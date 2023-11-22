@@ -1,4 +1,4 @@
-### Modular Crypto Wallet Platform
+# Modular Crypto Wallet Platform
 
 The modular crypto wallet platform will allow management of crypto assets, secure private payments, peer to peer communicartion network, and the delivery of web services content within the wallet patform. Functionality could be extended with the modular system, opertaing on top of the wallet platform core functionality. 
 
@@ -10,45 +10,45 @@ The basic wallet functionality is outlined below, the final specification will b
 
 ## Basic Wallet functionality;
 
-  # Key management, security and settings
+  ### Key management, security and settings
    * create
    * import
    * manage
    * security (recover, backup, share, security tools) 
 
-  # Wallet application package management
+  ### Wallet application package management
    * create a new package (admin function)
    * manage a package (admin function)
    * install
    * remove
    * manage
 
-  # Crypto asset management
+  ### Crypto asset management
    * transfer
    * manage
    * bridge to
    * bridge from
    * logs
 
-  # P2P wallet network
+  ### P2P wallet network
    * payment
    * names
    * web service
    * comms (message, share, video)
    * config
 
-  # Crypto assest investment
+  ### Crypto assest investment
     * stake
     * mine
     * funds 
     * manage
 
-  # Smart Contract abi Interface
+  ### Smart Contract abi Interface
    * import smart contracts
    * manage smart contracts
    * smart contracts usage logs
 
-  # Web Service
+  ### Web Service
    * consum service
    * publish service
    * serverless application deployment
