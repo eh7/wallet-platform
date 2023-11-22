@@ -65,10 +65,9 @@ I believe that by focusing in a large part on modular system and the web service
 I also believe with further development there could be a potential for users to supply services to platform, with spare comput and network resources they may have access to, which could earn them rewards. 
 
 
-# Further Notes;
+#### Further Notes;
 
 Function in this proposal have been based on some on my previouse development work and investigations over the last 3 years or more years. The proposal is also based on the esitamated time required for me to undertake the project which is 6 to 12 months period. However if the proposal is acceptd and further features or functions specified, there would be the potential for me to engaue other devemnet assests that I work with on previouse projects, both in web3 and web2 projects, to spead up or extend the functionality as it may be seen fit.
-
 
 Current Development Status;
  * electron app - single code base for web based interface and mobile device app interface
