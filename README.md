@@ -38,10 +38,10 @@ The basic wallet functionality is outlined below, the final specification will b
    * config
 
   ### Crypto assest investment
-    * stake
-    * mine
-    * funds 
-    * manage
+   * stake
+   * mine
+   * funds 
+   * manage
 
   ### Smart Contract abi Interface
    * import smart contracts
