@@ -4,13 +4,11 @@ The modular crypto wallet platform will allow management of crypto assets, secur
 
 A big part of the basic functionality is the wallet package management system. This would allow developers to create and integrate services from the other core wallet system functionality, these will include key management, P2P wallet network, Crypto assest investments, Smart Contract abi Interface, and Web Services. The modules would allow the creation user friendly interfaces for access to publicly avaiable smart contracts on any evm compatiable blockchain, or other key functions within the wallet platform.
 
-By using this approach the wallet functionality could be extended in the future either by developers or by the community of developers that will be built up around the wallet platform.
+By using this approach the wallet functionality could be extended in the future either by developers or by the community of developers that will be built up around the wallet platform. There is a potential that these developers could earn rewards for the usage of a given module. This however is future development and is not part of the basic wallet function. 
 
 Other key functional parts of the wallet platform are the peer to peer network and the web services. These will alllow the users to communicate, transact, share and interact with decertalise content deployment through the wallet platform.
 
-The main driver in the development of this platform is to create a platform that acts in a trully decentralised maner, but has the ease of use and is relative as simple to use as an smart phone application.
-
-I believe and have read evidence of the growing international remitance that happens around the world. Some of this in enabled by using blockchain and associate technologies in decetralised maner out side the legacy banking system, there is potential that this will grow over the comming years and I see this as key opertunity and that it could power the growth of a platform of type I am proposing. 
+The main driver in the development of the platform is to create a network that acts in a trully decentralised maner, but has the ease of use and is relative as simple to use as an smart phone application.
 
 If this is all true this should allow the adoption on web3 services for genral users with no expert knowledge, it will also give people and organisations with spare networks, and compute resources that they could be deployed within the wallet platform to earn rewards for them.
 
