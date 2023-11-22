@@ -6,6 +6,14 @@ A big part of the basic functionality is the wallet package management system. T
 
 By using this approach the wallet functionality could be extended in the future either by developers or by the community of developers that will be built up around the wallet platform.
 
+Other key functional parts of the wallet platform are the peer to peer network and the web services. These will alllow the users to communicate, transact, share and interact with decertalise content deployment through the wallet platform.
+
+The main driver in the development of this platform is to create a platform that acts in a trully decentralised maner, but has the ease of use and is relative as simple to use as an smart phone application.
+
+I believe and have read evidence of the growing international remitance that happens around the world. Some of this in enabled by using blockchain and associate technologies in decetralised maner out side the legacy banking system, there is potential that this will grow over the comming years and I see this as key opertunity and that it could power the growth of a platform of type I am proposing. 
+
+If this is all true this should allow the adoption on web3 services for genral users with no expert knowledge, it will also give people and organisations with spare networks, and compute resources that they could be deployed within the wallet platform to earn rewards for them.
+
 The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal is best suited to create a wallet platform that will be the most usful and attractive to protential users and developers moving forward. 
 
 ## Basic Wallet functionality;
