@@ -1,4 +1,4 @@
-## Modular Crypto Wallet Platform
+### Modular Crypto Wallet Platform
 
 The modular crypto wallet platform will allow management of crypto assets, secure private payments, peer to peer communicartion network, and the delivery of web services content within the wallet patform. Functionality could be extended with the modular system, opertaing on top of the wallet platform core functionality. 
 
@@ -8,47 +8,47 @@ By using this approach the wallet functionality could be extended in the future 
 
 The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal is best suited to create a wallet platform that will be the most usful and attractive to protential users and developers moving forward. 
 
-#Basic Wallet functionality;
+## Basic Wallet functionality;
 
-  Key management, security and settings
+  # Key management, security and settings
    * create
    * import
    * manage
    * security (recover, backup, share, security tools) 
 
-  Wallet application package management
+  # Wallet application package management
    * create a new package (admin function)
    * manage a package (admin function)
    * install
    * remove
    * manage
 
-  Crypto asset management
+  # Crypto asset management
    * transfer
    * manage
    * bridge to
    * bridge from
    * logs
 
-  P2P wallet network
+  # P2P wallet network
    * payment
    * names
    * web service
    * comms (message, share, video)
    * config
 
-  Crypto assest investment
+  # Crypto assest investment
     * stake
     * mine
     * funds 
     * manage
 
-  Smart Contract abi Interface
+  # Smart Contract abi Interface
    * import smart contracts
    * manage smart contracts
    * smart contracts usage logs
 
-  Web Service
+  # Web Service
    * consum service
    * publish service
    * serverless application deployment
@@ -57,7 +57,7 @@ The basic wallet functionality is outlined below, the final specification will b
 
 
 
-Conclusions
+## Conclusions
 
 Access to crypto payments and assest is growing accross the world and is project to grow further over the comming years. I believe this type of platform has the potential to resolve many of the technical bariers that are currently in place and this could be a good asset in achiving this progress through adoption.
 It would allow access to usefull blockchain technogies and services through a secure interface, from secure private payment, published smart contract(s) functionality, p2p communication to usable serveless web services.
@@ -65,7 +65,7 @@ I believe that by focusing in a large part on modular system and the web service
 I also believe with further development there could be a potential for users to supply services to platform, with spare comput and network resources they may have access to, which could earn them rewards. 
 
 
-Further Notes;
+# Further Notes;
 
 Function in this proposal have been based on some on my previouse development work and investigations over the last 3 years or more years. The proposal is also based on the esitamated time required for me to undertake the project which is 6 to 12 months period. However if the proposal is acceptd and further features or functions specified, there would be the potential for me to engaue other devemnet assests that I work with on previouse projects, both in web3 and web2 projects, to spead up or extend the functionality as it may be seen fit.
 
