@@ -79,7 +79,7 @@ Current Development Status;
  * electron app - single code base for web based interface and mobile device app interface
  * abi smart contract interface basic impementation
  * libp2p wallet network basic implementaiona proof of setup, create, and comms
- * Development Options: cdk (poylgon), evm, level2 optionsplease think about it??
+ * Development Options: cdk (poylgon), evm, level2 options, think about posible options??
  * Development option: private assest payment network (see tornado cash) level 2 solution (deployment options???)
  * asset bridge may be resolable by using something that is already avaiable, furth research required around how this is undertaken (more thoughts???)
 
