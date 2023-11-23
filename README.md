@@ -81,6 +81,6 @@ Current Development Status;
  * libp2p wallet network basic implementaiona proof of setup, create, and comms
  * Development Options: cdk (poylgon), evm, level2 options, think about posible options??
  * Development option: private assest payment network (see tornado cash) level 2 solution (deployment options???)
- * asset bridge may be resolable by using something that is already avaiable, furth research required around how this is undertaken (more thoughts???)
+ * asset bridge may be replaced by using something that is already implemented and available, furth research required around how this is undertaken (more thoughts???)
 
 
