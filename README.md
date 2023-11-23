@@ -73,7 +73,7 @@ I also believe with further development there could be a potential for users to 
 
 #### Further Notes;
 
-Function in this proposal have been based on some on my previouse development work and investigations over the last 3 years or more years. The proposal is also based on the esitamated time required for me to undertake the project which is 6 to 12 months period. However if the proposal is acceptd and further features or functions specified, there would be the potential for me to engaue other devemnet assests that I work with on previouse projects, both in web3 and web2 projects, to spead up or extend the functionality as it may be seen fit.
+Function in this proposal have been based on some on my previouse development work and investigations over the last 3 years or more years. The proposal is also based on the esitamated time required for me to undertake the project which is 6 to 12 months period. However if the proposal is acceptd and further features or functions specified, there would be the potential for me to engaue other development assests that I work with on previouse projects, both in web3 and web2 projects, to spead up or extend the functionality as it may be seen fit.
 
 Current Development Status;
  * electron app - single code base for web based interface and mobile device app interface
