@@ -1,0 +1,24 @@
+{
+    "1703983733671": {
+        "symbol": "ETH",
+        "timestamp": 1703983733671,
+        "quote": {
+            "USD": {
+                "price": 2302.5964276860077,
+                "volume_24h": 6874434604.02715,
+                "volume_change_24h": -44.1901,
+                "percent_change_1h": 0.39695825,
+                "percent_change_24h": -0.02230685,
+                "percent_change_7d": 0.09974903,
+                "percent_change_30d": 12.38838051,
+                "percent_change_60d": 26.27135964,
+                "percent_change_90d": 33.23686744,
+                "market_cap": 276732349184.73694,
+                "market_cap_dominance": 16.6949,
+                "fully_diluted_market_cap": 276732349184.74,
+                "tvl": null,
+                "last_updated": "2023-12-31T00:47:00.000Z"
+            }
+        }
+    }
+}
