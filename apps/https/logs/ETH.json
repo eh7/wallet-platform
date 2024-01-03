@@ -1,0 +1,1806 @@
+{
+    "1703988001912": {
+        "symbol": "ETH",
+        "timestamp": 1703988001912,
+        "quote": {
+            "USD": {
+                "price": 2291.6779024138914,
+                "volume_24h": 6893075592.730577,
+                "volume_change_24h": -39.4573,
+                "percent_change_1h": -0.40109468,
+                "percent_change_24h": -0.66532654,
+                "percent_change_7d": -0.7920081,
+                "percent_change_30d": 9.63142665,
+                "percent_change_60d": 26.35963057,
+                "percent_change_90d": 32.77594437,
+                "market_cap": 275420130894.1778,
+                "market_cap_dominance": 16.6735,
+                "fully_diluted_market_cap": 275420130894.18,
+                "tvl": null,
+                "last_updated": "2023-12-31T01:58:00.000Z"
+            }
+        }
+    },
+    "1703991601749": {
+        "symbol": "ETH",
+        "timestamp": 1703991601749,
+        "quote": {
+            "USD": {
+                "price": 2282.757479274781,
+                "volume_24h": 6864323501.0413,
+                "volume_change_24h": -38.0689,
+                "percent_change_1h": -0.38925292,
+                "percent_change_24h": -0.47192947,
+                "percent_change_7d": -1.43356239,
+                "percent_change_30d": 9.33754079,
+                "percent_change_60d": 25.98255635,
+                "percent_change_90d": 32.2080615,
+                "market_cap": 274348864141.68262,
+                "market_cap_dominance": 16.6902,
+                "fully_diluted_market_cap": 274348864141.68,
+                "tvl": null,
+                "last_updated": "2023-12-31T02:58:00.000Z"
+            }
+        }
+    },
+    "1703995201472": {
+        "symbol": "ETH",
+        "timestamp": 1703995201472,
+        "quote": {
+            "USD": {
+                "price": 2283.082150611554,
+                "volume_24h": 6851996358.046934,
+                "volume_change_24h": -37.5237,
+                "percent_change_1h": 0.01422277,
+                "percent_change_24h": -0.69722255,
+                "percent_change_7d": -1.48872111,
+                "percent_change_30d": 9.11971583,
+                "percent_change_60d": 26.02426404,
+                "percent_change_90d": 32.04786875,
+                "market_cap": 274387884148.52597,
+                "market_cap_dominance": 16.6604,
+                "fully_diluted_market_cap": 274387884148.53,
+                "tvl": null,
+                "last_updated": "2023-12-31T03:58:00.000Z"
+            }
+        }
+    },
+    "1703998801148": {
+        "symbol": "ETH",
+        "timestamp": 1703998801148,
+        "quote": {
+            "USD": {
+                "price": 2281.9753741280333,
+                "volume_24h": 6842650471.46221,
+                "volume_change_24h": -37.2622,
+                "percent_change_1h": -0.0484773,
+                "percent_change_24h": -0.90431541,
+                "percent_change_7d": -1.15342369,
+                "percent_change_30d": 8.89291001,
+                "percent_change_60d": 26.16679868,
+                "percent_change_90d": 32.14712456,
+                "market_cap": 274254868322.76727,
+                "market_cap_dominance": 16.624,
+                "fully_diluted_market_cap": 274254868322.77,
+                "tvl": null,
+                "last_updated": "2023-12-31T04:58:00.000Z"
+            }
+        }
+    },
+    "1704002401152": {
+        "symbol": "ETH",
+        "timestamp": 1704002401152,
+        "quote": {
+            "USD": {
+                "price": 2281.38038428281,
+                "volume_24h": 6842896975.583993,
+                "volume_change_24h": -37.0104,
+                "percent_change_1h": -0.02607346,
+                "percent_change_24h": -1.13901359,
+                "percent_change_7d": -0.15961401,
+                "percent_change_30d": 9.00611615,
+                "percent_change_60d": 26.69865138,
+                "percent_change_90d": 32.72635203,
+                "market_cap": 274183360600.33298,
+                "market_cap_dominance": 16.5913,
+                "fully_diluted_market_cap": 274183360600.33,
+                "tvl": null,
+                "last_updated": "2023-12-31T05:58:00.000Z"
+            }
+        }
+    },
+    "1704006001842": {
+        "symbol": "ETH",
+        "timestamp": 1704006001842,
+        "quote": {
+            "USD": {
+                "price": 2284.5127386161266,
+                "volume_24h": 6839345313.530236,
+                "volume_change_24h": -36.4117,
+                "percent_change_1h": 0.13730084,
+                "percent_change_24h": -0.83306882,
+                "percent_change_7d": -0.19612943,
+                "percent_change_30d": 9.17687175,
+                "percent_change_60d": 26.63701135,
+                "percent_change_90d": 32.53969671,
+                "market_cap": 274559816645.81165,
+                "market_cap_dominance": 16.6039,
+                "fully_diluted_market_cap": 274559816645.81,
+                "tvl": null,
+                "last_updated": "2023-12-31T06:58:00.000Z"
+            }
+        }
+    },
+    "1704009602220": {
+        "symbol": "ETH",
+        "timestamp": 1704009602220,
+        "quote": {
+            "USD": {
+                "price": 2294.371934926989,
+                "volume_24h": 6955876659.860046,
+                "volume_change_24h": -33.2586,
+                "percent_change_1h": 0.4315667,
+                "percent_change_24h": -0.0692305,
+                "percent_change_7d": -0.08911299,
+                "percent_change_30d": 9.56515398,
+                "percent_change_60d": 26.97724796,
+                "percent_change_90d": 32.69191945,
+                "market_cap": 275744725394.898,
+                "market_cap_dominance": 16.6069,
+                "fully_diluted_market_cap": 275744725394.9,
+                "tvl": null,
+                "last_updated": "2023-12-31T07:58:00.000Z"
+            }
+        }
+    },
+    "1704013201926": {
+        "symbol": "ETH",
+        "timestamp": 1704013201926,
+        "quote": {
+            "USD": {
+                "price": 2292.57562439021,
+                "volume_24h": 6742046269.557674,
+                "volume_change_24h": -34.8296,
+                "percent_change_1h": -0.07829204,
+                "percent_change_24h": 0.62306516,
+                "percent_change_7d": 0.01383376,
+                "percent_change_30d": 9.42447549,
+                "percent_change_60d": 26.965263,
+                "percent_change_90d": 32.10042809,
+                "market_cap": 275528839230.95575,
+                "market_cap_dominance": 16.6003,
+                "fully_diluted_market_cap": 275528839230.96,
+                "tvl": null,
+                "last_updated": "2023-12-31T08:58:00.000Z"
+            }
+        }
+    },
+    "1704016801416": {
+        "symbol": "ETH",
+        "timestamp": 1704016801416,
+        "quote": {
+            "USD": {
+                "price": 2309.2265564936897,
+                "volume_24h": 6752033286.692398,
+                "volume_change_24h": -34.9623,
+                "percent_change_1h": 0.72629805,
+                "percent_change_24h": 1.29951115,
+                "percent_change_7d": 0.57498947,
+                "percent_change_30d": 9.72561925,
+                "percent_change_60d": 27.94699453,
+                "percent_change_90d": 33.27742761,
+                "market_cap": 277529999823.33777,
+                "market_cap_dominance": 16.6305,
+                "fully_diluted_market_cap": 277529999823.34,
+                "tvl": null,
+                "last_updated": "2023-12-31T09:58:00.000Z"
+            }
+        }
+    },
+    "1704020401890": {
+        "symbol": "ETH",
+        "timestamp": 1704020401890,
+        "quote": {
+            "USD": {
+                "price": 2309.546817320798,
+                "volume_24h": 6810597335.754006,
+                "volume_change_24h": -33.6414,
+                "percent_change_1h": 0.01386875,
+                "percent_change_24h": 1.00921181,
+                "percent_change_7d": 0.88933414,
+                "percent_change_30d": 10.44823545,
+                "percent_change_60d": 28.60523639,
+                "percent_change_90d": 33.33670565,
+                "market_cap": 277568489761.4691,
+                "market_cap_dominance": 16.6366,
+                "fully_diluted_market_cap": 277568489761.47,
+                "tvl": null,
+                "last_updated": "2023-12-31T10:58:00.000Z"
+            }
+        }
+    },
+    "1704024001941": {
+        "symbol": "ETH",
+        "timestamp": 1704024001941,
+        "quote": {
+            "USD": {
+                "price": 2307.5235092873236,
+                "volume_24h": 6819334732.375457,
+                "volume_change_24h": -32.8853,
+                "percent_change_1h": -0.08760628,
+                "percent_change_24h": 0.84127592,
+                "percent_change_7d": 0.79129265,
+                "percent_change_30d": 10.29658111,
+                "percent_change_60d": 28.20190235,
+                "percent_change_90d": 33.57781984,
+                "market_cap": 277325322335.3049,
+                "market_cap_dominance": 16.6686,
+                "fully_diluted_market_cap": 277325322335.3,
+                "tvl": null,
+                "last_updated": "2023-12-31T11:58:00.000Z"
+            }
+        }
+    },
+    "1704027601628": {
+        "symbol": "ETH",
+        "timestamp": 1704027601628,
+        "quote": {
+            "USD": {
+                "price": 2300.1792239827737,
+                "volume_24h": 6910646027.697526,
+                "volume_change_24h": -31.7385,
+                "percent_change_1h": -0.31827564,
+                "percent_change_24h": 0.35987706,
+                "percent_change_7d": 0.27965544,
+                "percent_change_30d": 10.23102637,
+                "percent_change_60d": 26.63632087,
+                "percent_change_90d": 32.83066328,
+                "market_cap": 276442663380.2783,
+                "market_cap_dominance": 16.6367,
+                "fully_diluted_market_cap": 276442663380.28,
+                "tvl": null,
+                "last_updated": "2023-12-31T12:58:00.000Z"
+            }
+        }
+    },
+    "1704031201191": {
+        "symbol": "ETH",
+        "timestamp": 1704031201191,
+        "quote": {
+            "USD": {
+                "price": 2303.997425653284,
+                "volume_24h": 7031272339.674787,
+                "volume_change_24h": -29.3035,
+                "percent_change_1h": 0.16599583,
+                "percent_change_24h": 0.6162327,
+                "percent_change_7d": 0.25760076,
+                "percent_change_30d": 10.73433236,
+                "percent_change_60d": 27.99830852,
+                "percent_change_90d": 33.51928643,
+                "market_cap": 276901546682.98517,
+                "market_cap_dominance": 16.6539,
+                "fully_diluted_market_cap": 276901546682.99,
+                "tvl": null,
+                "last_updated": "2023-12-31T13:58:00.000Z"
+            }
+        }
+    },
+    "1704034801896": {
+        "symbol": "ETH",
+        "timestamp": 1704034801896,
+        "quote": {
+            "USD": {
+                "price": 2300.8654915074612,
+                "volume_24h": 6876091661.129608,
+                "volume_change_24h": -30.1427,
+                "percent_change_1h": -0.13593479,
+                "percent_change_24h": 0.00464009,
+                "percent_change_7d": 0.45490843,
+                "percent_change_30d": 10.69654619,
+                "percent_change_60d": 28.68041171,
+                "percent_change_90d": 34.02341654,
+                "market_cap": 276525141136.9409,
+                "market_cap_dominance": 16.6323,
+                "fully_diluted_market_cap": 276525141136.94,
+                "tvl": null,
+                "last_updated": "2023-12-31T14:58:00.000Z"
+            }
+        }
+    },
+    "1704038401339": {
+        "symbol": "ETH",
+        "timestamp": 1704038401339,
+        "quote": {
+            "USD": {
+                "price": 2298.323599122978,
+                "volume_24h": 6851526241.871291,
+                "volume_change_24h": -25.6563,
+                "percent_change_1h": -0.11047549,
+                "percent_change_24h": -0.66470832,
+                "percent_change_7d": 0.10887121,
+                "percent_change_30d": 10.4742281,
+                "percent_change_60d": 28.15143538,
+                "percent_change_90d": 35.9688361,
+                "market_cap": 276219648637.28436,
+                "market_cap_dominance": 16.6463,
+                "fully_diluted_market_cap": 276219648637.28,
+                "tvl": null,
+                "last_updated": "2023-12-31T15:58:00.000Z"
+            }
+        }
+    },
+    "1704042001992": {
+        "symbol": "ETH",
+        "timestamp": 1704042001992,
+        "quote": {
+            "USD": {
+                "price": 2304.775663343449,
+                "volume_24h": 6707886956.170957,
+                "volume_change_24h": -20.6836,
+                "percent_change_1h": 0.28072915,
+                "percent_change_24h": -0.17417244,
+                "percent_change_7d": 0.35566111,
+                "percent_change_30d": 9.42182021,
+                "percent_change_60d": 28.23383203,
+                "percent_change_90d": 36.84521496,
+                "market_cap": 276995077698.9899,
+                "market_cap_dominance": 16.6127,
+                "fully_diluted_market_cap": 276995077698.99,
+                "tvl": null,
+                "last_updated": "2023-12-31T16:58:00.000Z"
+            }
+        }
+    },
+    "1704045601803": {
+        "symbol": "ETH",
+        "timestamp": 1704045601803,
+        "quote": {
+            "USD": {
+                "price": 2297.0318016027622,
+                "volume_24h": 6589792701.894501,
+                "volume_change_24h": -17.162,
+                "percent_change_1h": -0.335992,
+                "percent_change_24h": -0.46028914,
+                "percent_change_7d": 0.2414002,
+                "percent_change_30d": 9.65523528,
+                "percent_change_60d": 27.2109018,
+                "percent_change_90d": 35.94196577,
+                "market_cap": 276064396410.27826,
+                "market_cap_dominance": 16.5778,
+                "fully_diluted_market_cap": 276064396410.28,
+                "tvl": null,
+                "last_updated": "2023-12-31T17:58:00.000Z"
+            }
+        }
+    },
+    "1704049201183": {
+        "symbol": "ETH",
+        "timestamp": 1704049201183,
+        "quote": {
+            "USD": {
+                "price": 2302.368110318083,
+                "volume_24h": 6583371981.006055,
+                "volume_change_24h": -15.2773,
+                "percent_change_1h": 0.23231323,
+                "percent_change_24h": 0.04320364,
+                "percent_change_7d": 0.45443361,
+                "percent_change_30d": 10.01657816,
+                "percent_change_60d": 26.27678114,
+                "percent_change_90d": 38.69435403,
+                "market_cap": 276705730519.59534,
+                "market_cap_dominance": 16.6091,
+                "fully_diluted_market_cap": 276705730519.6,
+                "tvl": null,
+                "last_updated": "2023-12-31T18:58:00.000Z"
+            }
+        }
+    },
+    "1704052801881": {
+        "symbol": "ETH",
+        "timestamp": 1704052801881,
+        "quote": {
+            "USD": {
+                "price": 2293.4960625986255,
+                "volume_24h": 6554473719.770747,
+                "volume_change_24h": -14.7163,
+                "percent_change_1h": -0.38534445,
+                "percent_change_24h": -0.24078728,
+                "percent_change_7d": 0.16230106,
+                "percent_change_30d": 9.68638969,
+                "percent_change_60d": 25.02323636,
+                "percent_change_90d": 37.09656098,
+                "market_cap": 275639460345.6751,
+                "market_cap_dominance": 16.5513,
+                "fully_diluted_market_cap": 275639460345.68,
+                "tvl": null,
+                "last_updated": "2023-12-31T19:58:00.000Z"
+            }
+        }
+    },
+    "1704056401197": {
+        "symbol": "ETH",
+        "timestamp": 1704056401197,
+        "quote": {
+            "USD": {
+                "price": 2282.0706908944544,
+                "volume_24h": 6582686889.638822,
+                "volume_change_24h": -14.0257,
+                "percent_change_1h": -0.498164,
+                "percent_change_24h": -0.79794912,
+                "percent_change_7d": 0.13789835,
+                "percent_change_30d": 9.11682247,
+                "percent_change_60d": 23.79168476,
+                "percent_change_90d": 37.01937836,
+                "market_cap": 274266323786.9761,
+                "market_cap_dominance": 16.5203,
+                "fully_diluted_market_cap": 274266323786.98,
+                "tvl": null,
+                "last_updated": "2023-12-31T20:58:00.000Z"
+            }
+        }
+    },
+    "1704060001909": {
+        "symbol": "ETH",
+        "timestamp": 1704060001909,
+        "quote": {
+            "USD": {
+                "price": 2283.0254571762202,
+                "volume_24h": 6628224698.066355,
+                "volume_change_24h": -10.4149,
+                "percent_change_1h": 0.04183772,
+                "percent_change_24h": -0.76873171,
+                "percent_change_7d": 0.16459652,
+                "percent_change_30d": 9.22483917,
+                "percent_change_60d": 23.73500247,
+                "percent_change_90d": 38.13201457,
+                "market_cap": 274381070555.87354,
+                "market_cap_dominance": 16.5235,
+                "fully_diluted_market_cap": 274381070555.87,
+                "tvl": null,
+                "last_updated": "2023-12-31T21:58:00.000Z"
+            }
+        }
+    },
+    "1704063601788": {
+        "symbol": "ETH",
+        "timestamp": 1704063601788,
+        "quote": {
+            "USD": {
+                "price": 2275.0309723983587,
+                "volume_24h": 6752594813.124716,
+                "volume_change_24h": -2.3749,
+                "percent_change_1h": -0.35017064,
+                "percent_change_24h": -0.51079558,
+                "percent_change_7d": 0.59083404,
+                "percent_change_30d": 9.11038861,
+                "percent_change_60d": 23.55501269,
+                "percent_change_90d": 36.99748115,
+                "market_cap": 273420268614.3107,
+                "market_cap_dominance": 16.6185,
+                "fully_diluted_market_cap": 273420268614.31,
+                "tvl": null,
+                "last_updated": "2023-12-31T22:58:00.000Z"
+            }
+        }
+    },
+    "1704067201121": {
+        "symbol": "ETH",
+        "timestamp": 1704067201121,
+        "quote": {
+            "USD": {
+                "price": 2280.9483240349155,
+                "volume_24h": 6870845295.5730715,
+                "volume_change_24h": -0.2552,
+                "percent_change_1h": 0.26009983,
+                "percent_change_24h": -0.55298222,
+                "percent_change_7d": 0.64954229,
+                "percent_change_30d": 9.29743245,
+                "percent_change_60d": 23.51009914,
+                "percent_change_90d": 37.07595745,
+                "market_cap": 274131434261.54013,
+                "market_cap_dominance": 16.6448,
+                "fully_diluted_market_cap": 274131434261.54,
+                "tvl": null,
+                "last_updated": "2023-12-31T23:58:00.000Z"
+            }
+        }
+    },
+    "1704070801879": {
+        "symbol": "ETH",
+        "timestamp": 1704070801879,
+        "quote": {
+            "USD": {
+                "price": 2295.9499121936533,
+                "volume_24h": 7000133336.538931,
+                "volume_change_24h": 1.7487,
+                "percent_change_1h": 0.65769084,
+                "percent_change_24h": -0.21542832,
+                "percent_change_7d": 1.37676895,
+                "percent_change_30d": 9.73597325,
+                "percent_change_60d": 24.29752626,
+                "percent_change_90d": 38.11408598,
+                "market_cap": 275934371590.204,
+                "market_cap_dominance": 16.6706,
+                "fully_diluted_market_cap": 275934371590.2,
+                "tvl": null,
+                "last_updated": "2024-01-01T00:58:00.000Z"
+            }
+        }
+    },
+    "1704074402014": {
+        "symbol": "ETH",
+        "timestamp": 1704074402014,
+        "quote": {
+            "USD": {
+                "price": 2303.0222660869968,
+                "volume_24h": 7028555352.692381,
+                "volume_change_24h": 1.9654,
+                "percent_change_1h": 0.30803607,
+                "percent_change_24h": 0.49502435,
+                "percent_change_7d": 1.32387857,
+                "percent_change_30d": 9.95527857,
+                "percent_change_60d": 24.01362476,
+                "percent_change_90d": 38.10441393,
+                "market_cap": 276784348985.9907,
+                "market_cap_dominance": 16.6364,
+                "fully_diluted_market_cap": 276784348985.99,
+                "tvl": null,
+                "last_updated": "2024-01-01T01:58:00.000Z"
+            }
+        }
+    },
+    "1704078001166": {
+        "symbol": "ETH",
+        "timestamp": 1704078001166,
+        "quote": {
+            "USD": {
+                "price": 2294.1358294001802,
+                "volume_24h": 6978558752.578554,
+                "volume_change_24h": 1.6642,
+                "percent_change_1h": -0.38585978,
+                "percent_change_24h": 0.49844761,
+                "percent_change_7d": 0.90004332,
+                "percent_change_30d": 9.67390478,
+                "percent_change_60d": 22.96280019,
+                "percent_change_90d": 37.57967278,
+                "market_cap": 275718248434.36786,
+                "market_cap_dominance": 16.6239,
+                "fully_diluted_market_cap": 275718248434.37,
+                "tvl": null,
+                "last_updated": "2024-01-01T02:58:00.000Z"
+            }
+        }
+    },
+    "1704081601081": {
+        "symbol": "ETH",
+        "timestamp": 1704081601081,
+        "quote": {
+            "USD": {
+                "price": 2275.332062128076,
+                "volume_24h": 7020963515.946332,
+                "volume_change_24h": 2.466,
+                "percent_change_1h": -0.8196449,
+                "percent_change_24h": -0.33945728,
+                "percent_change_7d": -0.08569181,
+                "percent_change_30d": 8.65312955,
+                "percent_change_60d": 22.29108656,
+                "percent_change_90d": 36.6030686,
+                "market_cap": 273458337879.03354,
+                "market_cap_dominance": 16.6025,
+                "fully_diluted_market_cap": 273458337879.03,
+                "tvl": null,
+                "last_updated": "2024-01-01T03:58:00.000Z"
+            }
+        }
+    },
+    "1704085201873": {
+        "symbol": "ETH",
+        "timestamp": 1704085201873,
+        "quote": {
+            "USD": {
+                "price": 2277.5766865332475,
+                "volume_24h": 7112292582.346691,
+                "volume_change_24h": 3.9406,
+                "percent_change_1h": 0.09865041,
+                "percent_change_24h": -0.19275789,
+                "percent_change_7d": -0.07282807,
+                "percent_change_30d": 8.74899751,
+                "percent_change_60d": 23.00205772,
+                "percent_change_90d": 36.68486033,
+                "market_cap": 273728105650.17236,
+                "market_cap_dominance": 16.6187,
+                "fully_diluted_market_cap": 273728105650.17,
+                "tvl": null,
+                "last_updated": "2024-01-01T04:58:00.000Z"
+            }
+        }
+    },
+    "1704088801252": {
+        "symbol": "ETH",
+        "timestamp": 1704088801252,
+        "quote": {
+            "USD": {
+                "price": 2274.54723383846,
+                "volume_24h": 7124211403.267769,
+                "volume_change_24h": 4.111,
+                "percent_change_1h": -0.13301211,
+                "percent_change_24h": -0.29951824,
+                "percent_change_7d": -0.50543006,
+                "percent_change_30d": 8.50887236,
+                "percent_change_60d": 23.68417425,
+                "percent_change_90d": 36.48973904,
+                "market_cap": 273364014134.74542,
+                "market_cap_dominance": 16.6306,
+                "fully_diluted_market_cap": 273364014134.75,
+                "tvl": null,
+                "last_updated": "2024-01-01T05:58:00.000Z"
+            }
+        }
+    },
+    "1704092401667": {
+        "symbol": "ETH",
+        "timestamp": 1704092401667,
+        "quote": {
+            "USD": {
+                "price": 2283.2282744325094,
+                "volume_24h": 7157381125.029957,
+                "volume_change_24h": 4.6501,
+                "percent_change_1h": 0.38166016,
+                "percent_change_24h": -0.05622486,
+                "percent_change_7d": -0.01279996,
+                "percent_change_30d": 8.5647702,
+                "percent_change_60d": 24.34408704,
+                "percent_change_90d": 36.79297707,
+                "market_cap": 274407335666.3239,
+                "market_cap_dominance": 16.6252,
+                "fully_diluted_market_cap": 274407335666.32,
+                "tvl": null,
+                "last_updated": "2024-01-01T06:58:00.000Z"
+            }
+        }
+    },
+    "1704096002276": {
+        "symbol": "ETH",
+        "timestamp": 1704096002276,
+        "quote": {
+            "USD": {
+                "price": 2284.5241826244596,
+                "volume_24h": 7044353611.90891,
+                "volume_change_24h": 1.272,
+                "percent_change_1h": 0.05675771,
+                "percent_change_24h": -0.42921342,
+                "percent_change_7d": 0.11300147,
+                "percent_change_30d": 8.89061243,
+                "percent_change_60d": 24.58122893,
+                "percent_change_90d": 37.3831301,
+                "market_cap": 274563082999.25742,
+                "market_cap_dominance": 16.6084,
+                "fully_diluted_market_cap": 274563082999.26,
+                "tvl": null,
+                "last_updated": "2024-01-01T07:58:00.000Z"
+            }
+        }
+    },
+    "1704099601860": {
+        "symbol": "ETH",
+        "timestamp": 1704099601860,
+        "quote": {
+            "USD": {
+                "price": 2285.7398253541983,
+                "volume_24h": 6997768746.326454,
+                "volume_change_24h": 3.793,
+                "percent_change_1h": 0.05321208,
+                "percent_change_24h": -0.29817115,
+                "percent_change_7d": 0.55022961,
+                "percent_change_30d": 8.80427457,
+                "percent_change_60d": 24.64683987,
+                "percent_change_90d": 37.34416214,
+                "market_cap": 274709183713.9013,
+                "market_cap_dominance": 16.6007,
+                "fully_diluted_market_cap": 274709183713.9,
+                "tvl": null,
+                "last_updated": "2024-01-01T08:58:00.000Z"
+            }
+        }
+    },
+    "1704103201495": {
+        "symbol": "ETH",
+        "timestamp": 1704103201495,
+        "quote": {
+            "USD": {
+                "price": 2298.1876730410795,
+                "volume_24h": 6836910570.087245,
+                "volume_change_24h": 1.2571,
+                "percent_change_1h": 0.54458725,
+                "percent_change_24h": -0.4780338,
+                "percent_change_7d": 1.06021552,
+                "percent_change_30d": 9.18925963,
+                "percent_change_60d": 25.22481563,
+                "percent_change_90d": 38.38679453,
+                "market_cap": 276205214906.57135,
+                "market_cap_dominance": 17.5998,
+                "fully_diluted_market_cap": 276205214906.57,
+                "tvl": null,
+                "last_updated": "2024-01-01T09:58:00.000Z"
+            }
+        }
+    },
+    "1704106801981": {
+        "symbol": "ETH",
+        "timestamp": 1704106801981,
+        "quote": {
+            "USD": {
+                "price": 2302.1176986218134,
+                "volume_24h": 6752417697.153614,
+                "volume_change_24h": -0.8543,
+                "percent_change_1h": 0.17100542,
+                "percent_change_24h": -0.32166998,
+                "percent_change_7d": 1.14357065,
+                "percent_change_30d": 9.48913219,
+                "percent_change_60d": 25.41846148,
+                "percent_change_90d": 38.68562655,
+                "market_cap": 276677540806.1697,
+                "market_cap_dominance": 16.626,
+                "fully_diluted_market_cap": 276677540806.17,
+                "tvl": null,
+                "last_updated": "2024-01-01T10:58:00.000Z"
+            }
+        }
+    },
+    "1704110401560": {
+        "symbol": "ETH",
+        "timestamp": 1704110401560,
+        "quote": {
+            "USD": {
+                "price": 2304.9452849442455,
+                "volume_24h": 6642098114.299086,
+                "volume_change_24h": -2.599,
+                "percent_change_1h": 0.12282545,
+                "percent_change_24h": -0.11173123,
+                "percent_change_7d": 1.09264597,
+                "percent_change_30d": 9.67764463,
+                "percent_change_60d": 25.49331086,
+                "percent_change_90d": 39.17117706,
+                "market_cap": 277017371228.64374,
+                "market_cap_dominance": 16.6697,
+                "fully_diluted_market_cap": 277017371228.64,
+                "tvl": null,
+                "last_updated": "2024-01-01T11:58:00.000Z"
+            }
+        }
+    },
+    "1704114001358": {
+        "symbol": "ETH",
+        "timestamp": 1704114001358,
+        "quote": {
+            "USD": {
+                "price": 2300.584824787772,
+                "volume_24h": 6592324221.5650215,
+                "volume_change_24h": -4.6063,
+                "percent_change_1h": -0.18917847,
+                "percent_change_24h": 0.01763344,
+                "percent_change_7d": 0.17990124,
+                "percent_change_30d": 9.2720586,
+                "percent_change_60d": 25.17175918,
+                "percent_change_90d": 38.99573151,
+                "market_cap": 276493314012.2822,
+                "market_cap_dominance": 16.5979,
+                "fully_diluted_market_cap": 276493314012.28,
+                "tvl": null,
+                "last_updated": "2024-01-01T12:58:00.000Z"
+            }
+        }
+    },
+    "1704117601454": {
+        "symbol": "ETH",
+        "timestamp": 1704117601454,
+        "quote": {
+            "USD": {
+                "price": 2305.777840642986,
+                "volume_24h": 6437176776.296237,
+                "volume_change_24h": -8.4493,
+                "percent_change_1h": 0.2257259,
+                "percent_change_24h": 0.07727504,
+                "percent_change_7d": 0.78332903,
+                "percent_change_30d": 9.56322454,
+                "percent_change_60d": 26.30058429,
+                "percent_change_90d": 38.79570394,
+                "market_cap": 277117431040.2901,
+                "market_cap_dominance": 16.6254,
+                "fully_diluted_market_cap": 277117431040.29,
+                "tvl": null,
+                "last_updated": "2024-01-01T13:58:00.000Z"
+            }
+        }
+    },
+    "1704121201151": {
+        "symbol": "ETH",
+        "timestamp": 1704121201151,
+        "quote": {
+            "USD": {
+                "price": 2300.6847490997857,
+                "volume_24h": 6465186203.036911,
+                "volume_change_24h": -5.9759,
+                "percent_change_1h": -0.22088388,
+                "percent_change_24h": -0.00785541,
+                "percent_change_7d": 0.39871065,
+                "percent_change_30d": 9.53096135,
+                "percent_change_60d": 26.66567502,
+                "percent_change_90d": 39.4976626,
+                "market_cap": 276505323308.3018,
+                "market_cap_dominance": 16.6212,
+                "fully_diluted_market_cap": 276505323308.3,
+                "tvl": null,
+                "last_updated": "2024-01-01T14:58:00.000Z"
+            }
+        }
+    },
+    "1704124801889": {
+        "symbol": "ETH",
+        "timestamp": 1704124801889,
+        "quote": {
+            "USD": {
+                "price": 2315.3063208045683,
+                "volume_24h": 6503508020.708804,
+                "volume_change_24h": -5.0794,
+                "percent_change_1h": 0.6355313,
+                "percent_change_24h": 0.73891778,
+                "percent_change_7d": 1.20985645,
+                "percent_change_30d": 10.01445424,
+                "percent_change_60d": 28.20760361,
+                "percent_change_90d": 40.46048674,
+                "market_cap": 278262601185.28534,
+                "market_cap_dominance": 16.6536,
+                "fully_diluted_market_cap": 278262601185.29,
+                "tvl": null,
+                "last_updated": "2024-01-01T15:58:00.000Z"
+            }
+        }
+    },
+    "1704128401295": {
+        "symbol": "ETH",
+        "timestamp": 1704128401295,
+        "quote": {
+            "USD": {
+                "price": 2310.955067125426,
+                "volume_24h": 6606578741.209251,
+                "volume_change_24h": -1.5103,
+                "percent_change_1h": -0.18793425,
+                "percent_change_24h": 0.26811303,
+                "percent_change_7d": 1.57645392,
+                "percent_change_30d": 10.06218149,
+                "percent_change_60d": 28.32003073,
+                "percent_change_90d": 39.94353214,
+                "market_cap": 277739650439.5048,
+                "market_cap_dominance": 16.6317,
+                "fully_diluted_market_cap": 277739650439.5,
+                "tvl": null,
+                "last_updated": "2024-01-01T16:58:00.000Z"
+            }
+        }
+    },
+    "1704132002041": {
+        "symbol": "ETH",
+        "timestamp": 1704132002041,
+        "quote": {
+            "USD": {
+                "price": 2313.9573397388144,
+                "volume_24h": 6604149426.419119,
+                "volume_change_24h": 0.2179,
+                "percent_change_1h": 0.1299148,
+                "percent_change_24h": 0.73684387,
+                "percent_change_7d": 1.53829624,
+                "percent_change_30d": 9.91054134,
+                "percent_change_60d": 28.20953896,
+                "percent_change_90d": 39.75749028,
+                "market_cap": 278100475346.0677,
+                "market_cap_dominance": 16.6317,
+                "fully_diluted_market_cap": 278100475346.07,
+                "tvl": null,
+                "last_updated": "2024-01-01T17:58:00.000Z"
+            }
+        }
+    },
+    "1704135601822": {
+        "symbol": "ETH",
+        "timestamp": 1704135601822,
+        "quote": {
+            "USD": {
+                "price": 2326.695803143528,
+                "volume_24h": 6747699116.150996,
+                "volume_change_24h": 2.4961,
+                "percent_change_1h": 0.55050554,
+                "percent_change_24h": 1.05663785,
+                "percent_change_7d": 2.36219599,
+                "percent_change_30d": 8.34897066,
+                "percent_change_60d": 28.71656164,
+                "percent_change_90d": 41.00294463,
+                "market_cap": 279631433876.37024,
+                "market_cap_dominance": 16.6091,
+                "fully_diluted_market_cap": 279631433876.37,
+                "tvl": null,
+                "last_updated": "2024-01-01T18:58:00.000Z"
+            }
+        }
+    },
+    "1704139201991": {
+        "symbol": "ETH",
+        "timestamp": 1704139201991,
+        "quote": {
+            "USD": {
+                "price": 2337.5552352796635,
+                "volume_24h": 6853907417.219139,
+                "volume_change_24h": 4.5684,
+                "percent_change_1h": 0.46673193,
+                "percent_change_24h": 1.92104854,
+                "percent_change_7d": 2.70303379,
+                "percent_change_30d": 8.31208028,
+                "percent_change_60d": 28.99092977,
+                "percent_change_90d": 41.73012695,
+                "market_cap": 280936563053.63873,
+                "market_cap_dominance": 16.5737,
+                "fully_diluted_market_cap": 280936563053.64,
+                "tvl": null,
+                "last_updated": "2024-01-01T19:58:00.000Z"
+            }
+        }
+    },
+    "1704142801601": {
+        "symbol": "ETH",
+        "timestamp": 1704142801601,
+        "quote": {
+            "USD": {
+                "price": 2341.6191025840812,
+                "volume_24h": 6985650566.189686,
+                "volume_change_24h": 6.1216,
+                "percent_change_1h": 0.17385118,
+                "percent_change_24h": 2.60940259,
+                "percent_change_7d": 3.19968236,
+                "percent_change_30d": 8.61815685,
+                "percent_change_60d": 29.68143464,
+                "percent_change_90d": 41.37087264,
+                "market_cap": 281424974576.9166,
+                "market_cap_dominance": 16.5705,
+                "fully_diluted_market_cap": 281424974576.92,
+                "tvl": null,
+                "last_updated": "2024-01-01T20:58:00.000Z"
+            }
+        }
+    },
+    "1704146401102": {
+        "symbol": "ETH",
+        "timestamp": 1704146401102,
+        "quote": {
+            "USD": {
+                "price": 2337.487765154266,
+                "volume_24h": 7043601731.321387,
+                "volume_change_24h": 6.2668,
+                "percent_change_1h": -0.1764308,
+                "percent_change_24h": 2.38553222,
+                "percent_change_7d": 2.91624856,
+                "percent_change_30d": 7.67976389,
+                "percent_change_60d": 29.73072952,
+                "percent_change_90d": 41.21726903,
+                "market_cap": 280928454229.149,
+                "market_cap_dominance": 16.5779,
+                "fully_diluted_market_cap": 280928454229.15,
+                "tvl": null,
+                "last_updated": "2024-01-01T21:58:00.000Z"
+            }
+        }
+    },
+    "1704150001625": {
+        "symbol": "ETH",
+        "timestamp": 1704150001625,
+        "quote": {
+            "USD": {
+                "price": 2334.132190136435,
+                "volume_24h": 6855562734.624641,
+                "volume_change_24h": 1.5249,
+                "percent_change_1h": -0.14355476,
+                "percent_change_24h": 2.59782036,
+                "percent_change_7d": 2.16060047,
+                "percent_change_30d": 8.2085636,
+                "percent_change_60d": 29.87859537,
+                "percent_change_90d": 40.96647985,
+                "market_cap": 280525168052.91223,
+                "market_cap_dominance": 16.5746,
+                "fully_diluted_market_cap": 280525168052.91,
+                "tvl": null,
+                "last_updated": "2024-01-01T22:58:00.000Z"
+            }
+        }
+    },
+    "1704153601260": {
+        "symbol": "ETH",
+        "timestamp": 1704153601260,
+        "quote": {
+            "USD": {
+                "price": 2350.616543725699,
+                "volume_24h": 6897836573.54537,
+                "volume_change_24h": 0.3928,
+                "percent_change_1h": 0.70623051,
+                "percent_change_24h": 3.05435327,
+                "percent_change_7d": 3.41953952,
+                "percent_change_30d": 8.55323488,
+                "percent_change_60d": 30.53342206,
+                "percent_change_90d": 41.88607783,
+                "market_cap": 282506322368.1705,
+                "market_cap_dominance": 16.5109,
+                "fully_diluted_market_cap": 282506322368.17,
+                "tvl": null,
+                "last_updated": "2024-01-01T23:58:00.000Z"
+            }
+        }
+    },
+    "1704157201263": {
+        "symbol": "ETH",
+        "timestamp": 1704157201263,
+        "quote": {
+            "USD": {
+                "price": 2387.9274082098036,
+                "volume_24h": 7553399395.904918,
+                "volume_change_24h": 7.9037,
+                "percent_change_1h": 1.58727992,
+                "percent_change_24h": 4.0060759,
+                "percent_change_7d": 5.37838116,
+                "percent_change_30d": 10.17767195,
+                "percent_change_60d": 33.77369619,
+                "percent_change_90d": 45.74669658,
+                "market_cap": 286990488506.5892,
+                "market_cap_dominance": 16.5833,
+                "fully_diluted_market_cap": 286990488506.59,
+                "tvl": null,
+                "last_updated": "2024-01-02T00:58:00.000Z"
+            }
+        }
+    },
+    "1704160801530": {
+        "symbol": "ETH",
+        "timestamp": 1704160801530,
+        "quote": {
+            "USD": {
+                "price": 2379.741531910762,
+                "volume_24h": 8119310400.599512,
+                "volume_change_24h": 15.5189,
+                "percent_change_1h": -0.34280256,
+                "percent_change_24h": 3.3312429,
+                "percent_change_7d": 4.69487793,
+                "percent_change_30d": 9.65759162,
+                "percent_change_60d": 32.92857868,
+                "percent_change_90d": 45.10797898,
+                "market_cap": 286006677763.4989,
+                "market_cap_dominance": 16.5279,
+                "fully_diluted_market_cap": 286006677763.5,
+                "tvl": null,
+                "last_updated": "2024-01-02T01:58:00.000Z"
+            }
+        }
+    },
+    "1704164401623": {
+        "symbol": "ETH",
+        "timestamp": 1704164401623,
+        "quote": {
+            "USD": {
+                "price": 2380.5624439495036,
+                "volume_24h": 8339783434.278943,
+                "volume_change_24h": 19.5058,
+                "percent_change_1h": 0.03449585,
+                "percent_change_24h": 3.76728411,
+                "percent_change_7d": 4.87006378,
+                "percent_change_30d": 9.91919397,
+                "percent_change_60d": 32.43011214,
+                "percent_change_90d": 45.0063903,
+                "market_cap": 286105338194.3853,
+                "market_cap_dominance": 16.4241,
+                "fully_diluted_market_cap": 286105338194.39,
+                "tvl": null,
+                "last_updated": "2024-01-02T02:58:00.000Z"
+            }
+        }
+    },
+    "1704168001995": {
+        "symbol": "ETH",
+        "timestamp": 1704168001995,
+        "quote": {
+            "USD": {
+                "price": 2388.048280836836,
+                "volume_24h": 8501525788.604658,
+                "volume_change_24h": 21.0877,
+                "percent_change_1h": 0.31445665,
+                "percent_change_24h": 4.953836,
+                "percent_change_7d": 5.23387507,
+                "percent_change_30d": 10.47839088,
+                "percent_change_60d": 32.67058791,
+                "percent_change_90d": 45.45505119,
+                "market_cap": 287005015453.3296,
+                "market_cap_dominance": 16.4383,
+                "fully_diluted_market_cap": 287005015453.33,
+                "tvl": null,
+                "last_updated": "2024-01-02T03:58:00.000Z"
+            }
+        }
+    },
+    "1704171601452": {
+        "symbol": "ETH",
+        "timestamp": 1704171601452,
+        "quote": {
+            "USD": {
+                "price": 2389.653130875189,
+                "volume_24h": 8556250400.08636,
+                "volume_change_24h": 20.3023,
+                "percent_change_1h": 0.06720342,
+                "percent_change_24h": 4.9208637,
+                "percent_change_7d": 5.25169452,
+                "percent_change_30d": 10.77296407,
+                "percent_change_60d": 33.49850333,
+                "percent_change_90d": 45.76914784,
+                "market_cap": 287200630163.75275,
+                "market_cap_dominance": 16.4754,
+                "fully_diluted_market_cap": 287200630163.75,
+                "tvl": null,
+                "last_updated": "2024-01-02T04:58:00.000Z"
+            }
+        }
+    },
+    "1704175201488": {
+        "symbol": "ETH",
+        "timestamp": 1704175201488,
+        "quote": {
+            "USD": {
+                "price": 2380.67746151533,
+                "volume_24h": 8690277468.978771,
+                "volume_change_24h": 21.9823,
+                "percent_change_1h": -0.37560553,
+                "percent_change_24h": 4.66599357,
+                "percent_change_7d": 6.3434114,
+                "percent_change_30d": 10.1532948,
+                "percent_change_60d": 32.35647422,
+                "percent_change_90d": 45.1741682,
+                "market_cap": 286121888708.35626,
+                "market_cap_dominance": 16.437,
+                "fully_diluted_market_cap": 286121888708.36,
+                "tvl": null,
+                "last_updated": "2024-01-02T05:58:00.000Z"
+            }
+        }
+    },
+    "1704178802031": {
+        "symbol": "ETH",
+        "timestamp": 1704178802031,
+        "quote": {
+            "USD": {
+                "price": 2377.856238139823,
+                "volume_24h": 8820297413.877096,
+                "volume_change_24h": 23.2336,
+                "percent_change_1h": -0.11850507,
+                "percent_change_24h": 4.14448107,
+                "percent_change_7d": 6.71818262,
+                "percent_change_30d": 10.19026408,
+                "percent_change_60d": 32.39837977,
+                "percent_change_90d": 44.88863483,
+                "market_cap": 285782819777.88696,
+                "market_cap_dominance": 16.4012,
+                "fully_diluted_market_cap": 285782819777.89,
+                "tvl": null,
+                "last_updated": "2024-01-02T06:58:00.000Z"
+            }
+        }
+    },
+    "1704182402234": {
+        "symbol": "ETH",
+        "timestamp": 1704182402234,
+        "quote": {
+            "USD": {
+                "price": 2389.242866236717,
+                "volume_24h": 9051757221.086775,
+                "volume_change_24h": 28.4966,
+                "percent_change_1h": 0.47886108,
+                "percent_change_24h": 4.58382907,
+                "percent_change_7d": 6.62602031,
+                "percent_change_30d": 10.36964078,
+                "percent_change_60d": 32.95764843,
+                "percent_change_90d": 45.2612081,
+                "market_cap": 287151322479.227,
+                "market_cap_dominance": 16.4139,
+                "fully_diluted_market_cap": 287151322479.23,
+                "tvl": null,
+                "last_updated": "2024-01-02T07:58:00.000Z"
+            }
+        }
+    },
+    "1704186001588": {
+        "symbol": "ETH",
+        "timestamp": 1704186001588,
+        "quote": {
+            "USD": {
+                "price": 2428.909007436603,
+                "volume_24h": 9975618864.482824,
+                "volume_change_24h": 42.5543,
+                "percent_change_1h": 1.66019712,
+                "percent_change_24h": 6.26358173,
+                "percent_change_7d": 8.59884663,
+                "percent_change_30d": 12.33549473,
+                "percent_change_60d": 35.11259178,
+                "percent_change_90d": 47.4603452,
+                "market_cap": 291918600458.4371,
+                "market_cap_dominance": 16.5579,
+                "fully_diluted_market_cap": 291918600458.44,
+                "tvl": null,
+                "last_updated": "2024-01-02T08:58:00.000Z"
+            }
+        }
+    },
+    "1704189601128": {
+        "symbol": "ETH",
+        "timestamp": 1704189601128,
+        "quote": {
+            "USD": {
+                "price": 2415.8399845713952,
+                "volume_24h": 10316957612.833784,
+                "volume_change_24h": 50.9009,
+                "percent_change_1h": -0.53806144,
+                "percent_change_24h": 5.11935178,
+                "percent_change_7d": 8.83609347,
+                "percent_change_30d": 11.48387581,
+                "percent_change_60d": 34.98337154,
+                "percent_change_90d": 46.51611406,
+                "market_cap": 290347899023.14655,
+                "market_cap_dominance": 16.4865,
+                "fully_diluted_market_cap": 290347899023.15,
+                "tvl": null,
+                "last_updated": "2024-01-02T09:58:00.000Z"
+            }
+        }
+    },
+    "1704193201840": {
+        "symbol": "ETH",
+        "timestamp": 1704193201840,
+        "quote": {
+            "USD": {
+                "price": 2399.252485656411,
+                "volume_24h": 10546330718.098969,
+                "volume_change_24h": 56.186,
+                "percent_change_1h": -0.68661414,
+                "percent_change_24h": 4.21936668,
+                "percent_change_7d": 7.17501939,
+                "percent_change_30d": 10.73375534,
+                "percent_change_60d": 34.3259827,
+                "percent_change_90d": 45.7033441,
+                "market_cap": 288354329295.527,
+                "market_cap_dominance": 16.4516,
+                "fully_diluted_market_cap": 288354329295.53,
+                "tvl": null,
+                "last_updated": "2024-01-02T10:58:00.000Z"
+            }
+        }
+    },
+    "1704196801466": {
+        "symbol": "ETH",
+        "timestamp": 1704196801466,
+        "quote": {
+            "USD": {
+                "price": 2393.6215694197194,
+                "volume_24h": 10841652476.803207,
+                "volume_change_24h": 63.2263,
+                "percent_change_1h": -0.23469461,
+                "percent_change_24h": 3.84721863,
+                "percent_change_7d": 6.79735361,
+                "percent_change_30d": 10.83987469,
+                "percent_change_60d": 33.70738944,
+                "percent_change_90d": 45.44084327,
+                "market_cap": 287677577230.266,
+                "market_cap_dominance": 16.4828,
+                "fully_diluted_market_cap": 287677577230.27,
+                "tvl": null,
+                "last_updated": "2024-01-02T11:58:00.000Z"
+            }
+        }
+    },
+    "1704200401223": {
+        "symbol": "ETH",
+        "timestamp": 1704200401223,
+        "quote": {
+            "USD": {
+                "price": 2387.532284297461,
+                "volume_24h": 11089827461.184597,
+                "volume_change_24h": 68.2233,
+                "percent_change_1h": -0.25439632,
+                "percent_change_24h": 3.77936334,
+                "percent_change_7d": 6.2652886,
+                "percent_change_30d": 10.91661786,
+                "percent_change_60d": 32.85461433,
+                "percent_change_90d": 45.0208724,
+                "market_cap": 286945736068.1477,
+                "market_cap_dominance": 16.4453,
+                "fully_diluted_market_cap": 286945736068.15,
+                "tvl": null,
+                "last_updated": "2024-01-02T12:58:00.000Z"
+            }
+        }
+    },
+    "1704204001589": {
+        "symbol": "ETH",
+        "timestamp": 1704204001589,
+        "quote": {
+            "USD": {
+                "price": 2397.568963949055,
+                "volume_24h": 11341403962.343155,
+                "volume_change_24h": 76.186,
+                "percent_change_1h": 0.4203788,
+                "percent_change_24h": 3.98091792,
+                "percent_change_7d": 6.65074391,
+                "percent_change_30d": 10.7492331,
+                "percent_change_60d": 32.89530833,
+                "percent_change_90d": 46.43651991,
+                "market_cap": 288151995120.3281,
+                "market_cap_dominance": 16.4416,
+                "fully_diluted_market_cap": 288151995120.33,
+                "tvl": null,
+                "last_updated": "2024-01-02T13:58:00.000Z"
+            }
+        }
+    },
+    "1704207601541": {
+        "symbol": "ETH",
+        "timestamp": 1704207601541,
+        "quote": {
+            "USD": {
+                "price": 2366.9118726000775,
+                "volume_24h": 11836013640.159794,
+                "volume_change_24h": 83.0731,
+                "percent_change_1h": -1.27867402,
+                "percent_change_24h": 2.87858315,
+                "percent_change_7d": 5.61649126,
+                "percent_change_30d": 9.92183901,
+                "percent_change_60d": 31.17490656,
+                "percent_change_90d": 44.89240901,
+                "market_cap": 284467470433.1868,
+                "market_cap_dominance": 16.4104,
+                "fully_diluted_market_cap": 284467470433.19,
+                "tvl": null,
+                "last_updated": "2024-01-02T14:58:00.000Z"
+            }
+        }
+    },
+    "1704211201617": {
+        "symbol": "ETH",
+        "timestamp": 1704211201617,
+        "quote": {
+            "USD": {
+                "price": 2359.5443204765206,
+                "volume_24h": 12228648118.742807,
+                "volume_change_24h": 88.0316,
+                "percent_change_1h": -0.31127277,
+                "percent_change_24h": 1.91067589,
+                "percent_change_7d": 5.93788251,
+                "percent_change_30d": 9.16879987,
+                "percent_change_60d": 30.1270045,
+                "percent_change_90d": 44.44846455,
+                "market_cap": 283582000661.31464,
+                "market_cap_dominance": 16.355,
+                "fully_diluted_market_cap": 283582000661.31,
+                "tvl": null,
+                "last_updated": "2024-01-02T15:58:00.000Z"
+            }
+        }
+    },
+    "1704214801566": {
+        "symbol": "ETH",
+        "timestamp": 1704214801566,
+        "quote": {
+            "USD": {
+                "price": 2368.563838209346,
+                "volume_24h": 12408642275.798456,
+                "volume_change_24h": 87.8225,
+                "percent_change_1h": 0.38225676,
+                "percent_change_24h": 2.49285553,
+                "percent_change_7d": 6.58335916,
+                "percent_change_30d": 9.62742752,
+                "percent_change_60d": 30.44487769,
+                "percent_change_90d": 44.57501299,
+                "market_cap": 284666012036.51025,
+                "market_cap_dominance": 16.399,
+                "fully_diluted_market_cap": 284666012036.51,
+                "tvl": null,
+                "last_updated": "2024-01-02T16:58:00.000Z"
+            }
+        }
+    },
+    "1704218402049": {
+        "symbol": "ETH",
+        "timestamp": 1704218402049,
+        "quote": {
+            "USD": {
+                "price": 2363.2436675983176,
+                "volume_24h": 12489538611.492125,
+                "volume_change_24h": 89.1165,
+                "percent_change_1h": -0.22461588,
+                "percent_change_24h": 2.12995836,
+                "percent_change_7d": 7.41757922,
+                "percent_change_30d": 9.70039775,
+                "percent_change_60d": 30.84759782,
+                "percent_change_90d": 44.20956196,
+                "market_cap": 284026606956.1979,
+                "market_cap_dominance": 16.4628,
+                "fully_diluted_market_cap": 284026606956.2,
+                "tvl": null,
+                "last_updated": "2024-01-02T17:58:00.000Z"
+            }
+        }
+    },
+    "1704222001757": {
+        "symbol": "ETH",
+        "timestamp": 1704222001757,
+        "quote": {
+            "USD": {
+                "price": 2367.147339796916,
+                "volume_24h": 12435739464.193975,
+                "volume_change_24h": 84.296,
+                "percent_change_1h": 0.16518281,
+                "percent_change_24h": 1.73858296,
+                "percent_change_7d": 7.19320035,
+                "percent_change_30d": 9.46743901,
+                "percent_change_60d": 30.4247956,
+                "percent_change_90d": 44.09494742,
+                "market_cap": 284495770074.855,
+                "market_cap_dominance": 16.4479,
+                "fully_diluted_market_cap": 284495770074.85,
+                "tvl": null,
+                "last_updated": "2024-01-02T18:58:00.000Z"
+            }
+        }
+    },
+    "1704225601360": {
+        "symbol": "ETH",
+        "timestamp": 1704225601360,
+        "quote": {
+            "USD": {
+                "price": 2371.4083979482934,
+                "volume_24h": 12557942842.94088,
+                "volume_change_24h": 83.2231,
+                "percent_change_1h": 0.18000815,
+                "percent_change_24h": 1.44822942,
+                "percent_change_7d": 7.27931892,
+                "percent_change_30d": 9.43903964,
+                "percent_change_60d": 30.27774098,
+                "percent_change_90d": 44.18591619,
+                "market_cap": 285007885649.4664,
+                "market_cap_dominance": 16.5196,
+                "fully_diluted_market_cap": 285007885649.47,
+                "tvl": null,
+                "last_updated": "2024-01-02T19:58:00.000Z"
+            }
+        }
+    },
+    "1704229201874": {
+        "symbol": "ETH",
+        "timestamp": 1704229201874,
+        "quote": {
+            "USD": {
+                "price": 2363.674914213952,
+                "volume_24h": 12570201478.513597,
+                "volume_change_24h": 79.9432,
+                "percent_change_1h": -0.32611353,
+                "percent_change_24h": 0.94190433,
+                "percent_change_7d": 6.54925556,
+                "percent_change_30d": 9.0022815,
+                "percent_change_60d": 29.14405671,
+                "percent_change_90d": 43.90118064,
+                "market_cap": 284078436361.12946,
+                "market_cap_dominance": 16.5105,
+                "fully_diluted_market_cap": 284078436361.13,
+                "tvl": null,
+                "last_updated": "2024-01-02T20:58:00.000Z"
+            }
+        }
+    },
+    "1704232801427": {
+        "symbol": "ETH",
+        "timestamp": 1704232801427,
+        "quote": {
+            "USD": {
+                "price": 2363.9766274170984,
+                "volume_24h": 12838734489.775635,
+                "volume_change_24h": 82.2751,
+                "percent_change_1h": 0.01276458,
+                "percent_change_24h": 1.13321929,
+                "percent_change_7d": 6.32030383,
+                "percent_change_30d": 8.25645435,
+                "percent_change_60d": 29.19435586,
+                "percent_change_90d": 43.79689031,
+                "market_cap": 284114697783.7404,
+                "market_cap_dominance": 16.4617,
+                "fully_diluted_market_cap": 284114697783.74,
+                "tvl": null,
+                "last_updated": "2024-01-02T21:58:00.000Z"
+            }
+        }
+    },
+    "1704236401331": {
+        "symbol": "ETH",
+        "timestamp": 1704236401331,
+        "quote": {
+            "USD": {
+                "price": 2363.368404517359,
+                "volume_24h": 12927148428.124834,
+                "volume_change_24h": 88.5644,
+                "percent_change_1h": -0.0257288,
+                "percent_change_24h": 1.25255178,
+                "percent_change_7d": 6.09545844,
+                "percent_change_30d": 7.16452878,
+                "percent_change_60d": 29.00971452,
+                "percent_change_90d": 43.36056782,
+                "market_cap": 284041598471.6151,
+                "market_cap_dominance": 16.4674,
+                "fully_diluted_market_cap": 284041598471.62,
+                "tvl": null,
+                "last_updated": "2024-01-02T22:58:00.000Z"
+            }
+        }
+    },
+    "1704240001265": {
+        "symbol": "ETH",
+        "timestamp": 1704240001265,
+        "quote": {
+            "USD": {
+                "price": 2355.747313072875,
+                "volume_24h": 12904140031.02367,
+                "volume_change_24h": 87.0752,
+                "percent_change_1h": -0.32246735,
+                "percent_change_24h": 0.21827334,
+                "percent_change_7d": 5.54079626,
+                "percent_change_30d": 7.37429084,
+                "percent_change_60d": 28.53028105,
+                "percent_change_90d": 42.9629022,
+                "market_cap": 283125657058.56586,
+                "market_cap_dominance": 16.434,
+                "fully_diluted_market_cap": 283125657058.57,
+                "tvl": null,
+                "last_updated": "2024-01-02T23:58:00.000Z"
+            }
+        }
+    },
+    "1704243602037": {
+        "symbol": "ETH",
+        "timestamp": 1704243602037,
+        "quote": {
+            "USD": {
+                "price": 2361.940887772217,
+                "volume_24h": 12408081931.71073,
+                "volume_change_24h": 64.2715,
+                "percent_change_1h": 0.26291337,
+                "percent_change_24h": -1.08824583,
+                "percent_change_7d": 6.06032378,
+                "percent_change_30d": 6.91220532,
+                "percent_change_60d": 29.09761185,
+                "percent_change_90d": 43.04573916,
+                "market_cap": 283870032270.8653,
+                "market_cap_dominance": 16.416,
+                "fully_diluted_market_cap": 283870032270.87,
+                "tvl": null,
+                "last_updated": "2024-01-03T00:58:00.000Z"
+            }
+        }
+    },
+    "1704247201473": {
+        "symbol": "ETH",
+        "timestamp": 1704247201473,
+        "quote": {
+            "USD": {
+                "price": 2375.1274715927448,
+                "volume_24h": 11914661089.736958,
+                "volume_change_24h": 46.7447,
+                "percent_change_1h": 0.5582944,
+                "percent_change_24h": -0.19388914,
+                "percent_change_7d": 6.45158364,
+                "percent_change_30d": 7.23029214,
+                "percent_change_60d": 29.46701471,
+                "percent_change_90d": 44.19152931,
+                "market_cap": 285454862777.8668,
+                "market_cap_dominance": 16.4453,
+                "fully_diluted_market_cap": 285454862777.87,
+                "tvl": null,
+                "last_updated": "2024-01-03T01:58:00.000Z"
+            }
+        }
+    },
+    "1704250801933": {
+        "symbol": "ETH",
+        "timestamp": 1704250801933,
+        "quote": {
+            "USD": {
+                "price": 2370.3794647174304,
+                "volume_24h": 11912049685.787966,
+                "volume_change_24h": 42.834,
+                "percent_change_1h": -0.19990535,
+                "percent_change_24h": -0.42775518,
+                "percent_change_7d": 6.78512326,
+                "percent_change_30d": 7.1129863,
+                "percent_change_60d": 29.23994175,
+                "percent_change_90d": 44.16140769,
+                "market_cap": 284885230527.8527,
+                "market_cap_dominance": 16.4359,
+                "fully_diluted_market_cap": 284885230527.85,
+                "tvl": null,
+                "last_updated": "2024-01-03T02:58:00.000Z"
+            }
+        }
+    },
+    "1704254401088": {
+        "symbol": "ETH",
+        "timestamp": 1704254401088,
+        "quote": {
+            "USD": {
+                "price": 2368.731191348629,
+                "volume_24h": 11683539990.494886,
+                "volume_change_24h": 37.4287,
+                "percent_change_1h": -0.06953627,
+                "percent_change_24h": -0.80890699,
+                "percent_change_7d": 6.75461857,
+                "percent_change_30d": 7.0669872,
+                "percent_change_60d": 29.06017089,
+                "percent_change_90d": 44.15256838,
+                "market_cap": 284687131976.2776,
+                "market_cap_dominance": 16.4381,
+                "fully_diluted_market_cap": 284687131976.28,
+                "tvl": null,
+                "last_updated": "2024-01-03T03:58:00.000Z"
+            }
+        }
+    },
+    "1704258001277": {
+        "symbol": "ETH",
+        "timestamp": 1704258001277,
+        "quote": {
+            "USD": {
+                "price": 2370.7539110429593,
+                "volume_24h": 11666103553.905464,
+                "volume_change_24h": 36.346,
+                "percent_change_1h": 0.08539254,
+                "percent_change_24h": -0.79087712,
+                "percent_change_7d": 6.68019481,
+                "percent_change_30d": 6.54166012,
+                "percent_change_60d": 29.50245255,
+                "percent_change_90d": 44.16198713,
+                "market_cap": 284930233545.0305,
+                "market_cap_dominance": 16.4397,
+                "fully_diluted_market_cap": 284930233545.03,
+                "tvl": null,
+                "last_updated": "2024-01-03T04:58:00.000Z"
+            }
+        }
+    },
+    "1704261601254": {
+        "symbol": "ETH",
+        "timestamp": 1704261601254,
+        "quote": {
+            "USD": {
+                "price": 2377.9142431275304,
+                "volume_24h": 11595695903.08941,
+                "volume_change_24h": 33.433,
+                "percent_change_1h": 0.30202764,
+                "percent_change_24h": -0.11606857,
+                "percent_change_7d": 6.813555,
+                "percent_change_30d": 5.95842286,
+                "percent_change_60d": 29.88888892,
+                "percent_change_90d": 44.85571695,
+                "market_cap": 285790801604.67334,
+                "market_cap_dominance": 16.4483,
+                "fully_diluted_market_cap": 285790801604.67,
+                "tvl": null,
+                "last_updated": "2024-01-03T05:58:00.000Z"
+            }
+        }
+    },
+    "1704265201352": {
+        "symbol": "ETH",
+        "timestamp": 1704265201352,
+        "quote": {
+            "USD": {
+                "price": 2377.922688226699,
+                "volume_24h": 11559094715.057358,
+                "volume_change_24h": 31.0511,
+                "percent_change_1h": 0.00035515,
+                "percent_change_24h": 0.00279454,
+                "percent_change_7d": 6.75533805,
+                "percent_change_30d": 5.66586504,
+                "percent_change_60d": 29.75085886,
+                "percent_change_90d": 45.09814574,
+                "market_cap": 285791816583.10156,
+                "market_cap_dominance": 16.4219,
+                "fully_diluted_market_cap": 285791816583.1,
+                "tvl": null,
+                "last_updated": "2024-01-03T06:58:00.000Z"
+            }
+        }
+    },
+    "1704268802420": {
+        "symbol": "ETH",
+        "timestamp": 1704268802420,
+        "quote": {
+            "USD": {
+                "price": 2363.483897583475,
+                "volume_24h": 11548306956.797434,
+                "volume_change_24h": 27.5808,
+                "percent_change_1h": -0.60720185,
+                "percent_change_24h": -1.07812266,
+                "percent_change_7d": 5.98964134,
+                "percent_change_30d": 5.19372159,
+                "percent_change_60d": 28.70400765,
+                "percent_change_90d": 44.5390929,
+                "market_cap": 284056483374.99493,
+                "market_cap_dominance": 16.4215,
+                "fully_diluted_market_cap": 284056483374.99,
+                "tvl": null,
+                "last_updated": "2024-01-03T07:58:00.000Z"
+            }
+        }
+    },
+    "1704272401856": {
+        "symbol": "ETH",
+        "timestamp": 1704272401856,
+        "quote": {
+            "USD": {
+                "price": 2370.669847877538,
+                "volume_24h": 10843464546.05636,
+                "volume_change_24h": 8.6997,
+                "percent_change_1h": 0.30404059,
+                "percent_change_24h": -2.39774975,
+                "percent_change_7d": 5.33863683,
+                "percent_change_30d": 5.02976337,
+                "percent_change_60d": 28.85144174,
+                "percent_change_90d": 44.64075992,
+                "market_cap": 284920130371.8397,
+                "market_cap_dominance": 16.4426,
+                "fully_diluted_market_cap": 284920130371.84,
+                "tvl": null,
+                "last_updated": "2024-01-03T08:58:00.000Z"
+            }
+        }
+    },
+    "1704276001475": {
+        "symbol": "ETH",
+        "timestamp": 1704276001475,
+        "quote": {
+            "USD": {
+                "price": 2376.396066751144,
+                "volume_24h": 10753775532.565876,
+                "volume_change_24h": 4.234,
+                "percent_change_1h": 0.24154434,
+                "percent_change_24h": -1.63272063,
+                "percent_change_7d": 5.49849955,
+                "percent_change_30d": 5.60892863,
+                "percent_change_60d": 29.10307181,
+                "percent_change_90d": 44.97497828,
+                "market_cap": 285608338824.59674,
+                "market_cap_dominance": 16.3699,
+                "fully_diluted_market_cap": 285608338824.6,
+                "tvl": null,
+                "last_updated": "2024-01-03T09:58:00.000Z"
+            }
+        }
+    },
+    "1704279601344": {
+        "symbol": "ETH",
+        "timestamp": 1704279601344,
+        "quote": {
+            "USD": {
+                "price": 2364.913590343699,
+                "volume_24h": 10676554471.95523,
+                "volume_change_24h": 1.2348,
+                "percent_change_1h": -0.48318866,
+                "percent_change_24h": -1.43123308,
+                "percent_change_7d": 3.79888113,
+                "percent_change_30d": 4.43945733,
+                "percent_change_60d": 28.31333311,
+                "percent_change_90d": 44.14117122,
+                "market_cap": 284228311707.818,
+                "market_cap_dominance": 16.3792,
+                "fully_diluted_market_cap": 284228311707.82,
+                "tvl": null,
+                "last_updated": "2024-01-03T10:58:00.000Z"
+            }
+        }
+    }
+}
