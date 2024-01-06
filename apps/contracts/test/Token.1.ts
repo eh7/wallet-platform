@@ -11,7 +11,7 @@ describe("Token contract ts", function () {
   async function deployTokenFixture() {
     const [owner, addr1, addr2] = await ethers.getSigners();
 
-    const hardhatToken = await ethers.deployContract("Token");
+    const hardhatToken = await ethers.deployContract("Eh7Token");
 
     await hardhatToken.waitForDeployment();
 
