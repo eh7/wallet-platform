@@ -1,7 +1,11 @@
-<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
-        type="application/javascript"></script>
+<html>
+	<head>
+		<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        		type="application/javascript"></script>
 
-<script>
+	<head>
+	<body>
+		<script>
 
 if (typeof window.ethereum !== 'undefined') {
   console.log('MetaMask is installed!');
@@ -23,6 +27,13 @@ const getChaonId = async () => {
 }
 getChaonId()
 
+window.ethereum.on('chainChanged', handleChainChanged);
+
+function handleChainChanged(chainId) {
+  // We recommend reloading the page, unless you must do otherwise.
+  window.location.reload();
+}
+
 
 /*
 
@@ -34,4 +45,6 @@ getChaonId()
     )
 */
 
-</script>
+		</script>
+	</body>
+</html>

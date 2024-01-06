@@ -1,0 +1,54 @@
+<html>
+	<head>
+		<script src="https://cdn.ethers.io/lib/ethers-5.2.umd.min.js"
+        		type="application/javascript"></script>
+
+	<head>
+	<body>
+		<div id="chainId">DEFAULT DATA</div>
+		<script>
+
+			if (typeof window.ethereum !== 'undefined') {
+				console.log('MetaMask is installed!');
+			}
+
+			const getChaonId = async () => {
+			const chainId = await window.ethereum.request({ method: 'eth_chainId' });
+			const stringChainId = chainId.toString()
+			const numberChainId = parseInt(chainId, 16)
+  			console.log({
+				chainId,
+				stringChainId,
+				numberChainId,
+			})
+			//console.log(parseInt(chainId, 16))
+
+ 			const elem = document.getElementById("chainId");
+ 			//elem.innerHTML = "new data";
+ 			elem.innerHTML = "ChainId: " + parseInt(chainId, 16);
+		}
+		getChaonId()
+
+		window.ethereum.on('chainChanged', handleChainChanged);
+
+		function handleChainChanged(chainId) {
+			// We recommend reloading the page, unless you must do otherwise.
+ 			const elem = document.getElementById("chainId");
+ 			elem.innerHTML = "ChainId: " + parseInt(chainId, 16);
+			window.location.reload();
+		}
+
+
+/*
+
+    getMessageHash(
+        0x14723A09ACff6D2A60DcdF7aA4AFf308FDDC160C,
+        123,
+        "coffee and donuts",
+        1
+    )
+*/
+
+		</script>
+	</body>
+</html>
