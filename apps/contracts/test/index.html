@@ -204,11 +204,6 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 
 */
 
-  // TESTING eth_sign
-  let messageHash = "0x1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8";
-  let signature = await ethereum.request({ method: 'eth_sign', params: [from[0], messageHash] });
-//console.log({ signature });
-
 //  await window.ethereum.request({
 //    "method": "eth_sign",
 //    //"params": [
@@ -290,6 +285,17 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
     ]
   });
   console.log({request})
+
+  // TESTING eth_sign
+  try {
+  let messageHash = "0x1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8";
+  let signature = await ethereum.request({ method: 'eth_sign', params: [from[0], messageHash] });
+  console.log({ 'eth_sign_sig': signature });
+  } catch (error) {
+    console.error('eth_sign txError:', error);
+    alert(error.message);
+  }
+
 
 });
 
