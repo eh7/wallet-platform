@@ -11,11 +11,13 @@
 
 		<script>
 
+                        let thisChainId = 1
+
 			if (typeof window.ethereum !== 'undefined') {
 				console.log('MetaMask is installed!');
 			}
 
-			const getChaonId = async () => {
+			const getChainId = async () => {
 			const chainId = await window.ethereum.request({ method: 'eth_chainId' });
 			const stringChainId = chainId.toString()
 			const numberChainId = parseInt(chainId, 16)
@@ -29,8 +31,10 @@
  			const elem = document.getElementById("chainId");
  			//elem.innerHTML = "new data";
  			elem.innerHTML = "ChainId: " + parseInt(chainId, 16);
+
+			thisChainId = numberChainId
 		}
-		getChaonId()
+		getChainId()
 
 		window.ethereum.on('chainChanged', handleChainChanged);
 
@@ -60,6 +64,12 @@
 
 signTypedDataV4Button.addEventListener('click', async function (event) {
   event.preventDefault();
+
+	  //var from = await web3.eth.getAccounts();
+  var from = await ethereum.request({ method: 'eth_accounts' });
+  console.log(from)
+
+/*
 
   // eth_signTypedData_v4 parameters. All of these parameters affect the resulting signature.
 	  const msgParams = JSON.stringify({
@@ -126,10 +136,6 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 	      ],
 	    },
 	  });
-
-	  //var from = await web3.eth.getAccounts();
-	  var from = await ethereum.request({ method: 'eth_accounts' });
-	  console.log(from)
 
 	/*
 	  var params = [from[0], msgParams];
@@ -198,10 +204,25 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
 
 */
 
-  await window.ethereum.request({
+  // TESTING eth_sign
+  let messageHash = "0x1c8aff950685c2ed4bc3174f3472287b56d9517b9c948127319a09a7a36deac8";
+  let signature = await ethereum.request({ method: 'eth_sign', params: [from[0], messageHash] });
+//console.log({ signature });
+
+//  await window.ethereum.request({
+//    "method": "eth_sign",
+//    //"params": [
+//    //  //"0x0000000000000000000000000000000000000000",
+//    //  from[0],
+//    //],
+//  });
+
+  const request = await window.ethereum.request({
     "method": "eth_signTypedData_v4",
+    //"method": "personal_sign",
     "params": [
-      "0x0000000000000000000000000000000000000000",
+      //"0x0000000000000000000000000000000000000000",
+      from[0],
       {
         "types": {
           "EIP712Domain": [
@@ -251,7 +272,7 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
         "domain": {
           "name": "Ether Mail",
           "version": "1",
-          "chainId": 1,
+          "chainId": thisChainId,
           "verifyingContract": "0xCcCCccccCCCCcCCCCCCcCcCccCcCCCcCcccccccC"
         },
         "message": {
@@ -268,6 +289,7 @@ signTypedDataV4Button.addEventListener('click', async function (event) {
       }
     ]
   });
+  console.log({request})
 
 });
 
