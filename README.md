@@ -82,6 +82,6 @@ Current Development Status;
  * Development Options: cdk (poylgon), evm, level2 options, think about posible options??
  * Development option: private assest payment network (see tornado cash) level 2 solution (deployment options???)
  * asset bridge may be replaced by using something that is already implemented and available, furth research required around how this is undertaken (more thoughts???)
- * optimism as a layer 2 solution, a commity based and well documented solution, would allow cheaper transactions but keeping within the current ethereum ecosystem.
+ * optimism as a layer 2 solution, a commity based and well documented solution layer 2 rollup ecosystem, would allow cheaper transactions but keeping within the current ethereum ecosystem.
 
 
