@@ -65,7 +65,7 @@ The basic wallet functionality is outlined below, the final specification will b
 
 ## Conclusions
 
-Access to crypto payments and assest is growing accross the world and is project to grow further over the comming years. I believe this type of platform has the potential to resolve many of the technical bariers that are currently in place and this could be a good asset in achiving this progress through adoption.
+Access to crypto payments and assest is growing accross the world and is projected to grow further over the comming years. I believe this type of platform has the potential to resolve many of the technical bariers that are currently in place and this could be a good asset in achiving this progress through adoption.
 It would allow access to usefull blockchain technogies and services through a secure interface, from secure private payment, published smart contract(s) functionality, p2p communication to usable serveless web services.
 I believe that by focusing in a large part on modular system and the web service elements, it will allow the delivery and extension of the platform, with the potential path for growth in the future.
 I also believe with further development there could be a potential for users to supply services to platform, with spare comput and network resources they may have access to, which could earn them rewards. 
