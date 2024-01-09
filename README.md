@@ -1,6 +1,6 @@
 # Modular Crypto Wallet Platform
 
-The modular crypto wallet platform will allow management of crypto assets, secure private payments, peer to peer communicartion network, and the delivery of web services content within the wallet platform. Functionality could be extended with the modular system, opertaing on top of the wallet platform core functionality. 
+The modular crypto wallet platform will allow management of crypto assets, secure private payments, peer to peer communication network, and the delivery of web services content within the wallet platform. Functionality could be extended with the modular system, opertaing on top of the wallet platform core functionality. 
 
 A big part of the basic functionality is the wallet package management system. This would allow developers to create and integrate services from the other core wallet system functionality, these will include key management, P2P wallet network, Crypto assest investments, Smart Contract abi Interface, and Web Services. The modules would allow the creation user friendly interfaces for access to publicly avaiable smart contracts on any evm compatiable blockchain, or other key functions within the wallet platform.
 
