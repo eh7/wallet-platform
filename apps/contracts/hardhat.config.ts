@@ -8,20 +8,45 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.19",
+  solidity: "0.8.20",
   //defaultNetwork: "yourtestnetname",
   networks: {
   //  hardhat:{},
     goerli:{
       url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,
       accounts: [`0x${PRIVATE_KEY}`]
-    }
+    },
+    sepolia:{
+      url: 'https://sepolia.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [`0x${PRIVATE_KEY}`]
+    },
+    op_sepolia:{
+      url: 'https://optimism-sepolia.infura.io/v3/' + INFURA_API_KEY,
+      accounts: [`0x${PRIVATE_KEY}`]
+    },
   },
   sourcify: {
-    enabled: true
+    enabled: false
   },
   etherscan: {
-    apiKey: process.env.ETHERSCAN_API_KEY, 
+    apiKey: {
+      mainnet: process.env.ETHERSCAN_API_KEY,
+      goerli: process.env.ETHERSCAN_API_KEY,
+      sepolia: process.env.ETHERSCAN_API_KEY,
+      op_mainnet: process.env.ETHERSCAN_OP_API_KEY, 
+      op_goerli: process.env.ETHERSCAN_OP_API_KEY, 
+      op_sepolia: process.env.ETHERSCAN_OP_API_KEY, 
+    },
+    customChains: [
+      {
+        network: "op_sepolia",
+        chainId: 11155420,
+        urls: {
+          apiURL: "https://api-sepolia-optimistic.etherscan.io/api",
+          browserURL: "https://sepolia-optimistic.etherscan.io"
+        }
+      }
+    ]
   },
 };
 
