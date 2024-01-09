@@ -12,7 +12,7 @@ The main driver in the development of the platform is to create a network that a
 
 If this is all true this should allow the adoption on web3 services for genral users with no expert knowledge, it will also give people and organisations with spare networks, and compute resources that they could be deployed within the wallet platform to earn rewards for them.
 
-The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal is best suited to create a wallet platform that will be the most usful and attractive to protential users and developers moving forward. 
+The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal are best suited to creating a wallet platform that will be the most usful and attractive to protential users, developers, and service providers moving forward. 
 
 ## Basic Wallet functionality;
 
