@@ -12,7 +12,7 @@ The main driver in the development of the platform is to create a network that a
 
 If this is all true this should allow the adoption on web3 services for genral users with no expert knowledge, it will also give people and organisations with spare networks, and compute resources that they could be deployed within the wallet platform to earn rewards for them.
 
-The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal is best suited to create a wallet platform that will be the most usful and attractive to protential users and developers moving forward. 
+The basic wallet functionality is outlined below, the final specification will be further definded during the specification stage that we will be undertake as a first phase of the development cycle. This will allow us to focus on the the feature that we all feal are best suited to creating a wallet platform that will be the most usful and attractive to protential users, developers, and service providers moving forward. 
 
 ## Basic Wallet functionality;
 
@@ -65,7 +65,7 @@ The basic wallet functionality is outlined below, the final specification will b
 
 ## Conclusions
 
-Access to crypto payments and assest is growing accross the world and is project to grow further over the comming years. I believe this type of platform has the potential to resolve many of the technical bariers that are currently in place and this could be a good asset in achiving this progress through adoption.
+Access to crypto payments and assest is growing accross the world and is projected to grow further over the comming years. I believe this type of platform has the potential to resolve many of the technical bariers that are currently in place and this could be a good asset in achiving this progress through adoption.
 It would allow access to usefull blockchain technogies and services through a secure interface, from secure private payment, published smart contract(s) functionality, p2p communication to usable serveless web services.
 I believe that by focusing in a large part on modular system and the web service elements, it will allow the delivery and extension of the platform, with the potential path for growth in the future.
 I also believe with further development there could be a potential for users to supply services to platform, with spare comput and network resources they may have access to, which could earn them rewards. 
@@ -82,5 +82,6 @@ Current Development Status;
  * Development Options: cdk (poylgon), evm, level2 options, think about posible options??
  * Development option: private assest payment network (see tornado cash) level 2 solution (deployment options???)
  * asset bridge may be replaced by using something that is already implemented and available, furth research required around how this is undertaken (more thoughts???)
+ * optimism as a layer 2 solution, a commity based and well documented solution layer 2 rollup ecosystem, would allow cheaper transactions but keeping within the current ethereum ecosystem.
 
 
