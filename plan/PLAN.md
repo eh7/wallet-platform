@@ -4,9 +4,9 @@ Lowering barriers to web3 applications and their benfit for users and contribute
 
 Explain the core functions need to deliver the basic core wallet platform, and outline the development requirements and functions that will be available to the users, and what they will be able to achieve in the initial version. 
 
-Expalin the enhaced development requirements and functions need to deliver the final fully functional wallet platform, including all incentive structures to allow the delivery of the platform in a decentralised manner. Discuse how this is a long term goal and how there are more than one way to this and it all depends on the way the wallet platform will be licensed and marketed.
+Expalin the enhaced function and development requirements need to deliver the final fully functional wallet platform, including all incentive structures to allow the delivery of the platform in a decentralised manner. Discuse how this is a long term goal and how there are more than one way to this and it all depends on the way the wallet platform will be licensed and marketed.
 
-Explain the finalsied platform and the potential benifits and use cases to sell the big idea. Also define the varoiuse users/contibuters and how/why they are part of the over development plan.
+Explain the finalsied platform and the potential benifits and use cases to sell the big idea. As part of this define the variose users/contibuters and how/why they are part of the over development plan.
 
 Explain the the development path and how the intial platform would target a given user base (international remitance payments) as this is a growinig base, and then move on to the the other main features that will build long term comitment to the platform and how this will be achieved.
 
