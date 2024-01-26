@@ -2,7 +2,7 @@ The summary structure
 
 Lowering barriers to web3 applications and their benfit for users and contributers. Make the point that web tech enhances privacy, usabiltiy (web adpoted), see notes in little red note book for positives.
 
-Expalin the core functions need to deliver the basic core wallet platform, and outline the development requirements and functions that will be available to the users, and what they will be able to achieve in the initial version. 
+Explain the core functions need to deliver the basic core wallet platform, and outline the development requirements and functions that will be available to the users, and what they will be able to achieve in the initial version. 
 
 Expalin the enhaced development requirements and functions need to deliver the final fully functional wallet platform, including all incentive structures to allow the delivery of the platform in a decentralised manner. Discuse how this is a long term goal and how there are more than one way to this and it all depends on the way the wallet platform will be licensed and marketed.
 
