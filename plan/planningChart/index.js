@@ -17,11 +17,11 @@ const opts = {
   onClick: v => console.log(v)
 };
 const svgGantt = new SVGGantt('#svg', data, opts);
-const canvasGantt = new CanvasGantt('#canvas', data, opts);
+//const canvasGantt = new CanvasGantt('#canvas', data, opts);
 const strGantt = new StrGantt(data, opts);
 
 function renderStr() {
-  // $('#str').textContent = formatXML(strGantt.render());
+  $('#str').textContent = formatXML(strGantt.render());
 }
 
 renderStr();

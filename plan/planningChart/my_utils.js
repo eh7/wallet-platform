@@ -16,10 +16,10 @@ export function getData() {
 
   let dates = [];
 
-  for (let i=0; i<10; i++) {
+  for (let i=1; i<=52; i++) {
     let date;
     date = new Date();
-    date.setDate(date.getDate() + (14 * i));
+    date.setDate(date.getDate() + (7 * i));
     dates.push(date);
 //    dates[i] = date;
   }
@@ -49,116 +49,112 @@ console.log(date)
 
   const tasks = [{
     id: 1,
-    name: 'Modular Crypto Wallet Platform',
+    name: 'Phase 1 Functionality Implemenation',
     start: dates[0],
-    duration: (52 / 2) * 7,
+    duration: 22 * 7,
     percent: 0.1,
+  }, {
+    id: 7,
+    name: 'Release Phase 1',
+    start: dates[22],
+    type: 'milestone'
+  }, {
+    id: 5,
+    name: 'Systems Arcitecture Analysis and Design',
+    start: dates[0],
+    duration: 3 * 7,
   }, {
     id: 2,
     name: 'Platform Service Development',
-    start: dates[0],
+    start: dates[3],
     duration: (52 / 2) * 7,
   }, {
     id: 21,
     name: 'Key Service',
-    start: dates[0],
+    start: dates[3],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 22,
     name: 'Data Service',
-    start: dates[1],
+    start: dates[5],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 23,
     name: 'P2P Network Service',
-    start: dates[2],
+    start: dates[7],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 24,
     name: 'Smart Contract ABI Service',
-    start: dates[3],
-    duration: 2 * 7,
-    parent: 2,
-  }, {
-    id: 25,
-    name: 'Package Management Service',
-    start: dates[4],
+    start: dates[9],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 3,
     name: 'User Interface development',
-    start: dates[5],
+    start: dates[11],
     duration: 2 * 7,
+  }, {
+    id: 25,
+    name: 'Package Management Service',
+    start: dates[11],
+    duration: 2 * 7,
+    parent: 2,
   }, {
     id: 31,
     name: 'Wallet Interface',
-    start: dates[5],
+    start: dates[13],
     parent: 3,
     duration: 2 * 7,
   }, {
     id: 32,
     name: 'Package Interface',
-    start: dates[6],
+    start: dates[15],
     parent: 3,
     duration: 2 * 7,
   }, {
     id: 33,
     name: 'Developer Interface',
-    start: dates[7],
+    start: dates[17],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 34,
     name: 'Service Provider Interface',
-    start: dates[8],
+    start: dates[19],
     //start: date.getDate() + 3;
     duration: 2 * 7,
     parent: 3,
-  }];
-  const tasks_old = [{
-    id: 1,
-    name: 'Waterfall model'
   }, {
-    id: 11,
-    parent: 1,
-    name: 'Requirements'
+    id: 6,
+    name: 'Phase 1 Service Integration',
+    start: dates[21],
+    duration: 7,
   }, {
-    id: 12,
-    parent: 1,
-    name: 'Design'
+    id: 7,
+    name: 'Phase 1 Testing',
+    start: dates[22],
+    duration: 7,
   }, {
-    id: 13,
-    parent: 1,
-    name: 'Implement',
+    id: 5,
+    name: 'Phase 1 Functionality Review and Optimisation',
+    start: dates[23],
+    duration: 7,
+  }, {
+    id: 4,
+    name: 'Phase 2 Functionality Implemenation',
+    start: dates[24],
+    duration: 25 * 7,
+  }, {
+    id: 8,
+    name: 'Release Phase 2',
+    start: dates[49],
     type: 'milestone'
-  }, {
-    id: 14,
-    parent: 1,
-    name: 'Verification'
-  }, {
-    id: 2,
-    name: 'Development'
-  }, {
-    id: 21,
-    parent: 2,
-    name: 'Preliminary'
-  }, {
-    id: 22,
-    parent: 2,
-    name: 'Systems design'
-  }, {
-    id: 23,
-    parent: 2,
-    name: 'Development'
-  }, {
-    id: 24,
-    parent: 2,
-    name: 'Integration'
   }];
+
 //  tasks.forEach((v) => {
 //    v.start = rand();
 //    v.duration = Math.random() * 90;
