@@ -14,16 +14,17 @@ function rand(begin) {
 
 export function getData() {
 
-  let dates;
+  let dates = [];
 
-  for (let i=0; i<5; i++) {
-//    let date;
-//    date = new Date();
-//    date.setDate(date.getDate() + (7 * i));
+  for (let i=0; i<10; i++) {
+    let date;
+    date = new Date();
+    date.setDate(date.getDate() + (14 * i));
+    dates.push(date);
 //    dates[i] = date;
   }
-console.log(dates);
 
+/*
   let date;
   date = new Date();
   date.setDate(date.getDate() + 0);
@@ -44,73 +45,79 @@ console.log(date)
   let date4;
   date4 = new Date();
   date4.setDate(date.getDate() + 56);
+*/
 
   const tasks = [{
     id: 1,
     name: 'Modular Crypto Wallet Platform',
-    start: date,
-    //start: rand(),
+    start: dates[0],
     duration: (52 / 2) * 7,
     percent: 0.1,
-    //duration: 26;
-    //start = 7 * 26;
-    //duration = Math.random() * 90;
-    //percent = Math.random();
-  }, {
-    id: 11,
-    name: 'Key Service',
-    start: date,
-    duration: 2 * 7,
-  }, {
-    id: 12,
-    name: 'Data Service',
-    start: date,
-    duration: 2 * 7,
-  }, {
-    id: 13,
-    name: 'P2P Network Service',
-    start: date,
-    duration: 2 * 7,
-  }, {
-    id: 14,
-    name: 'Smart Contract ABI Service',
-    start: date,
-    duration: 2 * 7,
-  }, {
-    id: 15,
-    name: 'Package Management Service',
-    start: date,
-    duration: 2 * 7,
   }, {
     id: 2,
-    name: 'Interface development',
-    start: date,
-    duration: 2 * 7,
+    name: 'Platform Service Development',
+    start: dates[0],
+    duration: (52 / 2) * 7,
   }, {
     id: 21,
-    name: 'Wallet Interface',
-    start: date1,
-    parent: 2,
+    name: 'Key Service',
+    start: dates[0],
     duration: 2 * 7,
+    parent: 2,
   }, {
     id: 22,
-    name: 'Package Interface',
-    start: date2,
-    parent: 2,
+    name: 'Data Service',
+    start: dates[1],
     duration: 2 * 7,
+    parent: 2,
   }, {
     id: 23,
-    name: 'Developer Interface',
-    start: date3,
+    name: 'P2P Network Service',
+    start: dates[2],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 24,
-    name: 'Service Provider Interface',
-    start: date4,
-    //start: date.getDate() + 3;
+    name: 'Smart Contract ABI Service',
+    start: dates[3],
     duration: 2 * 7,
     parent: 2,
+  }, {
+    id: 25,
+    name: 'Package Management Service',
+    start: dates[4],
+    duration: 2 * 7,
+    parent: 2,
+  }, {
+    id: 3,
+    name: 'User Interface development',
+    start: dates[5],
+    duration: 2 * 7,
+  }, {
+    id: 31,
+    name: 'Wallet Interface',
+    start: dates[5],
+    parent: 3,
+    duration: 2 * 7,
+  }, {
+    id: 32,
+    name: 'Package Interface',
+    start: dates[6],
+    parent: 3,
+    duration: 2 * 7,
+  }, {
+    id: 33,
+    name: 'Developer Interface',
+    start: dates[7],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 34,
+    name: 'Service Provider Interface',
+    start: dates[8],
+    //start: date.getDate() + 3;
+    duration: 2 * 7,
+    parent: 3,
   }];
   const tasks_old = [{
     id: 1,
@@ -171,6 +178,26 @@ console.log(date)
   }, {
     source: 23,
     target: 24,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 24,
+    target: 25,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 31,
+    target: 32,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 32,
+    target: 33,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 33,
+    target: 34,
     type: 'FS',
     lag: 3
   }, {
