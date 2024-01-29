@@ -5,7 +5,8 @@ import {
   utils
 } from 'gantt';
 //} from '../src';
-import { getData, formatXML } from './utils';
+//import { getData, formatXML } from './utils';
+import { getData, formatXML } from './my_utils';
 
 const $ = s => document.querySelector(s);
 const { tasks, links } = getData();
