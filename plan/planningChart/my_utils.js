@@ -13,17 +13,104 @@ function rand(begin) {
 }
 
 export function getData() {
+
+  let dates;
+
+  for (let i=0; i<5; i++) {
+//    let date;
+//    date = new Date();
+//    date.setDate(date.getDate() + (7 * i));
+//    dates[i] = date;
+  }
+console.log(dates);
+
+  let date;
+  date = new Date();
+  date.setDate(date.getDate() + 0);
+console.log(date)
+
+  let date1;
+  date1 = new Date();
+  date1.setDate(date.getDate() + 14);
+
+  let date2;
+  date2 = new Date();
+  date2.setDate(date.getDate() + 28);
+
+  let date3;
+  date3 = new Date();
+  date3.setDate(date.getDate() + 42);
+
+  let date4;
+  date4 = new Date();
+  date4.setDate(date.getDate() + 56);
+
   const tasks = [{
     id: 1,
     name: 'Modular Crypto Wallet Platform',
-    //start: date.getDate(),
-    start: rand(),
-    duration: 31,
+    start: date,
+    //start: rand(),
+    duration: (52 / 2) * 7,
     percent: 0.1,
     //duration: 26;
     //start = 7 * 26;
     //duration = Math.random() * 90;
     //percent = Math.random();
+  }, {
+    id: 11,
+    name: 'Key Service',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 12,
+    name: 'Data Service',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 13,
+    name: 'P2P Network Service',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 14,
+    name: 'Smart Contract ABI Service',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 15,
+    name: 'Package Management Service',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 2,
+    name: 'Interface development',
+    start: date,
+    duration: 2 * 7,
+  }, {
+    id: 21,
+    name: 'Wallet Interface',
+    start: date1,
+    parent: 2,
+    duration: 2 * 7,
+  }, {
+    id: 22,
+    name: 'Package Interface',
+    start: date2,
+    parent: 2,
+    duration: 2 * 7,
+  }, {
+    id: 23,
+    name: 'Developer Interface',
+    start: date3,
+    duration: 2 * 7,
+    parent: 2,
+  }, {
+    id: 24,
+    name: 'Service Provider Interface',
+    start: date4,
+    //start: date.getDate() + 3;
+    duration: 2 * 7,
+    parent: 2,
   }];
   const tasks_old = [{
     id: 1,
@@ -71,6 +158,23 @@ export function getData() {
 //    v.percent = Math.random();
 //  });
   const links = [
+  {
+    source: 21,
+    target: 22,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 22,
+    target: 23,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 23,
+    target: 24,
+    type: 'FS',
+    lag: 3
+  }, {
+  }
 /*
   {
     source: 11,

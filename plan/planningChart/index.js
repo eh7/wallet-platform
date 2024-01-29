@@ -21,14 +21,14 @@ const canvasGantt = new CanvasGantt('#canvas', data, opts);
 const strGantt = new StrGantt(data, opts);
 
 function renderStr() {
-  $('#str').textContent = formatXML(strGantt.render());
+  // $('#str').textContent = formatXML(strGantt.render());
 }
 
 renderStr();
 
 function changeOptions(options) {
   svgGantt.setOptions(options);
-  canvasGantt.setOptions(options);
+  //canvasGantt.setOptions(options);
   strGantt.setOptions(options);
   renderStr();
 }
@@ -36,7 +36,7 @@ function changeOptions(options) {
 function changeData() {
   const list = utils.formatData(tasks, links);
   svgGantt.setData(list);
-  canvasGantt.setData(list);
+  //canvasGantt.setData(list);
   strGantt.setData(list);
   renderStr();
 }
