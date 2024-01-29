@@ -6,10 +6,9 @@ Explain the core functions need to deliver the basic core wallet platform, and o
 
 Expalin the enhaced function and development requirements need to deliver the final fully functional wallet platform, including all incentive structures to allow the delivery of the platform in a decentralised manner. Discuse how this is a long term goal and how there are more than one way to this and it all depends on the way the wallet platform will be licensed and marketed.
 
-Explain the finalsied platform and the potential benifits and use cases to sell the big idea. As part of this define the variose users/contibuters and how/why they are part of the over development plan.
-
 Explain the the development path and how the intial platform would target a given user base (international remitance payments) as this is a growinig base, and then move on to the the other main features that will build long term comitment to the platform and how this will be achieved.
 
+Explain the finalsied platform and the potential benifits and use cases to sell the big idea. As part of this define the variose users/contibuters and how/why they are part of the over development plan.
 Define the proposed initial development phase 6 to 12 months, targeting a core platform that is targeted to international remitance payments.
 
 Define the next development phase to show how this would be appoached, outside the 6 to 12 months inital development plan, explaining how this could be done in tadem if the resources to do this are in place.
