@@ -51,12 +51,12 @@ console.log(date)
     id: 1,
     name: 'Phase 1 Functionality Implemenation',
     start: dates[0],
-    duration: 22 * 7,
+    duration: 25 * 7,
     percent: 0.1,
   }, {
-    id: 7,
+    id: 11,
     name: 'Release Phase 1',
-    start: dates[22],
+    start: dates[25],
     type: 'milestone'
   }, {
     id: 5,
@@ -67,7 +67,7 @@ console.log(date)
     id: 2,
     name: 'Platform Service Development',
     start: dates[3],
-    duration: (52 / 2) * 7,
+    duration: 30 * 7,
   }, {
     id: 21,
     name: 'Key Service',
@@ -76,82 +76,82 @@ console.log(date)
     parent: 2,
   }, {
     id: 22,
-    name: 'Data Service',
+    name: 'P2P Network Service',
     start: dates[5],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 23,
-    name: 'P2P Network Service',
+    name: 'Data Service',
     start: dates[7],
-    duration: 2 * 7,
+    duration: 3 * 7,
     parent: 2,
   }, {
     id: 24,
     name: 'Smart Contract ABI Service',
-    start: dates[9],
+    start: dates[10],
     duration: 2 * 7,
+    parent: 2,
+  }, {
+    id: 25,
+    name: 'Package Management Service',
+    start: dates[12],
+    duration: 3 * 7,
     parent: 2,
   }, {
     id: 3,
     name: 'User Interface development',
-    start: dates[11],
+    start: dates[15],
     duration: 2 * 7,
-  }, {
-    id: 25,
-    name: 'Package Management Service',
-    start: dates[11],
-    duration: 2 * 7,
-    parent: 2,
   }, {
     id: 31,
     name: 'Wallet Interface',
-    start: dates[13],
+    start: dates[15],
     parent: 3,
     duration: 2 * 7,
   }, {
     id: 32,
     name: 'Package Interface',
-    start: dates[15],
+    start: dates[17],
     parent: 3,
     duration: 2 * 7,
   }, {
     id: 33,
     name: 'Developer Interface',
-    start: dates[17],
+    start: dates[19],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 34,
     name: 'Service Provider Interface',
-    start: dates[19],
+    start: dates[21],
     //start: date.getDate() + 3;
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 6,
     name: 'Phase 1 Service Integration',
-    start: dates[21],
+    start: dates[23],
     duration: 7,
   }, {
     id: 7,
     name: 'Phase 1 Testing',
-    start: dates[22],
+    start: dates[24],
     duration: 7,
   }, {
     id: 5,
     name: 'Phase 1 Functionality Review and Optimisation',
-    start: dates[23],
+    start: dates[25],
     duration: 7,
   }, {
     id: 4,
     name: 'Phase 2 Functionality Implemenation',
-    start: dates[24],
-    duration: 25 * 7,
+    start: dates[26],
+    duration: 21 * 7,
   }, {
     id: 8,
     name: 'Release Phase 2',
-    start: dates[49],
+    start: dates[47],
     type: 'milestone'
   }];
 
