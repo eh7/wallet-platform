@@ -21,31 +21,7 @@ export function getData() {
     date = new Date();
     date.setDate(date.getDate() + (7 * i));
     dates.push(date);
-//    dates[i] = date;
   }
-
-/*
-  let date;
-  date = new Date();
-  date.setDate(date.getDate() + 0);
-console.log(date)
-
-  let date1;
-  date1 = new Date();
-  date1.setDate(date.getDate() + 14);
-
-  let date2;
-  date2 = new Date();
-  date2.setDate(date.getDate() + 28);
-
-  let date3;
-  date3 = new Date();
-  date3.setDate(date.getDate() + 42);
-
-  let date4;
-  date4 = new Date();
-  date4.setDate(date.getDate() + 56);
-*/
 
   const tasks = [{
     id: 1,
@@ -59,8 +35,8 @@ console.log(date)
     start: dates[25],
     type: 'milestone'
   }, {
-    id: 5,
-    name: 'Systems Arcitecture Analysis and Design',
+    id: 12,
+    name: 'Phase 1 Systems Arcitecture Analysis and Design',
     start: dates[0],
     duration: 3 * 7,
   }, {
@@ -125,34 +101,38 @@ console.log(date)
     id: 34,
     name: 'Service Provider Interface',
     start: dates[21],
-    //start: date.getDate() + 3;
     duration: 2 * 7,
     parent: 3,
   }, {
-    id: 6,
+    id: 35,
     name: 'Phase 1 Service Integration',
     start: dates[23],
     duration: 7,
   }, {
-    id: 7,
+    id: 36,
     name: 'Phase 1 Testing',
     start: dates[24],
     duration: 7,
   }, {
-    id: 5,
+    id: 37,
     name: 'Phase 1 Functionality Review and Optimisation',
     start: dates[25],
     duration: 7,
   }, {
     id: 4,
     name: 'Phase 2 Functionality Implemenation',
-    start: dates[26],
+    start: dates[29],
     duration: 21 * 7,
   }, {
-    id: 8,
+    id: 41,
     name: 'Release Phase 2',
-    start: dates[47],
+    start: dates[50],
     type: 'milestone'
+  }, {
+    id: 42,
+    name: 'Phase 2 Systems Arcitecture Analysis and Design',
+    start: dates[26],
+    duration: 3 * 7,
   }];
 
 //  tasks.forEach((v) => {
@@ -162,6 +142,11 @@ console.log(date)
 //  });
   const links = [
   {
+    source: 12,
+    target: 21,
+    type: 'FS',
+    lag: 3
+  }, {
     source: 21,
     target: 22,
     type: 'FS',
@@ -182,6 +167,11 @@ console.log(date)
     type: 'FS',
     lag: 3
   }, {
+    source: 25,
+    target: 31,
+    type: 'FS',
+    lag: 3
+  }, {
     source: 31,
     target: 32,
     type: 'FS',
@@ -197,6 +187,25 @@ console.log(date)
     type: 'FS',
     lag: 3
   }, {
+    source: 34,
+    target: 35,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 35,
+    target: 36,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 36,
+    target: 37,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 37,
+    target: 42,
+    type: 'FS',
+    lag: 3
   }
 /*
   {
