@@ -25,6 +25,7 @@ export function getData() {
 
   const tasks = [{
     id: 1,
+    type: 'group',
     name: 'Phase 1 Functionality Implemenation',
     start: dates[0],
     duration: 25 * 7,
@@ -120,9 +121,10 @@ export function getData() {
     duration: 7,
   }, {
     id: 4,
+    type: 'group',
     name: 'Phase 2 Functionality Implemenation',
-    start: dates[29],
-    duration: 21 * 7,
+    start: dates[26],
+    duration: 24 * 7,
   }, {
     id: 41,
     name: 'Release Phase 2',
