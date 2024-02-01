@@ -13,7 +13,8 @@ const { tasks, links } = getData();
 
 const data = utils.formatData(tasks, links);
 const opts = {
-  viewMode: 'week',
+  //viewMode: 'week',
+  viewMode: 'month',
   onClick: v => console.log(v)
 };
 const svgGantt = new SVGGantt('#svg', data, opts);
