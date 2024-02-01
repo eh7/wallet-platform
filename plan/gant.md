@@ -1,4 +1,4 @@
-<svg width="1121.0559895833362" height="860" viewBox="0 0 1121.0559895833362 860"  width="100%" height="100%">
+<svg width="1121.0559895833362" height="860" viewBox="0 0 1121.0559895833362 860">
   <g>
     <rect x="0.7" y="0.7" width="1119.6559895833361" height="858.6" style="stroke:#eee;stroke-width:1.4px;fill:#fff;" />
     <line x1="0" x2="1121.0559895833362" y1="59.3" y2="59.3" style="stroke:#eee;stroke-width:1.4px;" />
