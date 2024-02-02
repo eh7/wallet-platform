@@ -16,7 +16,7 @@ export function getData() {
 
   let dates = [];
 
-  for (let i=1; i<=52; i++) {
+  for (let i=1; i<=100; i++) {
     let date;
     date = new Date();
     date.setDate(date.getDate() + (7 * i));
@@ -26,131 +26,217 @@ export function getData() {
   const tasks = [{
     id: 1,
     type: 'group',
-    name: 'Phase 1 Functionality Implemenation',
+    name: 'Wallet Platfrom Design, Development, and Implementation',
     start: dates[0],
-    duration: 25 * 7,
-    percent: 0.1,
-  }, {
-    id: 11,
-    name: 'Release Phase 1',
-    start: dates[25],
-    type: 'milestone'
-  }, {
-    id: 12,
-    name: 'Phase 1 Systems Arcitecture Analysis and Design',
-    start: dates[0],
-    duration: 3 * 7,
+    duration: 60 * 7,
+    percent: 0,
   }, {
     id: 2,
-    name: 'Platform Service Development',
-    start: dates[3],
-    duration: 30 * 7,
+    type: 'group',
+    name: 'Phase 1 Development Cycle',
+    start: dates[0],
+    duration: 13 * 7,
+    percent: 0,
   }, {
     id: 21,
-    name: 'Key Service',
-    start: dates[3],
-    duration: 2 * 7,
+    name: 'Release Phase 1',
+    start: dates[14],
     parent: 2,
+    type: 'milestone'
   }, {
     id: 22,
-    name: 'P2P Network Service',
-    start: dates[5],
+    name: 'Phase 1 Systems Arcitecture Analysis and Design',
+    start: dates[0],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 23,
-    name: 'Data Service',
-    start: dates[7],
-    duration: 3 * 7,
+    name: 'Key Management Service',
+    start: dates[2],
+    duration: 2 * 7,
     parent: 2,
   }, {
     id: 24,
-    name: 'Smart Contract ABI Service',
-    start: dates[10],
+    name: 'Payments and Transaction Services',
+    start: dates[4],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 25,
-    name: 'Package Management Service',
+    name: 'Secure Private Payments Services',
+    start: dates[6],
+    duration: 4 * 7,
+    parent: 2,
+  }, {
+    id: 26,
+    name: 'Wallet Interface Services',
+    start: dates[10],
+    duration: 2 * 7,
+    parent: 2,
+  }, {
+    id: 27,
+    name: 'Testing and Analysis of development phase 1',
     start: dates[12],
-    duration: 3 * 7,
+    duration: 2 * 7,
     parent: 2,
   }, {
     id: 3,
-    name: 'User Interface development',
-    start: dates[15],
-    duration: 2 * 7,
+    type: 'group',
+    name: 'Phase 2 Development Cycle',
+    start: dates[14],
+    duration: 26 * 7,
+    percent: 0,
   }, {
     id: 31,
-    name: 'Wallet Interface',
-    start: dates[15],
+    name: 'Release Phase 2',
+    start: dates[41],
     parent: 3,
-    duration: 2 * 7,
+    type: 'milestone'
   }, {
     id: 32,
-    name: 'Package Interface',
-    start: dates[17],
-    parent: 3,
+    name: 'Phase 2 Systems Arcitecture Analysis and Design',
+    start: dates[14],
     duration: 2 * 7,
+    parent: 3,
   }, {
     id: 33,
-    name: 'Developer Interface',
-    start: dates[19],
+    name: 'Secure Payments Service',
+    start: dates[16],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 34,
-    name: 'Service Provider Interface',
-    start: dates[21],
+    name: 'Package Manangement Service',
+    start: dates[18],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 35,
-    name: 'Phase 1 Service Integration',
-    start: dates[23],
-    duration: 7,
+    name: 'Peer to peer Web Service',
+    start: dates[20],
+    duration: 2 * 7,
+    parent: 3,
   }, {
     id: 36,
-    name: 'Phase 1 Testing',
-    start: dates[24],
-    duration: 7,
+    name: 'Peer to Peer Communication Service',
+    start: dates[22],
+    duration: 2 * 7,
+    parent: 3,
   }, {
     id: 37,
-    name: 'Phase 1 Functionality Review and Optimisation',
-    start: dates[25],
-    duration: 7,
+    name: 'Key Security and Managemnt Service',
+    start: dates[24],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 38,
+    name: 'Crypto Asset Management Service',
+    start: dates[26],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 39,
+    name: 'Crypto Asset Investemnts Service',
+    start: dates[28],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 310,
+    name: 'Smart Contract ABI User Interface Service',
+    start: dates[30],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 311,
+    name: 'Enhance Wallet Interface for new services',
+    start: dates[32],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 312,
+    name: 'App Store Interface',
+    start: dates[34],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 313,
+    name: 'Integrate Core Servcies',
+    start: dates[36],
+    duration: 2 * 7,
+    parent: 3,
+  }, {
+    id: 314,
+    name: 'Testing and Analysis of development phase 2',
+    start: dates[38],
+    duration: 2 * 7,
+    parent: 3,
   }, {
     id: 4,
     type: 'group',
-    name: 'Phase 2 Functionality Implemenation',
-    start: dates[26],
-    duration: 24 * 7,
+    name: 'Phase 3 Development Cycle',
+    start: dates[40],
+    duration: 26 * 7,
+    percent: 0,
   }, {
     id: 41,
-    name: 'Release Phase 2',
-    start: dates[50],
+    name: 'Release Phase 3',
+    start: dates[60],
+    parent: 4,
     type: 'milestone'
   }, {
     id: 42,
-    name: 'Phase 2 Systems Arcitecture Analysis and Design',
-    start: dates[26],
+    name: 'Define Reward Structure and Token Economics for the Platform',
+    start: dates[40],
+    duration: 4 * 7,
+    parent: 4,
+  }, {
+    id: 43,
+    name: 'Service Provider Reward protocol',
+    start: dates[44],
+    duration: 2 * 7,
+    parent: 4,
+  }, {
+    id: 44,
+    name: 'Service Provider User Interface',
+    start: dates[46],
+    duration: 2 * 7,
+    parent: 4,
+  }, {
+    id: 45,
+    name: 'Intergrate the Core Servcies with the Servcie Provider Protocol',
+    start: dates[48],
     duration: 3 * 7,
+    parent: 4,
+  }, {
+    id: 46,
+    name: 'Developer Reward Protocol',
+    start: dates[51],
+    duration: 2 * 7,
+    parent: 4,
+  }, {
+    id: 47,
+    name: 'Developer Provider User Interface',
+    start: dates[53],
+    duration: 2 * 7,
+    parent: 4,
+  }, {
+    id: 48,
+    name: 'Intergrate the Core Servcies with the Developer Protocol',
+    start: dates[55],
+    duration: 3 * 7,
+    parent: 4,
+  }, {
+    id: 49,
+    name: 'Testing and Analysis of development phase 3',
+    start: dates[58],
+    duration: 2 * 7,
+    parent: 4,
   }];
 
-//  tasks.forEach((v) => {
-//    v.start = rand();
-//    v.duration = Math.random() * 90;
-//    v.percent = Math.random();
-//  });
   const links = [
   {
-    source: 12,
+    source: 27,
     target: 21,
-    type: 'FS',
-    lag: 3
-  }, {
-    source: 21,
-    target: 22,
     type: 'FS',
     lag: 3
   }, {
@@ -164,17 +250,17 @@ export function getData() {
     type: 'FS',
     lag: 3
   }, {
-    source: 24,
-    target: 25,
-    type: 'FS',
-    lag: 3
-  }, {
     source: 25,
-    target: 31,
+    target: 26,
     type: 'FS',
     lag: 3
   }, {
-    source: 31,
+    source: 26,
+    target: 27,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 21,
     target: 32,
     type: 'FS',
     lag: 3
@@ -194,20 +280,25 @@ export function getData() {
     type: 'FS',
     lag: 3
   }, {
-    source: 35,
-    target: 36,
-    type: 'FS',
-    lag: 3
-  }, {
-    source: 36,
-    target: 37,
-    type: 'FS',
-    lag: 3
-  }, {
-    source: 37,
-    target: 42,
-    type: 'FS',
-    lag: 3
+    source: 35, target: 36, type: 'FS', lag: 3
+  }, { source: 36, target: 37, type: 'FS', lag: 3
+  }, { source: 37, target: 38, type: 'FS', lag: 3
+  }, { source: 38, target: 39, type: 'FS', lag: 3
+  }, { source: 39, target: 310, type: 'FS', lag: 3
+  }, { source: 310, target: 311, type: 'FS', lag: 3
+  }, { source: 311, target: 312, type: 'FS', lag: 3
+  }, { source: 312, target: 313, type: 'FS', lag: 3
+  }, { source: 313, target: 314, type: 'FS', lag: 3
+  }, { source: 314, target: 31, type: 'FS', lag: 3
+  }, { source: 42, target: 43, type: 'FS', lag: 3
+  }, { source: 43, target: 44, type: 'FS', lag: 3
+  }, { source: 44, target: 45, type: 'FS', lag: 3
+  }, { source: 45, target: 46, type: 'FS', lag: 3
+  }, { source: 46, target: 47, type: 'FS', lag: 3
+  }, { source: 47, target: 48, type: 'FS', lag: 3
+  }, { source: 48, target: 49, type: 'FS', lag: 3
+  }, { source: 49, target: 41, type: 'FS', lag: 3
+  }, { source: 31, target: 42, type: 'FS', lag: 0
   }
 /*
   {
