@@ -1,12 +1,12 @@
 Modular Crypto Wallet Platform
 
-The Modular Wallet Platform will consist of an ecosystem of interfaces, services, nodes, and protocols, to allow the delivery of a decentralised modular wallet platform.
+The Modular Crypto Wallet Platform will consist of an ecosystem of interfaces, services, nodes, and protocols. These together will allow the delivery of a decentralised modular crypto currency wallet platform.
 
-The initial target user case will be the internation remitance payment market, this has been chosen as it is a proven and growing market that the wallet platform will be aimed and marketed to. Attracting user of this target market the first phase of development will focus on the implementation and development of the secure private transfers, on the etherum and polygon main networks. The work will form the foundation on to which all the other servcies offered through the wallet platform will sit around. This first phase of development will aim to be deliverd within 3 months of the project start date and will make up the initial release.
+The initial target user case will be the internation remitance payment market. This has been chosen as it is a proven and growing market that the wallet platform will be aimed and marketed to at the start of the development process. The idea being that this will attract user of this target market the first phase of development will focus on the implementation and development of the secure private transfers, on the etherum and polygon main networks. The work will form the foundation on to which all the other servcies offered through the wallet platform will sit around. This first phase of development will aim to be deliverd within 3 months of the project start date and will make up the initial release.
 
 The second and third development phases will aim to expand the user case user base that the wallet platform will target at.
 
-Firstly in phase 2 to the general use crypto user base will be targeted by providing further key management services, communication and collabaration tools and function through the peer to peer networking and content sharing services. We will also imlement and introduce crypto assest management and investment services and functionality. All the services will be avaiable and usable through the wallet platform package system. The package system will also developers to contribute scritpble and configarable application functionality, that others users on the walllet platform will be able to use and interacte with. 
+Firstly in phase 2 to the general use crypto user base will be targeted by providing further key management services, communication and collabaration tools and function through the peer to peer networking and content sharing services. We will also imlement and introduce crypto assest management and investment services and functionality. All the services will be avaiable and usable through the wallet platform package system. The package system will allow developers to contribute scritpble and configarable application functionality, that others users on the walllet platform will be able to use and interacte with. 
 
 For the final phase of development, the focuse will be on extending the use case to developers and service providers, in order to make the platform a trully decentralised platfrom and operating environment. Wallet users will be able to access and interact with the applications created, and the developers will rewarded economicly or by some other means depending on what the developers motivations where in creating the applications and publishing them to the wallet platform application store. The service providers will also be able to earn rewards for providing remote compute and data services to the wallet platform, so as to enable the decentrailsed delivery of the wallet platform services and the applications that are published on the platform.  
 
@@ -64,6 +64,8 @@ Secure Private Payments
 
 Wallet Interface
 - create a wallet interface to access all the features implemented in the phase 1 development cycle
+
+Create the eletron smart phone application from code base
 
 Testing and Analysis of development phase 1
 

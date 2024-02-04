@@ -40,7 +40,7 @@ export function getData() {
   }, {
     id: 21,
     name: 'Release Phase 1',
-    start: dates[14],
+    start: dates[16],
     parent: 2,
     type: 'milestone'
   }, {
@@ -75,167 +75,173 @@ export function getData() {
     parent: 2,
   }, {
     id: 27,
-    name: 'Testing and Analysis of development phase 1',
+    name: 'Create Eletron Smart Phone App Latest Code Base',
     start: dates[12],
+    duration: 2 * 7,
+    parent: 2,
+  }, {
+    id: 28,
+    name: 'Testing and Analysis of development phase 1',
+    start: dates[14],
     duration: 2 * 7,
     parent: 2,
   }, {
     id: 3,
     type: 'group',
     name: 'Phase 2 Development Cycle',
-    start: dates[14],
+    start: dates[16],
     duration: 26 * 7,
     percent: 0,
   }, {
     id: 31,
     name: 'Release Phase 2',
-    start: dates[41],
+    start: dates[42],
     parent: 3,
     type: 'milestone'
   }, {
     id: 32,
     name: 'Phase 2 Systems Arcitecture Analysis and Design',
-    start: dates[14],
+    start: dates[16],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 33,
     name: 'Secure Payments Service',
-    start: dates[16],
+    start: dates[18],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 34,
     name: 'Package Manangement Service',
-    start: dates[18],
+    start: dates[20],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 35,
     name: 'Peer to peer Web Service',
-    start: dates[20],
+    start: dates[22],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 36,
     name: 'Peer to Peer Communication Service',
-    start: dates[22],
+    start: dates[24],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 37,
     name: 'Key Security and Managemnt Service',
-    start: dates[24],
+    start: dates[26],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 38,
     name: 'Crypto Asset Management Service',
-    start: dates[26],
+    start: dates[28],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 39,
     name: 'Crypto Asset Investemnts Service',
-    start: dates[28],
+    start: dates[30],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 310,
     name: 'Smart Contract ABI User Interface Service',
-    start: dates[30],
+    start: dates[32],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 311,
     name: 'Enhance Wallet Interface for new services',
-    start: dates[32],
+    start: dates[34],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 312,
     name: 'App Store Interface',
-    start: dates[34],
+    start: dates[36],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 313,
     name: 'Integrate Core Servcies',
-    start: dates[36],
+    start: dates[38],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 314,
     name: 'Testing and Analysis of development phase 2',
-    start: dates[38],
+    start: dates[40],
     duration: 2 * 7,
     parent: 3,
   }, {
     id: 4,
     type: 'group',
     name: 'Phase 3 Development Cycle',
-    start: dates[40],
+    start: dates[42],
     duration: 26 * 7,
     percent: 0,
   }, {
     id: 41,
     name: 'Release Phase 3',
-    start: dates[60],
+    start: dates[62],
     parent: 4,
     type: 'milestone'
   }, {
     id: 42,
     name: 'Define Reward Structure and Token Economics for the Platform',
-    start: dates[40],
+    start: dates[42],
     duration: 4 * 7,
     parent: 4,
   }, {
     id: 43,
     name: 'Service Provider Reward protocol',
-    start: dates[44],
+    start: dates[46],
     duration: 2 * 7,
     parent: 4,
   }, {
     id: 44,
     name: 'Service Provider User Interface',
-    start: dates[46],
+    start: dates[48],
     duration: 2 * 7,
     parent: 4,
   }, {
     id: 45,
     name: 'Intergrate the Core Servcies with the Servcie Provider Protocol',
-    start: dates[48],
+    start: dates[50],
     duration: 3 * 7,
     parent: 4,
   }, {
     id: 46,
     name: 'Developer Reward Protocol',
-    start: dates[51],
+    start: dates[53],
     duration: 2 * 7,
     parent: 4,
   }, {
     id: 47,
     name: 'Developer Provider User Interface',
-    start: dates[53],
+    start: dates[55],
     duration: 2 * 7,
     parent: 4,
   }, {
     id: 48,
     name: 'Intergrate the Core Servcies with the Developer Protocol',
-    start: dates[55],
+    start: dates[57],
     duration: 3 * 7,
     parent: 4,
   }, {
     id: 49,
     name: 'Testing and Analysis of development phase 3',
-    start: dates[58],
+    start: dates[60],
     duration: 2 * 7,
     parent: 4,
   }];
 
   const links = [
   {
-    source: 27,
+    source: 28,
     target: 21,
     type: 'FS',
     lag: 3
@@ -257,6 +263,11 @@ export function getData() {
   }, {
     source: 26,
     target: 27,
+    type: 'FS',
+    lag: 3
+  }, {
+    source: 27,
+    target: 28,
     type: 'FS',
     lag: 3
   }, {
