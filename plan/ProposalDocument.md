@@ -1,4 +1,4 @@
-iIntroduction to the Modual Cytpo Wallet Platform
+# The Modual Cytpo Wallet Platform
 
 The Crytop Wallt Platform is an eco-system that is made up of several functional parts and protocols that will allow users to manange and interact with their crypto assests, through a web interface or a dedicated smart phone application in a user friendly way. Both the web interface and the app will use a shared code base and api to the wallet platform functionality.
 
@@ -20,7 +20,6 @@ What should be focuse of development?
 * key security
 * crypto management
 * crypto investemnts
-
 
 The basic function of the wallet is to do the following
 
