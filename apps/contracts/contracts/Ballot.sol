@@ -12,9 +12,9 @@ contract Ballot {
 
   address public owner;
 
-  uint256 ballotCount = 0;
+  uint256 public ballotCount = 0;
 
-  mapping(string => uint256) ballots;
+  mapping(string => uint256) public ballots;
   mapping(string => uint256) canditdates;
   mapping(uint256 => mapping(uint256 => uint256)) vote;
 
@@ -28,11 +28,14 @@ contract Ballot {
   }
 */
 
-  function createBallot(string memory title, string[] memory candidates) public {
+  function createBallot(
+    string memory title
+    //string memory title,
+    //string[] memory candidates
+  ) public {
     ballots[title] = ballotCount;
     //canditdates[ballotCount] = candidates;
     ballotCount++;
-    
   }
 
   /**
