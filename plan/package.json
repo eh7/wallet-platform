@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "server": "dool server",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gavin Francis <gav@eh7.co.uk>",
