@@ -35,7 +35,6 @@ contract Ballot {
   );
 
   function createBallot(
-    //string memory title
     string memory title,
     string[] memory candidates
   ) public returns (uint256 ballotId) {
