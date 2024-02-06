@@ -15,7 +15,7 @@ contract Ballot {
   uint256 public ballotCount = 0;
 
   mapping(string => uint256) public ballots;
-  mapping(string => uint256) canditdates;
+  mapping(uint256 => uint256) canditdates;
   mapping(uint256 => mapping(uint256 => uint256)) vote;
 
   constructor() {
@@ -28,15 +28,31 @@ contract Ballot {
   }
 */
 
+  event Log(uint256 ballotId, string ballotName, string[] candidates);
+
   function createBallot(
-    string memory title
-    //string memory title,
-    //string[] memory candidates
-  ) public {
-    ballots[title] = ballotCount;
-    //canditdates[ballotCount] = candidates;
+    //string memory title
+    string memory title,
+    string[] memory candidates
+  ) public returns (uint256 ballotId) {
+    ballotId = ballotCount;
+    ballots[title] = ballotId;
+    //canditdates[ballotId] = candidates;
     ballotCount++;
+    emit Log(
+      ballotId,
+      title,
+      candidates
+    );
+    return ballotId;
   }
+
+//  function createCandidates(
+//    uint256 ballotId,
+//    string[] memory candidates
+//  ) public {
+//    candidates[ballotId] = candidates;
+//  }
 
   /**
    * A function to transfer tokens.

@@ -16,10 +16,23 @@ describe("Ballot contract", function () {
 
   it("add a ballot", async function () {
     const testBallotName = 'test ballot name';
+    const testCandidates = [
+      'yes',
+      'no',
+    ];
     const ballotContract = await ethers.deployContract("Ballot");
+
+//    ballotContract.on("Log", (setter, LogArgs, event)=> {
+//      console.log("New Log Event is:", LogArgs, event);
+//    });
+
+//    const event = interface.decodeEventLog("Transfer", data, topics);
+
+
     expect(Number(await ballotContract.ballotCount())).to.equal(0);
-    await ballotContract.createBallot(
-      testBallotName
+    const ballotAddedObject = await ballotContract.createBallot(
+      testBallotName,
+      testCandidates,
     );
     expect(Number(await ballotContract.ballotCount())).to.equal(1);
     const ballotCount = await ballotContract.ballotCount();
@@ -28,5 +41,25 @@ describe("Ballot contract", function () {
       Number(ballot), 
       Number(ballotCount)
     );
+
+    expect(ballotAddedObject)
+      .to.emit(ballotContract, 'Log')
+      .withArgs(
+        Number(ballot),
+        testBallotName,
+        testCandidates
+      );
+
+    const ballotAddedObjectResult = await ballotAddedObject.wait();
+    //const eventBallotId = ballotAddedObjectResult.events[0].args[0];
+    const eventBallotId = Number(ballotAddedObjectResult.logs[0].args[0]);
+    const eventBallotName = ballotAddedObjectResult.logs[0].args[1];
+    const eventBallotCandidates = ballotAddedObjectResult.logs[0].args[2];
+    console.log('Log event args');
+    console.log('eventBallotId :: ', eventBallotId);
+    console.log('eventBallotName :: ', eventBallotName);
+    console.log('eventBallotCandidates :: ', eventBallotCandidates);
+
+    //console.log(ballotAddedObject);
   });
 });
