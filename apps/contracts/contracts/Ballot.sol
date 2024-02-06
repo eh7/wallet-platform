@@ -15,7 +15,7 @@ contract Ballot {
   uint256 public ballotCount = 0;
 
   mapping(string => uint256) public ballots;
-  mapping(uint256 => uint256) canditdates;
+  mapping(uint256 => string[]) canditdates;
   mapping(uint256 => mapping(uint256 => uint256)) vote;
 
   constructor() {
@@ -29,6 +29,10 @@ contract Ballot {
 */
 
   event Log(uint256 ballotId, string ballotName, string[] candidates);
+  event LogCandidates(
+    uint256 ballotId,
+    string[] candidates
+  );
 
   function createBallot(
     //string memory title
@@ -37,11 +41,15 @@ contract Ballot {
   ) public returns (uint256 ballotId) {
     ballotId = ballotCount;
     ballots[title] = ballotId;
-    //canditdates[ballotId] = candidates;
+    canditdates[ballotId] = candidates;
     ballotCount++;
     emit Log(
       ballotId,
       title,
+      candidates
+    );
+    emit LogCandidates(
+      ballotId,
       candidates
     );
     return ballotId;

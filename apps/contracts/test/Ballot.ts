@@ -50,8 +50,14 @@ describe("Ballot contract", function () {
         testCandidates
       );
 
+    expect(ballotAddedObject)
+      .to.emit(ballotContract, 'LogCandidates')
+      .withArgs(
+        Number(ballot),
+        testCandidates
+      );
+
     const ballotAddedObjectResult = await ballotAddedObject.wait();
-    //const eventBallotId = ballotAddedObjectResult.events[0].args[0];
     const eventBallotId = Number(ballotAddedObjectResult.logs[0].args[0]);
     const eventBallotName = ballotAddedObjectResult.logs[0].args[1];
     const eventBallotCandidates = ballotAddedObjectResult.logs[0].args[2];
@@ -59,6 +65,13 @@ describe("Ballot contract", function () {
     console.log('eventBallotId :: ', eventBallotId);
     console.log('eventBallotName :: ', eventBallotName);
     console.log('eventBallotCandidates :: ', eventBallotCandidates);
+
+    const eventBallotIdLogCandidates = Number(ballotAddedObjectResult.logs[1].args[0]);
+    const eventCandidatesLogCandidates = ballotAddedObjectResult.logs[1].args[1];
+    console.log('\nLogCandidates event args');
+    console.log('eventBallotIdLogCandidates :: ', eventBallotIdLogCandidates);
+    console.log('eventCandidatesLogCandiates :: ', eventCandidatesLogCandidates);
+    
 
     //console.log(ballotAddedObject);
   });
