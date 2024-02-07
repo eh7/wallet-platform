@@ -15,8 +15,14 @@ contract Ballot {
   uint256 public ballotCount = 0;
 
   mapping(string => uint256) public ballots;
-  mapping(uint256 => string[]) canditdates;
-  mapping(uint256 => mapping(uint256 => uint256)) vote;
+  mapping(uint256 => string[]) public canditdates;
+  mapping(uint256 => string) public question;
+
+  mapping(uint256 => mapping(address => uint256)) public vote;
+
+  mapping(uint256 => mapping(address => uint256)) public voted;
+
+  mapping(uint256 => mapping(uint256 => uint256)) public counts;
 
   constructor() {
     // account that is deploying the contract.
@@ -33,25 +39,59 @@ contract Ballot {
     uint256 ballotId,
     string[] candidates
   );
+  event LogVote(
+    uint256 ballotId,
+    address voter,
+    uint256 vote
+  );
 
   function createBallot(
     string memory title,
     string[] memory candidates
   ) public returns (uint256 ballotId) {
+
     ballotId = ballotCount;
-    ballots[title] = ballotId;
-    canditdates[ballotId] = candidates;
+
     ballotCount++;
+
+    ballots[title] = ballotId;
+    question[ballotId] = title;
+    canditdates[ballotId] = candidates;
+
     emit Log(
       ballotId,
       title,
       candidates
     );
+
     emit LogCandidates(
       ballotId,
       candidates
     );
+
     return ballotId;
+  }
+
+  function castVote(
+    uint256 _ballotId,
+    uint256 _vote
+  ) public {
+    require(voted[_ballotId][msg.sender] != 1, "msg.sender already voted");
+    voted[_ballotId][msg.sender] = 1;
+    //vote[_ballotId][msg.sender] = _vote;
+    counts[_ballotId][_vote]++;
+    emit LogVote(
+      _ballotId,
+      msg.sender,
+      _vote
+    );
+  }
+
+  function getVote(
+    uint256 _ballotId
+  ) public returns (uint256 _vote) {
+    _vote = vote[_ballotId][msg.sender];
+    return _vote;
   }
 
 //  function createCandidates(

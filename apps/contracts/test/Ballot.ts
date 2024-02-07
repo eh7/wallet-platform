@@ -72,7 +72,32 @@ describe("Ballot contract", function () {
     console.log('eventBallotIdLogCandidates :: ', eventBallotIdLogCandidates);
     console.log('eventCandidatesLogCandiates :: ', eventCandidatesLogCandidates);
     
+    console.log("ballotContract.question(0) :: ", await ballotContract.question(0));
 
-    //console.log(ballotAddedObject);
+    const castVote0 = await ballotContract.castVote(0, 2);
+    const castVote0Result = await castVote0.wait();
+    //console.log(castVote0);
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', castVote0Result.logs[0].args);
+
+    const vote0 = await ballotContract.getVote(0);
+    const vote0Result = await vote0.wait();
+//    console.log(
+//      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+//      vote0,
+//      vote0Result.logs
+//    );
+
+    const count0 = await ballotContract.counts(0, 2);
+    console.log('counts(0,2): ', count0);
+
+    const castVote1 = await ballotContract.castVote(1, 0);
+
+    const count1 = await ballotContract.counts(1, 0);
+    console.log('counts(1,0): ', count0);
+
+    const count2 = await ballotContract.counts(1, 1);
+    console.log('counts(1,1): ', count2);
+/*
+*/
   });
 });
