@@ -66,6 +66,29 @@
         </div>
       </div>
 
+<div id="overlay" onclick="off()">
+  <div id="text">Generate the key as they do not haver one</div>
+</div>
+
+<div style="padding:20px">
+  <h2>Overlay with Text</h2>
+  <button onclick="on()">Turn on overlay effect</button>
+</div>
+
+<script>
+function on() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function off() {
+  document.getElementById("overlay").style.display = "none";
+}
+
+if (!localStorage.getItem("keyset")) {
+  on()
+}
+</script>
+
       <hr class="col-1 my-5 mx-0">
 
       <h2>Guides</h2>
