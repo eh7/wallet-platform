@@ -6,6 +6,7 @@
     <title>Bootstrap w/ Parcel</title>
     <link rel="stylesheet" href="scss/styles.scss">
     <script type="module" src="js/main.js"></script>
+    <script type="module" src="js/functions.js"></script>
   </head>
   <body>
     <div class="container py-4 px-3 mx-auto">
@@ -70,7 +71,9 @@
   <div id="overlay_text">
     <h3>Generate or Import key<h3>
       <button type="button" class="btn btn-primary me-3" onclick="off()">Create New Key</button>
+      <button type="button" class="btn btn-primary me-3" onclick="divOff('overlay')">Create New Key</button>
       <button type="button" class="btn btn-primary me-3" onclick="off()">Import Key</button>
+      <button type="button" class="btn btn-primary me-3" onclick="test()">test</button>
     <p>
       
     </p>
@@ -90,10 +93,10 @@ function on() {
 function off() {
   document.getElementById("overlay").style.display = "none";
 }
-
 if (!localStorage.getItem("keyset")) {
   on()
 }
+test()
 </script>
 
       <hr class="col-1 my-5 mx-0">

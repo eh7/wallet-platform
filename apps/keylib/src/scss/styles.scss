@@ -106,8 +106,9 @@ body {
   bottom: 0;
   background-color: rgba(255,255,255,1); /* Black background with opacity */
   z-index: 2; /* Specify a stack order in case you're using a different order for other elements */
-  cursor: pointer; /* Add a pointer on hover */
+  //cursor: pointer; /* Add a pointer on hover */
   //pointer-events: none;
+  //cursor: pointer;
 }
 
 
