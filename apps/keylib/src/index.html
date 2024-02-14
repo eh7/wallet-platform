@@ -6,9 +6,11 @@
     <title>Bootstrap w/ Parcel</title>
     <link rel="stylesheet" href="scss/styles.scss">
     <script type="module" src="js/main.js"></script>
-    <script type="module" src="js/functions.js"></script>
   </head>
   <body>
+    <div id="root"></div>
+    <!--script type="module" src="js/index.js"></script//-->
+
     <div class="container py-4 px-3 mx-auto">
       <header class="d-flex justify-content-between align-items-md-center pb-3 mb-5 border-bottom">
         <h1 class="h4">
@@ -69,7 +71,7 @@
 
 <div id="overlay"  data-backdrop="false">
   <div id="overlay_text">
-    <h3>Generate or Import key<h3>
+    <h3 id="overlayHeader">Generate or Import key<h3>
       <button type="button" class="btn btn-primary me-3" onclick="off()">Create New Key</button>
       <button type="button" class="btn btn-primary me-3" onclick="divOff('overlay')">Create New Key</button>
       <button type="button" class="btn btn-primary me-3" onclick="off()">Import Key</button>
@@ -96,7 +98,10 @@ function off() {
 if (!localStorage.getItem("keyset")) {
   on()
 }
-test()
+//test.test()
+//console.log(test)
+//console.log(test())
+//console.log(keylib)
 </script>
 
       <hr class="col-1 my-5 mx-0">

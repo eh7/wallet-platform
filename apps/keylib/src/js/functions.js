@@ -4,6 +4,17 @@ window.divOff = function divOff(_id) {
 
 
 //function test() {
-module.exports.test = function test() {
+export function test() {
   alert('test')
 }
+
+//export {
+//  testExport
+//}
+
+
+/*
+export function add(a, b) {
+  return a + b;
+}
+*/
