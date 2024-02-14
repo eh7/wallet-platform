@@ -31,12 +31,17 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Button variant="primary" href="/">/</Button>
-        <Button variant="primary" href="/about">/about</Button>
-        <Button variant="primary" href="/products">/products</Button>
         <Container as="main" className="py-4 px-3 mx-auto">
-	  Home
+          <NavMain />
+	  <h1>Home</h1>
+          <hr className="col-1 my-5 mx-0" />
         </Container>
       </>
     );
   }
+}
+
+//          <Card>
+//            <Card.Body>
+//            </Card.Body>
+//          </Card>

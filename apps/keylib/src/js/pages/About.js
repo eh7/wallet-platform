@@ -5,6 +5,8 @@ import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
 //import Footer from "react-bootstrap/Footer";
 
+import NavMain from '../components/NavMain';
+
 //const display = "Hello, to Guru99 Tutorials";
 //const h1tag =<h1>{display}</h1>;
 //export default h1tag;
@@ -15,13 +17,9 @@ export default class About extends React.Component {
     return (
       <>
         <Container as="main" className="py-4 px-3 mx-auto">
-		About
-          <h1>*************** Build Bootstrap with React</h1>
-
-          <ExampleComponents />
-
+          <NavMain />
+          <h1>About</h1>
           <hr className="col-1 my-5 mx-0" />
-
         </Container>
       </>
     );
