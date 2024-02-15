@@ -20,6 +20,8 @@ import Button from "react-bootstrap/Button";
 import Nav from 'react-bootstrap/Nav';
 
 import NavMain from '../components/NavMain';
+import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 //import Footer from "react-bootstrap/Footer";
 
@@ -31,10 +33,14 @@ export default class Home extends React.Component {
   render() {
     return (
       <>
-        <Container as="main" className="py-4 px-3 mx-auto">
-          <NavMain />
-	  <h1>Home</h1>
-          <hr className="col-1 my-5 mx-0" />
+        <Container as="main" fluid="md" className="py-4 px-3 mx-auto">
+         <Row>
+           <Col>
+             <NavMain />
+	     <h1>Home</h1>
+             <hr className="col-1 my-5 mx-0" />
+           </Col>
+         </Row>
         </Container>
       </>
     );
