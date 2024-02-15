@@ -17,8 +17,8 @@ import ReactDOM from 'react-dom';
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+import Nav from 'react-bootstrap/Nav';
 
-import NavMain from '../components/NavMain';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
@@ -28,16 +28,11 @@ import Col from 'react-bootstrap/Col';
 //const h1tag =<h1>{display}</h1>;
 //export default h1tag;
 
-export default class Home extends React.Component {
+export default class Setup extends React.Component {
   render() {
     return (
       <>
-        <h1>Home</h1>
-        keyset: {
-          localStorage.getItem("keyset") ?
-          <h3>user already setup {localStorage.getItem("keyset")}</h3> :
-          <h3>setup user</h3>
-        }
+        <h1>Setup</h1>
       </>
     );
   }
