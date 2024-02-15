@@ -10,6 +10,9 @@ const App = () => {
  return (
     <>
        <NavMain/>
+       {
+         <Setup />
+       }
        <Routes>
           <Route path="/setup" element={<Setup />} /> 
           <Route path="/" element={<Home />} />

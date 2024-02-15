@@ -17,10 +17,27 @@ import ReactDOM from 'react-dom';
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
-
-import NavMain from '../components/NavMain';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+
+import NavMain from '../components/NavMain';
+
+import { ethers } from "ethers";
+
+import 'dotenv/config';
+
+require('dotenv').config()
+console.log(process.env.RPC_URL);
+
+//const provider = new ethers.JsonRpcProvider(
+//  process.env.RPC_URL  
+//);
+//const signer = await provider.getSigner()
+
+console.log(
+  'provider:',
+//  provider
+);
 
 //import Footer from "react-bootstrap/Footer";
 
@@ -33,11 +50,19 @@ export default class Home extends React.Component {
     return (
       <>
         <h1>Home</h1>
+
         keyset: {
           localStorage.getItem("keyset") ?
           <h3>user already setup {localStorage.getItem("keyset")}</h3> :
           <h3>setup user</h3>
         }
+        <h4>*** setup pass phrase</h4>
+        {localStorage.setItem("phrase", '')}
+        {
+          localStorage.setItem("phrase", 'phrase')
+        }
+        <h3>user already setup '{localStorage.getItem("phrase")}'</h3>
+
       </>
     );
   }
