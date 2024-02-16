@@ -24,7 +24,7 @@ import NavMain from '../components/NavMain';
 
 import Wallet from '../services/wallet';
 
-import { ethers } from "ethers";
+//import { ethers } from "ethers";
 
 //import 'dotenv/config';
 
@@ -35,15 +35,19 @@ export default class Home extends React.Component {
     this.state = {
       count: 0,
       provider: {},
+      wallet: {},
     };
   }
 
   componentDidMount() {
 
+    this.state.wallet = new Wallet();
+    /*
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.RPC_URL  
     );
     this.state.provider = provider;
+    */
 
     /*
     async function run () {
@@ -61,12 +65,14 @@ export default class Home extends React.Component {
 
   componentDidUpdate() {
     
+    /*
     async function run (provider) {
       alert(
         'blockNumber(): ' + await provider.getBlockNumber()
       );
     }
     run(this.state.provider)
+    */
 
     //console.log('this.state.provider:', this.state.provider);
 
@@ -74,9 +80,16 @@ export default class Home extends React.Component {
     alert('componentDidUpdate')
   }
 
+  getPhrase = async () => {
+    alert(
+      'Phrase: ' + await this.state.wallet.getNewPhrase()
+    );
+  }
+
   getBlockNumber = async () => {
     alert(
-      'blockNumber(): ' + await this.state.provider.getBlockNumber()
+      //'blockNumber(): ' + await this.state.provider.getBlockNumber()
+      'blockNumber(): ' + await this.state.wallet.getBlockNumber()
     );
   }
 
@@ -86,6 +99,7 @@ export default class Home extends React.Component {
       <>
         <h1>Home</h1>
 
+        <Button onClick={this.getPhrase}>getPhrase</Button>
         <Button onClick={this.getBlockNumber}>getBlockNumber</Button>
 
         keyset: {

@@ -17,19 +17,52 @@ const endPoint = process.env.RPC_URL || '';
 export default class Wallet {
 
   constructor(
-     eventEmitter,
+     //eventEmitter,
      walletInitData,
   ) {
-    this.eventEmitter = eventEmitter;
+    //this.eventEmitter = eventEmitter;
     this.data = '';
     this.initData = walletInitData;
+    this.provider = {};
 
+    this.setupProvider();
+    console.log('this.provider:', this.provider);
+
+    this.setupNewWallet();
+
+    /*
     // TODO move this into it's own function
     window.walletAPI.keystoreSeedHex((event, keystore) => {
       console.log('xxxxxxxxxxxxxxx keystore xxxxxxxxxxxx', keystore);
     });
+    */
 
     //this.setupWallet(walletInitData);
+  }
+
+  setupProvider = () => {
+    this.provider = new ethers.providers.JsonRpcProvider(endPoint);
+  }
+
+  getBlockNumber = async () => {
+    return await this.provider.getBlockNumber()
+  }
+
+  setupNewWallet = async () => {
+    if (!localStorage.getItem("keyset")) {
+      // setup wallet data
+      alert('setup wallet data as not wallet daa provided')
+      this.setupWallet(this.data.mnemonic);
+      //const phrase = await bip39.generateMnemonic();
+
+    } else {
+      // import or load wallet data
+      alert('import or load wallet data')
+    }
+  }
+
+  getNewPhrase = async () => {
+    return await bip39.generateMnemonic();
   }
 
   checkWalletSetup = (message) => {
