@@ -26,26 +26,74 @@ import { ethers } from "ethers";
 
 import 'dotenv/config';
 
-require('dotenv').config()
+//require('dotenv').config()
 console.log(process.env.RPC_URL);
 
+//const provider = ethers.JsonRpcProvider();
 //const provider = new ethers.JsonRpcProvider(
 //  process.env.RPC_URL  
 //);
 //const signer = await provider.getSigner()
 
-console.log(
-  'provider:',
-//  provider
-);
-
-//import Footer from "react-bootstrap/Footer";
-
-//const display = "Hello, to Guru99 Tutorials";
-//const h1tag =<h1>{display}</h1>;
-//export default h1tag;
-
 export default class Home extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      count: 0,
+      provider: {},
+    };
+  }
+
+  componentDidMount() {
+
+    /*
+    const initializeProvider = async () => {
+      if (window.ethereum) {
+        await window.ethereum.request({ method: 'eth_requestAccounts' });
+        const provider = new ethers.providers.Web3Provider(window.ethereum);
+        setProvider(provider);
+      }
+    };
+
+    initializeProvider();
+    */
+
+    const provider = new ethers.providers.JsonRpcProvider(
+      process.env.RPC_URL  
+    );
+    this.state.provider = provider;
+    console.log('this.state.provider:', this.state.provider);
+
+    /*
+    async function run () {
+      console.log(
+        'blockNumber():',
+        await provider.getBlockNumber()
+      );
+    }
+    run()
+    */
+
+    document.title = `You clicked ${this.state.count} times`;
+    alert('componentDidMount')
+  }
+
+  componentDidUpdate() {
+    
+    async function run (provider) {
+      alert(
+        'blockNumber(): ' + await provider.getBlockNumber()
+      );
+    }
+    run(this.state.provider)
+
+    console.log('this.state.provider:', this.state.provider);
+
+    document.title = `You clicked ${this.state.count} times`;
+    alert('componentDidUpdate')
+  }
+
   render() {
     return (
       <>
@@ -62,6 +110,11 @@ export default class Home extends React.Component {
           localStorage.setItem("phrase", 'phrase')
         }
         <h3>user already setup '{localStorage.getItem("phrase")}'</h3>
+
+        <p>You clicked {this.state.count} times</p>
+        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+          Click me
+        </button>
 
       </>
     );
