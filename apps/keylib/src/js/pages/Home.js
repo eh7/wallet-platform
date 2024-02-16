@@ -22,18 +22,11 @@ import Col from 'react-bootstrap/Col';
 
 import NavMain from '../components/NavMain';
 
+import Wallet from '../services/wallet';
+
 import { ethers } from "ethers";
 
-import 'dotenv/config';
-
-//require('dotenv').config()
-console.log(process.env.RPC_URL);
-
-//const provider = ethers.JsonRpcProvider();
-//const provider = new ethers.JsonRpcProvider(
-//  process.env.RPC_URL  
-//);
-//const signer = await provider.getSigner()
+//import 'dotenv/config';
 
 export default class Home extends React.Component {
 
@@ -47,23 +40,10 @@ export default class Home extends React.Component {
 
   componentDidMount() {
 
-    /*
-    const initializeProvider = async () => {
-      if (window.ethereum) {
-        await window.ethereum.request({ method: 'eth_requestAccounts' });
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        setProvider(provider);
-      }
-    };
-
-    initializeProvider();
-    */
-
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.RPC_URL  
     );
     this.state.provider = provider;
-    console.log('this.state.provider:', this.state.provider);
 
     /*
     async function run () {
@@ -88,16 +68,25 @@ export default class Home extends React.Component {
     }
     run(this.state.provider)
 
-    console.log('this.state.provider:', this.state.provider);
+    //console.log('this.state.provider:', this.state.provider);
 
     document.title = `You clicked ${this.state.count} times`;
     alert('componentDidUpdate')
   }
 
+  getBlockNumber = async () => {
+    alert(
+      'blockNumber(): ' + await this.state.provider.getBlockNumber()
+    );
+  }
+
   render() {
+    //const provider = new ethers.providers.JsonRpcProvider(endPoint);
     return (
       <>
         <h1>Home</h1>
+
+        <Button onClick={this.getBlockNumber}>getBlockNumber</Button>
 
         keyset: {
           localStorage.getItem("keyset") ?
