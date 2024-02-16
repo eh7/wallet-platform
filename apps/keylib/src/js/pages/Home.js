@@ -26,12 +26,16 @@ import { ethers } from "ethers";
 
 import 'dotenv/config';
 
-require('dotenv').config()
 console.log(process.env.RPC_URL);
+//console.log(ethers.JsonRpcProvider);
+//console.log(ethers.JsonRpcProvider);
 
-//const provider = new ethers.JsonRpcProvider(
+const endPoint = process.env.RPC_URL;
+const provider = ethers.JsonRpcProvider(process.env.RPC_URL)
+//const wallet = new ethers.Wallet(this.data.privateKey);
+
+//const provider = new ethers.JsonRpcProvider();
 //  process.env.RPC_URL  
-//);
 //const signer = await provider.getSigner()
 
 console.log(
@@ -47,6 +51,7 @@ console.log(
 
 export default class Home extends React.Component {
   render() {
+    //const provider = new ethers.providers.JsonRpcProvider(endPoint);
     return (
       <>
         <h1>Home</h1>
