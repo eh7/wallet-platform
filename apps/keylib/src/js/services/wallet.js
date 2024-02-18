@@ -3,6 +3,14 @@ import bip39 from 'bip39-light';
 import EthjsWallet, { hdkey as etherHDkey } from 'ethereumjs-wallet';
 import { ethers } from 'ethers';
 
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc'; //Using AES encryption
+const key = crypto.randomBytes(32);
+const iv = crypto.randomBytes(16);
+
+//console.log('key::::iv :: ', key, '::::', iv);
+//console.log(key.toString('utf8'), '::::', iv);
+
 import 'dotenv/config';
 //import * as dotenv from 'dotenv';
 //dotenv.config();
@@ -25,10 +33,32 @@ export default class Wallet {
     this.initData = walletInitData;
     this.provider = {};
 
+    this.key = Buffer.from(process.env.KEY, 'hex');
+    this.iv = Buffer.from(process.env.IV, 'hex');
+
+//    this.key = crypto.randomBytes(32);
+//    this.iv = crypto.randomBytes(16);
+
     this.setupProvider();
     console.log('this.provider:', this.provider);
 
     this.setupNewWallet();
+
+    const text = 'hello testing 123';
+    const encryptedText = this.encrypt(text);
+    const decryptedText = this.decrypt(encryptedText);
+    console.log(
+      'zzzzzzzzzzzzzzzzzzzzzzzzzzzz',
+    );
+    console.log(
+      text,
+    );
+    console.log(
+      encryptedText,
+    );
+    console.log(
+      decryptedText,
+    );
 
     /*
     // TODO move this into it's own function
@@ -48,10 +78,37 @@ export default class Wallet {
     return await this.provider.getBlockNumber()
   }
 
+  //Encrypting text
+  encrypt = (text) => {
+    //const key = Buffer.from(this.key);
+    let cipher = crypto.createCipheriv(
+      'aes-256-cbc',
+      Buffer.from(this.key),
+      this.iv
+    );
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return {
+      iv: this.iv.toString('hex'),
+      encryptedData: encrypted.toString('hex')
+    };
+  }
+
+  // Decrypting text
+  decrypt = (text) => {
+    let iv = Buffer.from(text.iv, 'hex');
+    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this.key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString('utf8');
+  }
+
   setupNewWallet = async () => {
     if (!localStorage.getItem("keyset")) {
       // setup wallet data
       alert('setup wallet data as not wallet daa provided')
+      localStorage.setItem("keyset", this.data.mnemonic);
       this.setupWallet(this.data.mnemonic);
       //const phrase = await bip39.generateMnemonic();
 
