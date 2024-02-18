@@ -113,6 +113,10 @@ export default class Wallet {
       localStorage.setItem("keyset", this.data.mnemonic);
       this.setupWallet(this.data.mnemonic);
       //const phrase = await bip39.generateMnemonic();
+      //
+      const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+      const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+      const address = zeroWallet.getAddressString();
 
     } else {
       // import or load wallet data
@@ -120,11 +124,53 @@ export default class Wallet {
     }
   }
 
+  getAddress = async () => {
+    if (localStorage.getItem('keyset')) {
+      const phrase = this.decrypt(
+        JSON.parse(
+          localStorage.getItem(
+            "phrase",
+          )
+        )
+      )
+/*
+      alert(
+        "phrase: " +
+        this.decrypt(
+          JSON.parse(
+            phrase,
+          )
+        )
+      );
+console.log(
+  this.decrypt(
+    JSON.parse(phrase)
+  )
+);
+*/
+
+      //WIP
+      const seedHex = bip39.mnemonicToSeedHex(phrase);
+      const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+      const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+      const address = zeroWallet.getAddressString();
+      const addressCheckSum = zeroWallet.getChecksumAddressString();
+      return addressCheckSum;
+
+    } else {
+      alert('no keyset error');
+    }
+  }
+
   getNewPhrase = async () => {
     const phrase = await bip39.generateMnemonic();
     localStorage.setItem(
       "phrase",
-      this.encrypt(phrase)
+      JSON.stringify(
+        this.encrypt(
+          phrase
+        )
+      )
     );
     localStorage.setItem(
       "keyset",
@@ -213,8 +259,22 @@ export default class Wallet {
     return await this.ethersData.provider.getNetwork();
   }
 
-  getAddress = () => {
-    return this.wallet.data.addressCheckSum;
+  getAddressOld = () => {
+    const phrase = localStorage.getItem('phrase');
+    console.log(
+      phrase
+    );
+    /*
+    const seedHex = bip39.mnemonicToSeedHex(
+      this.decrypt(phrase)
+    );
+    const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+    const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+    const address = zeroWallet.getAddressString();
+    const addressCheckSum = zeroWallet.getChecksumAddressString();
+    return addressCheckSum;
+    */
+    //return this.wallet.data.addressCheckSum;
   }
 
   // TODO debug this and check it works okay

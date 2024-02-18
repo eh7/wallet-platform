@@ -80,6 +80,12 @@ export default class Home extends React.Component {
     alert('componentDidUpdate')
   }
 
+  getAddress = async () => {
+    alert(
+      'address[0]: ' + await this.state.wallet.getAddress()
+    );
+  }
+
   getPhrase = async () => {
     alert(
       'Phrase: ' + await this.state.wallet.getNewPhrase()
@@ -99,8 +105,9 @@ export default class Home extends React.Component {
       <>
         <h1>Home</h1>
 
-        <Button onClick={this.getPhrase}>getPhrase</Button>
-        <Button onClick={this.getBlockNumber}>getBlockNumber</Button>
+        <Button onClick={this.getPhrase}>getPhrase</Button> |
+        <Button onClick={this.getAddress}>getAddress</Button> |
+        <Button onClick={this.getBlockNumber}>getBlockNumber</Button> |
 
         keyset: {
           localStorage.getItem("keyset") ?
