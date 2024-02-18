@@ -14,6 +14,9 @@ function NavMain() {
         <Nav.Item>
           <Nav.Link href="About">About</Nav.Link>
         </Nav.Item>
+        <Nav.Item>
+          <Nav.Link href="Setup">Setup</Nav.Link>
+        </Nav.Item>
       </Nav>
     </Container>
   );

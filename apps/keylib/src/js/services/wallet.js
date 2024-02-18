@@ -42,7 +42,7 @@ export default class Wallet {
     this.setupProvider();
     console.log('this.provider:', this.provider);
 
-    this.setupNewWallet();
+    //this.setupNewWallet();
 
     /*
     const text = 'hello testing 123';
@@ -120,12 +120,47 @@ export default class Wallet {
 
     } else {
       // import or load wallet data
-      alert('import or load wallet data')
+      console.log('import or load wallet data')
     }
   }
 
+  getSeedHex= async () => {
+    return await this.decrypt(
+      JSON.parse(
+        localStorage.getItem(
+          "seedHex",
+        )
+      )
+    )
+  }
+
+  saveKeystore = async () => {
+    const _password = "thisisapassword";
+    const seedHex = this.getSeedHex();
+    const keystore = await this.seedHexToKeystore(seedHex, _password);
+    localStorage.setItem(
+      'keystore',
+      JSON.stringify(keystore)
+    );
+    console.log('saveKeystore keystore :: ', keystore);
+  }
+
+  getKeystore = async () => {
+    if (localStorage.getItem('keyset')) {
+      const _password = "thisisapassword";
+      const keystore = JSON.parse(
+        localStorage.getItem(
+          "keystore",
+        )
+      )
+      console.log('wallet.getKeystore:', keystore);
+      return await this.recoverSeedHexFromKeystore(keystore, _password);
+    }
+  }
+ 
   getAddress = async () => {
     if (localStorage.getItem('keyset')) {
+      // TODO remove this from localStorage after dev
       const phrase = this.decrypt(
         JSON.parse(
           localStorage.getItem(
@@ -133,25 +168,30 @@ export default class Wallet {
           )
         )
       )
-/*
-      alert(
-        "phrase: " +
-        this.decrypt(
-          JSON.parse(
-            phrase,
+      const seedHex = this.decrypt(
+        JSON.parse(
+          localStorage.getItem(
+            "seedHex",
           )
         )
-      );
-console.log(
-  this.decrypt(
-    JSON.parse(phrase)
-  )
-);
-*/
+      )
 
       //WIP
-      const seedHex = bip39.mnemonicToSeedHex(phrase);
+      //const seedHex = bip39.mnemonicToSeedHex(phrase);
+//console.log(seedHex)
+//
       const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+console.log('ssssssssssssssssssssssss', Object.keys(HDwallet))
+console.log('ssssssssssssssssssssssss', HDwallet._hdkey._privateKey.toString('hex'))
+
+      let walletNew = HDwallet.derivePath("m/44'/60'/0'/0/1").getWallet();
+      const addressOne = walletNew.getAddressString();
+      walletNew = HDwallet.derivePath("m/44'/60'/0'/0/2").getWallet();
+      const addressTwo = walletNew.getAddressString();
+console.log('walletNew', addressOne, addressTwo);
+
+      console.log('qqqqqqqqqqqq', walletNew.publicKey.toString('hex'));
+
       const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
       const address = zeroWallet.getAddressString();
       const addressCheckSum = zeroWallet.getChecksumAddressString();
@@ -164,6 +204,7 @@ console.log(
 
   getNewPhrase = async () => {
     const phrase = await bip39.generateMnemonic();
+    const seedHex = bip39.mnemonicToSeedHex(phrase);
     localStorage.setItem(
       "phrase",
       JSON.stringify(
@@ -172,6 +213,12 @@ console.log(
         )
       )
     );
+    localStorage.setItem(
+      "seedHex",
+      JSON.stringify(
+        this.encrypt(seedHex)
+      )
+    )
     localStorage.setItem(
       "keyset",
       true,
@@ -278,35 +325,47 @@ console.log(
   }
 
   // TODO debug this and check it works okay
-  recoverSeedHexFromKeystore = async (_password) => {
-    const password = _password;
-    const resPkey0 = await EthjsWallet.fromV3(this.data.keystore0, password);
-    const resPkey1 = await EthjsWallet.fromV3(this.data.keystore1, password);
-    // console.log(_pkeySeed);
-    const seedHex = resPkey0.privateKey.toString('hex') + resPkey1.privateKey.toString('hex');
-    const HDwallet = hdkey.fromMasterSeed(seedHex);
-    const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
-    const address = zeroWallet.getAddressString();
-    const addressCheckSum = zeroWallet.getChecksumAddressString();
-    console.log(addressCheckSum);
+  recoverSeedHexFromKeystore = async (_keystore, _password) => {
+    try {
+      const password = _password;
+      console.log(
+        'recoverSeedHexFromKeystore',
+        _keystore[0],
+        _keystore[1],
+        _password
+      );
+      const resPkey0 = await EthjsWallet.fromV3(_keystore[0], password);
+      const resPkey1 = await EthjsWallet.fromV3(_keystore[1], password);
+      // console.log(_pkeySeed);
+      const seedHex = resPkey0.privateKey.toString('hex') + resPkey1.privateKey.toString('hex');
+      console.log("recoverSeedHexFromKeystore :: seedHex", seedHex);
+      const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+      const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+      const address = zeroWallet.getAddressString();
+      const addressCheckSum = zeroWallet.getChecksumAddressString();
+      //console.log(addressCheckSum);
+      return addressCheckSum;
+/*
+*/
+    }
+    catch (e) {
+      console.log("ERROR catch recoverSeedHexFromKeystore:", e);
+    }
   }
 
   seedHexToKeystore = async (_pkeySeed, _password) => {
     try {
-      const pkey0 = _pkeySeed.substr(0, (_pkeySeed.length / 2));
-      const pkey1 = _pkeySeed.substr((_pkeySeed.length / 2));
+      const pkeySeed = await _pkeySeed;
+      const pkey0 = pkeySeed.substr(0, (pkeySeed.length / 2));
+      const pkey1 = pkeySeed.substr((pkeySeed.length / 2));
       const password = _password;
-      const keystore0 = await this.pkeyV3(pkey0, password);
-      const keystore1 = await this.pkeyV3(pkey1, password);
-      //this.data.keystore0 = keystore0;
-      //this.data.keystore1 = keystore1;
+      const keystore0 = this.pkeyV3(pkey0, password);
+      const keystore1 =  this.pkeyV3(pkey1, password);
       const keystore = [
-        keystore0,
-        keystore1,
+        await keystore0,
+        await keystore1,
       ];
-      this.data.keystore = keystore;
-//console.log('xxxxxxxxxxxxxxxxxxxxxx', window.walletAPI.saveKeystoreData);
-      window.walletAPI.saveKeystoreData(this.data.keystore);
+      return keystore;
     }
     catch (err) {
       console.log('seedHexToKeystore err:', err);
@@ -317,7 +376,25 @@ console.log(
     try {
       const key = Buffer.from(_pkey, 'hex');
       const wallet = EthjsWallet.fromPrivateKey(key);
-      return await wallet.toV3(_password);
+      const v3Options = {
+        kdf: 'scrypt',
+        dklen: 32,
+        n: 262144,
+        r: 8,
+        p: 1,
+        cipher: 'aes-128-ctr'
+      }
+      const n = Math.pow(2, 16);
+      const _v3Options = {
+        kdf: 'scrypt',
+        dklen: 32,
+        n,
+        r: 8,
+        p: 1,
+        cipher: 'aes-128-ctr'
+      }
+      console.log(_v3Options);
+      return await wallet.toV3String(_password, _v3Options);
     }
     catch (err) {
       console.log('pkeyV3 err:', err);

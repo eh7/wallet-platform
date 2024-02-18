@@ -1,23 +1,31 @@
 // App.js
 import { Routes, Route } from 'react-router-dom';
-import Setup from './pages/Setup';
+
+import NavMain from './components/NavMain';
+
 import Home from './pages/Home';
 import About from './pages/About';
 import Products from './pages/Products';
-import NavMain from './components/NavMain';
+
+import Setup from './pages/Setup';
+import SetupPhrase from './pages/SetupPhrase';
+import SetupSeed from './pages/SetupSeed';
+import SetupImportKeystore from './pages/SetupImportKeystore';
+import SetupExportKeystore from './pages/SetupExportKeystore';
 
 const App = () => {
  return (
     <>
        <NavMain/>
-       {
-         <Setup />
-       }
        <Routes>
-          <Route path="/setup" element={<Setup />} /> 
           <Route path="/" element={<Home />} />
           <Route path="/about" element={<About />} />
           <Route path="/products" element={<Products />} />
+          <Route path="/setup" element={<Setup />} /> 
+          <Route path="/setup/phrase" element={<SetupPhrase />} /> 
+          <Route path="/setup/seed" element={<SetupSeed />} /> 
+          <Route path="/setup/import/keystore" element={<SetupImportKeystore />} /> 
+          <Route path="/setup/export/keystore" element={<SetupExportKeystore />} /> 
        </Routes>
     </>
  );

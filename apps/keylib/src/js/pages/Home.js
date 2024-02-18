@@ -20,8 +20,6 @@ import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import NavMain from '../components/NavMain';
-
 import Wallet from '../services/wallet';
 
 //import { ethers } from "ethers";
@@ -60,7 +58,7 @@ export default class Home extends React.Component {
     */
 
     document.title = `You clicked ${this.state.count} times`;
-    alert('componentDidMount')
+    //alert('componentDidMount')
   }
 
   componentDidUpdate() {
@@ -77,7 +75,31 @@ export default class Home extends React.Component {
     //console.log('this.state.provider:', this.state.provider);
 
     document.title = `You clicked ${this.state.count} times`;
-    alert('componentDidUpdate')
+    //alert('componentDidUpdate')
+  }
+
+  enterKeystorePhrase = async () => {
+    alert('enterKeystorePhrase');
+  }
+
+  exportKeystore = async () => {
+     alert('exportKeystore');
+  }
+
+  importKeystore = async () => {
+    alert('importKeystore');
+  }
+
+  saveKeystore = async () => {
+    alert(
+      'saveKeystore: ' + await this.state.wallet.saveKeystore()
+    );
+  }
+
+  getKeystore = async () => {
+    alert(
+      'getKeystore: ' + await this.state.wallet.getKeystore()
+    );
   }
 
   getAddress = async () => {
@@ -105,15 +127,7 @@ export default class Home extends React.Component {
       <>
         <h1>Home</h1>
 
-        <Button onClick={this.getPhrase}>getPhrase</Button> |
         <Button onClick={this.getAddress}>getAddress</Button> |
-        <Button onClick={this.getBlockNumber}>getBlockNumber</Button> |
-
-        keyset: {
-          localStorage.getItem("keyset") ?
-          <h3>user already setup {localStorage.getItem("keyset")}</h3> :
-          <h3>setup user</h3>
-        }
 
         <p>You clicked {this.state.count} times</p>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>
