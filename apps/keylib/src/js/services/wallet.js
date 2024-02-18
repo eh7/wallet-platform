@@ -181,16 +181,13 @@ export default class Wallet {
 //console.log(seedHex)
 //
       const HDwallet = etherHDkey.fromMasterSeed(seedHex);
-console.log('ssssssssssssssssssssssss', Object.keys(HDwallet))
-console.log('ssssssssssssssssssssssss', HDwallet._hdkey._privateKey.toString('hex'))
 
+      /*
       let walletNew = HDwallet.derivePath("m/44'/60'/0'/0/1").getWallet();
       const addressOne = walletNew.getAddressString();
       walletNew = HDwallet.derivePath("m/44'/60'/0'/0/2").getWallet();
       const addressTwo = walletNew.getAddressString();
-console.log('walletNew', addressOne, addressTwo);
-
-      console.log('qqqqqqqqqqqq', walletNew.publicKey.toString('hex'));
+      */
 
       const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
       const address = zeroWallet.getAddressString();

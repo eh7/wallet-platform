@@ -9,7 +9,7 @@ function NavMain() {
           <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="Products">Products</Nav.Link>
+          <Nav.Link href="Applications">Applications</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link href="About">About</Nav.Link>

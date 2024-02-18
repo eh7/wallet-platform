@@ -104,9 +104,16 @@ export default class Setup extends React.Component {
         <Button onClick={this.saveKeystore}>saveKeystore</Button> |
         <Button onClick={this.getKeystore}>getKeystore</Button> |
         <Button onClick={this.enterKeystorePhrase}>enterKeystorePhrase</Button> |
+
         <Button onClick={this.exportKeystore}>exportKeystore</Button> |
         <Button onClick={this.importKeystore}>importKeystore</Button> |
         <Button onClick={this.getBlockNumber}>getBlockNumber</Button> |
+
+        <br/>
+        <Button href="/setup/phrase">Phrase</Button> |
+        <Button href="/setup/seed">Seed</Button> |
+        <Button href="/setup/import/keystore">Import Keystore</Button> |
+        <Button href="/setup/export/keystore">Export Keystore</Button> |
 
         keyset: {
           localStorage.getItem("keyset") ?

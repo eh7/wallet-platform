@@ -5,7 +5,7 @@ import NavMain from './components/NavMain';
 
 import Home from './pages/Home';
 import About from './pages/About';
-import Products from './pages/Products';
+import Applications from './pages/Applications';
 
 import Setup from './pages/Setup';
 import SetupPhrase from './pages/SetupPhrase';
@@ -19,8 +19,8 @@ const App = () => {
        <NavMain/>
        <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/products" element={<Products />} />
+          <Route path="/About" element={<About />} />
+          <Route path="/Applications" element={<Applications />} />
           <Route path="/setup" element={<Setup />} /> 
           <Route path="/setup/phrase" element={<SetupPhrase />} /> 
           <Route path="/setup/seed" element={<SetupSeed />} /> 
@@ -30,7 +30,7 @@ const App = () => {
     </>
  );
 };
-//          <Route path="/products" element={<Products />} />
+//          <Route path="/products" element={<Applications />} />
 //          <Route path="/about" element={<About />} />
 
 export default App;
