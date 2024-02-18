@@ -19,7 +19,7 @@ run()
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
-const key = crypto.randomBytes(32);
+const key = crypto.randomBytes(128);
 const iv = crypto.randomBytes(16);
 
 console.log(key.toString('hex'))
@@ -32,7 +32,7 @@ const algorithm = 'aes-256-cbc'; //Using AES encryption
 
 //const key = crypto.randomBytes(32);
 //const iv = crypto.randomBytes(16);
-//
+
 const key = Buffer.from('c726128a6567add145a27d301240637f727b372bb15653bc9518d4217d3fde24', 'hex');
 const iv = Buffer.from('ae32fedeb2302c300cc05b4d335f6a68', 'hex');
 
