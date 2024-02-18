@@ -107,12 +107,6 @@ export default class Home extends React.Component {
           <h3>user already setup {localStorage.getItem("keyset")}</h3> :
           <h3>setup user</h3>
         }
-        <h4>*** setup pass phrase</h4>
-        {localStorage.setItem("phrase", '')}
-        {
-          localStorage.setItem("phrase", 'phrase')
-        }
-        <h3>user already setup '{localStorage.getItem("phrase")}'</h3>
 
         <p>You clicked {this.state.count} times</p>
         <button onClick={() => this.setState({ count: this.state.count + 1 })}>

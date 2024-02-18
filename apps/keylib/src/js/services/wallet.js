@@ -5,8 +5,8 @@ import { ethers } from 'ethers';
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
-const key = crypto.randomBytes(32);
-const iv = crypto.randomBytes(16);
+//const key = crypto.randomBytes(32);
+//const iv = crypto.randomBytes(16);
 
 //console.log('key::::iv :: ', key, '::::', iv);
 //console.log(key.toString('utf8'), '::::', iv);
@@ -44,6 +44,7 @@ export default class Wallet {
 
     this.setupNewWallet();
 
+    /*
     const text = 'hello testing 123';
     const encryptedText = this.encrypt(text);
     const decryptedText = this.decrypt(encryptedText);
@@ -59,6 +60,7 @@ export default class Wallet {
     console.log(
       decryptedText,
     );
+    */
 
     /*
     // TODO move this into it's own function
@@ -119,7 +121,16 @@ export default class Wallet {
   }
 
   getNewPhrase = async () => {
-    return await bip39.generateMnemonic();
+    const phrase = await bip39.generateMnemonic();
+    localStorage.setItem(
+      "phrase",
+      this.encrypt(phrase)
+    );
+    localStorage.setItem(
+      "keyset",
+      true,
+    );
+    return phrase;
   }
 
   checkWalletSetup = (message) => {
