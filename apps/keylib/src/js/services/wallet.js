@@ -145,6 +145,21 @@ export default class Wallet {
     console.log('saveKeystore keystore :: ', keystore);
   }
 
+  getKeystoreJson = () => {
+    try {
+      if (localStorage.getItem('keyset')) {
+        const keystore = JSON.parse(
+          localStorage.getItem(
+            "keystore",
+          )
+        )
+        return keystore;
+      }
+    } catch (e) {
+      console.log('ERROR :: wallet :: getKeystoreJson :: ', e);
+    }
+  }
+
   getKeystore = async () => {
     if (localStorage.getItem('keyset')) {
       const _password = "thisisapassword";
@@ -161,6 +176,7 @@ export default class Wallet {
   getAddress = async () => {
     if (localStorage.getItem('keyset')) {
       // TODO remove this from localStorage after dev
+      /*
       const phrase = this.decrypt(
         JSON.parse(
           localStorage.getItem(
@@ -168,6 +184,7 @@ export default class Wallet {
           )
         )
       )
+      */
       const seedHex = this.decrypt(
         JSON.parse(
           localStorage.getItem(
@@ -202,6 +219,7 @@ export default class Wallet {
   getNewPhrase = async () => {
     const phrase = await bip39.generateMnemonic();
     const seedHex = bip39.mnemonicToSeedHex(phrase);
+    /*
     localStorage.setItem(
       "phrase",
       JSON.stringify(
@@ -210,6 +228,7 @@ export default class Wallet {
         )
       )
     );
+    */
     localStorage.setItem(
       "seedHex",
       JSON.stringify(

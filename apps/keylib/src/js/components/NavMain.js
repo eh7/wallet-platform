@@ -9,13 +9,13 @@ function NavMain() {
           <Nav.Link href="/">Home</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="Applications">Applications</Nav.Link>
+          <Nav.Link href="/applications">Applications</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="About">About</Nav.Link>
+          <Nav.Link href="/about">About</Nav.Link>
         </Nav.Item>
         <Nav.Item>
-          <Nav.Link href="Setup">Setup</Nav.Link>
+          <Nav.Link href="/setup">Setup</Nav.Link>
         </Nav.Item>
       </Nav>
     </Container>
