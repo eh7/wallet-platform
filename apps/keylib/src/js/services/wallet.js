@@ -5,20 +5,8 @@ import { ethers } from 'ethers';
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
-//const key = crypto.randomBytes(32);
-//const iv = crypto.randomBytes(16);
-
-//console.log('key::::iv :: ', key, '::::', iv);
-//console.log(key.toString('utf8'), '::::', iv);
 
 import 'dotenv/config';
-//import * as dotenv from 'dotenv';
-//dotenv.config();
-
-//const myEventHandler = function () {
-//  console.log('event emitted');
-//}
-//eventEmitter.on('scream', myEventHandler);
 
 const endPoint = process.env.RPC_URL || '';
 
@@ -36,40 +24,8 @@ export default class Wallet {
     this.key = Buffer.from(process.env.KEY, 'hex');
     this.iv = Buffer.from(process.env.IV, 'hex');
 
-//    this.key = crypto.randomBytes(32);
-//    this.iv = crypto.randomBytes(16);
-
     this.setupProvider();
     console.log('this.provider:', this.provider);
-
-    //this.setupNewWallet();
-
-    /*
-    const text = 'hello testing 123';
-    const encryptedText = this.encrypt(text);
-    const decryptedText = this.decrypt(encryptedText);
-    console.log(
-      'zzzzzzzzzzzzzzzzzzzzzzzzzzzz',
-    );
-    console.log(
-      text,
-    );
-    console.log(
-      encryptedText,
-    );
-    console.log(
-      decryptedText,
-    );
-    */
-
-    /*
-    // TODO move this into it's own function
-    window.walletAPI.keystoreSeedHex((event, keystore) => {
-      console.log('xxxxxxxxxxxxxxx keystore xxxxxxxxxxxx', keystore);
-    });
-    */
-
-    //this.setupWallet(walletInitData);
   }
 
   setupProvider = () => {
@@ -214,6 +170,16 @@ export default class Wallet {
     } else {
       alert('no keyset error');
     }
+  }
+
+  saveNewPhraseSeed = async (_words) => {
+    const phrase = _words.join(' ');
+    //alert('saveNewPhrase :: ' + _words);
+    //const phrase = _words.replace(',', ' ');
+    //console.log(phrase);
+    const seedHex = bip39.mnemonicToSeedHex(phrase);
+    alert('saveNewPhrase :: ' + seedHex);
+    console.log(seedHex);
   }
 
   getNewPhrase = async () => {

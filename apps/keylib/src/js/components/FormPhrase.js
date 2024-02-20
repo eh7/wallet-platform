@@ -7,10 +7,16 @@ import Card from 'react-bootstrap/Card';
 
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+ 
+import ReactToPrint from 'react-to-print';
+
+import Wallet from '../services/wallet';
 
 function FormPhrase({_subtitle}) {
 
 //  const [validated, setValidated] = useState(false);
+
+  const wallet = new Wallet();
 
   const [wordCount, setWordCount] = useState(12);
 
@@ -39,6 +45,13 @@ function FormPhrase({_subtitle}) {
     event.preventDefault();
     alert("handleSubmit");
     const form = event.currentTarget;
+
+    const words = [];
+    for(let i = 1; i <= form[0].value; i++) {
+     words.push(form[i].value);
+    }
+    wallet.saveNewPhraseSeed(words);
+
 //    if (form.checkValidity() === false) {
 //      event.preventDefault();
 //      event.stopPropagation();
@@ -47,7 +60,7 @@ function FormPhrase({_subtitle}) {
 //    setValidated(true);
   };
 
-  handleSelectChage = (e) => {
+  const handleSelectChage = (e) => {
     if (e.currentTarget.value) {
       getFormWordInputs(e.currentTarget.value);
       setWordCount(e.currentTarget.value);
@@ -66,20 +79,36 @@ function FormPhrase({_subtitle}) {
             <div>
             <Form onSubmit={handleSubmit}>
 
-              <Form.Group className="mb-3 pl-3 pt-4" controlId="formSelectNumberWords">
-                <Form.Label>Number of words</Form.Label>
-                  <Form.Select aria-label="Select Number of Words" onChange={handleSelectChage}>
-                    <option value="12">12</option>
-                    <option value="16">16</option>
-                    <option value="24">24</option>
-                  </Form.Select>
-              </Form.Group>
+              <Container ref={el=>this.componentRef=el}>
 
-              <Container>
+                <div className="pt-3 text-primary h3">
+                  Secret Phrase                    
+                </div>
+
+                <Form.Group className="mb-3 pl-3 pt-4" controlId="formSelectNumberWords">
+                  <Form.Label>Number of words</Form.Label>
+                    <Form.Select aria-label="Select Number of Words" onChange={handleSelectChage}>
+                      <option value="12">12</option>
+                      <option value="16">16</option>
+                      <option value="24">24</option>
+                    </Form.Select>
+                </Form.Group>
+
                 <Row className="mb-3">
                   {getFormWordInputs(wordCount)}
                 </Row>
               </Container>
+              <Row className="pl-3 pb-3 pt-0">
+
+              <ReactToPrint
+                trigger={() => {
+                  return(<Button  variant="link">print phrase</Button>)
+                }}
+                content={() => this.componentRef}
+                documentTitle="Secret Phrase"
+                pageStyle="print"
+              />
+              </Row>
 
               <Button variant="primary" type="submit">
                 Submit
