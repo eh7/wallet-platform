@@ -174,12 +174,20 @@ export default class Wallet {
 
   saveNewPhraseSeed = async (_words) => {
     const phrase = _words.join(' ');
-    //alert('saveNewPhrase :: ' + _words);
-    //const phrase = _words.replace(',', ' ');
-    //console.log(phrase);
     const seedHex = bip39.mnemonicToSeedHex(phrase);
-    alert('saveNewPhrase :: ' + seedHex);
-    console.log(seedHex);
+    // TODO remove this console.log and think about how we
+    // store seedHex temporaly.???? 
+    console.log(phrase);
+    localStorage.setItem(
+      "seedHex",
+      JSON.stringify(
+        this.encrypt(seedHex)
+      )
+    )
+    localStorage.setItem(
+      "keyset",
+      true,
+    );
   }
 
   getNewPhrase = async () => {
