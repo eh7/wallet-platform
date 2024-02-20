@@ -90,6 +90,16 @@ export default class Wallet {
     )
   }
 
+  saveKeystorePassword = async (_password) => {
+    const seedHex = this.getSeedHex();
+    const keystore = await this.seedHexToKeystore(seedHex, _password);
+    localStorage.setItem(
+      'keystore',
+      JSON.stringify(keystore)
+    );
+    console.log('keystore:', JSON.stringify(keystore));
+  }
+
   saveKeystore = async () => {
     const _password = "thisisapassword";
     const seedHex = this.getSeedHex();
@@ -177,7 +187,7 @@ export default class Wallet {
     const seedHex = bip39.mnemonicToSeedHex(phrase);
     // TODO remove this console.log and think about how we
     // store seedHex temporaly.???? 
-    console.log(phrase);
+    // console.log(phrase);
     localStorage.setItem(
       "seedHex",
       JSON.stringify(
@@ -188,6 +198,11 @@ export default class Wallet {
       "keyset",
       true,
     );
+    console.log("new phrase saves and loaded");
+
+    console.log("!!! saving keystore");
+    await this.saveKeystorePassword("_password");
+    console.log("!!! saved keystore");
   }
 
   getNewPhrase = async () => {
