@@ -22,6 +22,8 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import FormPhrase from "../components/FormPhrase";
+
 //import Footer from "react-bootstrap/Footer";
 
 //const display = "Hello, to Guru99 Tutorials";
@@ -33,6 +35,7 @@ export default class SetupPhrase extends React.Component {
     return (
       <>
         <h1>SetupPhrase</h1>
+        <FormPhrase _subtitle={"Setup New Phrase"} />
       </>
     );
   }
