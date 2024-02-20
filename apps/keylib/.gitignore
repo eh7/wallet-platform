@@ -5,3 +5,4 @@ dist/
 .env
 test.mjs
 test.js
+test.txt
