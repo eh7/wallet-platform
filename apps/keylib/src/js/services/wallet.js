@@ -189,7 +189,7 @@ export default class Wallet {
         const newPassword = await bip39.generateMnemonic();
         resolve(newPassword);
       } catch (e) {
-        reject('ERROR :: walletService :: getNewPhraseForSeed :: ', e);
+        reject('ERROR :: walletService :: getNewPasswordForSeed :: ', e);
       }
     })
   }

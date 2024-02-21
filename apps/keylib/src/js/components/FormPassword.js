@@ -20,8 +20,8 @@ function FormPassword({_subtitle, _new}) {
 
   const [wordCount, setWordCount] = useState(12);
 
-  const [phrase, setPassword] = useState();
-  const [phraseText, setPasswordText] = useState();
+  const [password, setPassword] = useState();
+  const [passwordText, setPasswordText] = useState();
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
@@ -52,7 +52,7 @@ function FormPassword({_subtitle, _new}) {
             required
             type="text"
             placeholder={placeholder}
-            value={_new ? phrase[i] : ''}
+            value={_new ? password[i] : ''}
           />
         </Form.Group>
       );
@@ -122,7 +122,7 @@ function FormPassword({_subtitle, _new}) {
                 </Row>
                 <Row className="mb-0 pl-3 pt-0">
                   <div className="pt-0 text-muted">
-                    {phraseText}
+                    {passwordText}
                   </div>
                 </Row>
                 <Row className="mb-3">
@@ -133,7 +133,7 @@ function FormPassword({_subtitle, _new}) {
 
               <ReactToPrint
                 trigger={() => {
-                  return(<Button  variant="link">print phrase</Button>)
+                  return(<Button  variant="link">print password</Button>)
                 }}
                 content={() => this.componentRef}
                 documentTitle="Secret Password"
