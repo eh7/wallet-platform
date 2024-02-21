@@ -110,7 +110,8 @@ export default class Setup extends React.Component {
         <Button onClick={this.getBlockNumber}>getBlockNumber</Button> |
 
         <br/>
-        <Button href="/setup/phrase">Phrase</Button> |
+        <Button href="/setup/phrase">New Phrase</Button> |
+        <Button href="/setup/phrase/import">Import Phrase</Button> |
         <Button href="/setup/seed">Seed</Button> |
         <Button href="/setup/import/keystore">Import Keystore</Button> |
         <Button href="/setup/export/keystore">Export Keystore</Button> |

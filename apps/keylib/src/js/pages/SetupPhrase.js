@@ -16,12 +16,22 @@ import FormPhrase from "../components/FormPhrase";
 //const h1tag =<h1>{display}</h1>;
 //export default h1tag;
 
+        //<FormPhrase _subtitle={"Setup New Phrase"} _new={true} />
+
 export default class SetupPhrase extends React.Component {
+
+  constructor(props) {
+    super(props);
+    // Don't call this.setState() here!
+    this.state = { _new: props._new };
+    //this.handleClick = this.handleClick.bind(this);
+  }
+
   render() {
     return (
       <>
         <h1>SetupPhrase</h1>
-        <FormPhrase _subtitle={"Setup New Phrase"} />
+        <FormPhrase _new={this.state._new} />
       </>
     );
   }

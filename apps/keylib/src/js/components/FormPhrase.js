@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import Container from "react-bootstrap/Container";
 import Button from 'react-bootstrap/Button';
@@ -12,13 +12,27 @@ import ReactToPrint from 'react-to-print';
 
 import Wallet from '../services/wallet';
 
-function FormPhrase({_subtitle}) {
+function FormPhrase({_subtitle, _new}) {
 
 //  const [validated, setValidated] = useState(false);
 
   const wallet = new Wallet();
 
   const [wordCount, setWordCount] = useState(12);
+
+  const [phrase, setPhrase] = useState();
+  const [isLoading, setIsLoading] = useState(true); 
+
+  useEffect(() => {
+    setIsLoading(true);
+    wallet.getNewPhraseForSeed().then((newPhrase) => {
+      //setPhrase(newPhrase);
+      setPhrase(
+        newPhrase.split(' ')
+      );
+      setIsLoading(false);
+    });
+  }, []);
 
   const getFormWordInputs = (_wordCount) => {
     let content = [];
@@ -34,6 +48,7 @@ function FormPhrase({_subtitle}) {
             required
             type="text"
             placeholder={placeholder}
+            value={_new ? phrase[i] : ''}
           />
         </Form.Group>
       );
@@ -60,12 +75,14 @@ function FormPhrase({_subtitle}) {
 //    setValidated(true);
   };
 
-  const handleSelectChage = (e) => {
+  const handleSelectChage = async (e) => {
     if (e.currentTarget.value) {
       getFormWordInputs(e.currentTarget.value);
       setWordCount(e.currentTarget.value);
     }
   }
+
+  if (isLoading) return <div>Loading New Phrase...</div>;
 
   return (
     <>
@@ -73,7 +90,7 @@ function FormPhrase({_subtitle}) {
         <Card.Body>
           <Card.Title>Secret Phrase Form</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {_subtitle}
+            {_new ? "Setup New Phrase" : "Import Your Phrase"}
           </Card.Subtitle>
           <Card.Text>
             <div>
@@ -94,6 +111,11 @@ function FormPhrase({_subtitle}) {
                     </Form.Select>
                 </Form.Group>
 
+                <Row className="mb-3 pl-3 pt-3">
+                  <div className="pt-3 text-primary h3">
+                    Words
+                  </div>
+                </Row>
                 <Row className="mb-3">
                   {getFormWordInputs(wordCount)}
                 </Row>

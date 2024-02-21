@@ -182,6 +182,22 @@ export default class Wallet {
     }
   }
 
+  getNewPhraseForSeedOperation = async () => {
+    return new Promise(function(resolve, reject) {
+      try {
+        const newPhrase = await bip39.generateMnemonic();
+        resolve(newPhrase);
+      } catch (e) {
+        reject('ERROR :: walletService :: getNewPhraseForSeed :: ', e);
+      }
+    })
+  }
+
+  getNewPhraseForSeed = async () => {
+    //const newPhrase  = await this.getNewPhraseForSeedOperation();
+    return await bip39.generateMnemonic();
+  }
+
   saveNewPhraseSeed = async (_words) => {
     const phrase = _words.join(' ');
     const seedHex = bip39.mnemonicToSeedHex(phrase);
