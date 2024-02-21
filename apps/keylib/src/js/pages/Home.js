@@ -125,15 +125,35 @@ export default class Home extends React.Component {
     //const provider = new ethers.providers.JsonRpcProvider(endPoint);
     return (
       <>
-        <h1>Home</h1>
-
-        <Button onClick={this.getAddress}>getAddress</Button> |
-
-        <p>You clicked {this.state.count} times</p>
-        <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-          Click me
-        </button>
-
+        <Container>
+          <Row><h1>Home</h1></Row>
+          <Row>
+            <Button onClick={this.getAddress}>getAddress</Button> |
+          </Row>
+          <Row className="p-3">
+            Chain: ...TODO,,,
+          </Row>
+          <Row className="p-3">
+            Balance: ...TODO,,,
+          </Row>
+          <Row className="p-3">
+            Buy/Sell: ...TODO,,,
+          </Row>
+          <Row className="p-3">
+            Send: ...TODO,,,
+          </Row>
+          <Row className="p-3">
+            Bridge: ...TODO,,,
+          </Row>
+          <Row className="p-3">
+            <p>You clicked {this.state.count} times</p>
+          </Row>
+          <Row className="p-3">
+            <button onClick={() => this.setState({ count: this.state.count + 1 })}>
+              Click me
+            </button>
+          </Row>
+        </Container>
       </>
     );
   }

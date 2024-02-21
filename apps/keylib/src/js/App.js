@@ -9,6 +9,7 @@ import Applications from './pages/Applications';
 
 import Setup from './pages/Setup';
 import SetupPhrase from './pages/SetupPhrase';
+import SetupPassword from './pages/SetupPassword';
 import SetupPhraseImport from './pages/SetupPhrase';
 import SetupSeed from './pages/SetupSeed';
 import SetupImportKeystore from './pages/SetupImportKeystore';
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="/About" element={<About />} />
           <Route path="/Applications" element={<Applications />} />
           <Route path="/setup" element={<Setup />} /> 
+          <Route path="/setup/password" element={<SetupPassword _new={true}/>} /> 
           <Route path="/setup/phrase" element={<SetupPhrase _new={true}/>} /> 
           <Route path="/setup/phrase/import" element={<SetupPhrase _new={false} />} /> 
           <Route path="/setup/seed" element={<SetupSeed />} /> 

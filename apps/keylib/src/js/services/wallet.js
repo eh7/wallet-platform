@@ -182,6 +182,18 @@ export default class Wallet {
     }
   }
 
+  // TODO async setup if required for FormPassword
+  getNewPasswordForSeed = async () => {
+    return new Promise(function(resolve, reject) {
+      try {
+        const newPassword = await bip39.generateMnemonic();
+        resolve(newPassword);
+      } catch (e) {
+        reject('ERROR :: walletService :: getNewPhraseForSeed :: ', e);
+      }
+    })
+  }
+
   getNewPhraseForSeedOperation = async () => {
     return new Promise(function(resolve, reject) {
       try {

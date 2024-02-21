@@ -12,7 +12,7 @@ import ReactToPrint from 'react-to-print';
 
 import Wallet from '../services/wallet';
 
-function FormPhrase({_subtitle, _new}) {
+function FormPassword({_subtitle, _new}) {
 
 //  const [validated, setValidated] = useState(false);
 
@@ -20,19 +20,19 @@ function FormPhrase({_subtitle, _new}) {
 
   const [wordCount, setWordCount] = useState(12);
 
-  const [phrase, setPhrase] = useState();
-  const [phraseText, setPhraseText] = useState();
+  const [phrase, setPassword] = useState();
+  const [phraseText, setPasswordText] = useState();
   const [isLoading, setIsLoading] = useState(true); 
 
   useEffect(() => {
     setIsLoading(true);
-    wallet.getNewPhraseForSeed().then((newPhrase) => {
-      //setPhrase(newPhrase);
-      setPhraseText(
-        newPhrase
+    wallet.getNewPasswordForSeed().then((newPassword) => {
+      //setPassword(newPassword);
+      setPasswordText(
+        newPassword
       );
-      setPhrase(
-        newPhrase.split(' ')
+      setPassword(
+        newPassword.split(' ')
       );
       setIsLoading(false);
     });
@@ -69,7 +69,7 @@ function FormPhrase({_subtitle, _new}) {
     for(let i = 1; i <= form[0].value; i++) {
      words.push(form[i].value);
     }
-    wallet.saveNewPhraseSeed(words);
+    wallet.saveNewPasswordSeed(words);
 
 //    if (form.checkValidity() === false) {
 //      event.preventDefault();
@@ -86,15 +86,15 @@ function FormPhrase({_subtitle, _new}) {
     }
   }
 
-  if (isLoading) return <div>Loading New Phrase...</div>;
+  if (isLoading) return <div>Loading New Password...</div>;
 
   return (
     <>
       <Card>
         <Card.Body>
-          <Card.Title>Secret Phrase Form</Card.Title>
+          <Card.Title>Secret Password Form</Card.Title>
           <Card.Subtitle className="mb-2 text-muted">
-            {_new ? "Setup New Phrase" : "Import Your Phrase"}
+            {_new ? "Setup New Password" : "Import Your Password"}
           </Card.Subtitle>
           <Card.Text>
             <div>
@@ -103,7 +103,7 @@ function FormPhrase({_subtitle, _new}) {
               <Container ref={el=>this.componentRef=el}>
 
                 <div className="pt-3 text-primary h3">
-                  Secret Phrase                    
+                  Secret Password                    
                 </div>
 
                 <Form.Group className="mb-3 pl-3 pt-4" controlId="formSelectNumberWords">
@@ -136,7 +136,7 @@ function FormPhrase({_subtitle, _new}) {
                   return(<Button  variant="link">print phrase</Button>)
                 }}
                 content={() => this.componentRef}
-                documentTitle="Secret Phrase"
+                documentTitle="Secret Password"
                 pageStyle="print"
               />
               </Row>
@@ -151,41 +151,6 @@ function FormPhrase({_subtitle, _new}) {
       </Card>
     </>
   );
-
-/*
-  return (
-    <Card>
-      <Card.Body>
-        <Card.Title>Secret Phrase Form</Card.Title>
-        <Card.Subtitle className="mb-2 text-muted">
-         {_subtitle}
-        </Card.Subtitle>
-        <Card.Text>
-          <Form>
-            <Form.Group className="mb-3" controlId="formBasicEmail">
-              <Form.Label>Email address</Form.Label>
-              <Form.Control type="email" placeholder="Enter email" />
-              <Form.Text className="text-muted">
-                We'll never share your email with anyone else.
-              </Form.Text>
-            </Form.Group>
-      
-            <Form.Group className="mb-3" controlId="formBasicPassword">
-              <Form.Label>Password</Form.Label>
-              <Form.Control type="password" placeholder="Password" />
-            </Form.Group>
-            <Form.Group className="mb-3" controlId="formBasicCheckbox">
-              <Form.Check type="checkbox" label="Check me out" />
-            </Form.Group>
-            <Button variant="primary" type="submit">
-              Submit
-            </Button>
-          </Form>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-  );
-*/
 }
 
-export default FormPhrase;
+export default FormPassword;
