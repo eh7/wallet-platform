@@ -84,8 +84,8 @@ function FormPhrase({_subtitle, _new}) {
 
     const password = document.getElementById("formPassword")
     const passwordCheck = document.getElementById("formPasswordCheck")
-console.log(password.value, " -- ", passwordCheck.value);
-console.log(password.value.length);
+//console.log(password.value, " -- ", passwordCheck.value);
+//console.log(password.value.length);
     
     if (password.value !== passwordCheck.value) {
       validationErrors.push("Password and Password Check Do Not Match");
@@ -105,7 +105,7 @@ console.log(password.value.length);
     for(let i = 1; i <= form[0].value; i++) {
      words.push(form[i].value);
     }
-    wallet.saveNewPhraseSeed(words);
+    wallet.saveNewPhraseSeed(words, password.value);
 
 //    if (form.checkValidity() === false) {
 //      event.preventDefault();
