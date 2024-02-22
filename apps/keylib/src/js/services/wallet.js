@@ -128,7 +128,7 @@ export default class Wallet {
 
   getKeystore = async () => {
     if (localStorage.getItem('keyset')) {
-      const _password = "_password";
+      const _password = "password01";
       const keystore = JSON.parse(
         localStorage.getItem(
           "keystore",
@@ -227,6 +227,7 @@ export default class Wallet {
       true,
     );
     console.log("new phrase saves and loaded");
+    console.log(_password);
 
     console.log("!!! saving keystore");
     await this.saveKeystorePassword(_password);
