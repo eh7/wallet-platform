@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 
-import Container from "react-bootstrap/Container";
+import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
-import Form from 'react-bootstrap/Form';
 import Card from 'react-bootstrap/Card';
-
 import Col from 'react-bootstrap/Col';
+import Container from "react-bootstrap/Container";
+import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
  
 import ReactToPrint from 'react-to-print';
@@ -23,6 +23,19 @@ function FormPhrase({_subtitle, _new}) {
   const [phrase, setPhrase] = useState();
   const [phraseText, setPhraseText] = useState();
   const [isLoading, setIsLoading] = useState(true); 
+
+  const [
+    validationMessage,
+    setValidationMessage
+  ] = useState(false);
+
+  const [
+    validationErrors,
+    setValidationErrors
+  ] = useState([]);
+
+  //const [password, setPassword] = useState();
+  //const [passwordCheck, setPasswordCheck] = useState();
 
   useEffect(() => {
     setIsLoading(true);
@@ -62,8 +75,31 @@ function FormPhrase({_subtitle, _new}) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    alert("handleSubmit");
+
+    //alert("handleSubmit");
+    //setValidationMessage(false);
+    //setValidationErrors([]);
+
     const form = event.currentTarget;
+
+    const password = document.getElementById("formPassword")
+    const passwordCheck = document.getElementById("formPasswordCheck")
+console.log(password.value, " -- ", passwordCheck.value);
+console.log(password.value.length);
+    
+    if (password.value !== passwordCheck.value) {
+      validationErrors.push("Password and Password Check Do Not Match");
+      setValidationMessage(true);
+    }
+    if (password.value.length < 8) {
+      validationErrors.push("Password Must be 8 Characters or More");
+      setValidationMessage(true);
+    }
+
+    if (validationErrors.length > 0) {
+      window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+      return null;
+    }
 
     const words = [];
     for(let i = 1; i <= form[0].value; i++) {
@@ -96,6 +132,14 @@ function FormPhrase({_subtitle, _new}) {
           <Card.Subtitle className="mb-2 text-muted">
             {_new ? "Setup New Phrase" : "Import Your Phrase"}
           </Card.Subtitle>
+          { (validationErrors.length > 0) &&
+            <Card.Title className="mb-2 p-3 text-warning"> 
+              Validation Error:
+              <Alert key="warning" variant="warning">
+                {validationErrors.map((error) => <div>{error}</div>)}
+              </Alert>
+            </Card.Title>
+          }
           <Card.Text>
             <div>
             <Form onSubmit={handleSubmit}>
@@ -115,6 +159,7 @@ function FormPhrase({_subtitle, _new}) {
                     </Form.Select>
                 </Form.Group>
 
+
                 <Row className="mb-0 pl-3 pt-3">
                   <div className="pt-3 text-primary h3">
                     Words
@@ -128,22 +173,53 @@ function FormPhrase({_subtitle, _new}) {
                 <Row className="mb-3">
                   {getFormWordInputs(wordCount)}
                 </Row>
+
+                <Row className="pl-3 pb-3 pt-0">
+
+                  <ReactToPrint
+                    trigger={() => {
+                      return(<Button  variant="link">print phrase</Button>)
+                    }}
+                    content={() => this.componentRef}
+                    documentTitle="Secret Phrase"
+                    pageStyle="print"
+                  />
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <div className="pt-3 text-primary h3">
+                    Password & Password Check
+                  </div>
+                </Row>
+                <Row className="mb-0 pl-3 pt-0">
+                  <div className="pt-0 text-muted">
+                    This is used to to give access to your keystore in the future.
+                  </div>
+                </Row>
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3" controlId="formPassword">
+                    <Form.Control
+                      required
+                      type="password"
+                      placeholder="Password"
+                    />
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formPasswordCheck">
+                    <Form.Control
+                      required
+                      type="password"
+                      placeholder="Password Check"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Button variant="primary" type="submit">
+                    Submit
+                  </Button>
+                </Row>
+
               </Container>
-              <Row className="pl-3 pb-3 pt-0">
-
-              <ReactToPrint
-                trigger={() => {
-                  return(<Button  variant="link">print phrase</Button>)
-                }}
-                content={() => this.componentRef}
-                documentTitle="Secret Phrase"
-                pageStyle="print"
-              />
-              </Row>
-
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
             </Form>
             </div>
           </Card.Text>
