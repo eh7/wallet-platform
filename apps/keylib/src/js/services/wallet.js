@@ -243,7 +243,7 @@ export default class Wallet {
       true,
     );
     console.log("new phrase saves and loaded");
-    console.log(_password);
+    //console.log(_password);
 
     console.log("!!! saving keystore");
     await this.saveKeystorePassword(_password);
