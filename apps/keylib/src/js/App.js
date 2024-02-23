@@ -14,6 +14,7 @@ import SetupPhraseImport from './pages/SetupPhrase';
 import SetupSeed from './pages/SetupSeed';
 import SetupImportKeystore from './pages/SetupImportKeystore';
 import SetupExportKeystore from './pages/SetupExportKeystore';
+import SetupLoadKeystore from './pages/SetupLoadKeystore';
 
 const App = () => {
  return (
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/setup/seed" element={<SetupSeed />} /> 
           <Route path="/setup/import/keystore" element={<SetupImportKeystore />} /> 
           <Route path="/setup/export/keystore" element={<SetupExportKeystore />} /> 
+          <Route path="/setup/keystore/load" element={<SetupLoadKeystore />} /> 
        </Routes>
     </>
  );

@@ -61,14 +61,22 @@ function FormPhrase({_subtitle, _new}) {
       const placeholder = "enter word " + displayCount;
       content.push(
         <Form.Group className="mb-3 p-2" controlId={controlId}>
-          <Form.Control
-            required
-            type="text"
-            placeholder={placeholder}
-            value={_new ? phrase[i] : ''}
-          />
+          { _new ?
+            <Form.Control
+              required
+              type="text"
+              placeholder={placeholder}
+              value={phrase[i]}
+            /> :
+            <Form.Control
+              required
+              type="text"
+              placeholder={placeholder}
+            /> 
+          }
         </Form.Group>
       );
+             // value={_new ? phrase[i] : ''}
     }
     return content;
   }
@@ -106,13 +114,6 @@ function FormPhrase({_subtitle, _new}) {
      words.push(form[i].value);
     }
     wallet.saveNewPhraseSeed(words, password.value);
-
-//    if (form.checkValidity() === false) {
-//      event.preventDefault();
-//      event.stopPropagation();
-//    }
-//
-//    setValidated(true);
   };
 
   const handleSelectChage = async (e) => {
@@ -165,11 +166,14 @@ function FormPhrase({_subtitle, _new}) {
                     Words
                   </div>
                 </Row>
-                <Row className="mb-0 pl-3 pt-0">
-                  <div className="pt-0 text-muted">
-                    {phraseText}
-                  </div>
-                </Row>
+                { _new ?
+                  <Row className="mb-0 pl-3 pt-0">
+                    <div className="pt-0 text-muted">
+                      {phraseText}
+                    </div>
+                  </Row> :
+                  ''
+                }
                 <Row className="mb-3">
                   {getFormWordInputs(wordCount)}
                 </Row>

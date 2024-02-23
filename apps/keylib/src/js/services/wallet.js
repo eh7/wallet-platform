@@ -126,6 +126,22 @@ export default class Wallet {
     }
   }
 
+  getKeystoreWithPassword = async (_password) => {
+    if (localStorage.getItem('keystore')) {
+      try {
+        const keystore = JSON.parse(
+          localStorage.getItem(
+            "keystore",
+          )
+        )
+        console.log('wallet.getKeystore:', keystore);
+        return await this.recoverSeedHexFromKeystore(keystore, _password);
+      } catch (e) {
+        console.log('ERROR :: wallet :: getKeystoreWithPassword :: ', e); 
+      }
+    }
+  }
+
   getKeystore = async () => {
     if (localStorage.getItem('keyset')) {
       const _password = "password01";

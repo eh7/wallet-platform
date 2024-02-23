@@ -111,6 +111,7 @@ export default class Setup extends React.Component {
 
         <br/>
         <Button href="/setup/password">Password</Button> |
+        <Button href="/setup/keystore/load">load keystore</Button> |
         <Button href="/setup/phrase">New Phrase</Button> |
         <Button href="/setup/phrase/import">Import Phrase</Button> |
         <Button href="/setup/seed">Seed</Button> |
