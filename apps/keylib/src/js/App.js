@@ -6,6 +6,7 @@ import NavMain from './components/NavMain';
 import Home from './pages/Home';
 import About from './pages/About';
 import Applications from './pages/Applications';
+import SendTx from './pages/Send';
 
 import Setup from './pages/Setup';
 import SetupPhrase from './pages/SetupPhrase';
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Applications" element={<Applications />} />
+          <Route path="/send" element={<SendTx />} /> 
           <Route path="/setup" element={<Setup />} /> 
           <Route path="/setup/password" element={<SetupPassword _new={true}/>} /> 
           <Route path="/setup/phrase" element={<SetupPhrase _new={true}/>} /> 

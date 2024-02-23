@@ -15,6 +15,9 @@ function NavMain() {
           <Nav.Link href="/about">About</Nav.Link>
         </Nav.Item>
         <Nav.Item>
+          <Nav.Link href="/send">Send Tx</Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
           <Nav.Link href="/setup">Setup</Nav.Link>
         </Nav.Item>
       </Nav>
