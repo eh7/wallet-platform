@@ -20,6 +20,9 @@ function NavMain() {
         <Nav.Item>
           <Nav.Link href="/setup">Setup</Nav.Link>
         </Nav.Item>
+        <Nav.Item className="ml-auto">
+          <Nav.Link href="/config/network">Network</Nav.Link>
+        </Nav.Item>
       </Nav>
     </Container>
   );
