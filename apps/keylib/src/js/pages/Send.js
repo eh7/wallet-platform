@@ -6,7 +6,7 @@ import Button from "react-bootstrap/Button";
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FromSendTransaction from '../components/FormSendTransaction';
+import FromSendTransaction from '../components/Form/SendTransaction';
 
 import Wallet from '../services/wallet';
 

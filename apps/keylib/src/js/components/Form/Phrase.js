@@ -10,7 +10,7 @@ import Row from 'react-bootstrap/Row';
  
 import ReactToPrint from 'react-to-print';
 
-import Wallet from '../services/wallet';
+import Wallet from '../../services/wallet';
 
 function FormPhrase({_subtitle, _new}) {
 

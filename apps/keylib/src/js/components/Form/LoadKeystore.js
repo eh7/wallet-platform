@@ -8,7 +8,7 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
  
-import Wallet from '../services/wallet';
+import Wallet from '../../services/wallet';
 
 function FormLoadKeystore({_subtitle, _new}) {
 

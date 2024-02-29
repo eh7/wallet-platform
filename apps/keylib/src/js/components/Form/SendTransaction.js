@@ -8,9 +8,9 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
  
-import Wallet from '../services/wallet';
+import Wallet from '../../services/wallet';
 
-function FormLoadKeystore({_subtitle, _new}) {
+function FormSendTransaction({_subtitle, _new}) {
 
 //  const [validated, setValidated] = useState(false);
 
@@ -130,4 +130,4 @@ function FormLoadKeystore({_subtitle, _new}) {
   );
 }
 
-export default FormLoadKeystore;
+export default FormSendTransaction;

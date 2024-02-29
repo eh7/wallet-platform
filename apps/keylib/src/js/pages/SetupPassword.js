@@ -8,8 +8,8 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FormPhrase from "../components/FormPhrase";
-import FormPassword from "../components/FormPassword";
+import FormPhrase from "../components/Form/Phrase";
+import FormPassword from "../components/Form/Password";
 
 export default class SetupPassword extends React.Component {
 

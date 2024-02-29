@@ -8,7 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FormPhrase from "../components/FormPhrase";
+import FormPhrase from "../components/Form/Phrase";
 
 //import Footer from "react-bootstrap/Footer";
 

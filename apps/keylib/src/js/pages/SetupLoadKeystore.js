@@ -8,7 +8,7 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
-import FromLoadKeystore from '../components/FormLoadKeystore';
+import FromLoadKeystore from '../components/Form/LoadKeystore';
 
 export default class SetupLoadKeystore extends React.Component {
 

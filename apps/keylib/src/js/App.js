@@ -1,7 +1,7 @@
 // App.js
 import { Routes, Route } from 'react-router-dom';
 
-import NavMain from './components/NavMain';
+import NavMain from './components/Nav/Main';
 
 import Home from './pages/Home';
 import About from './pages/About';
