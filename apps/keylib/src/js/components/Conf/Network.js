@@ -12,9 +12,9 @@ import Wallet from '../../services/wallet';
 
 function ConfNetowrk({_subtitle, _new}) {
 
-//  const [validated, setValidated] = useState(false);
-
   const wallet = new Wallet();
+
+  const [isLoading, setIsLoading] = useState(true); 
 
   const [
     validationMessage,
@@ -26,20 +26,68 @@ function ConfNetowrk({_subtitle, _new}) {
     setValidationErrors
   ] = useState([]);
 
+  const [
+    networks,
+    setNetworks
+  ] = useState([]);
+
   useEffect(() => {
+    setIsLoading(true);
+
+    const myNetworks = JSON.parse(
+      localStorage.getItem("networks")
+    )
+
+    if (myNetworks === null) {
+    }
+    else {
+      myNetworks.map((network) => {
+        networks.push(network)
+      })
+    }
+     
+    /*
+    networks.push({
+      'name': '_name',
+      'rpcUrl': '_rpcUrl',
+      'chainId': '_chainId',
+      'symbol': '_symbol',
+      'explorer': '_explorer',
+    });
+    */
+    setIsLoading(false);
   }, []);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    //alert("handleSubmit");
-    //setValidationMessage(false);
-    //setValidationErrors([]);
-
     const form = event.currentTarget;
 
-    const to = document.getElementById("formTo")
-    const amount = document.getElementById("formAmount")
+    const name = document.getElementById("formNetworkName")
+    const rpcUrl = document.getElementById("formNetworkRPC")
+    const chainId = document.getElementById("formNetworChainId")
+    const symbol = document.getElementById("formNetworkSymbol")
+    const explorer = document.getElementById("formNetworkBlockExplore")
+
+    /*
+    alert(
+     'name: ' +  name.value +
+     '\nrpcUrl: ' + rpcUrl.value +
+     '\nchainId: ' + chainId.value +
+     '\nsymbol: ' + symbol.value +
+     '\nexplorer: ' + explorer.value
+    );
+    */
+
+    networks.push({
+      'name': name.value,
+      'rpcUrl': rpcUrl.value,
+      'chainId': chainId.value,
+      'symbol': symbol.value,
+      'explorer': explorer.value,
+    });
+
+    localStorage.setItem("networks", JSON.stringify(networks));
 
     /*
     const password = document.getElementById("formPassword")
@@ -61,9 +109,48 @@ function ConfNetowrk({_subtitle, _new}) {
     */
   };
 
+  if (isLoading) return <div>Loading Networks...</div>;
+
   return (
     <>
-      <Card>
+      <Card className="w-100">
+        <Row className="mb-0 pl-3 pt-3">
+          <Button variant="link" type="submit" className="w-100">
+            add network
+          </Button>
+        </Row>
+        {networks.map((data) => {
+          return (
+            <div>
+              Network name:  {data.name}
+            </div>
+          )
+        })}
+        {networks.map((network) => network.name)}
+        {networks.map((network) => {
+          <Row>
+            <Col>
+              {network.name}
+            </Col>
+            <Col>
+              {network.rpcUrl}
+            </Col>
+            <Col>
+              {network.chainId}
+            </Col>
+            <Col>
+              {network.symbol}
+            </Col>
+            <Col>
+              {network.explorer}
+            </Col>
+          </Row>
+        })}
+        {networks.length}
+        { (networks.length === 0) ?  'No networks added yet' : 'list networks'}
+        { (networks.length === 0) &&  'No networks added yet'}
+      </Card>
+      <Card className="w-100">
         <Card.Body>
           <Card.Title>Network Configuration</Card.Title>
           { (validationErrors.length > 0) &&
@@ -81,41 +168,61 @@ function ConfNetowrk({_subtitle, _new}) {
               <Container ref={el=>this.componentRef=el}>
 
                 <div className="pt-3 text-primary h3">
-                  Send Transaction                    
+                  Network Configuration                    
                 </div>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <div className="pt-3 text-primary h3">
-                    To 
-                  </div>
-                </Row>
-                <Row className="mb-0 pl-3 pt-3">
-                  <Form.Group className="mb-3 pr-3" controlId="formTo">
+                  <Form.Group className="mb-3 pr-3 w-100" controlId="formNetworkName">
                     <Form.Control
                       required
                       type="text"
-                      placeholder="To"
+                      placeholder="Name"
                     />
                   </Form.Group>
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <div className="pt-3 text-primary h3">
-                    Amount
-                  </div>
-                </Row>
-                <Row className="mb-0 pl-3 pt-3">
-                  <Form.Group className="mb-3 pr-3" controlId="formAmount">
+                  <Form.Group className="mb-3 pr-3 w-100" controlId="formNetworkRPC">
                     <Form.Control
                       required
                       type="text"
-                      placeholder="Amount"
+                      placeholder="rpc url"
                     />
                   </Form.Group>
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <Button variant="primary" type="submit">
+                  <Form.Group className="mb-3 pr-3 w-100" controlId="formNetworChainId">
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="Chain ID"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3 w-100" controlId="formNetworkSymbol">
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="Symbol"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3 w-100" controlId="formNetworkBlockExplore">
+                    <Form.Control
+                      type="text"
+                      placeholder="block explorer"
+                    />
+                  </Form.Group>
+                </Row>
+
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Button variant="primary" type="submit" className="w-100">
                     Submit
                   </Button>
                 </Row>
@@ -131,3 +238,52 @@ function ConfNetowrk({_subtitle, _new}) {
 }
 
 export default ConfNetowrk;
+
+/*
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <div className="pt-3 text-primary h3">
+                    Chain ID
+                  </div>
+                </Row>
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3" controlId="formNetworChainId>
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="1"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <div className="pt-3 text-primary h3">
+                    Currency symbol
+                  </div>
+                </Row>
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3" controlId="formNetworkSymbol>
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="ETH"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <div className="pt-3 text-primary h3">
+                    Block explorer URL
+                  </div>
+                </Row>
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group className="mb-3 pr-3" controlId="formNetworkBlockExplore>
+                    <Form.Control
+                      required
+                      type="text"
+                      placeholder="https://etherscan.io"
+                    />
+                  </Form.Group>
+                </Row>
+###
+*/

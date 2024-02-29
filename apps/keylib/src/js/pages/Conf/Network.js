@@ -21,6 +21,7 @@ export default class ConfNetwork extends React.Component {
     super(props);
     this.state = {
       count: 0,
+      networks: [],
       provider: {},
       wallet: {},
     };
@@ -28,6 +29,8 @@ export default class ConfNetwork extends React.Component {
 
   componentDidMount() {
     this.state.wallet = new Wallet();
+    this.state.networks.push({
+    })
   }
 
   componentDidUpdate() {
@@ -45,12 +48,13 @@ export default class ConfNetwork extends React.Component {
       <>
         <Container>
           <Row>
-            <h1>
-              Network Confguration
-            </h1>
+            <h3>
+              Network Configuration
+            </h3>
           </Row>
           <Row>
-            <Button onClick={this.getAddress}>getAddress</Button> |
+            <p>Networks</p>
+            {this.state.networks}
           </Row>
           <Row>
             <ConfNetwork /> 
