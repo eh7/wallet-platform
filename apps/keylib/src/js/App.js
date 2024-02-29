@@ -8,6 +8,8 @@ import About from './pages/About';
 import Applications from './pages/Applications';
 import SendTx from './pages/Send';
 
+import ConfNetwork from './pages/Conf/Network';
+
 import Setup from './pages/Setup';
 import SetupPhrase from './pages/SetupPhrase';
 import SetupPassword from './pages/SetupPassword';
@@ -26,6 +28,7 @@ const App = () => {
           <Route path="/About" element={<About />} />
           <Route path="/Applications" element={<Applications />} />
           <Route path="/send" element={<SendTx />} /> 
+          <Route path="/config/network" element={<ConfNetwork />} /> 
           <Route path="/setup" element={<Setup />} /> 
           <Route path="/setup/password" element={<SetupPassword _new={true}/>} /> 
           <Route path="/setup/phrase" element={<SetupPhrase _new={true}/>} /> 
