@@ -14,6 +14,18 @@ function ConfNetowrk({_subtitle, _new}) {
 
   const wallet = new Wallet();
 
+  let myNetworks = JSON.parse(
+    localStorage.getItem("networks")
+  )
+  if (myNetworks === null) {
+    myNetworks = [];
+  }
+
+  const [
+    networks,
+    setNetworks
+  ] = useState(myNetworks);
+
   const [isLoading, setIsLoading] = useState(true); 
 
   const [
@@ -26,15 +38,12 @@ function ConfNetowrk({_subtitle, _new}) {
     setValidationErrors
   ] = useState([]);
 
-  const [
-    networks,
-    setNetworks
-  ] = useState([]);
 
   useEffect(() => {
     setIsLoading(true);
     console.log('xxuseEffectxxxxx', networks);
 
+    /*
     const myNetworks = JSON.parse(
       localStorage.getItem("networks")
     )
@@ -46,6 +55,7 @@ function ConfNetowrk({_subtitle, _new}) {
         networks.push(network)
       })
     }
+    */
      
     /*
     networks.push({
@@ -134,23 +144,25 @@ function ConfNetowrk({_subtitle, _new}) {
         })}
         {networks.map((network) => network.name)}
         {networks.map((network) => {
-          <Row>
-            <Col>
-              {network.name}
-            </Col>
-            <Col>
-              {network.rpcUrl}
-            </Col>
-            <Col>
-              {network.chainId}
-            </Col>
-            <Col>
-              {network.symbol}
-            </Col>
-            <Col>
-              {network.explorer}
-            </Col>
-          </Row>
+          return (
+            <Row>
+              <Col>
+                {network.name}
+              </Col>
+              <Col>
+                {network.rpcUrl}
+              </Col>
+              <Col>
+                {network.chainId}
+              </Col>
+              <Col>
+                {network.symbol}
+              </Col>
+              <Col>
+                {network.explorer}
+              </Col>
+            </Row>
+          )
         })}
         {networks.length}
         { (networks.length === 0) ?  'No networks added yet' : 'list networks'}
