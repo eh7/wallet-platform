@@ -33,6 +33,7 @@ function ConfNetowrk({_subtitle, _new}) {
 
   useEffect(() => {
     setIsLoading(true);
+    console.log('xxuseEffectxxxxx', networks);
 
     const myNetworks = JSON.parse(
       localStorage.getItem("networks")
@@ -56,7 +57,7 @@ function ConfNetowrk({_subtitle, _new}) {
     });
     */
     setIsLoading(false);
-  }, []);
+  }, [networks]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -79,15 +80,20 @@ function ConfNetowrk({_subtitle, _new}) {
     );
     */
 
-    networks.push({
+    //setIsLoading(true);
+
+    setNetworks(networks.push({
       'name': name.value,
       'rpcUrl': rpcUrl.value,
       'chainId': chainId.value,
       'symbol': symbol.value,
       'explorer': explorer.value,
-    });
+    }));
+    console.log('zzzzzzzzzzzzzzzzzzzzzzz', networks);
 
     localStorage.setItem("networks", JSON.stringify(networks));
+
+    console.log('xxxxxxxxxxxxxxxx', networks);
 
     /*
     const password = document.getElementById("formPassword")
