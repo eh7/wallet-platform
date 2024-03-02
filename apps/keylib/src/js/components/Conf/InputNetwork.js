@@ -79,6 +79,15 @@ const InputNetwork = ({ networks, setNetworks }) => {
                      {(network.chainId) ? network.chainId : 'no value'}
                     </Col>
                     <Col>
+                     {(network.rpcUrl) ? network.rpcUrl : 'no value'}
+                    </Col>
+                    <Col>
+                     {(network.symbol) ? network.symbol : 'no value'}
+                    </Col>
+                    <Col>
+                     {(network.explorer) ? network.explorer : 'no value'}
+                    </Col>
+                    <Col>
                       <button onClick={(evt) => {handleDelete(network)}}>X</button>
                     </Col>
                   </Row>
