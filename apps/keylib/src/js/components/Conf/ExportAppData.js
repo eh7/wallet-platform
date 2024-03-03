@@ -8,11 +8,11 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-import InputNetwork from './InputNetwork';
+//import InputNetwork from './InputNetwork';
  
 import Wallet from '../../services/wallet';
 
-function ConfNetowrk({_subtitle, _new}) {
+function ConfExportAppData({_subtitle, _new}) {
 
   const wallet = new Wallet();
 
@@ -35,11 +35,11 @@ function ConfNetowrk({_subtitle, _new}) {
     <>
       <Card className="w-100">
         <Row className="mb-0 pl-3 pt-3">
-          <InputNetwork networks={networks} setNetworks={setNetworks}/>
+          export app data
         </Row>
       </Card>
     </>
   );
 }
 
-export default ConfNetowrk;
+export default ConfExportAppData;
