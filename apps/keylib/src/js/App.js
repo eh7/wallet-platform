@@ -11,6 +11,7 @@ import SendTx from './pages/Send';
 import ConfNetwork from './pages/Conf/Network';
 
 import Setup from './pages/Setup';
+import SetupAddress from './pages/SetupAddress';
 import SetupPhrase from './pages/SetupPhrase';
 import SetupPassword from './pages/SetupPassword';
 import SetupPhraseImport from './pages/SetupPhrase';
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/send" element={<SendTx />} /> 
           <Route path="/config/network" element={<ConfNetwork />} /> 
           <Route path="/setup" element={<Setup />} /> 
+          <Route path="/setup/address" element={<SetupAddress />} /> 
           <Route path="/setup/password" element={<SetupPassword _new={true}/>} /> 
           <Route path="/setup/phrase" element={<SetupPhrase _new={true}/>} /> 
           <Route path="/setup/phrase/import" element={<SetupPhrase _new={false} />} /> 
