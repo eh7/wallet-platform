@@ -89,6 +89,7 @@ function NavMain() {
                   <NavDropdown.Item href="/setup/keystore/load">load Keystore</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/import/keystor">import Keystore</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/address">address</NavDropdown.Item>
+                  <NavDropdown.Item href="/setup/export/data">export app data</NavDropdown.Item>
                 </NavDropdownMenu>
               </Nav.Item>
 

@@ -14,44 +14,44 @@ export default class SetupAddress extends React.Component {
 
   constructor(props) {
     super(props);
+    const wallet = new Wallet();
+    const address = this.getAddress(wallet)
     this.state = {
+      address,
       count: 0,
       provider: {},
-      wallet: {},
+      isLoading: true,
+      wallet,
     };
   }
 
   componentDidMount() {
-
-    this.state.wallet = new Wallet();
-
-    document.title = `You clicked ${this.state.count} times`;
-
-    //alert('componentDidMount')
+    //const address = await this.wallet.getAddress();
+    //this.state.address = address;
+    //this.state.isLoading = false;
+    //this.setState(this.state);
   }
 
   componentDidUpdate() {
-    
-    document.title = `You clicked ${this.state.count} times`;
-
-    //alert('componentDidUpdate')
   }
 
-  getAddress = async () => {
+  getAddress = async (wallet) => {
     //alert(
     //  'address[0]: ' + await this.state.wallet.getAddress()
     //);
-    return  await this.state.wallet.getAddress();
+    const address = await wallet.getAddress();
+    this.state.address = address;
+    this.state.isLoading = false;
+    this.setState(this.state);
+    //return address;
   }
 
   render() {
     return (
       <>
-        <h1>Address</h1>
-
-        {this.getAddress()}
-        <Button onClick={this.getAddress}>getAddress</Button> |
-
+        {(!this.state.isLoading) ? (
+          <h6>Address: {this.state.address}</h6>
+        ) : (<h6>Loading</h6>)}
       </>
     );
   }
