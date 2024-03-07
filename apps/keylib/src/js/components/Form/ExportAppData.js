@@ -10,6 +10,11 @@ import Row from 'react-bootstrap/Row';
  
 import Wallet from '../../services/wallet';
 
+const crypto = require('crypto');
+const algorithm = 'aes-256-cbc'; //Using AES encryption
+
+import 'dotenv/config';
+
 function ExportAppData(props) {
 
   const wallet = new Wallet();
@@ -44,11 +49,51 @@ function ExportAppData(props) {
     console.log(props);
 
 
-    console.log(await wallet.getKeystoreWithPassword(password));
+    //const this_key = await wallet.getKeystoreWithPassword(password);
+    const this_key = await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)
+    //console.log(this_key);
     //const newPhrase  = await this.getNewPhraseForSeedOperation();
+
+   const text = encrypt(JSON.stringify(props.networks), this_key);
+   console.log(
+     'encrypt networks:',
+     text,
+   );
+
+   console.log(
+     'decrypt networks:',
+     decrypt(text, this_key),
+   );
+
+    //encrypt("this is some text", key);
 
     document.getElementById("submitButton").disabled = false;
   };
+
+  encrypt = (text, key) => {
+    const this_key = Buffer.from(process.env.KEY, 'hex');
+    const this_iv = Buffer.from(process.env.IV, 'hex');
+    let cipher = crypto.createCipheriv(
+      'aes-256-cbc',
+      Buffer.from(this_key),
+      this_iv
+    );
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return {
+      iv: this_iv.toString('hex'),
+      encryptedData: encrypted.toString('hex')
+    };
+  }
+
+  decrypt = (text, this_key) => {
+    let iv = Buffer.from(text.iv, 'hex');
+    let encryptedText = Buffer.from(text.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this_key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return decrypted.toString('utf8');
+  }
 
   return (
     <>

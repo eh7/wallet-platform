@@ -126,6 +126,10 @@ export default class Wallet {
     }
   }
 
+  getKeystoreWithPasswordKeystore = async (_password, _keystore) => {
+    return await this.recoverSeedHexFromKeystore(_keystore, _password);
+  }
+
   getKeystoreWithPassword = async (_password) => {
     if (localStorage.getItem('keystore')) {
       try {
@@ -388,6 +392,9 @@ export default class Wallet {
       const resPkey1 = await EthjsWallet.fromV3(_keystore[1], password);
       // console.log(_pkeySeed);
       const seedHex = resPkey0.privateKey.toString('hex') + resPkey1.privateKey.toString('hex');
+      //console.log("recoverSeedHexFromKeystore :: seedHex", seedHex);
+      return seedHex;
+
       console.log("recoverSeedHexFromKeystore :: seedHex", seedHex);
       const HDwallet = etherHDkey.fromMasterSeed(seedHex);
       const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
