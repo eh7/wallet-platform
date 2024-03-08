@@ -50,11 +50,14 @@ function ExportAppData(props) {
 
 
     //const this_key = await wallet.getKeystoreWithPassword(password);
-    const this_key = await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)
+    const this_key = (await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)).substr(64);
     //console.log(this_key);
     //const newPhrase  = await this.getNewPhraseForSeedOperation();
 
-   const text = encrypt(JSON.stringify(props.networks), this_key);
+   console.log('xxxxxxxxxxxxxxxxx', this_key.length, this_key);
+
+   //const text = encrypt(JSON.stringify(props.networks), this_key);
+   const text = encrypt(JSON.stringify(props), this_key);
    console.log(
      'encrypt networks:',
      text,
@@ -62,7 +65,9 @@ function ExportAppData(props) {
 
    console.log(
      'decrypt networks:',
-     decrypt(text, this_key),
+     JSON.parse(
+       decrypt(text, this_key)
+     ),
    );
 
     //encrypt("this is some text", key);
@@ -71,8 +76,11 @@ function ExportAppData(props) {
   };
 
   encrypt = (text, key) => {
-    const this_key = Buffer.from(process.env.KEY, 'hex');
-    const this_iv = Buffer.from(process.env.IV, 'hex');
+    //const this_key = Buffer.from(process.env.KEY, 'hex');
+    console.log(key.length, key);
+    const this_key = Buffer.from(key, 'hex');
+    //const this_iv = Buffer.from(process.env.IV, 'hex');
+    const this_iv = crypto.randomBytes(16);
     let cipher = crypto.createCipheriv(
       'aes-256-cbc',
       Buffer.from(this_key),
@@ -86,10 +94,16 @@ function ExportAppData(props) {
     };
   }
 
-  decrypt = (text, this_key) => {
+  decrypt = (text, key) => {
+    const this_key = Buffer.from(key, 'hex');
     let iv = Buffer.from(text.iv, 'hex');
     let encryptedText = Buffer.from(text.encryptedData, 'hex');
-    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(this_key), iv);
+    console.log(this_key.length, this_key);
+    let decipher = crypto.createDecipheriv(
+      'aes-256-cbc',
+      Buffer.from(this_key),
+      iv,
+    );
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return decrypted.toString('utf8');
