@@ -17,6 +17,13 @@ function FormSendTransaction({_subtitle, _new}) {
   const wallet = new Wallet();
 
   const [
+    network,
+    setNetwork,
+  ] = useState();
+
+  const networks = localStorage.getItem('networks');
+
+  const [
     validationMessage,
     setValidationMessage
   ] = useState(false);
@@ -83,6 +90,25 @@ function FormSendTransaction({_subtitle, _new}) {
                 <div className="pt-3 text-primary h3">
                   Send Transaction                    
                 </div>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Form.Group controlId="formBasicSelect">
+                    <Form.Label>Select Network to Send Tx</Form.Label>
+                    <Form.Control
+                      as="select"
+                      value={network}
+                      onChange={e => {
+                        console.log("e.target.value", e.target.value);
+                        setNetwork(e.target.value);
+                      }}
+                    >
+                      <option value="DICTUM">Dictamen</option>
+                      <option value="CONSTANCY">Constancia</option>
+                      <option value="COMPLEMENT">Complemento</option>
+                    </Form.Control>
+                    {JSON.stringify(networks)}
+                  </Form.Group>
+                </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
                   <div className="pt-3 text-primary h3">
