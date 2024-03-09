@@ -36,6 +36,12 @@ export default class Wallet {
     return await this.provider.getBlockNumber()
   }
 
+  getBalance = async (_address) => {
+    const balance = await this.provider.getBalance(_address);
+    const balanceInEth = ethers.utils.formatEther(balance);
+    return balanceInEth;
+  }
+
   //Encrypting text
   encrypt = (text) => {
     //const key = Buffer.from(this.key);

@@ -27,6 +27,9 @@ function FormSendTransaction({_subtitle, _new}) {
     )
   );
 
+  const [address, setAddress] = useState('');
+  const [balance, setBalance] = useState('');
+
   const [
     validationMessage,
     setValidationMessage
@@ -39,6 +42,7 @@ function FormSendTransaction({_subtitle, _new}) {
 
   useEffect(() => {
     console.log('useEffect:', network);
+    getBalance();
   }, [network]);
 
   const handleSubmit = (event) => {
@@ -73,6 +77,14 @@ function FormSendTransaction({_subtitle, _new}) {
     */
   };
 
+  const getBalance = async () => {
+    const address = await wallet.getAddress();
+    const balance = await wallet.getBalance(address);
+    setAddress(address);
+    setBalance(balance);
+    //alert(address + ' :: ' + balance);
+  }
+
   return (
     <>
       <Card>
@@ -94,7 +106,14 @@ function FormSendTransaction({_subtitle, _new}) {
 
                 <div className="pt-3 text-primary h3">
                   Send Transaction
-                  {(network.name) ? (<p>{network.name}</p>) : (<p></p>)}                  
+                </div>
+
+                <div className="pt-3 text-secondary h6">
+                  {(network.name) ? (<p>
+                    <p>network: {network.name}</p>
+                    <p>address: {address}</p>
+                    <p>balance: {balance}</p>
+                  </p>) : (<p></p>)} 
                 </div>
 
                 <Row className="mb-0 pl-3 pt-3">
