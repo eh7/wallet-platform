@@ -19,9 +19,13 @@ function FormSendTransaction({_subtitle, _new}) {
   const [
     network,
     setNetwork,
-  ] = useState();
+  ] = useState({});
 
-  const networks = localStorage.getItem('networks');
+  const [networks, setNetworks] = useState(
+    JSON.parse(
+      localStorage.getItem('networks')
+    )
+  );
 
   const [
     validationMessage,
@@ -34,7 +38,8 @@ function FormSendTransaction({_subtitle, _new}) {
   ] = useState([]);
 
   useEffect(() => {
-  }, []);
+    console.log('useEffect:', network);
+  }, [network]);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -88,7 +93,8 @@ function FormSendTransaction({_subtitle, _new}) {
               <Container ref={el=>this.componentRef=el}>
 
                 <div className="pt-3 text-primary h3">
-                  Send Transaction                    
+                  Send Transaction
+                  {(network.name) ? (<p>{network.name}</p>) : (<p></p>)}                  
                 </div>
 
                 <Row className="mb-0 pl-3 pt-3">
@@ -98,15 +104,16 @@ function FormSendTransaction({_subtitle, _new}) {
                       as="select"
                       value={network}
                       onChange={e => {
-                        console.log("e.target.value", e.target.value);
-                        setNetwork(e.target.value);
+                        if (e.target.value !== '') {
+                          setNetwork(networks[e.target.value]);
+                        }
                       }}
                     >
-                      <option value="DICTUM">Dictamen</option>
-                      <option value="CONSTANCY">Constancia</option>
-                      <option value="COMPLEMENT">Complemento</option>
+                      <option value="">Select Network</option>
+                      {networks.map((_network, _index) => {
+                        return (<option value={_index}>{_network.name}</option>)
+                      })}
                     </Form.Control>
-                    {JSON.stringify(networks)}
                   </Form.Group>
                 </Row>
 
