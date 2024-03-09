@@ -52,11 +52,48 @@ function ImportAppData(props) {
     document.getElementById("submitButton").disabled = true;
 
     const password = document.getElementById("formPassword").value;
+    const importData =  JSON.parse(
+      document.getElementById("formImportData").value
+    );
+
+    console.log('sssssssssssssssssssss', importData.data);
+    console.log('sssssssssssssssssssss', JSON.parse(importData.keystore[0]));
+
+    const _keystore = JSON.parse(importData.keystore[1]);
+    const _password = password;
+
+console.log(_keystore, _password);
+
+    const _key = await wallet.recoverHexFromSingleKeystore(_keystore, _password);
+console.log(_key);
+decrypt(importData.data, _key)
+
+    //const this_key = (await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)).substr(64);
+    //const keystoreArray = importData.keystore;
+    const keystoreArray = [
+      JSON.parse(importData.keystore[0]),
+      JSON.parse(importData.keystore[1]),
+    ];
+    //const keystore1 = JSON.parse(importData.keystore[0]);
+    console.log(await wallet.getKeystoreWithPasswordKeystore(_password, keystoreArray));
+console.log('keystoreArray', keystoreArray);
+/*
+      console.log(
+        'decrypt mportData networks:',
+        JSON.parse(
+          decrypt(importData.data, _key)
+        ),
+      );
+*/
+    //const _key = await wallet.getKeystoreWithPasswordKeystore(_password, _keystore);
+//    console.log('_key', _key);
+
     //console.log(password);
     //console.log(props);
 
 
     try {
+/*
       //const this_key = await wallet.getKeystoreWithPassword(password);
       const this_key = (await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)).substr(64);
       //console.log(this_key);
@@ -85,6 +122,8 @@ function ImportAppData(props) {
       );
 
       //encrypt("this is some text", key);
+      //
+ */
 
     } catch (e) {
       console.log('ERROR :: handleSubmit :: ', e);
@@ -126,7 +165,20 @@ function ImportAppData(props) {
     );
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
+    const decrpted_object = JSON.parse(decrypted.toString('utf8'));
+
+    console.log("networks", JSON.stringify(decrpted_object.networks));
+    alert('set networks localStorage.setItem("networks", JSON.stringify(decrpted_object.networks))'); 
+
+    console.log("keystore", JSON.stringify(decrpted_object.keystore));
+    alert('set keystores localStorage.setItem("keystore", JSON.stringify(decrpted_object.networks))'); 
+
+console.log('decrypt :: ', text, key, this_key);
+console.log('decrypted', decrypted.toString('utf8'));
+console.log('decrypted JSON.parse::', decrpted_object);
+/*
     return decrypted.toString('utf8');
+*/
   }
 
   return (

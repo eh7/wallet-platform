@@ -44,6 +44,7 @@ function NavMain() {
                   <NavDropdown.Item href="/setup/import/keystor">Import Keystore</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/address">Address</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/export/data">Export Application Data</NavDropdown.Item>
+                  <NavDropdown.Item href="/setup/import/data">Import Application Data</NavDropdown.Item>
                 </NavDropdownMenu>
               </Nav.Item>
 

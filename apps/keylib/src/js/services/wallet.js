@@ -384,6 +384,22 @@ export default class Wallet {
     //return this.wallet.data.addressCheckSum;
   }
 
+  recoverHexFromSingleKeystore = async (_keystore, _password) => {
+    try {
+      console.log(
+        'recoverHexFromSingleKeystore',
+        _keystore,
+        _password,
+      );
+      const resKey = await EthjsWallet.fromV3(_keystore, _password);
+      const hexKey = resKey.privateKey.toString('hex');
+      return hexKey;
+    }
+    catch (e) {
+      console.log("ERROR catch recoverSeedHexFromKeystore:", e);
+    }
+  }
+
   // TODO debug this and check it works okay
   recoverSeedHexFromKeystore = async (_keystore, _password) => {
     try {
