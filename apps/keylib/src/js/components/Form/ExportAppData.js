@@ -37,8 +37,10 @@ function ExportAppData(props) {
   useEffect(() => {
 //                    {JSON.stringify(exportData)}
 //                  <textarea class="form-control" id="formTextarea" rows="3"></textarea>
+    document.getElementById("formTextarea").value = JSON.stringify(exportData);
+
     console.log('sssssssssssssss useEffect ssssssssssss ::', exportData);
-  }, []);
+  }, [exportData]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
