@@ -20,6 +20,11 @@ function ExportAppData(props) {
   const wallet = new Wallet();
 
   const [
+    exportData,
+    setExportData
+  ] = useState({});
+
+  const [
     validationMessage,
     setValidationMessage
   ] = useState(false);
@@ -30,6 +35,9 @@ function ExportAppData(props) {
   ] = useState([]);
 
   useEffect(() => {
+//                    {JSON.stringify(exportData)}
+//                  <textarea class="form-control" id="formTextarea" rows="3"></textarea>
+    console.log('sssssssssssssss useEffect ssssssssssss ::', exportData);
   }, []);
 
   const handleSubmit = async (event) => {
@@ -45,32 +53,45 @@ function ExportAppData(props) {
     document.getElementById("submitButton").disabled = true;
 
     const password = document.getElementById("formPassword").value;
-    console.log(password);
-    console.log(props);
+    //console.log(password);
+    //console.log(props);
 
 
-    //const this_key = await wallet.getKeystoreWithPassword(password);
-    const this_key = (await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)).substr(64);
-    //console.log(this_key);
-    //const newPhrase  = await this.getNewPhraseForSeedOperation();
+    try {
+      //const this_key = await wallet.getKeystoreWithPassword(password);
+      const this_key = (await wallet.getKeystoreWithPasswordKeystore(password, props.keystore)).substr(64);
+      //console.log(this_key);
+      //const newPhrase  = await this.getNewPhraseForSeedOperation();
 
-   console.log('xxxxxxxxxxxxxxxxx', this_key.length, this_key);
+      console.log('xxxxxxxxxxxxxxxxx', this_key.length, this_key);
 
-   //const text = encrypt(JSON.stringify(props.networks), this_key);
-   const text = encrypt(JSON.stringify(props), this_key);
-   console.log(
-     'encrypt networks:',
-     text,
-   );
+       //const text = encrypt(JSON.stringify(props.networks), this_key);
+      const text = encrypt(JSON.stringify(props), this_key);
+      console.log(
+        'encrypt networks:',
+        text,
+      );
 
-   console.log(
-     'decrypt networks:',
-     JSON.parse(
-       decrypt(text, this_key)
-     ),
-   );
+//      console.log('DDDDDDDDDDDD', {
+      setExportData({
+        data: text,
+        keystore: props.keystore,
+      });  
 
-    //encrypt("this is some text", key);
+      console.log(
+        'decrypt networks:',
+        JSON.parse(
+          decrypt(text, this_key)
+        ),
+      );
+
+      //encrypt("this is some text", key);
+
+    } catch (e) {
+      console.log('ERROR :: handleSubmit :: ', e);
+      validationErrors.push(e);
+      //setValidationMessage(true);
+    }
 
     document.getElementById("submitButton").disabled = false;
   };
@@ -151,6 +172,11 @@ function ExportAppData(props) {
                   <Button variant="primary" type="submit" id="submitButton">
                     Submit
                   </Button>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                    {JSON.stringify(exportData)}
+                  <textarea class="form-control" id="formTextarea" rows="3"></textarea>
                 </Row>
 
               </Container>
