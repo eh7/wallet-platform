@@ -19,6 +19,7 @@ import SetupSeed from './pages/SetupSeed';
 import SetupImportKeystore from './pages/SetupImportKeystore';
 import SetupExportKeystore from './pages/SetupExportKeystore';
 import SetupExportData from './pages/SetupExportData';
+import SetupImportData from './pages/SetupImportData';
 import SetupLoadKeystore from './pages/SetupLoadKeystore';
 
 const App = () => {
@@ -34,6 +35,7 @@ const App = () => {
           <Route path="/setup" element={<Setup />} /> 
           <Route path="/setup/address" element={<SetupAddress />} /> 
           <Route path="/setup/export/data" element={<SetupExportData />} /> 
+          <Route path="/setup/import/data" element={<SetupImportData />} /> 
           <Route path="/setup/password" element={<SetupPassword _new={true}/>} /> 
           <Route path="/setup/phrase" element={<SetupPhrase _new={true}/>} /> 
           <Route path="/setup/phrase/import" element={<SetupPhrase _new={false} />} /> 
