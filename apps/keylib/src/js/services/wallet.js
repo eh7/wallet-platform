@@ -294,6 +294,19 @@ export default class Wallet {
     }
   }
 
+  initSetupWalletKeystore = async (_seedHex) => {
+    localStorage.setItem(
+      "seedHex",
+      JSON.stringify(
+        this.encrypt(_seedHex)
+      )
+    )
+    localStorage.setItem(
+      "keyset",
+      true,
+    );
+  }
+
   setupWalletKeystore = async (_password) => {
     const mnemonic = this.data.mnemonic;
     const seedHex = bip39.mnemonicToSeedHex(mnemonic);

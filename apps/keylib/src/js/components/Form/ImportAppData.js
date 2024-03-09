@@ -168,15 +168,19 @@ console.log('keystoreArray', keystoreArray);
     const decrpted_object = JSON.parse(decrypted.toString('utf8'));
 
     console.log("networks", JSON.stringify(decrpted_object.networks));
+    localStorage.setItem("networks", JSON.stringify(decrpted_object.networks));
     alert('set networks localStorage.setItem("networks", JSON.stringify(decrpted_object.networks))'); 
 
     console.log("keystore", JSON.stringify(decrpted_object.keystore));
+    localStorage.setItem("keystore", JSON.stringify(decrpted_object.keystore));
     alert('set keystores localStorage.setItem("keystore", JSON.stringify(decrpted_object.networks))'); 
 
+    wallet.initSetupWalletKeystore(key);
+
+/*
 console.log('decrypt :: ', text, key, this_key);
 console.log('decrypted', decrypted.toString('utf8'));
 console.log('decrypted JSON.parse::', decrpted_object);
-/*
     return decrypted.toString('utf8');
 */
   }
