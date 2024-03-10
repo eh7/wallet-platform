@@ -7,6 +7,8 @@ import Col from 'react-bootstrap/Col';
 import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+
+import QRCode from 'qrcode'
  
 import Wallet from '../../services/wallet';
 
@@ -38,6 +40,7 @@ function ExportAppData(props) {
 //                    {JSON.stringify(exportData)}
 //                  <textarea class="form-control" id="formTextarea" rows="3"></textarea>
     document.getElementById("formTextarea").value = JSON.stringify(exportData);
+    setQrcode();
 
     console.log('sssssssssssssss useEffect ssssssssssss ::', exportData);
   }, [exportData]);
@@ -132,6 +135,52 @@ function ExportAppData(props) {
     return decrypted.toString('utf8');
   }
 
+  setQrcode = async () => {
+    //console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', exportData);
+    if (Object.keys(exportData).length > 0) {
+      try {
+        //await QRCode.toCanvas(qrCodeCanvas, 'sample test text');
+        const textData = JSON.stringify(exportData)
+        const qrCodeCanvas = document.getElementById("qrCodeCanvas");
+        const qrCodeCanvas1 = document.getElementById("qrCodeCanvas1");
+        console.log(textData.length);
+        await QRCode.toCanvas(
+          qrCodeCanvas,
+          textData.substr(0, 2048),
+          { errorCorrectionLevel: 'L' }
+        );
+        await QRCode.toCanvas(
+          qrCodeCanvas1,
+          [{ 
+            data: Buffer.from(
+              Buffer.from(textData) 
+            ),
+            mode: 'byte'
+          }],
+          //textData.substr(2048),
+          //textData.substr(0.1024),
+          { errorCorrectionLevel: 'H' }
+        );
+        console.log('data:', Buffer.from(textData));
+
+        //const byteArray = new Uint8Array(exportData);
+        //console.log(byteArray);
+
+        //document.getElementById("qrCodeCanvas").value = qrcodeObject;
+/*
+        const textData = JSON.stringify(exportData)
+        console.log('zzzzzzzzzzzzzzzzzz', textData.length, textData);
+        const qrcodeObject = await QRCode.toDataURL(
+          "JSON.stringify(exportData)"
+        );
+        document.getElementById("qrCodeCanvas").value = qrcodeObject;
+*/
+      } catch (e) {
+        console.log("ERROR :: setQrcode ::", e);
+      }
+   }
+  }
+
   return (
     <>
       <Card>
@@ -177,8 +226,10 @@ function ExportAppData(props) {
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                    {JSON.stringify(exportData)}
                   <textarea class="form-control" id="formTextarea" rows="3"></textarea>
+                  <canvas id="qrCodeCanvas"></canvas>
+                  <canvas id="qrCodeCanvas1"></canvas>
+                    {JSON.stringify(exportData)}
                 </Row>
 
               </Container>

@@ -92,7 +92,7 @@ function FormPhrase({_subtitle, _new}) {
 
     const password = document.getElementById("formPassword")
     const passwordCheck = document.getElementById("formPasswordCheck")
-//console.log(password.value, " -- ", passwordCheck.value);
+console.log(password.value, " -- ", passwordCheck.value);
 //console.log(password.value.length);
     
     if (password.value !== passwordCheck.value) {
