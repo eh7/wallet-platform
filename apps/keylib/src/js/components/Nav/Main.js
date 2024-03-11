@@ -1,7 +1,10 @@
+import { useState, useEffect } from 'react';
+
 import Container from "react-bootstrap/Container";
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
+import Col from 'react-bootstrap/Col';
 
 import NavDropdown from 'react-bootstrap/NavDropdown';
 
@@ -10,14 +13,49 @@ import {
   NavDropdownMenu,
 } from "react-bootstrap-submenu";
 
+import Wallet from '../../services/wallet';
+
 function NavMain() {
+
+  const wallet = new Wallet();
+
+  const [myAddress, setMyAddress] = useState('');
+  const [myBalance, setMyBalance] = useState('');
+  const [myNetwork, setMyNetwork] = useState('');
+
+  const getAddress = async () => {
+    const address = await wallet.getAddress();
+    setMyAddress(
+      address
+    );
+    console.log(myAddress);
+  }
+
+  const getNetwork = async () => {
+  }
+
+  useEffect(() => {
+    console.log('useEffect:', myAddress, myBalance, myNetwork);
+  }, [myAddress, myBalance, myNetwork]);
+
+  getAddress();
+  getNetwork();
+  
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
-      <Navbar className="rounded mb-0">
-        <Row className="w-100">
-          <Navbar.Brand className="w-100" href="#home">Crypto Wallet Interface</Navbar.Brand>
-        </Row>
-      </Navbar>
+
+      <Row className="w-100">
+        <Col sm="7">
+          <Navbar className="rounded mb-0">
+            <Navbar.Brand href="/">Crypto Wallet Interface</Navbar.Brand>
+           </Navbar>
+        </Col>
+        <Col sm="5" className="small text-muted">
+          address: {myAddress}<br/>
+          network: {myNetwork}
+        </Col>
+      </Row>
+
       <div>
         <Navbar>
           <Navbar.Collapse id="responsive-navbar-nav">

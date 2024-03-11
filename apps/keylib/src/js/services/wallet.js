@@ -20,6 +20,7 @@ export default class Wallet {
     this.data = '';
     this.initData = walletInitData;
     this.provider = {};
+    this.networkProvider = {};
 
     this.key = Buffer.from(process.env.KEY, 'hex');
     this.iv = Buffer.from(process.env.IV, 'hex');
@@ -29,7 +30,15 @@ export default class Wallet {
   }
 
   setupProvider = () => {
+    const networks = JSON.parse(localStorage.getItem("networks"));
+
     this.provider = new ethers.providers.JsonRpcProvider(endPoint);
+
+    networks.map((network, i) => {
+      this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+      //console.log(networks[2].rpcUrl === endPoint);
+      //console.log(Object.keys(this.networkProvider));
+    })
   }
 
   getBlockNumber = async () => {

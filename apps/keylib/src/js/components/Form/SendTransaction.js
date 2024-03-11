@@ -82,7 +82,7 @@ function FormSendTransaction({_subtitle, _new}) {
     const balance = await wallet.getBalance(address);
     setAddress(address);
     setBalance(balance);
-    //alert(address + ' :: ' + balance);
+    alert(address + ' :: ' + balance);
   }
 
   return (
