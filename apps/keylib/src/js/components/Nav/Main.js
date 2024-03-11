@@ -19,6 +19,8 @@ import {
 
 import Wallet from '../../services/wallet';
 
+import NavAlert from './Alert';
+
 /*
 const Backdrop = styled("div")`
   position: fixed;
@@ -74,6 +76,8 @@ function NavMain() {
   
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
+
+<NavAlert/>
 
       <Row className="w-100">
         <Col sm="7">
