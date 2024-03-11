@@ -10,9 +10,9 @@ import {
 
 import Wallet from '../../services/wallet';
 
-function NavAlert() {
+function NavAlert(props) {
 
-  const wallet = new Wallet();
+  const wallet = props.wallet;
 
   const [show, setShow] = useState(false);
 
@@ -24,17 +24,23 @@ function NavAlert() {
     console.log('useEffect :: show :: ', show);
   });//, []);
 
+  const bodyContent = () => {
+    return(<h1>bodyContent</h1>);
+  }
+
+  if (props.action === 'showData' || props.action === 'setNetwork') {
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
-        Launch demo modal
+
+      <Button variant="link" onClick={handleShow}>
+        {props.action}
       </Button>
 
       <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+        <Modal.Header className="Modal_Default_header" closeButton>
+          <Modal.Title>{props.heading}</Modal.Title>
         </Modal.Header>
-        <Modal.Body>Woohoo, you are reading this text in a modal!</Modal.Body>
+        <Modal.Body>{props.text}{bodyContent}</Modal.Body>
         <Modal.Footer>
           <Button variant="secondary" onClick={handleClose}>
             Close
@@ -46,6 +52,14 @@ function NavAlert() {
       </Modal>
     </>
   );
+  } else {
+    return (
+      <>
+        <h6>no 'action' set {props.action}</h6>
+      </>
+    );
+  }
+
   /*
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
@@ -109,3 +123,4 @@ function NavAlert() {
 export default NavAlert;
       //<div className="block-example border border-primary">
       //<div className="block-example rounded mb-0 border-primary">
+      //<Modal className="Modal_Default" show={show} onHide={handleClose}>

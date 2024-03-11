@@ -74,10 +74,19 @@ function NavMain() {
 
   getAddress();
   
+  const text = () => {
+    return (
+      <>
+        <h6>this is some text.</h6>
+      </>
+    );
+  }
+
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
 
-<NavAlert/>
+<NavAlert wallet={wallet} action="setNetwork" heading="setNetwork Heading" text="setNetwork text"/>
+<NavAlert wallet={wallet} action="showData" heading="showData Heading" text="showData text"/>
 
       <Row className="w-100">
         <Col sm="7">
@@ -88,6 +97,7 @@ function NavMain() {
         <Col sm="5" className="small text-muted">
           address: {myAddress}<br/>
           network: {(myNetwork !== '') ? ({myNetwork}) : (<Button variant="link" onClick={() => alert(true)}>Set</Button>)}
+          <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork Heading" text="setNetwork text"/>
         </Col>
       </Row>
 
