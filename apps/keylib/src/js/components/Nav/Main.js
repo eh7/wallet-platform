@@ -5,8 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+//import Modal from 'react-bootstrap/Modal';
 
 import NavDropdown from 'react-bootstrap/NavDropdown';
+
+//import styled from 'styled-components';
 
 import {
   DropdownSubmenu,
@@ -15,9 +19,25 @@ import {
 
 import Wallet from '../../services/wallet';
 
+/*
+const Backdrop = styled("div")`
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #000;
+  opacity: 0.5;
+`;
+*/
+
 function NavMain() {
 
   const wallet = new Wallet();
+
+  //const [showSetNetwork, setShowSetNetwork] = useState(false);
+  //const renderBackdrop = (props) => <Backdrop {...props} />;
 
   const [myAddress, setMyAddress] = useState('');
   const [myBalance, setMyBalance] = useState('');
@@ -31,15 +51,26 @@ function NavMain() {
     console.log(myAddress);
   }
 
-  const getNetwork = async () => {
+  const setNetwork = (chainId) => {
+    const networks = JSON.parse(localStorage.getItem('networks'));
+    localStorage.setItem('myNetwork', chainId);
+    console.log('setNetwork :: chainId ::', chainId);      
+    setMyNetwork(networks[chainId].name);
+  }
+
+  const selectNetwork = async () => {
+    alert('selectNetwork');
+//    const networks = JSON.parse(localStorage.getItem('networks'));
+//    networks.map((_network, _i) => {
+//      console.log('----------------> getNetwork :: chainId ::', _network.chainId);      
+//    });
   }
 
   useEffect(() => {
-    console.log('useEffect:', myAddress, myBalance, myNetwork);
+    //console.log('useEffect:', myAddress, myBalance, myNetwork);
   }, [myAddress, myBalance, myNetwork]);
 
   getAddress();
-  getNetwork();
   
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
@@ -52,7 +83,7 @@ function NavMain() {
         </Col>
         <Col sm="5" className="small text-muted">
           address: {myAddress}<br/>
-          network: {myNetwork}
+          network: {(myNetwork !== '') ? ({myNetwork}) : (<Button variant="link" onClick={() => alert(true)}>Set</Button>)}
         </Col>
       </Row>
 
