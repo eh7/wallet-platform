@@ -82,6 +82,7 @@ function NavMain() {
     setNetwork(e.chainId);
     console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', networks[e].chainId);
     //setMyNetwork(networks[e].name);
+    console.log(networks[e].name);
   }
 
   const text = () => {

@@ -73,7 +73,7 @@ function NavAlert(props) {
       <>
 
         <Button variant="link" onClick={handleShow}>
-          {props.action}
+          'Set Network'
         </Button>
 
         <Modal show={show} onHide={handleClose}>
