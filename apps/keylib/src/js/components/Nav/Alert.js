@@ -10,6 +10,8 @@ import {
 
 import Wallet from '../../services/wallet';
 
+import SetMyNetwork from '../Form/SetMyNetwork';
+
 function NavAlert(props) {
 
   const wallet = props.wallet;
@@ -28,30 +30,57 @@ function NavAlert(props) {
     return(<h1>bodyContent</h1>);
   }
 
-  if (props.action === 'showData' || props.action === 'setNetwork') {
-  return (
-    <>
+  if (props.action === 'showData') {
+    return (
+      <>
 
-      <Button variant="link" onClick={handleShow}>
-        {props.action}
-      </Button>
+        <Button variant="link" onClick={handleShow}>
+          {props.action}
+        </Button>
 
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header className="Modal_Default_header" closeButton>
-          <Modal.Title>{props.heading}</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>{props.text}{bodyContent}</Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header className="Modal_Default_header" closeButton>
+            <Modal.Title>{props.heading}</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>{props.text}{bodyContent}</Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
+  }
+  else if (props.action === 'setNetwork') {
+    return (
+      <>
+
+        <Button variant="link" onClick={handleShow}>
+          {props.action}
+        </Button>
+
+        <Modal show={show} onHide={handleClose}>
+          <Modal.Header className="Modal_Default_header" closeButton>
+            <Modal.Title>Set My Network</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            <SetMyNetwork wallet={props.wallet}/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleClose}>
+              Close
+            </Button>
+            <Button variant="primary" onClick={handleClose}>
+              Save Changes
+            </Button>
+          </Modal.Footer>
+        </Modal>
+      </>
+    );
   } else {
     return (
       <>

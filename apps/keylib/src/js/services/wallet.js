@@ -34,11 +34,14 @@ export default class Wallet {
 
     this.provider = new ethers.providers.JsonRpcProvider(endPoint);
 
-    networks.map((network, i) => {
-      this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
-      //console.log(networks[2].rpcUrl === endPoint);
-      //console.log(Object.keys(this.networkProvider));
-    })
+    if (networks === null) {
+      console.log(localStorage.getItem("networks"));
+    } else {
+      networks.map((network, i) => {
+        this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+      })
+    }
+
   }
 
   getBlockNumber = async () => {
