@@ -47,34 +47,9 @@ function SetMyNetwork(props) {
 
   useEffect(() => {
     //console.log('sssssssssssssss useEffect ssssssssssss ::', exportData);
-    console.log('useEffect');
-  }, []);
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const form = event.currentTarget;
-
-    if (document.getElementById("submitButton").disabled) {
-      alert("disabled");
-      return;
-    }
-
-    document.getElementById("submitButton").disabled = true;
-
-    const network = document.getElementById("formNetwork").value;
-
-    setValidationError([]);
-
-    try {
-    } catch (e) {
-      console.log('ERROR :: SetMyNetwork :: handleSubmit :: ', e);
-      validationErrors.push(e);
-      //setValidationMessage(true);
-    }
-
-    document.getElementById("submitButton").disabled = false;
-  };
+    console.log('useEffect', network);
+    localStorage.setItem('network', JSON.stringify(network));
+  }, [network]);
 
   return (
     <>
@@ -91,7 +66,7 @@ function SetMyNetwork(props) {
           }
           <Card.Text>
             <div>
-            <Form onSubmit={handleSubmit}>
+            <Form>
 
               <Container ref={el=>this.componentRef=el}>
 
@@ -100,28 +75,19 @@ function SetMyNetwork(props) {
                     Select Your Default Network
                   </div>
                 </Row>
-                <Row className="mb-0 pl-3 pt-3">
-                  {networks.map((network, i) => {
-                    console.log(i, network);
-                  })}
-                  <Form.Group className="mb-3 pr-3" controlId="formPassword">
-                    <Form.Control
-                      required
-                      type="password"
-                      placeholder="password"
-                    />
-                  </Form.Group>
-                </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
                   <Form.Group controlId="formBasicSelect">
                     <Form.Label>Select Network</Form.Label>
                     <Form.Control
                       as="select"
-                      value={network}
                       onChange={e => {
                         if (e.target.value !== '') {
+                          //alert(e.target.value);
                           setNetwork(networks[e.target.value]);
+                          props.networkCallback(
+                            networks[e.target.value]
+                          );
                         }
                       }}
                     >
@@ -133,13 +99,6 @@ function SetMyNetwork(props) {
                   </Form.Group>
                 </Row>
 
-
-                <Row className="mb-0 pl-3 pt-3">
-                  <Button variant="primary" type="submit" id="submitButton">
-                    Submit
-                  </Button>
-                </Row>
-
               </Container>
             </Form>
             </div>
@@ -149,5 +108,6 @@ function SetMyNetwork(props) {
     </>
   );
 }
+                      //value={network}
 
 export default SetMyNetwork;

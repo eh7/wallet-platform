@@ -17,6 +17,11 @@ function NavAlert(props) {
   const wallet = props.wallet;
 
   const [show, setShow] = useState(false);
+  const [network, setNetwork] = useState(
+    JSON.parse(
+      localStorage.getItem('network')
+    )
+  );
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
@@ -25,6 +30,13 @@ function NavAlert(props) {
     //console.log('useEffect:', myAddress, myBalance, myNetwork);
     console.log('useEffect :: show :: ', show);
   });//, []);
+
+  const networkCallback = (e) => {
+    // the event context comes from the Child
+    //this.setState({ count: this.state.count++ });
+    console.log('networkCallback', e);
+    setNetwork(e);
+  }
 
   const bodyContent = () => {
     return(<h1>bodyContent</h1>);
@@ -68,14 +80,11 @@ function NavAlert(props) {
             <Modal.Title>Set My Network</Modal.Title>
           </Modal.Header>
           <Modal.Body>
-            <SetMyNetwork wallet={props.wallet}/>
+            <SetMyNetwork wallet={props.wallet} networkCallback={networkCallback}/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={handleClose}>
               Close
-            </Button>
-            <Button variant="primary" onClick={handleClose}>
-              Save Changes
             </Button>
           </Modal.Footer>
         </Modal>
