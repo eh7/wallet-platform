@@ -36,6 +36,7 @@ function NavAlert(props) {
     //this.setState({ count: this.state.count++ });
     console.log('networkCallback', e);
     setNetwork(e);
+    props.updateNetwork(e);
   }
 
   const bodyContent = () => {

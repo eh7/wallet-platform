@@ -86,7 +86,8 @@ function SetMyNetwork(props) {
                           //alert(e.target.value);
                           setNetwork(networks[e.target.value]);
                           props.networkCallback(
-                            networks[e.target.value]
+                            e.target.value
+                            //networks[e.target.value]
                           );
                         }
                       }}

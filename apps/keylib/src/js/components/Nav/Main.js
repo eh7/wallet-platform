@@ -56,8 +56,8 @@ function NavMain() {
   const setNetwork = (chainId) => {
     const networks = JSON.parse(localStorage.getItem('networks'));
     localStorage.setItem('myNetwork', chainId);
-    console.log('setNetwork :: chainId ::', chainId);      
-    setMyNetwork(networks[chainId].name);
+    console.log('Main.js :: setNetwork :: chainId ::', chainId);      
+    //setMyNetwork(networks[chainId].name);
   }
 
   const selectNetwork = async () => {
@@ -69,11 +69,21 @@ function NavMain() {
   }
 
   useEffect(() => {
-    //console.log('useEffect:', myAddress, myBalance, myNetwork);
+    console.log('useEffect:', myAddress, myBalance, myNetwork);
   }, [myAddress, myBalance, myNetwork]);
 
   getAddress();
   
+  const updateNetwork = (e) => {
+    const networks = JSON.parse(localStorage.getItem('networks'));
+    //console.log('updateNetwork', e);
+    //console.log('zzzzzzzzzzzz', networks[e]);
+    //alert('TODO WIP :: updateNetwork in Main.js');
+    setNetwork(e.chainId);
+    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', networks[e].chainId);
+    //setMyNetwork(networks[e].name);
+  }
+
   const text = () => {
     return (
       <>
@@ -97,7 +107,7 @@ function NavMain() {
         <Col sm="5" className="small text-muted">
           address: {myAddress}<br/>
           network: {(myNetwork !== '') ? ({myNetwork}) : (<Button variant="link" onClick={() => alert(true)}>Set</Button>)}
-          <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork" text="setNetwork"/>
+          <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork" text="setNetwork" updateNetwork={updateNetwork}/>
         </Col>
       </Row>
 
