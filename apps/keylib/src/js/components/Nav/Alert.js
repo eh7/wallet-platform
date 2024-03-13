@@ -28,15 +28,18 @@ function NavAlert(props) {
 
   useEffect(() => {
     //console.log('useEffect:', myAddress, myBalance, myNetwork);
-    console.log('useEffect :: show :: ', show);
+    //console.log('useEffect :: show :: ', show);
+    //console.log('useEffect :: Nav/Alert.js', network);
   });//, []);
 
   const networkCallback = (e) => {
     // the event context comes from the Child
     //this.setState({ count: this.state.count++ });
-    console.log('networkCallback', e);
-    setNetwork(e);
+    const networks = JSON.parse(localStorage.getItem('networks'));
+    //console.log('networkCallback', e);
+    setNetwork(networks[e]);
     props.updateNetwork(e);
+    handleClose();
   }
 
   const bodyContent = () => {
@@ -73,7 +76,7 @@ function NavAlert(props) {
       <>
 
         <Button variant="link" onClick={handleShow}>
-          'Set Network'
+          {network.name}
         </Button>
 
         <Modal show={show} onHide={handleClose}>

@@ -96,8 +96,6 @@ function NavMain() {
   return (
     <Container as="main" className="py-4 px-3 mx-auto">
 
-      <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork Heading" text="setNetwork text"/>
-      <NavAlert wallet={wallet} action="showData" heading="showData Heading" text="showData text"/>
 
       <Row className="w-100">
         <Col sm="7">
@@ -154,113 +152,8 @@ function NavMain() {
     </Container>
   );
 
-  /*
-  return (
-    <Container as="main" className="py-4 px-3 mx-auto">
-      <Nav variant="tabs" defaultActiveKey="/home">
-        <Nav.Item>
-          <Nav.Link href="/">Home</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/applications">Applications</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/about">About</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/send">Send Tx</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link href="/setup">Setup</Nav.Link>
-        </Nav.Item>
-        <Nav.Item className="ml-auto">
-          <Nav.Link href="/config/network">Network</Nav.Link>
-        </Nav.Item>
-      </Nav>
-
-      <Navbar className="rounded mb-0">
-        <Row className="w-100">
-          <Navbar.Brand className="w-100" href="#home">Crypto Wallet Interface</Navbar.Brand>
-        </Row>
-        <Row className="w-100">
-          <Navbar.Toggle aria-controls="responsive-navbar-nav" />
-          <Nav variant="tabs" defaultActiveKey="/home">
-            <Nav.Item>
-              <Nav.Link href="/">Home</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/applications">Applications</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/about">About</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/send">Send Tx</Nav.Link>
-            </Nav.Item>
-            <Nav.Item>
-              <Nav.Link href="/setup">Setup</Nav.Link>
-            </Nav.Item>
-            <Nav.Item className="ml-auto">
-              <Nav.Link href="/config/network">Network</Nav.Link>
-            </Nav.Item>
-          </Nav>
-        </Row>
-      </Navbar>
-
-      <div>
-        <Navbar>
-          <Navbar.Collapse id="responsive-navbar-nav">
-            <Nav variant="tabs" className="w-100" defaultActiveKey="/home">
-              <Nav.Item>
-                <Nav.Link href="/">Home</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-                <Nav.Link href="/applications">Applications</Nav.Link>
-              </Nav.Item>
-              <Nav.Item>
-               <Nav.Link href="/about">About</Nav.Link>
-             </Nav.Item>
-             <Nav.Item>
-                <Nav.Link href="/send">Send Tx</Nav.Link>
-              </Nav.Item>
-
-              <Nav.Item>
-                <Nav.Link href="/setup">Setup</Nav.Link>
-                <NavDropdownMenu title="setup" id="setup-nav-dropdown">
-                  <NavDropdown.Item href="/setup">Setup ....</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/phrase">Setup Phrase.</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/phrase">Adress</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/keystore/load">load Keystore</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/import/keystor">import Keystore</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/address">address</NavDropdown.Item>
-                  <NavDropdown.Item href="/setup/export/data">export app data</NavDropdown.Item>
-                </NavDropdownMenu>
-              </Nav.Item>
-
-              <Nav.Item className="ml-auto">
-                <Nav.Link href="/config/network">Network</Nav.Link>
-              </Nav.Item>
-              <NavDropdownMenu title="Dropdown 1" id="collasible-nav-dropdown">
-                <NavDropdown.Item href="#action/3.1">Action</NavDropdown.Item>
-                <DropdownSubmenu href="#action/3.7" title="Text to show">
-                  <NavDropdown.Item href="#action/8.1">Sub 1</NavDropdown.Item>
-                  <DropdownSubmenu href="#action/3.7" title="Text to show">
-                    <NavDropdown.Item href="#action/9.1">
-                      Sub 2
-                    </NavDropdown.Item>
-                  </DropdownSubmenu>
-                </DropdownSubmenu>
-              </NavDropdownMenu>
-            </Nav>
-          </Navbar.Collapse>
-        </Navbar>
-      </div>
-
-    </Container>
-  );
-  */
+      //<NavAlert wallet={wallet} action="setNetwork" heading="setNetwork Heading" text="setNetwork text"/>
+      //<NavAlert wallet={wallet} action="showData" heading="showData Heading" text="showData text"/>
 }
 
 export default NavMain;
-      //<div className="block-example border border-primary">
-      //<div className="block-example rounded mb-0 border-primary">
