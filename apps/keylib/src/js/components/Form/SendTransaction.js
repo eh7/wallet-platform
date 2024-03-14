@@ -31,6 +31,9 @@ function FormSendTransaction({_subtitle, _new}) {
     )
   );
 
+  const [txReceiptShow, setTxReceiptShow] = useState(false);
+  const [txReceipt, setTxReceipt] = useState({});
+
   const [address, setAddress] = useState('');
   const [balance, setBalance] = useState('');
 
@@ -52,6 +55,8 @@ function FormSendTransaction({_subtitle, _new}) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
+    document.getElementById("submitButton").disabled = true;
+
     //alert("handleSubmit");
     //setValidationMessage(false);
     //setValidationErrors([]);
@@ -67,9 +72,14 @@ function FormSendTransaction({_subtitle, _new}) {
       to: to,
       value: amount
     }];
-console.log(params);
+    //console.log(params);
 
-    wallet.sendTx(params);
+    const receipt = await wallet.sendTx(params);
+    setTxReceipt(receipt);
+    setTxReceiptShow(true);
+    console.log('txReceipt', receipt, "setTxReceiptShow");
+
+    document.getElementById("submitButton").disabled = false;
 
 //    const transactionHash = await provider.send('eth_sendTransaction', params)
 //    console.log('transactionHash is ' + transactionHash);
@@ -107,6 +117,18 @@ console.log(params);
       <Card>
         <Card.Body>
           <Card.Title>Send Transaction Form</Card.Title>
+          { (txReceiptShow) ? (
+            <Alert key="warning" variant="warning">
+              <p className="h4 primary">Transaction Receipt</p>
+              <p>hash: {txReceipt.transactionHash}</p>
+              <p>blockNumber: {txReceipt.blockNumber}</p>
+              <p>confirmations: {txReceipt.confirmations}</p>
+              <Button variant="link" onClick={() => setTxReceiptShow(false)}>Hide Tx Info</Button>  
+            </Alert>
+            ) : (
+              <>{(txReceipt.transactionHash) ? (<Button variant="link" onClick={() => setTxReceiptShow(true)}>Show TX Info</Button>) : (<></>)}</>
+            )
+          }
           { (validationErrors.length > 0) &&
             <Card.Title className="mb-2 p-3 text-warning"> 
               Validation Error:
@@ -184,7 +206,7 @@ console.log(params);
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <Button variant="primary" type="submit">
+                  <Button variant="primary" type="submit" id="submitButton">
                     Submit
                   </Button>
                 </Row>

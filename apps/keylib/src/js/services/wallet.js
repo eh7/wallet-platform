@@ -53,14 +53,25 @@ export default class Wallet {
     const provider = this.networkProvider[network.chainId];
     const privateKeyString = await this.getPrivateKey();
     const signer = new ethers.Wallet(privateKeyString, provider);
-    //console.log('pk', privateKeyString);
     const params = {
       from: _params[0].from,
       to: _params[0].to,
       value: ethers.utils.parseUnits(_params[0].value, 'ether').toHexString(),
     };
-    const transactionHash = await signer.sendTransaction(params)
-    console.log('transactionHash is ' + transactionHash);
+    const transaction = await signer.sendTransaction(params)
+    //console.log('transaction hash:', transaction.hash);
+    console.log('transaction:', transaction);
+    const receipt = await transaction.wait(transaction);
+    console.log('receipt:', receipt);
+    /*
+    alert(
+      "transaction complete" +
+      "\nhash: " + receipt.transactionHash +
+      "\nblockNumber: " + receipt.blockNumber +
+      "\ngasUsed: " + receipt.gasUsed.toNumber()
+    );
+    */
+    return receipt;
   }
 
   getBalance = async (_address) => {
