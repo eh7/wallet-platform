@@ -15,12 +15,15 @@ import ExampleComponents from "@/components/ExampleComponents";
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import pageSetup from '../setup';
+
 //const display = "Hello, to Guru99 Tutorials";
 //const h1tag =<h1>{display}</h1>;
 //export default h1tag;
 
 export class Home extends React.Component {
   public render() {
+    pageSetup();
     return (
       <>
         <Head>

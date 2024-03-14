@@ -12,6 +12,8 @@ import ExportAppData from '../components/Form/ExportAppData';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 export default class SetupExportData extends React.Component {
 
   constructor(props) {
@@ -24,6 +26,7 @@ export default class SetupExportData extends React.Component {
     const storedNetworks = JSON.parse(localStorage.getItem('networks'))
     this.state.networks = storedNetworks;
     this.getKeystore()
+    pageSetup();
   }
 
   componentDidMount() {

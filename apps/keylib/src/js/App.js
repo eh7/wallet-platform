@@ -23,7 +23,17 @@ import SetupImportData from './pages/SetupImportData';
 import SetupLoadKeystore from './pages/SetupLoadKeystore';
 
 const App = () => {
- return (
+  /*
+  const setTitle = () => {
+    console.log('zzzzzzzzzzzzzzzzzzzzz', window.location.pathname);
+    document.title = "testing";
+  }  
+
+  setTitle();
+  alert(1234);
+  */
+
+  return (
     <>
        <NavMain/>
        <Routes>

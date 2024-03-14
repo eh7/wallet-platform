@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import FromLoadKeystore from '../components/Form/LoadKeystore';
 
+import pageSetup from '../setup';
+
 export default class SetupLoadKeystore extends React.Component {
 
   constructor(props) {
@@ -17,6 +19,7 @@ export default class SetupLoadKeystore extends React.Component {
     // Don't call this.setState() here!
     this.state = {};
     //this.handleClick = this.handleClick.bind(this);
+    pageSetup();
   }
 
   render() {

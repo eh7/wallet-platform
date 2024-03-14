@@ -3,6 +3,9 @@ import ReactDOM from 'react-dom';
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
+
+import pageSetup from '../setup';
+
 //import Footer from "react-bootstrap/Footer";
 
 //const display = "Hello, to Guru99 Tutorials";
@@ -12,6 +15,7 @@ import Button from "react-bootstrap/Button";
 
 export default class About extends React.Component {
   render() {
+    pageSetup();
     return (
       <>
         <h1>About</h1>

@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 export default class SetupAddress extends React.Component {
 
   constructor(props) {
@@ -23,6 +25,7 @@ export default class SetupAddress extends React.Component {
       isLoading: true,
       wallet,
     };
+    pageSetup();
   }
 
   componentDidMount() {

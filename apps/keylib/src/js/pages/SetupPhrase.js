@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import FormPhrase from "../components/Form/Phrase";
 
+import pageSetup from '../setup';
+
 //import Footer from "react-bootstrap/Footer";
 
 //const display = "Hello, to Guru99 Tutorials";
@@ -25,6 +27,7 @@ export default class SetupPhrase extends React.Component {
     // Don't call this.setState() here!
     this.state = { _new: props._new };
     //this.handleClick = this.handleClick.bind(this);
+    pageSetup();
   }
 
   render() {

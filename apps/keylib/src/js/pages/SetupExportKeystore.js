@@ -10,6 +10,8 @@ import Col from 'react-bootstrap/Col';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 export default class SetupExportKeystore extends React.Component {
 
   constructor(props) {
@@ -18,6 +20,7 @@ export default class SetupExportKeystore extends React.Component {
       wallet: {},
     };
     this.state.wallet = new Wallet();
+    pageSetup();
   }
 
   componentDidMount() {

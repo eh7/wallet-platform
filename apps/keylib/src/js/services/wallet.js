@@ -48,8 +48,26 @@ export default class Wallet {
     return await this.provider.getBlockNumber()
   }
 
+  sendTx = async (_params) => {
+    const network = JSON.parse(localStorage.getItem("network"));
+    const provider = this.networkProvider[network.chainId];
+    const privateKeyString = await this.getPrivateKey();
+    const signer = new ethers.Wallet(privateKeyString, provider);
+    //console.log('pk', privateKeyString);
+    const params = {
+      from: _params[0].from,
+      to: _params[0].to,
+      value: ethers.utils.parseUnits(_params[0].value, 'ether').toHexString(),
+    };
+    const transactionHash = await signer.sendTransaction(params)
+    console.log('transactionHash is ' + transactionHash);
+  }
+
   getBalance = async (_address) => {
-    const balance = await this.provider.getBalance(_address);
+    const network = JSON.parse(localStorage.getItem("network"));
+    const provider = this.networkProvider[network.chainId];
+    const balance = await provider.getBalance(_address);
+    //const balance = await this.provider.getBalance(_address);
     const balanceInEth = ethers.utils.formatEther(balance);
     return balanceInEth;
   }
@@ -177,6 +195,23 @@ export default class Wallet {
     }
   }
  
+  getPrivateKey = async () => {
+    if (localStorage.getItem('keyset')) {
+      const seedHex = this.decrypt(
+        JSON.parse(
+          localStorage.getItem(
+            "seedHex",
+          )
+        )
+      )
+      const HDwallet = etherHDkey.fromMasterSeed(seedHex);
+      const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+      return zeroWallet.getPrivateKeyString();
+    } else {
+      alert('no keyset error wallet/getPrivateKey');
+    }
+  }
+
   getAddress = async () => {
     if (localStorage.getItem('keyset')) {
       // TODO remove this from localStorage after dev

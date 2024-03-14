@@ -10,6 +10,8 @@ import FromSendTransaction from '../components/Form/SendTransaction';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 //import { ethers } from "ethers";
 
 //import 'dotenv/config';
@@ -23,6 +25,7 @@ export default class Home extends React.Component {
       provider: {},
       wallet: {},
     };
+    pageSetup();
   }
 
   componentDidMount() {

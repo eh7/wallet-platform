@@ -22,6 +22,8 @@ import Col from 'react-bootstrap/Col';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 //import { ethers } from "ethers";
 
 //import 'dotenv/config';
@@ -35,6 +37,7 @@ export default class Home extends React.Component {
       provider: {},
       wallet: {},
     };
+    pageSetup();
   }
 
   componentDidMount() {
@@ -57,7 +60,7 @@ export default class Home extends React.Component {
     run()
     */
 
-    document.title = `You clicked ${this.state.count} times`;
+    //document.title = `You clicked ${this.state.count} times`;
     //alert('componentDidMount')
   }
 
@@ -74,7 +77,7 @@ export default class Home extends React.Component {
 
     //console.log('this.state.provider:', this.state.provider);
 
-    document.title = `You clicked ${this.state.count} times`;
+    //document.title = `You clicked ${this.state.count} times`;
     //alert('componentDidUpdate')
   }
 

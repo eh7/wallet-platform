@@ -11,6 +11,8 @@ import Col from 'react-bootstrap/Col';
 import FormPhrase from "../components/Form/Phrase";
 import FormPassword from "../components/Form/Password";
 
+import pageSetup from '../setup';
+
 export default class SetupPassword extends React.Component {
 
   constructor(props) {
@@ -18,6 +20,7 @@ export default class SetupPassword extends React.Component {
     // Don't call this.setState() here!
     this.state = { _new: props._new };
     //this.handleClick = this.handleClick.bind(this);
+    pageSetup();
   }
 
   render() {

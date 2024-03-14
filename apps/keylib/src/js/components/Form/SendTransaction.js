@@ -16,14 +16,18 @@ function FormSendTransaction({_subtitle, _new}) {
 
   const wallet = new Wallet();
 
-  const [
-    network,
-    setNetwork,
-  ] = useState({});
-
   const [networks, setNetworks] = useState(
     JSON.parse(
       localStorage.getItem('networks')
+    )
+  );
+
+  const [
+    network,
+    setNetwork,
+  ] = useState(
+    JSON.parse(
+      localStorage.getItem('network')
     )
   );
 
@@ -45,7 +49,7 @@ function FormSendTransaction({_subtitle, _new}) {
     getBalance();
   }, [network]);
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
 
     //alert("handleSubmit");
@@ -54,8 +58,21 @@ function FormSendTransaction({_subtitle, _new}) {
 
     const form = event.currentTarget;
 
-    const to = document.getElementById("formTo")
-    const amount = document.getElementById("formAmount")
+    const from = await wallet.getAddress();
+    const to = document.getElementById("formTo").value;
+    const amount = document.getElementById("formAmount").value;
+
+    const params = [{
+      from: from,
+      to: to,
+      value: amount
+    }];
+console.log(params);
+
+    wallet.sendTx(params);
+
+//    const transactionHash = await provider.send('eth_sendTransaction', params)
+//    console.log('transactionHash is ' + transactionHash);
 
     /*
     const password = document.getElementById("formPassword")
@@ -82,7 +99,7 @@ function FormSendTransaction({_subtitle, _new}) {
     const balance = await wallet.getBalance(address);
     setAddress(address);
     setBalance(balance);
-    alert(address + ' :: ' + balance);
+    //alert(address + ' :: ' + balance);
   }
 
   return (
@@ -113,7 +130,7 @@ function FormSendTransaction({_subtitle, _new}) {
                     <p>network: {network.name}</p>
                     <p>address: {address}</p>
                     <p>balance: {balance}</p>
-                  </p>) : (<p></p>)} 
+                  </p>) : (<p>No Network Selected</p>)} 
                 </div>
 
                 <Row className="mb-0 pl-3 pt-3">

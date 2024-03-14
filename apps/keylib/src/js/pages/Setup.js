@@ -24,6 +24,8 @@ import Col from 'react-bootstrap/Col';
 
 import Wallet from '../services/wallet';
 
+import pageSetup from '../setup';
+
 export default class Setup extends React.Component {
 
   constructor(props) {
@@ -33,6 +35,7 @@ export default class Setup extends React.Component {
       provider: {},
       wallet: {},
     };
+    pageSetup();
   }
 
   componentDidMount() {

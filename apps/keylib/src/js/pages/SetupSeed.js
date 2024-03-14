@@ -22,6 +22,8 @@ import Nav from 'react-bootstrap/Nav';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 
+import pageSetup from '../setup';
+
 //import Footer from "react-bootstrap/Footer";
 
 //const display = "Hello, to Guru99 Tutorials";
@@ -30,6 +32,7 @@ import Col from 'react-bootstrap/Col';
 
 export default class SetupSeed extends React.Component {
   render() {
+    pageSetup();
     return (
       <>
         <h1>SetupSeed</h1>
