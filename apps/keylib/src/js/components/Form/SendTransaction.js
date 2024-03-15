@@ -179,26 +179,6 @@ function FormSendTransaction({_subtitle, _new}) {
                 </div>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <Form.Group controlId="formBasicSelect">
-                    <Form.Label>Select Network to Send Tx</Form.Label>
-                    <Form.Control
-                      as="select"
-                      value={network}
-                      onChange={e => {
-                        if (e.target.value !== '') {
-                          setNetwork(networks[e.target.value]);
-                        }
-                      }}
-                    >
-                      <option value="">Select Network</option>
-                      {networks.map((_network, _index) => {
-                        return (<option value={_index}>{_network.name}</option>)
-                      })}
-                    </Form.Control>
-                  </Form.Group>
-                </Row>
-
-                <Row className="mb-0 pl-3 pt-3">
                   <div className="pt-3 text-primary h3">
                     To 
                   </div>

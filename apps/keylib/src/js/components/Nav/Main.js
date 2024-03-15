@@ -76,13 +76,9 @@ function NavMain() {
   
   const updateNetwork = (e) => {
     const networks = JSON.parse(localStorage.getItem('networks'));
-    //console.log('updateNetwork', e);
-    //console.log('zzzzzzzzzzzz', networks[e]);
-    //alert('TODO WIP :: updateNetwork in Main.js');
     setNetwork(e.chainId);
-    console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', networks[e].chainId);
-    //setMyNetwork(networks[e].name);
     console.log(networks[e].name);
+    window.location.reload();
   }
 
   const text = () => {
@@ -98,15 +94,14 @@ function NavMain() {
 
 
       <Row className="w-100">
-        <Col sm="7">
+        <Col sm="6">
           <Navbar className="rounded mb-0">
             <Navbar.Brand href="/">Crypto Wallet Interface</Navbar.Brand>
            </Navbar>
         </Col>
-        <Col sm="5" className="small text-muted">
-          address: {myAddress}<br/>
-          network: {(myNetwork !== '') ? ({myNetwork}) : (<Button variant="link" onClick={() => alert(true)}>Set</Button>)}
-          <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork" text="setNetwork" updateNetwork={updateNetwork}/>
+        <Col sm="6" className="small text-muted">
+            {myAddress}
+            <NavAlert wallet={wallet} action="setNetwork" heading="setNetwork" text="setNetwork" updateNetwork={updateNetwork}/>
         </Col>
       </Row>
 
