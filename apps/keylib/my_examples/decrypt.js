@@ -1,5 +1,7 @@
 const crypto = require('crypto');
 const seedHexJson = require('../seedHex.json');
+//import EthjsWallet, { hdkey as etherHDkey } from 'ethereumjs-wallet';
+const EthjsWallet = require('ethereumjs-wallet');
 require('dotenv/config');
 
 //const seedHexJson = {
@@ -21,6 +23,12 @@ const decrypt = (text, key) => {
   return decrypted.toString('utf8');
 }
 
+const getPkey = (seedHex) => {
+  const HDwallet = EthjsWallet.hdkey.fromMasterSeed(seedHex);
+  const zeroWallet = HDwallet.derivePath("m/44'/60'/0'/0/0").getWallet();
+  return zeroWallet.getPrivateKeyString();
+}
+
 /*
 console.log(
   'key',
@@ -30,8 +38,13 @@ console.log(
 );
 */
 
+const seedHex = decrypt(seedHexJson, env_key);
+const pkey = getPkey(seedHex);
+
 console.log(
   'decrypt seedHex:',
-  decrypt(seedHexJson, env_key),
+  //decrypt(seedHexJson, env_key),
+  seedHex,
+  '\npkey: ', pkey,
 );
 

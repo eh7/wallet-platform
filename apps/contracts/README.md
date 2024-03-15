@@ -15,3 +15,11 @@ npx hardhat run scripts/deploy.ts
 cp .env.example .env
 then
 and enter your details in .env file
+
+INFO
+----
+
+Ballot deplyed address seplia: 0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d
+
+to verify;
+npx hardhat verify 0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d --network sepolia

@@ -89,9 +89,10 @@ contract Ballot {
 
   function getVote(
     uint256 _ballotId
-  ) public returns (uint256 _vote) {
-    _vote = vote[_ballotId][msg.sender];
-    return _vote;
+  ) public view returns (uint256 _vote) {
+    return vote[_ballotId][msg.sender];
+    //_vote = vote[_ballotId][msg.sender];
+    //return _vote;
   }
 
 //  function createCandidates(

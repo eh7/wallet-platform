@@ -130,9 +130,6 @@ export default class Home extends React.Component {
       <>
         <Container>
           <Row><h1>Home</h1></Row>
-          <Row>
-            <Button onClick={this.getAddress}>getAddress</Button> |
-          </Row>
           <Row className="p-3">
             Chain: ...TODO,,,
           </Row>

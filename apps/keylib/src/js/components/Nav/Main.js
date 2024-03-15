@@ -121,10 +121,16 @@ function NavMain() {
                 <Nav.Link href="/applications">Applications</Nav.Link>
               </Nav.Item>
               <Nav.Item>
-               <Nav.Link href="/about">About</Nav.Link>
-             </Nav.Item>
-             <Nav.Item>
+                <Nav.Link href="/about">About</Nav.Link>
+              </Nav.Item>
+              <Nav.Item>
                 <Nav.Link href="/send">Send Tx</Nav.Link>
+              </Nav.Item>
+
+              <Nav.Item>
+                <NavDropdownMenu title="Contracts" id="contract-nav-dropdown">
+                  <Nav.Link href="/contract/ballot">Ballot</Nav.Link>
+                </NavDropdownMenu>
               </Nav.Item>
 
               <Nav.Item>

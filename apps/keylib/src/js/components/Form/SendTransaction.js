@@ -112,6 +112,19 @@ function FormSendTransaction({_subtitle, _new}) {
     //alert(address + ' :: ' + balance);
   }
 
+  const openInNewTab = url => {
+    const fullUrl = url;
+    window.open(fullUrl, '_blank', 'noopener,noreferrer');
+  };
+
+/*
+                {(network.explorer) ? (
+                  <Button variant="link" onClick={() => openInNewTab({network.explorer + "/tx/" + txReceipt.transactionHash})}>
+                    block explorer
+                  </Button>
+                ) : (<>no explorer path</>)}
+*/
+
   return (
     <>
       <Card>
@@ -123,6 +136,16 @@ function FormSendTransaction({_subtitle, _new}) {
               <p>hash: {txReceipt.transactionHash}</p>
               <p>blockNumber: {txReceipt.blockNumber}</p>
               <p>confirmations: {txReceipt.confirmations}</p>
+              <p>gas: {txReceipt.gasUsed.toNumber()}</p>
+              <p>
+                {(network.explorer) ? (<p>
+                  <Button variant="link" onClick={() => {
+                      const url = network.explorer + "/tx/" + txReceipt.transactionHash;
+                      openInNewTab(url);
+                    }}
+                  >block explorer</Button>
+                </p>) : (<p>no network.explorer</p>)}
+              </p>
               <Button variant="link" onClick={() => setTxReceiptShow(false)}>Hide Tx Info</Button>  
             </Alert>
             ) : (

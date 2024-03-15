@@ -80,12 +80,12 @@ describe("Ballot contract", function () {
     console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', castVote0Result.logs[0].args);
 
     const vote0 = await ballotContract.getVote(0);
-    const vote0Result = await vote0.wait();
-//    console.log(
-//      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-//      vote0,
+    //const vote0Result = await vote0.wait();
+    console.log(
+      'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+      vote0,
 //      vote0Result.logs
-//    );
+    );
 
     const count0 = await ballotContract.counts(0, 2);
     console.log('counts(0,2): ', count0);

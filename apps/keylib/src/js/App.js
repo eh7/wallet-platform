@@ -22,6 +22,10 @@ import SetupExportData from './pages/SetupExportData';
 import SetupImportData from './pages/SetupImportData';
 import SetupLoadKeystore from './pages/SetupLoadKeystore';
 
+import AllABI from './pages/AllABI';
+
+import "bootstrap/dist/css/bootstrap.min.css";
+
 const App = () => {
   /*
   const setTitle = () => {
@@ -40,6 +44,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/About" element={<About />} />
           <Route path="/Applications" element={<Applications />} />
+          <Route path="/contract/ballot" element={<AllABI contractName="Ballot" />} />
           <Route path="/send" element={<SendTx />} /> 
           <Route path="/config/network" element={<ConfNetwork />} /> 
           <Route path="/setup" element={<Setup />} /> 
