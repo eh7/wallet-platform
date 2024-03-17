@@ -19,7 +19,12 @@ and enter your details in .env file
 INFO
 ----
 
+Sepolia deplyment;
 Ballot deplyed address seplia: 0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d
+Eh7Token deployed to 0x15E3067A46379F932dAEE5571E9Ea79713bDAE3A
+Eh7Token deployed to 0xC41C4F229E6257B061f75bb77d09B22638cd5AD5
 
 to verify;
 npx hardhat verify 0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d --network sepolia
+npx hardhat verify 0x15E3067A46379F932dAEE5571E9Ea79713bDAE3A --network sepolia
+
