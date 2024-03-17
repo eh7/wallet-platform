@@ -127,18 +127,41 @@ const AllABI = (props) => {
   async function handleSubmit(e, inputs, stateMutability) {
     e.preventDefault();
 
-    await web3All.contractSetup(abiData);
-    const returnData = await web3All.executeContractFunction (formData.name, formData.values, inputs, stateMutability);
-    console.log('executeContractFunction :: ', returnData);
-    alert('executeContractFunction :: ' + returnData.transactionHash);
+    try {
+      await web3All.contractSetup(abiData);
+      
+      inputs.map((item) => {
+        if (item.type === "string[]") {
+          //formData.values.candidates = JSON.parse(formData.values.candidates)
+      console.log('xxxxxxxxxxxxxxxxxxxxx', JSON.parse(formData.values.candidates))
+          console.log('ssssssssssssssssssssss', item);
+          console.log('ssssssssssssssssssssss', item.name);
+          formData.values[item.name] = JSON.parse(formData.values[item.name]);
+          console.log('bbbbbbbbbbbbbbbb', formData.values[item.name]);
+        }
+      });
+      //console.log(JSON.parse(formData.values.candidates))
+      //console.log(abiData, inputs[0], inputs[1]);
 
-    formData.values.role = '';
-    formData.values.account = '';
+      const returnData = await web3All.executeContractFunction (formData.name, formData.values, inputs, stateMutability);
+      console.log('executeContractFunction :: ', returnData);
+      if (typeof returnData.transactionHash === 'undefined') {
+        alert('executeContractFunction :: ' + returnData);
+      } else {
+        alert('executeContractFunction :: ' + returnData.transactionHash);
+      }
 
-    formData.display = false;
-    setFormData(formData);
+      formData.values.role = '';
+      formData.values.account = '';
 
-    //setFormFeedback(formData.values);
+      formData.display = false;
+      setFormData(formData);
+
+      //setFormFeedback(formData.values);
+    } catch (e) {
+      console.log("web3All :: handleSubmit :: error", e);
+      alert("web3All :: handleSubmit :: error");
+    }
   }
 
   useEffect(() => {
