@@ -49,18 +49,8 @@ const capitalize = (str) => {
 
 const AllABI = (props) => {
 
-  //console.log('ALL props:', props);
-  //alert('ALL props:' + props.contractName);
-
-//  let initialState = {
-//    inputs: [],
-//    displayQuestions: false,
-//  };
-//  const [data, setData] = useState(initialState);
   const [abiData, setAbiData] = useState({});
-//  let abiParser = {};
  
-  //const [rerender, setRerender] = useState(false);
   const [contractFormData, setContractFormData] = useState({display:false});
   const [formData, setFormData] = useState({display:false});
   const [logs, setLogs] = useState([]);
@@ -68,18 +58,11 @@ const AllABI = (props) => {
   const [showIndex, setShowIndex] = useState(null);
   const [eventTypes, setEventTypes] = useState([]);
   const [eventLoading, setEventLoading] = useState(null);
-  //const [variantEventButton, setVariantEventButton] = useState([]);
+
+  const [formFeedback, setFormFeedback] = useState('');
+
   const variantEventButton = [];
 
-//  function handleClickedLi (index, item) {
-//    console.log(
-//      'handleClickedLi:',
-//      index,
-//      item,
-//    );
-//    alert('handleClickedLi');
-//  }
- 
   async function handleEventLogs(e, index) {
     if (showLogs && index === showIndex) {
       setShowLogs(false);
@@ -147,51 +130,26 @@ const AllABI = (props) => {
     await web3All.contractSetup(abiData);
     const returnData = await web3All.executeContractFunction (formData.name, formData.values, inputs, stateMutability);
     console.log('executeContractFunction :: ', returnData);
-    alert('executeContractFunction :: ' + returnData);
+    alert('executeContractFunction :: ' + returnData.transactionHash);
 
     formData.values.role = '';
     formData.values.account = '';
 
     formData.display = false;
     setFormData(formData);
+
+    //setFormFeedback(formData.values);
   }
 
   useEffect(() => {
     async function setup () {
-//alert(props.contractName.search("Bespoke"));
-//if (props.contractName.search("Bespoke") === 0) {
-//  alert('props.contractName ::: ' + props.contractName);
-//}
       web3All = new Web3All(props.contractName || contractName, formData);
-//console.log('loaded', web3All);
-      // console.log("networkCheck:", await web3All.checkNetwork());
       if (!await web3All.checkNetwork()) {
         await web3All.switchNetwork();
       }
       setAbiData(web3All);
-//      const web3AllData = web3All.GetAbi(web3All)
-//      console.log(
-//        'GetAbi IN Home:',
-//        web3All.GetAbi(web3All)
-//      );
-//      setData(
-//        // web3All.GetAbi(web3All)
-//        web3AllData
-//      );
       const web3AllEventsData = web3All.GetEventsAbi(web3All)
       setEventTypes(web3AllEventsData);
-      // console.log('GetEventsAbi data:', web3AllEventsData);
-      //const events = await web3All.Logs(web3All);
-      //setLogs(events);
-      //console.log('logs:', events);
-      /*
-      try {
-        await web3All.addNetwork(11, 'test matic mumbai network', ['https://rpc-mumbai.maticvigil.com/v1/6212b4f0b9fdd49f8fb509635dece98b70fd5979']);
-      }
-      catch (e) {
-        console.log("ERROR in addNetwork:", e);
-      }
-      */
     }
     setup();
     myEmitter.on('eventShowForm', (e) => {
@@ -520,20 +478,20 @@ const AllABI = (props) => {
   	          return (
   	            <Form.Group className="mb-3" controlId="formBasicEmail">
   	              <Form.Label>
-                          {capitalize(input.name)} ({input.type})
-                        </Form.Label>
+                        {capitalize(input.name)} ({input.type})
+                      </Form.Label>
   		      <Form.Control
-                          required
-                          name={input.name}
+                        required
+                        name={input.name}
   			value={formData.values[input.name]}
-                          type={input.type}
-                          onChange={(e) => handleInputOnChange(e, input.name, input)}
-                          placeholder={"Enter " + input.name}
-                        />
-                      </Form.Group>
+                         type={input.type}
+                         onChange={(e) => handleInputOnChange(e, input.name, input)}
+                         placeholder={"Enter " + input.name}
+                      />
+                    </Form.Group>
   		  );
   		})}
-  	        <Button type='submit' variant="outline-primary">Submit</Button>
+  	        <Button type='submit' variant="outline-primary" id="submit-button">Submit</Button>
   	      </Form>
   	    )}
   	  </Col>
@@ -543,18 +501,5 @@ const AllABI = (props) => {
     );
   }
 }
-
-/*
-                { console.log(logs[0].args) }
-                { logs.map((event) => {
-                  return (
-                    <Row> 
-                      <Col>{event.args[0].toNumber()}</Col>
-                      <Col>{event.args[1]}</Col>
-                      <Col>{event.args[2]}</Col>
-                    </Row> 
-                  );
-                })}
-*/
 
 export default AllABI;

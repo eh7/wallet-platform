@@ -1,7 +1,13 @@
 const contracts = [
   'Ballot',
+  'Eh7Token',
   'Bespoke',
 ];
+
+const contractsJson = {
+  "Ballot": "../contracts/Ballot",
+  "Eh7Token": "../contracts/Eh7Token",
+}
 
 const networks = {
   1: "Ethereum Main Network",
@@ -22,6 +28,7 @@ const navbarHeader = "Smart Contract ABI UI";
 
 export {
   contracts,
+  contractsJson,
   navbarHeader,
   navbarHeaderBrand,
   networks,

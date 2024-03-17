@@ -16,13 +16,19 @@ import {
 } from "react-bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
 
+import Wallet from '../services/wallet';
+
+import {
+  contractsJson as _contractsJson,
+} from '../services/conf';
+
 class Web3All {
 
   contractData = {};
 
   constructor (contractName, formData) {
-console.log('################# contractName', contractName);
-console.log('formData :: ', formData);
+    console.log('################# contractName', contractName);
+    console.log('formData :: ', formData);
     if (contractName === "Bespoke") {
 console.log('formData :: ', formData);
       this.contractName = contractName; 
@@ -31,25 +37,26 @@ console.log('formData :: ', formData);
       this.networkId = "";//contractJson.networkId; 
       this.creationBlock = "";//contractJson.creationBlock; 
 console.log('this::', this);
-//alert('bespoke setup');
     } else {
-//    if (contractName.search("PropertiesRinkeby")) {
-//      contractName = "Properties";
-//    }
-
       let contractJson = '';
       if (contractName === 'Ballot') {
         contractJson = require('../contracts/Ballot');
+      } else if (contractName === 'Eh7Token') {
+        contractJson = require('../contracts/Eh7Token');
       }
-console.log(contractJson);
+      //contractJson = require(_contractsJson[contractName]);
+//console.log(contractJson);
       this.contractName = contractJson.contract; 
       this.abi = contractJson.abi; 
       this.address = contractJson.network.address; 
       this.networkId = contractJson.networkId; 
       this.creationBlock = contractJson.creationBlock; 
+
+      this.wallet = new Wallet();
 /*
 */
     }
+    //alert('constructor complete');
 
     // await contractSetup(this);
   }
@@ -95,37 +102,67 @@ console.log(contractJson);
     inputs.map((input) => {
       args.push(values[input.name]);
     });
+
+    //alert('signerAddress :: ' + this.signerAddress);
   
     if (stateMutability === 'view' || stateMutability === 'pure') {
-      const returnData = await this.contractData.contract[functionName](...args);
-      console.log(
-        "executeContractFunction - test CALL WITH REF :: ",
-        returnData,
-      );
-      return returnData;
+      try {
+        const returnData = await this.contractData.contract[functionName](...args);
+        console.log(
+          "executeContractFunction - test CALL WITH REF :: ",
+          returnData,
+        );
+        return returnData;
+      } catch (e) {
+        console.log('(view call error)', e); 
+        alert('(view call error)');
+      }
     } else {
-      const returnData = await this.contractData.contractWithSigner[functionName](...args);
-      console.log(
-        "executeFunction - stateMutability not pure or view:",
-        returnData,
-      );
+      try {
+        const returnData = await this.contractData.contractWithSigner[functionName](...args);
+        const network = JSON.parse(localStorage.getItem("network"));
+        //returnData.hash
+        console.log(
+          "executeFunction - stateMutability not pure or view:",
+          returnData.hash,
+          returnData,
+        );
+        const receipt = await returnData.wait();
+        console.log(
+          "reciept executeFunction - stateMutability not pure or view:",
+          receipt,
+        );
+        return receipt;
+      } catch (e) {
+        console.log('(exec call error)', e); 
+        alert('(exec call error');
+      }
     }
   }
 
   async contractSetup (abiData) {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    const address = await provider.send("eth_requestAccounts", []);
-    const signer = provider.getSigner();
+    const network = JSON.parse(localStorage.getItem("network"));
+    const provider = new ethers.providers.JsonRpcProvider(network.rpcUrl);
+    const privateKeyString = await this.wallet.getPrivateKey();
+    const address = await this.wallet.getAddress();
+    const signer = new ethers.Wallet(privateKeyString, provider);
+
+    // TODO: this is metamask example setup get that working to as option...
+    //    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    //    const address = await provider.send("eth_requestAccounts", []);
+    //    const signer = provider.getSigner();
+
     const contract = new ethers.Contract(
-      // addressPropertiesRinkeby,
       abiData.address,
       abiData.abi,
       provider
     );
+
     this.contractData.provider = provider; 
     this.contractData.contract = contract; 
     this.contractData.contractWithSigner = contract.connect(signer);
     this.contractData.abiData = abiData;
+    this.signerAddress = address; 
   }
 
   async Logs (abiData, eventType) {

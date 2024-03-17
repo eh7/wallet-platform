@@ -125,6 +125,7 @@ function NavMain() {
               <Nav.Item>
                 <NavDropdownMenu title="Contracts" id="contract-nav-dropdown">
                   <Nav.Link href="/contract/ballot">Ballot</Nav.Link>
+                  <Nav.Link href="/contract/eh7token">Eh7Token</Nav.Link>
                 </NavDropdownMenu>
               </Nav.Item>
 
