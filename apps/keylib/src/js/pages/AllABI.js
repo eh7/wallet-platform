@@ -130,18 +130,14 @@ const AllABI = (props) => {
     try {
       await web3All.contractSetup(abiData);
       
+      // Add other bespoke parts format formData.values
       inputs.map((item) => {
         if (item.type === "string[]") {
-          //formData.values.candidates = JSON.parse(formData.values.candidates)
-      console.log('xxxxxxxxxxxxxxxxxxxxx', JSON.parse(formData.values.candidates))
-          console.log('ssssssssssssssssssssss', item);
-          console.log('ssssssssssssssssssssss', item.name);
           formData.values[item.name] = JSON.parse(formData.values[item.name]);
-          console.log('bbbbbbbbbbbbbbbb', formData.values[item.name]);
         }
       });
-      //console.log(JSON.parse(formData.values.candidates))
-      //console.log(abiData, inputs[0], inputs[1]);
+console.log('ggggggggggggggggggggggggggggggg', inputs);
+console.log('ggggggggggggggggggggggggggggggg', formData.values);
 
       const returnData = await web3All.executeContractFunction (formData.name, formData.values, inputs, stateMutability);
       console.log('executeContractFunction :: ', returnData);

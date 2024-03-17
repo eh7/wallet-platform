@@ -107,6 +107,9 @@ console.log('this::', this);
   
     if (stateMutability === 'view' || stateMutability === 'pure') {
       try {
+console.log('zzzzzzzzzzzzzzzzzzzzzzz ...args', ...args);
+console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
+        //const returnData = await this.contractData.contract[functionName](0, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C');
         const returnData = await this.contractData.contract[functionName](...args);
         console.log(
           "executeContractFunction - test CALL WITH REF :: ",
