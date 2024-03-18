@@ -40,6 +40,11 @@ export default class Wallet {
       networks.map((network, i) => {
         this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
       })
+      console.log(
+        'this.networkProvider:',
+        this.networkProvider,
+        networks
+      );
     }
 
   }
@@ -221,6 +226,18 @@ export default class Wallet {
     } else {
       alert('no keyset error wallet/getPrivateKey');
     }
+  }
+
+  getWalletSettings = async () => {
+    const address = await this.getAddress();
+    const network = JSON.parse(localStorage.getItem("network"));
+    const chain = network.name;
+    const balance = await this.getBalance(address);
+    return {
+      address,
+      balance,
+      chain,
+    };
   }
 
   getAddress = async () => {

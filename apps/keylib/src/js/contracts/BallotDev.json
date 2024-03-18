@@ -5,10 +5,12 @@
   "network": {
     "events": {},
     "links": {},
-    "address": "0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d",
+    "address": "0x5fbdb2315678afecb367f032d93f642f64180aa3",
+    "addressOld": "0xE20ba754f2abbA1D8aa6da49af37FD9f6f69410d",
     "transactionHash": "0x13afc878abb106a159a30c224f6cbc281f209c265268c0fbe25e057b7a30d8e0"
   },
-  "networkId": 11155111,
+  "networkIdDDD": 1,
+  "networkId": 31337,
   "contract": "Ballot",
   "creationBlock": 5491429,
   "abi": [

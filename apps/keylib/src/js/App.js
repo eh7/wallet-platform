@@ -45,6 +45,7 @@ const App = () => {
           <Route path="/About" element={<About />} />
           <Route path="/Applications" element={<Applications />} />
           <Route path="/contract/ballot" element={<AllABI contractName="Ballot" />} />
+          <Route path="/contract/ballotDev" element={<AllABI contractName="BallotDev" />} />
           <Route path="/contract/eh7token" element={<AllABI contractName="Eh7Token" />} />
           <Route path="/send" element={<SendTx />} /> 
           <Route path="/config/network" element={<ConfNetwork />} /> 

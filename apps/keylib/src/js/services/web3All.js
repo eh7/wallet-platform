@@ -38,14 +38,18 @@ console.log('formData :: ', formData);
       this.creationBlock = "";//contractJson.creationBlock; 
 console.log('this::', this);
     } else {
+
       let contractJson = '';
       if (contractName === 'Ballot') {
         contractJson = require('../contracts/Ballot');
       } else if (contractName === 'Eh7Token') {
         contractJson = require('../contracts/Eh7Token');
+      } else if (contractName === 'BallotDev') {
+        contractJson = require('../contracts/BallotDev');
       }
       //contractJson = require(_contractsJson[contractName]);
 //console.log(contractJson);
+//
       this.contractName = contractJson.contract; 
       this.abi = contractJson.abi; 
       this.address = contractJson.network.address; 
@@ -138,7 +142,7 @@ console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
         return receipt;
       } catch (e) {
         console.log('(exec call error)', e); 
-        alert('(exec call error');
+        alert('(exec call error:\n\n' + e.reason);
       }
     }
   }

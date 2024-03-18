@@ -36,13 +36,26 @@ export default class Home extends React.Component {
       count: 0,
       provider: {},
       wallet: {},
+      settings: {},
+      showSettings: false,
     };
     pageSetup();
+    this.state.wallet = new Wallet();
+    console.log('1')
+  }
+
+  setSettings = async () => {
+    //this.state.settings = this.wallet.getWalletSettings()
+    this.state.settings = await this.state.wallet.getWalletSettings()
+    this.setState({ showSettings: true });
+    console.log(this.state.showSettings)
+    console.log(this.state.settings);
   }
 
   componentDidMount() {
 
-    this.state.wallet = new Wallet();
+    this.setSettings();
+
     /*
     const provider = new ethers.providers.JsonRpcProvider(
       process.env.RPC_URL  
@@ -131,27 +144,13 @@ export default class Home extends React.Component {
         <Container>
           <Row><h1>Home</h1></Row>
           <Row className="p-3">
-            Chain: ...TODO,,,
+            Address: {(this.state.showSettings) ? (<>{this.state.settings.address}</>) : (<>...</>)}
           </Row>
           <Row className="p-3">
-            Balance: ...TODO,,,
+            Chain: {(this.state.showSettings) ? (<>{this.state.settings.chain}</>) : (<>...</>)}
           </Row>
           <Row className="p-3">
-            Buy/Sell: ...TODO,,,
-          </Row>
-          <Row className="p-3">
-            Send: ...TODO,,,
-          </Row>
-          <Row className="p-3">
-            Bridge: ...TODO,,,
-          </Row>
-          <Row className="p-3">
-            <p>You clicked {this.state.count} times</p>
-          </Row>
-          <Row className="p-3">
-            <button onClick={() => this.setState({ count: this.state.count + 1 })}>
-              Click me
-            </button>
+            Balance: {(this.state.showSettings) ? (<>{this.state.settings.balance}</>) : (<>...</>)}
           </Row>
         </Container>
       </>

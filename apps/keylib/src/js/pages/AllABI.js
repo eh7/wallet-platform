@@ -163,9 +163,12 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
   useEffect(() => {
     async function setup () {
       web3All = new Web3All(props.contractName || contractName, formData);
+      /*
+      // metamask check for network and change - TODO handle Metamask???
       if (!await web3All.checkNetwork()) {
         await web3All.switchNetwork();
       }
+      */
       setAbiData(web3All);
       const web3AllEventsData = web3All.GetEventsAbi(web3All)
       setEventTypes(web3AllEventsData);

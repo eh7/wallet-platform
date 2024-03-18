@@ -1,11 +1,13 @@
 const contracts = [
   'Ballot',
+  'BallotDev',
   'Eh7Token',
   'Bespoke',
 ];
 
 const contractsJson = {
   "Ballot": "../contracts/Ballot",
+  "BallotDev": "../contracts/BallotDev",
   "Eh7Token": "../contracts/Eh7Token",
 }
 
@@ -14,6 +16,7 @@ const networks = {
   4: "Rinkebey Test Network",
   11155111: "Sepolia Test Network",
   80001: "Mumbai Polygon Test Network",
+  31337: "hardhat - devEvmNode",
 };
 
 const networkBlockerUrls = {
@@ -21,6 +24,7 @@ const networkBlockerUrls = {
   4: "rinkeby.etherscan.io",
   11155111: "sepolia.etherscan.io",
   80001: "mumbai.polygonscan.com",
+  31337: "devEvmNode",
 };
 
 const navbarHeaderBrand = "React Dapp:";
