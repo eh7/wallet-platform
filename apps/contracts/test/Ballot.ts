@@ -30,11 +30,13 @@ describe("Ballot contract", function () {
 
 
     expect(Number(await ballotContract.ballotCount())).to.equal(0);
+
     const ballotAddedObject = await ballotContract.createBallot(
       testBallotName,
       testCandidates,
     );
     expect(Number(await ballotContract.ballotCount())).to.equal(1);
+
     const ballotCount = await ballotContract.ballotCount();
     const ballot = await ballotContract.ballots(testBallotName);
     console.log(
@@ -74,7 +76,7 @@ describe("Ballot contract", function () {
     
     console.log("ballotContract.question(0) :: ", await ballotContract.question(0));
 
-    const castVote0 = await ballotContract.castVote(0, 2);
+    const castVote0 = await ballotContract.castVote(0, 1);
     const castVote0Result = await castVote0.wait();
     //console.log(castVote0);
     console.log('zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz', castVote0Result.logs[0].args);
@@ -90,6 +92,12 @@ describe("Ballot contract", function () {
     const count0 = await ballotContract.counts(0, 2);
     console.log('counts(0,2): ', count0);
 
+    const ballotAddedObject1 = await ballotContract.createBallot(
+      "testBallotName",
+      ["yes","no"],
+    );
+    expect(Number(await ballotContract.ballotCount())).to.equal(2);
+
     const castVote1 = await ballotContract.castVote(1, 0);
 
     const count1 = await ballotContract.counts(1, 0);
@@ -97,7 +105,42 @@ describe("Ballot contract", function () {
 
     const count2 = await ballotContract.counts(1, 1);
     console.log('counts(1,1): ', count2);
+
+    // this should fail with not valid ballotId
+    await expect(ballotContract.castVote(2, 0))
+    .to.be.revertedWith('ballotId not setup');
+
+    // this should fail with not valid ballotId
+    const ballotAddedObject2 = await ballotContract.createBallot(
+      "testBallotName 2",
+      ["yes","no"],
+    );
+    //const ballotAddedObjectResult2 = await ballotAddedObject2.wait();
+    //const eventBallotId2 = Number(ballotAddedObjectResult2.logs[0].args[0]);
+    //const eventBallotName2 = ballotAddedObjectResult2.logs[0].args[1];
+    //const eventBallotCandidates2 = ballotAddedObjectResult2.logs[0].args[2];
+    //console.log('Log event args');
+    //console.log('eventBallotId2 :: ', eventBallotId2);
+    //console.log('eventBallotName2 :: ', eventBallotName2);
+    //console.log('eventBallotCandidates2 :: ', eventBallotCandidates2);
+    //console.log('ccccc', ballotAddedObjectResult2.logs);
+    //const eventBallotIdLogTest = Number(ballotAddedObjectResult2.logs[1].args[0]);
+    const castVoteObject = await ballotContract.castVote(2, 0);
+    const castVoteObjectResult2 = await castVoteObject.wait();
 /*
+    //const castVoteTestLog = castVoteObjectResult2.logs[0].args;
+    const castVoteTestLog = castVoteObjectResult2.logs[0].args[1];
+    console.log(castVoteTestLog);
+    const castVoteTestLogArg2 = castVoteObjectResult2.logs[0].args[2].toString();
+    const castVoteTestLogArg3 = castVoteObjectResult2.logs[0].args[3];
+    console.log(castVoteTestLogArg2);
+    console.log(castVoteTestLogArg3);
+    //await expect(ballotContract.castVote(1, 0))
+    //.to.be.revertedWith('voteId invalid');
 */
+    await expect(
+      ballotContract.castVote(2, 5)
+    )
+    .to.be.revertedWith('voteId invalid');
   });
 });
