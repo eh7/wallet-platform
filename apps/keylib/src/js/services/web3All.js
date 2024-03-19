@@ -148,7 +148,7 @@ console.log('this::', this);
   }
 
   async contractSetup (abiData) {
-console.log('zccccccccccccccccccccccccccccccccc', abiData);
+//console.log('zccccccccccccccccccccccccccccccccc', abiData);
     let networkProvider = {};
     const networks = JSON.parse(localStorage.getItem("networks"));
     if (networks === null) {
@@ -157,13 +157,15 @@ console.log('zccccccccccccccccccccccccccccccccc', abiData);
       networks.map((network, i) => {
 //console.log(typeof networks[i].chainId);
         networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
-console.log('sssssssssssssssssssssssssss', abiData.networkId, networks[i].chainId);
+//console.log('sssssssssssssssssssssssssss', String(abiData.networkId), networks[i].chainId);
       })
     }
-    //const provider = networkProvider[abiData.networkId];
+    const provider = networkProvider[
+      String(abiData.networkId)
+    ];
 
     const network = JSON.parse(localStorage.getItem("network"));
-    const provider = new ethers.providers.JsonRpcProvider(network.rpcUrl);
+    //const provider = new ethers.providers.JsonRpcProvider(network.rpcUrl);
     const privateKeyString = await this.wallet.getPrivateKey();
     const address = await this.wallet.getAddress();
     const signer = new ethers.Wallet(privateKeyString, provider);
