@@ -111,9 +111,9 @@ console.log('this::', this);
   
     if (stateMutability === 'view' || stateMutability === 'pure') {
       try {
-console.log('zzzzzzzzzzzzzzzzzzzzzzz ...args', ...args);
-console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
-        //const returnData = await this.contractData.contract[functionName](0, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C');
+//console.log('zzzzzzzzzzzzzzzzzzzzzzz ...args', ...args);
+//console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
+//const returnData = await this.contractData.contract[functionName](0, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C');
         const returnData = await this.contractData.contract[functionName](...args);
         console.log(
           "executeContractFunction - test CALL WITH REF :: ",
@@ -148,6 +148,20 @@ console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
   }
 
   async contractSetup (abiData) {
+console.log('zccccccccccccccccccccccccccccccccc', abiData);
+    let networkProvider = {};
+    const networks = JSON.parse(localStorage.getItem("networks"));
+    if (networks === null) {
+      console.log(localStorage.getItem("networks"));
+    } else {
+      networks.map((network, i) => {
+//console.log(typeof networks[i].chainId);
+        networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+console.log('sssssssssssssssssssssssssss', abiData.networkId, networks[i].chainId);
+      })
+    }
+    //const provider = networkProvider[abiData.networkId];
+
     const network = JSON.parse(localStorage.getItem("network"));
     const provider = new ethers.providers.JsonRpcProvider(network.rpcUrl);
     const privateKeyString = await this.wallet.getPrivateKey();
