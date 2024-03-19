@@ -29,7 +29,14 @@ const run = async () => {
     provider
   );
 
-  console.log(contract);
+  //console.log(contract);
+
+  const functionName = "owner";
+  const returnData = await contract[functionName]();
+  console.log(
+    "executeContractFunction :: BallotDev :: owner :: ",
+    returnData,
+  );
 
   /*
   let contractData = {};
