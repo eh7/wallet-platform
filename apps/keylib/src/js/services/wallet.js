@@ -6,6 +6,8 @@ import { ethers } from 'ethers';
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
+//import { redirect } from "react-router-dom";
+
 import 'dotenv/config';
 
 const endPoint = process.env.RPC_URL || '';
@@ -16,6 +18,30 @@ export default class Wallet {
      //eventEmitter,
      walletInitData,
   ) {
+
+    const networks = JSON.parse(localStorage.getItem("networks"));
+    const network = JSON.parse(localStorage.getItem("network"));
+
+    // Check if the networks and network are set
+    // if not redirect to approiate page to setup.
+    if (Object.keys(networks).length === 0) {
+      console.log('ssssssssssssssss networks keys ::', Object.keys(networks));
+      //redirect("/config/network");
+      //return 'no networks';
+    } else if (Object.keys(network).length === 0) {
+      
+      console.log('ssssssssssssssss network keys ::', Object.keys(network));
+      //redirect("/config/network");
+      //window.location.href='/config/network';
+      //return 'no network';
+      /*
+      localStorage.setItem(
+        'network',
+        JSON.stringify(networks[0])
+      );
+      */
+    }
+
     //this.eventEmitter = eventEmitter;
     this.data = '';
     this.initData = walletInitData;
@@ -80,12 +106,16 @@ export default class Wallet {
   }
 
   getBalance = async (_address) => {
-    const network = JSON.parse(localStorage.getItem("network"));
-    const provider = this.networkProvider[network.chainId];
-    const balance = await provider.getBalance(_address);
-    //const balance = await this.provider.getBalance(_address);
-    const balanceInEth = ethers.utils.formatEther(balance);
-    return balanceInEth;
+    try {
+      const network = JSON.parse(localStorage.getItem("network"));
+      const provider = this.networkProvider[network.chainId];
+      const balance = await provider.getBalance(_address);
+      //const balance = await this.provider.getBalance(_address);
+      const balanceInEth = ethers.utils.formatEther(balance);
+      return balanceInEth;
+    } catch (e) {
+      console.log('eallet.js :: getBalance :: ', e);
+    }
   }
 
   //Encrypting text

@@ -13,7 +13,7 @@ import ExampleComponents from "@/components/ExampleComponents";
 //}
 
 import React from 'react';
-import ReactDOM from 'react-dom';
+import ReactDOM, {Redirect} from 'react-dom';
 
 import Container from "react-bootstrap/Container";
 import Button from "react-bootstrap/Button";
@@ -41,7 +41,8 @@ export default class Home extends React.Component {
     };
     pageSetup();
     this.state.wallet = new Wallet();
-    console.log('1')
+    if (this.state.wallet === 'no networks') {
+    }
   }
 
   setSettings = async () => {
