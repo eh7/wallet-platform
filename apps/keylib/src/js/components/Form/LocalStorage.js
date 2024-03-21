@@ -67,9 +67,16 @@ function LocalStorage(props) {
 
     
 //    if (localStorageObject === '') {
+      console.log('JSON.parse', JSON.parse(localStorage.getItem(itemName)));
+
+      const prettyData = JSON.stringify(
+        JSON.parse(localStorage.getItem(itemName)),
+        undefined,
+        2
+      );
       data = JSON.parse(localStorage.getItem(itemName));
       console.log('localStorage', data);
-      document.getElementById("formJSONObject").value = data;
+      document.getElementById("formJSONObject").value = prettyData;
 //    }
 
     document.getElementById("submitButton").disabled = false;
