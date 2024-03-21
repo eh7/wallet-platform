@@ -37,6 +37,13 @@ function LocalStorage(props) {
   useEffect(() => {
   }, [exportData]);
 
+  const handleSave = async (event) => {
+    event.preventDefault();
+    const itemName = document.getElementById("formItemName").value;
+    const localStorageObject = document.getElementById("formJSONObject").value;
+    console.log('save item:');
+  }
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -59,11 +66,11 @@ function LocalStorage(props) {
     console.log('localStorageObject:', localStorageObject);
 
     
-    if (localStorageObject === '') {
-      data = localStorage.getItem(itemName);
-      //console.log('localStorage', data);
+//    if (localStorageObject === '') {
+      data = JSON.parse(localStorage.getItem(itemName));
+      console.log('localStorage', data);
       document.getElementById("formJSONObject").value = data;
-    }
+//    }
 
     document.getElementById("submitButton").disabled = false;
   };
@@ -151,7 +158,7 @@ function LocalStorage(props) {
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <textarea class="form-control" id="formJSONObject" rows="3"></textarea>
+                  <textarea class="form-control" id="formJSONObject" rows="9"></textarea>
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
