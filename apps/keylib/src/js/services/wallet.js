@@ -19,18 +19,18 @@ export default class Wallet {
      walletInitData,
   ) {
 
-    const networks = JSON.parse(localStorage.getItem("networks"));
-    const network = JSON.parse(localStorage.getItem("network"));
+    //const networks = JSON.parse(localStorage.getItem("networks"));
+    //const network = JSON.parse(localStorage.getItem("network"));
 
     // Check if the networks and network are set
     // if not redirect to approiate page to setup.
-    if (Object.keys(networks).length === 0) {
-      console.log('ssssssssssssssss networks keys ::', Object.keys(networks));
-      //redirect("/config/network");
-      //return 'no networks';
-    } else if (Object.keys(network).length === 0) {
-      
-      console.log('ssssssssssssssss network keys ::', Object.keys(network));
+    //if (Object.keys(networks).length === 0) {
+    //  console.log('ssssssssssssssss networks keys ::', Object.keys(networks));
+    //  //redirect("/config/network");
+    //  //return 'no networks';
+    //} else if (Object.keys(network).length === 0) {
+    //  
+    //  console.log('ssssssssssssssss network keys ::', Object.keys(network));
       //redirect("/config/network");
       //window.location.href='/config/network';
       //return 'no network';
@@ -40,7 +40,7 @@ export default class Wallet {
         JSON.stringify(networks[0])
       );
       */
-    }
+    //}
 
     //this.eventEmitter = eventEmitter;
     this.data = '';
