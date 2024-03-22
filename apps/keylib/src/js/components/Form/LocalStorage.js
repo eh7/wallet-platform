@@ -19,15 +19,7 @@ function LocalStorage(props) {
 
   const wallet = new Wallet();
 
-  const [
-    exportData,
-    setExportData
-  ] = useState({});
-
-  const [
-    validationMessage,
-    setValidationMessage
-  ] = useState(false);
+  const [clicked, setClicked] = useState('');
 
   const [
     validationErrors,
@@ -35,96 +27,45 @@ function LocalStorage(props) {
   ] = useState([]);
 
   useEffect(() => {
-  }, [exportData]);
-
-  const handleSave = async (event) => {
-    event.preventDefault();
-    const itemName = document.getElementById("formItemName").value;
-    const localStorageObject = document.getElementById("formJSONObject").value;
-    console.log('save item:');
-  }
+  }, []);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
     const form = event.currentTarget;
 
-    if (document.getElementById("submitButton").disabled) {
+    if (document.getElementById("submitButtonView").disabled || 
+      document.getElementById("submitButtonView").disabled) {
       alert("disabled");
       return;
     }
 
-    document.getElementById("submitButton").disabled = true;
+    document.getElementById("submitButtonSave").disabled = true;
+    document.getElementById("submitButtonView").disabled = true;
 
     const itemName = document.getElementById("formItemName").value;
     const localStorageObject = document.getElementById("formJSONObject").value;
 
-    let data;
-
-    // function TODO here
-    console.log('itemName:', itemName);
-    console.log('localStorageObject:', localStorageObject);
-
-    
-//    if (localStorageObject === '') {
-      console.log('JSON.parse', JSON.parse(localStorage.getItem(itemName)));
-
+    if (clicked === 'view') {
       const prettyData = JSON.stringify(
         JSON.parse(localStorage.getItem(itemName)),
         undefined,
         2
       );
-      data = JSON.parse(localStorage.getItem(itemName));
+      const data = JSON.parse(localStorage.getItem(itemName));
       console.log('localStorage', data);
       document.getElementById("formJSONObject").value = prettyData;
-//    }
+    } else {
+      //console.log(typeof localStorageObject);
+      localStorage.setItem(
+        itemName,
+        localStorageObject,
+      );
+    }
 
-    document.getElementById("submitButton").disabled = false;
+    document.getElementById("submitButtonSave").disabled = false;
+    document.getElementById("submitButtonView").disabled = false;
   };
-
-  encrypt = (text, key) => {
-    //const this_key = Buffer.from(process.env.KEY, 'hex');
-    console.log(key.length, key);
-    const this_key = Buffer.from(key, 'hex');
-    //const this_iv = Buffer.from(process.env.IV, 'hex');
-    const this_iv = crypto.randomBytes(16);
-    let cipher = crypto.createCipheriv(
-      'aes-256-cbc',
-      Buffer.from(this_key),
-      this_iv
-    );
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
-    return {
-      iv: this_iv.toString('hex'),
-      encryptedData: encrypted.toString('hex')
-    };
-  }
-
-  decrypt = (text, key) => {
-    const this_key = Buffer.from(key, 'hex');
-    let iv = Buffer.from(text.iv, 'hex');
-    let encryptedText = Buffer.from(text.encryptedData, 'hex');
-    console.log(this_key.length, this_key);
-    let decipher = crypto.createDecipheriv(
-      'aes-256-cbc',
-      Buffer.from(this_key),
-      iv,
-    );
-    let decrypted = decipher.update(encryptedText);
-    decrypted = Buffer.concat([decrypted, decipher.final()]);
-    const decrpted_object = JSON.parse(decrypted.toString('utf8'));
-
-    console.log("networks", JSON.stringify(decrpted_object.networks));
-    localStorage.setItem("networks", JSON.stringify(decrpted_object.networks));
-    alert('set networks localStorage.setItem("networks", JSON.stringify(decrpted_object.networks))'); 
-
-    console.log("keystore", JSON.stringify(decrpted_object.keystore));
-    localStorage.setItem("keystore", JSON.stringify(decrpted_object.keystore));
-    alert('set keystores localStorage.setItem("keystore", JSON.stringify(decrpted_object.networks))'); 
-
-    wallet.initSetupWalletKeystore(key);
-  }
 
   return (
     <>
@@ -165,12 +106,28 @@ function LocalStorage(props) {
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    id="submitButtonView"
+                    onClick={() => setClicked('view')}
+                  >
+                    View
+                  </Button>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
                   <textarea class="form-control" id="formJSONObject" rows="9"></textarea>
                 </Row>
 
                 <Row className="mb-0 pl-3 pt-3">
-                  <Button variant="primary" type="submit" id="submitButton">
-                    Submit
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    id="submitButtonSave"
+                    onClick={() => setClicked('save')}
+                  >
+                    Save 
                   </Button>
                 </Row>
 
