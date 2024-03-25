@@ -46,25 +46,48 @@ function LocalStorage(props) {
     const itemName = document.getElementById("formItemName").value;
     const localStorageObject = document.getElementById("formJSONObject").value;
 
+//alert('clcicked:' + clicked);
+
     if (clicked === 'view') {
+      console.log('xxxxxxxxxxxxxxxxx', localStorage.getItem(itemName));
+      console.log(localStorage.getItem(itemName) === '');
+      console.log(localStorage.getItem(itemName));
+//      const prettyData = (localStorage.getItem(itemName) === '') ? 
+//        JSON.stringify({}) :
+//        JSON.stringify(
+//          JSON.parse(localStorage.getItem(itemName)),
+//          undefined,
+//          2
+//        );
+
       const prettyData = JSON.stringify(
         JSON.parse(localStorage.getItem(itemName)),
+        //{},
         undefined,
         2
       );
       const data = JSON.parse(localStorage.getItem(itemName));
       console.log('localStorage', data);
       document.getElementById("formJSONObject").value = prettyData;
-    } else {
-      //console.log(typeof localStorageObject);
-      localStorage.setItem(
-        itemName,
-        localStorageObject,
-      );
+    } else if (clicked === 'save') {
+      if (itemName !== '' && localStorageObject !== '') {
+        localStorage.setItem(
+          itemName,
+          localStorageObject,
+        );
+      }
+    } else if (clicked === 'create') {
+      if (itemName !== '' && localStorageObject !== '') {
+        localStorage.setItem(
+          itemName,
+          localStorageObject,
+        );
+      }
     }
 
     document.getElementById("submitButtonSave").disabled = false;
     document.getElementById("submitButtonView").disabled = false;
+    document.getElementById("submitButtonCreate").disabled = false;
   };
 
   return (
@@ -112,7 +135,7 @@ function LocalStorage(props) {
                     id="submitButtonView"
                     onClick={() => setClicked('view')}
                   >
-                    View
+                    view
                   </Button>
                 </Row>
 
@@ -127,7 +150,18 @@ function LocalStorage(props) {
                     id="submitButtonSave"
                     onClick={() => setClicked('save')}
                   >
-                    Save 
+                    save 
+                  </Button>
+                </Row>
+
+                <Row className="mb-0 pl-3 pt-3">
+                  <Button
+                    variant="primary"
+                    type="submit"
+                    id="submitButtonCreate"
+                    onClick={() => setClicked('create')}
+                  >
+                    create
                   </Button>
                 </Row>
 

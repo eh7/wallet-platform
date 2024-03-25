@@ -385,14 +385,15 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
 	      //<p>networkId: { contractFormData.contractNetworkId }</p>
   } else {
 
+console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
     return (
       <div className="container mt-4 p-5 text-primary">
         <Card border="secondary" className="text-secondary">
           <Card.Header>
             <h5>Smart Contract</h5>
             Name: <h1>{ abiData.contractName }</h1>
-  	  Address: <h5><a href={ "https://" + ((web3All.networkId) ? networkBlockerUrls[web3All.networkId] : 'mumbai.polygonscan.com') + "/address/" + abiData.address } target="_blank">{ abiData.address }</a></h5>
-  	</Card.Header>
+  	    Address: <h5><a href={ "https://" + ((web3All.networkId) ? networkBlockerUrls[web3All.networkId] : 'mumbai.polygonscan.com') + "/address/" + abiData.address } target="_blank">{ abiData.address }</a></h5>
+  	  </Card.Header>
           <Card.Header className="">
   	  <h5 className="float-end">Status:<br/>(connected)</h5>
   	  Blockchain Network: <h2>{ networks[abiData.networkId] }</h2>

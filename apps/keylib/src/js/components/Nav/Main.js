@@ -127,6 +127,7 @@ function NavMain() {
                   <Nav.Link href="/contract/ballot">Ballot</Nav.Link>
                   <Nav.Link href="/contract/ballotDev">BallotDev</Nav.Link>
                   <Nav.Link href="/contract/eh7token">Eh7Token</Nav.Link>
+                  <Nav.Link href="/contract/etherWallet">EtherWallet</Nav.Link>
                 </NavDropdownMenu>
               </Nav.Item>
 

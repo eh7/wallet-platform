@@ -46,6 +46,8 @@ console.log('this::', this);
         contractJson = require('../contracts/Eh7Token');
       } else if (contractName === 'BallotDev') {
         contractJson = require('../contracts/BallotDev');
+      } else if (contractName === 'EtherWallet') {
+        contractJson = require('../contracts/EtherWallet');
       }
       //contractJson = require(_contractsJson[contractName]);
 //console.log(contractJson);
