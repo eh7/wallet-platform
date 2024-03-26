@@ -1,6 +1,6 @@
 const crypto = require('crypto');
-//const seedHexJson = require('../seedHex.json');
-const seedHexJson = require('../seedHex.xps13.json');
+const seedHexJson = require('../seedHex.json');
+//const seedHexJson = require('../seedHex.xps13.json');
 //import EthjsWallet, { hdkey as etherHDkey } from 'ethereumjs-wallet';
 const EthjsWallet = require('ethereumjs-wallet');
 require('dotenv/config');

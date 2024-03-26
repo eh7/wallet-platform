@@ -48,6 +48,9 @@ console.log('this::', this);
         contractJson = require('../contracts/BallotDev');
       } else if (contractName === 'EtherWallet') {
         contractJson = require('../contracts/EtherWallet');
+console.log('aaaaaaaa', contractJson.network.address);
+        contractJson.network.address = (process.env.ETHER_WALLET_ADDRESS) ? process.env.ETHER_WALLET_ADDRESS : contractJson.network.address;
+console.log('bbbbbbbb', contractJson.network.address);
       }
       //contractJson = require(_contractsJson[contractName]);
 //console.log(contractJson);
