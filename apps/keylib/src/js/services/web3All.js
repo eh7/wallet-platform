@@ -22,6 +22,8 @@ import {
   contractsJson as _contractsJson,
 } from '../services/conf';
 
+import allContractsJson from '../contracts/All';
+
 class Web3All {
 
   contractData = {};
@@ -38,7 +40,9 @@ console.log('formData :: ', formData);
       this.creationBlock = "";//contractJson.creationBlock; 
 console.log('this::', this);
     } else {
+      const contractJson = allContractsJson[contractName]);
 
+      /*
       let contractJson = '';
       if (contractName === 'Ballot') {
         contractJson = require('../contracts/Ballot');
@@ -59,6 +63,7 @@ console.log('aaaaaaaa', contractJson.network.address);
         contractJson.network.address = (process.env.ETHER_WALLET_ADDRESS) ? process.env.ETHER_WALLET_ADDRESS : contractJson.network.address;
 console.log('bbbbbbbb', contractJson.network.address);
       }
+      */
       //contractJson = require(_contractsJson[contractName]);
 //console.log(contractJson);
 //

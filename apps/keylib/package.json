@@ -4,9 +4,10 @@
   "description": "",
   "mainOld": "index.js",
   "scripts": {
-    "startParcel": "parcel serve src/index.html --public-url / --dist-dir dist",
-    "start": "parcel serve src/index.dev.html --public-url / --dist-dir dist",
-    "build": "parcel build src/index.dev.html --public-url / --dist-dir dist",
+    "startParcel": "npm run contractJsonBuild && parcel serve src/index.html --public-url / --dist-dir dist",
+    "start": "npm run contractJsonBuild && parcel serve src/index.dev.html --public-url / --dist-dir dist",
+    "build": "npm run contractJsonBuild && parcel build src/index.dev.html --public-url / --dist-dir dist",
+    "contractJsonBuild": "node src/js/contracts/join.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Gavin Francis <gav@eh7.co.uk>",
