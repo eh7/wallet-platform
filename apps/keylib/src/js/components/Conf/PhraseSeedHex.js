@@ -8,11 +8,12 @@ import Container from "react-bootstrap/Container";
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 
-import InputNetwork from './InputNetwork';
- 
+import Phrase from '../../components/Form/Phrase';
+import SeedHex from '../../components/Form/SeedHex';
+
 import Wallet from '../../services/wallet';
 
-function ConfNetwork({_subtitle, _new, type}) {
+function ConfPhraseSeedHex({_subtitle, _new, type}) {
 
   const wallet = new Wallet();
 
@@ -35,11 +36,19 @@ function ConfNetwork({_subtitle, _new, type}) {
     <>
       <Card className="w-100">
         <Row className="mb-0 pl-3 pt-3">
-          <InputNetwork networks={networks} setNetworks={setNetworks} type={type}/>
+        <h5>SeedHex</h5>
+        <SeedHex/>
+        </Row>
+        <Row>
+          <h3>Or</h3>
+        </Row>
+        <Row className="mb-0 pl-3 pt-3">
+        <h5>Phrase</h5>
+        <Phrase/>
         </Row>
       </Card>
     </>
   );
 }
 
-export default ConfNetwork;
+export default ConfPhraseSeedHex;

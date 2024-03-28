@@ -14,6 +14,7 @@ import Applications from './pages/Applications';
 import SendTx from './pages/Send';
 
 import ConfNetwork from './pages/Conf/Network';
+import ConfPhraseSeedHex from './components/Conf/PhraseSeedHex';
 //import LocalStorage from './components/Conf/LocalStorage';
 import LocalStorage from './components/Form/LocalStorage';
 
@@ -96,6 +97,17 @@ const App = () => {
   }
   if (Object.keys(liveSeedHex || {}).length === 0) {
     alert('no seedHex setup');
+    return (
+      <>
+        <Container>
+          <Row><h1>Configure pharase or seedHex</h1></Row>
+          <Row className="p-3">
+            <h6>setup your default "phrase" or "seedHex" data</h6>
+            <ConfPhraseSeedHex type='init'/>
+          </Row>
+        </Container>
+      </>
+    );
   }
 
 
