@@ -48,6 +48,7 @@ const App = () => {
 
   const liveNetworks = JSON.parse(localStorage.getItem("networks"));
   const liveNetwork = JSON.parse(localStorage.getItem("network"));
+  const liveSeedHex = JSON.parse(localStorage.getItem("seedHex"));
 
   //console.log('xxxxxxxxxxxxxxxxxx', typeof liveNetworks);
   //console.log('xxxxxxxxxxxxxxxxxx', liveNetwork, Object.keys(liveNetworks || {}).length);
@@ -92,6 +93,9 @@ const App = () => {
       </>
     );
 */
+  }
+  if (Object.keys(liveSeedHex || {}).length === 0) {
+    alert('no seedHex setup');
   }
 
 

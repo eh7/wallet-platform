@@ -57,7 +57,7 @@ export default class ConfNetwork extends React.Component {
             {this.state.networks}
           </Row>
           <Row>
-            <ConfNetwork /> 
+            <ConfNetwork type={this.props.type}/> 
           </Row>
         </Container>
       </>

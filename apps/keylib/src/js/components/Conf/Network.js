@@ -12,7 +12,7 @@ import InputNetwork from './InputNetwork';
  
 import Wallet from '../../services/wallet';
 
-function ConfNetowrk({_subtitle, _new}) {
+function ConfNetowrk({_subtitle, _new, type}) {
 
   const wallet = new Wallet();
 
@@ -35,7 +35,7 @@ function ConfNetowrk({_subtitle, _new}) {
     <>
       <Card className="w-100">
         <Row className="mb-0 pl-3 pt-3">
-          <InputNetwork networks={networks} setNetworks={setNetworks}/>
+          <InputNetwork networks={networks} setNetworks={setNetworks} type={type}/>
         </Row>
       </Card>
     </>

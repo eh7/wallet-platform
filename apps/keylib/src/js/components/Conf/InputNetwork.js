@@ -6,7 +6,7 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Table from 'react-bootstrap/Table';
 
-const InputNetwork = ({ networks, setNetworks }) => {
+const InputNetwork = ({ networks, setNetworks, type }) => {
     
   const inputNetworkRef = useRef(null)
   const inputIdRef = useRef(null)
@@ -25,6 +25,11 @@ const InputNetwork = ({ networks, setNetworks }) => {
       explorer: inputExplorerRef.current.value,
     }])
     inputNetworkRef.current.value = ''
+
+    if (type === 'init') {
+      console.log('---------------> init done now reload');
+      window.location.href='/';
+    }
   }
     
   const handleDelete = (networkToDelete) => {

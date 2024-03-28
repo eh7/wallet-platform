@@ -6,6 +6,8 @@ import { ethers } from 'ethers';
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
+import { redirect } from "react-router-dom";
+
 //import { redirect } from "react-router-dom";
 
 import 'dotenv/config';
@@ -255,6 +257,7 @@ export default class Wallet {
       return zeroWallet.getPrivateKeyString();
     } else {
       alert('no keyset error wallet/getPrivateKey');
+      //return { redirect: '/setup/phrase/import' };
     }
   }
 
@@ -309,6 +312,7 @@ export default class Wallet {
       return addressCheckSum;
 
     } else {
+      //return { redirect: '/setup/phrase/import' };
       alert('no keyset error');
     }
   }
