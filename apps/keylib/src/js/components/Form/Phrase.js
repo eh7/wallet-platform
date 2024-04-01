@@ -12,7 +12,7 @@ import ReactToPrint from 'react-to-print';
 
 import Wallet from '../../services/wallet';
 
-function FormPhrase({_subtitle, _new}) {
+function FormPhrase({_subtitle, _new, type}) {
 
 //  const [validated, setValidated] = useState(false);
 
@@ -113,7 +113,7 @@ console.log(password.value, " -- ", passwordCheck.value);
     for(let i = 1; i <= form[0].value; i++) {
      words.push(form[i].value);
     }
-    wallet.saveNewPhraseSeed(words, password.value);
+    wallet.saveNewPhraseSeed(words, password.value, type);
   };
 
   const handleSelectChage = async (e) => {

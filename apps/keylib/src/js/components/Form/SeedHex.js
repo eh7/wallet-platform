@@ -51,6 +51,10 @@ function SeedHex(props) {
         'keyset',
         true,
       );
+
+      if (type === 'init') {
+        window.location.href='/';
+      }
     }
 
     document.getElementById("submitButtonSave").disabled = false;
