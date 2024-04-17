@@ -12,7 +12,7 @@ import InputNetwork from './InputNetwork';
  
 import Wallet from '../../services/wallet';
 
-function ConfNetowrk({_subtitle, _new, type}) {
+function ConfNetwork({_subtitle, _new, type}) {
 
   const wallet = new Wallet();
 
@@ -42,4 +42,4 @@ function ConfNetowrk({_subtitle, _new, type}) {
   );
 }
 
-export default ConfNetowrk;
+export default ConfNetwork;

@@ -1,6 +1,7 @@
 const contracts = [
   'Ballot',
   'BallotDev',
+  'Dai',
   'Eh7Token',
   'EtherWallet',
   'Bespoke',
@@ -9,6 +10,7 @@ const contracts = [
 const contractsJson = {
   "Ballot": "../contracts/Ballot",
   "BallotDev": "../contracts/BallotDev",
+  "Dai": "../contracts/Dai",
   "Eh7Token": "../contracts/Eh7Token",
   "EtherWallet": "../contracts/EtherWallet",
 }

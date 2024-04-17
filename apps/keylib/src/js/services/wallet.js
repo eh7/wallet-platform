@@ -345,7 +345,7 @@ export default class Wallet {
     return await bip39.generateMnemonic();
   }
 
-  saveNewPhraseSeed = async (_words, _password) => {
+  saveNewPhraseSeed = async (_words, _password, _type) => {
     const phrase = _words.join(' ');
     const seedHex = bip39.mnemonicToSeedHex(phrase);
     // TODO remove this console.log and think about how we
@@ -367,6 +367,10 @@ export default class Wallet {
     console.log("!!! saving keystore");
     await this.saveKeystorePassword(_password);
     console.log("!!! saved keystore");
+
+    if (_type === 'init') {
+      window.location.href='/';
+    }
   }
 
   getNewPhrase = async () => {
