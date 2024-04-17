@@ -1,0 +1,11 @@
+examples
+node_modules/
+dist/
+.parcel-cache/
+.env
+test.mjs
+test.js
+test.txt
+tmp.txt
+network.json
+networks.json
