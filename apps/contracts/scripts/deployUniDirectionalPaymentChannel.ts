@@ -1,7 +1,10 @@
 import { ethers } from "hardhat";
 
 async function main() {
-  const thisContract = await ethers.deployContract("UniDirectionalPaymentChannel", {
+  let contract_owner = await ethers.getSigner(network.config.from);
+  console.log('contract_owner', contract_owner);
+
+  const thisContract = await ethers.deployContract("UniDirectionalPaymentChannel", contract_owner, {
   });
 
   await thisContract.waitForDeployment();
