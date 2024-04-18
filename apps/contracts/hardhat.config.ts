@@ -8,7 +8,7 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const PRIVATE_KEY_DEV_EVM = process.env.PRIVATE_KEY_DEV_EVM;
 
 const config: HardhatUserConfig = {
-  solidity: "0.8.20",
+  solidity: "0.8.24",
   //defaultNetwork: "yourtestnetname",
   networks: {
   //  hardhat:{},
