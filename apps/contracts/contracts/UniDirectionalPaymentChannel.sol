@@ -17,6 +17,8 @@ contract ReentrancyGuard {
 contract UniDirectionalPaymentChannel is ReentrancyGuard {
     using ECDSA for bytes32;
 
+    bool closed = false;
+
     address payable public sender;
     address payable public receiver;
 
@@ -78,13 +80,15 @@ contract UniDirectionalPaymentChannel is ReentrancyGuard {
 
         (bool sent,) = receiver.call{value: _amount}("");
         require(sent, "Failed to send Ether");
-        selfdestruct(sender);
+        closed = true;
+        //selfdestruct(sender);
     }
 
     function cancel() external {
         require(msg.sender == sender, "!sender");
         require(block.timestamp >= expiresAt, "!expired");
-        selfdestruct(sender);
+        closed = true;
+        //selfdestruct(sender);
     }
 }
 
