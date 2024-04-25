@@ -5,6 +5,7 @@ const contracts = [
   'Eh7Token',
   'EtherWallet',
   'Bespoke',
+  'Groth16VerifierSquare',
 ];
 
 const contractsJson = {
@@ -13,6 +14,7 @@ const contractsJson = {
   "Dai": "../contracts/Dai",
   "Eh7Token": "../contracts/Eh7Token",
   "EtherWallet": "../contracts/EtherWallet",
+  "Groth16VerifierSquare": "../contracts/Groth16VerifierSquare",
 }
 
 const networks = {
