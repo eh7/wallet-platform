@@ -3,6 +3,29 @@ pragma solidity ^0.8.24;
 
 import "./ECDSA.sol";
 
+/*
+contract ReentrancyGuard {
+  bytes32 constant REENTRANCY_GUARD = keccak256("REENTRANCY_GUARD");
+
+  //modifier nonReentrant() {
+  modifier guard() {
+    require(tload(REENTRANCY_GUARD) == 0, "Reentrant call detected.");
+    tstore(REENTRANCY_GUARD, 1);
+    _;
+    tstore(REENTRANCY_GUARD, 0);
+
+    assembly {
+      if tload(REENTRANCY_GUARD) { revert(0, 0) }
+      tstore(REENTRANCY_GUARD, 1)
+    }
+    _;
+    assembly {
+      tstore(REENTRANCY_GUARD, 0)
+    }
+  }  
+}
+*/
+
 contract ReentrancyGuard {
     bool private locked;
 
