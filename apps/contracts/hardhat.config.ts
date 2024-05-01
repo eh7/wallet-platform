@@ -1,6 +1,8 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
 
+import { TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS } from "hardhat/builtin-tasks/task-names";
+
 require('dotenv').config({ path: __dirname+'/.env' });
 
 const INFURA_API_KEY = process.env.INFURA_API_KEY;
@@ -28,6 +30,10 @@ const config: HardhatUserConfig = {
       url: 'https://optimism-sepolia.infura.io/v3/' + INFURA_API_KEY,
       accounts: [`0x${PRIVATE_KEY}`]
     },
+    zksync_testnet:{
+      url: "https://sepolia.era.zksync.dev",
+      accounts: [`0x${PRIVATE_KEY}`]
+    },
   },
   sourcify: {
     enabled: false
@@ -53,6 +59,30 @@ const config: HardhatUserConfig = {
     ]
   },
 };
+
+subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS).setAction(async (_, __, runSuper) => {
+  let paths = await runSuper();
+
+  //console.log("zzzzzzzzzzzzzzzzzzzzzzzz", paths.filter(
+  //  (p: any) => !p.includes("TransientStore")
+  //));
+
+  paths = paths.filter(
+    (p: any) => !p.includes("TransientTest")
+  );
+  paths = paths.filter(
+    (p: any) => !p.includes("TransientStore")
+  );
+  return paths;
+
+  //console.log(paths);
+
+  //return paths.filter(
+  //  (p: any) => !p.includes("TransientStore")
+  //);
+
+  //return paths.filter((p: any) => !p.includes("TransientTest"));
+});
 
 export default config;
 
