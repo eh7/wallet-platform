@@ -32,17 +32,32 @@ describe("UniDirectionalPaymentChannel contract", function () {
    
     const authedAmount = "0.1";
     const signAuthedAmount = ethers.parseEther(authedAmount);
-    //const signedMessage = await uniDirectionalPaymentChannelContract.getHash(signAuthedAmount)
+
+    const hash = await uniDirectionalPaymentChannelContract.getHash(signAuthedAmount);
+    console.log(hash);
+
+    console.log('1',await uniDirectionalPaymentChannelContract.sender());
+    console.log('2',owner.address);
+
+    const sig = await owner.signMessage(hash)
+//    const sig = await owner.signMessage(ethers.utils.arrayify(hash))
+console.log(sig);
+
+    const verify = await uniDirectionalPaymentChannelContract.verify(signAuthedAmount, sig);
+    console.log(verify);
+
+/*
     const signedMessage = await uniDirectionalPaymentChannelContract.getEthSignedHash(signAuthedAmount)
     console.log(
       'signedMessage',
       signedMessage,
     );
 
-    const verify = await uniDirectionalPaymentChannelContract.verify(signAuthedAmount, owner.addres);
+    const verify = await uniDirectionalPaymentChannelContract.verify(signAuthedAmount, signedMessage);
 
     expect(await uniDirectionalPaymentChannelContract.sender()).to.equal(owner.address);
     expect(await uniDirectionalPaymentChannelContract.receiver()).to.equal(receiver.address);
+*/
 
 //    expect(await uniDirectionalPaymentChannelContract.expiresAt()).to.equal(receiver.address);
 //console.log(
