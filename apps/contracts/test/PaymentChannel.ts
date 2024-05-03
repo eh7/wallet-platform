@@ -10,7 +10,6 @@ describe("PaymentChannel contract", function () {
 
     const duration = 7 * 24 * 60 * 60;
 
-    //const sendAmount = ethers.utils.parseEther("1.0");
     const amount = "1.0";
     const sendAmount = ethers.parseEther(amount);
 
@@ -40,44 +39,31 @@ describe("PaymentChannel contract", function () {
       )).toString()
     );
     expect(contractBalance).to.equal(amount);
-
   });
 
-/*
-    const paymentChannelContract = await ethers.deployContract("PaymentChannel", [receiver.address], {
+
+  it("Check varify signature", async function () {
+    const [owner] = await ethers.getSigners();
+    const receiver = (await ethers.getSigners())[1];
+    const duration = 7 * 24 * 60 * 60;
+    const amount = "1.0";
+    const sendAmount = ethers.parseEther(amount);
+    const paymentChannelContract = await ethers.deployContract("PaymentChannel", [receiver.address, duration], {
       value: sendAmount,
     });
 
-    let contractBalance = ethers.formatEther(
-      (await ethers.provider.getBalance(
-        paymentChannelContract.target,
-      )).toString()
-    );
+    const dataToSign = ethers.parseEther("0.1");
+    //const signature = '0x1f88ed57be3c174a37e7c1f012701a907984262f4354b77c5fe31c82f88cb42538233b117b4d276e46408b633047000073f2716fa1ad9f0780b576bcdc9a728f1c';
+    const signature = '0x11125e14c61cf3fa1a5faae01dcdeb3306a2b379ddfa425b5cb84de8eb8ccd8b0188764ff1863b2103f03a33c513fb3a5e9cba8f9902ce6efa0ad189bbb299d21b';
 
-    expect(contractBalance).to.equal(amount);
-*/
-/*
     console.log(
-      paymentChannelContract.target,
-      contractBalance,
+      paymentChannelContract.target + "\n",
+      await paymentChannelContract.hashData(dataToSign) + "\n",
+      await paymentChannelContract.hash(dataToSign),
+      await paymentChannelContract.verify(dataToSign, signature),
+      await paymentChannelContract.splitSignature(signature),
+      await paymentChannelContract.recoverSigner(dataToSign, signature)
     );
-*/
-/*  
-    const authedAmount = "0.1";
-    const signAuthedAmount = ethers.parseEther(authedAmount);
-
-    const hash = await paymentChannelContract.getHash(signAuthedAmount);
-    console.log(hash);
-
-    console.log('1',await paymentChannelContract.sender());
-    console.log('2',owner.address);
-
-    const sig = await owner.signMessage(hash)
-//    const sig = await owner.signMessage(ethers.utils.arrayify(hash))
-console.log(sig);
-
-    const verify = await paymentChannelContract.verify(signAuthedAmount, sig);
-    console.log(verify);
-*/
+  });
 
 });
