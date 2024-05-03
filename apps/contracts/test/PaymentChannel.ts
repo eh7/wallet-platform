@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
+import keccak256 from "keccak256";
 
 describe("PaymentChannel contract", function () {
 
@@ -52,9 +53,24 @@ describe("PaymentChannel contract", function () {
       value: sendAmount,
     });
 
+    const contractAddress = paymentChannelContract.target;// '0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512';
     const dataToSign = ethers.parseEther("0.1");
-    //const signature = '0x1f88ed57be3c174a37e7c1f012701a907984262f4354b77c5fe31c82f88cb42538233b117b4d276e46408b633047000073f2716fa1ad9f0780b576bcdc9a728f1c';
-    const signature = '0x11125e14c61cf3fa1a5faae01dcdeb3306a2b379ddfa425b5cb84de8eb8ccd8b0188764ff1863b2103f03a33c513fb3a5e9cba8f9902ce6efa0ad189bbb299d21b';
+    //const signature = '0x11125e14c61cf3fa1a5faae01dcdeb3306a2b379ddfa425b5cb84de8eb8ccd8b0188764ff1863b2103f03a33c513fb3a5e9cba8f9902ce6efa0ad189bbb299d21b';
+
+    const types = ['address', 'uint256'];
+    const values= [contractAddress, dataToSign];
+    const data = keccak256(
+      ethers.solidityPacked(types, values)
+    );
+    const signature = await owner.signMessage(
+      data
+    );
+
+    expect(
+      await paymentChannelContract.recoverSigner(dataToSign, signature)
+    ).to.equal(
+      owner.address
+    );
 
     console.log(
       paymentChannelContract.target + "\n",

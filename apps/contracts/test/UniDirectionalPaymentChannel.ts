@@ -43,6 +43,7 @@ describe("UniDirectionalPaymentChannel contract", function () {
 //    const sig = await owner.signMessage(ethers.utils.arrayify(hash))
 console.log(sig);
 
+    //const verify = await uniDirectionalPaymentChannelContract.verify(signAuthedAmount, sig);
     const verify = await uniDirectionalPaymentChannelContract.verify(signAuthedAmount, sig);
     console.log(verify);
 
