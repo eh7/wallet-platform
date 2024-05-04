@@ -2,6 +2,16 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 import keccak256 from "keccak256";
 
+const getBalance = async (ethers, address) => {
+  const balance = ethers.formatEther(
+    (await ethers.provider.getBalance(
+      address,
+    )).toString()
+  );
+  console.log('balance (', address, ')', balance);
+}
+
+
 describe("PaymentChannel contract", function () {
 
   it("Deployment the PaymentChannel contract, and check sender, recipient, expiration, contrcat eth balance is setup okay", async function () {
@@ -46,6 +56,10 @@ describe("PaymentChannel contract", function () {
   it("Check varify signature", async function () {
     const [owner] = await ethers.getSigners();
     const receiver = (await ethers.getSigners())[1];
+
+    console.log('sender', owner.address);   
+    console.log('receiver', receiver.address);   
+
     const duration = 7 * 24 * 60 * 60;
     const amount = "1.0";
     const sendAmount = ethers.parseEther(amount);
@@ -72,6 +86,22 @@ describe("PaymentChannel contract", function () {
       owner.address
     );
 
+    getBalance(ethers, paymentChannelContract.target);
+    getBalance(ethers, owner.address);
+    getBalance(ethers, receiver.address);
+
+    await paymentChannelContract.connect(
+      receiver
+    ).claim(
+      dataToSign,
+      signature,
+    );
+
+    getBalance(ethers, paymentChannelContract.target);
+    getBalance(ethers, owner.address);
+    getBalance(ethers, receiver.address);
+
+    /*
     console.log(
       paymentChannelContract.target + "\n",
       await paymentChannelContract.hashData(dataToSign) + "\n",
@@ -80,6 +110,7 @@ describe("PaymentChannel contract", function () {
       await paymentChannelContract.splitSignature(signature),
       await paymentChannelContract.recoverSigner(dataToSign, signature)
     );
+    */
   });
 
 });

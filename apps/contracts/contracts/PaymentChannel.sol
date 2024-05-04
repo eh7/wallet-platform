@@ -39,6 +39,15 @@ contract PaymentChannel {
     return message.toEthSignedMessageHash().recover(signature) == sender;
   }
 
+  // the recipient can claim amount authorised by the sender
+  // at any time by presenting a signature and amount
+  function claim(uint256 amount, bytes memory signature) public {
+    require(msg.sender == recipient);
+    require(isValidSignature(amount, signature));
+    require(address(this).balance >= amount);
+    recipient.transfer(amount);
+  }
+
   // the recipient can close the channel at any time by presenting a
   // signed amount from the sender. the recipient will be sent that amount,
   // and the remainder will go back to the sender
