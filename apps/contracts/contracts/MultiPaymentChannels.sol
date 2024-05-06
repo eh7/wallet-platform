@@ -12,11 +12,24 @@ contract MultiPaymentChannels {
   address payable public recipient;  // the account receiving the payments
   uint256 public expiration;     // timeout in case the recipient never closes the channel
 
+  // new variables to hold values for authorised payments
+  // in the multi payment channel
+  mapping(address => bytes32) root;
+  mapping(address => uint256) balance;
+  mapping(bytes32 => bool) payed;
+
   // in the constructor pass in the recipient address and the duration of the payment channel
   constructor (address payable _recipient, uint256 duration) payable {
     sender = payable(msg.sender);
     recipient = _recipient;
     expiration = block.timestamp + duration;
+  }
+
+  // WIP: function create or add balance to a payment channel 
+  function creditPaymentChannel(uint256 amount, bytes32 hash) external payable returns (bytes memory){
+    //sender = payable(msg.sender);
+    //recipient = _recipient;
+    //expiration = block.timestamp + duration;
   }
 
   function hashData(uint256 amount) external view returns (bytes memory){
