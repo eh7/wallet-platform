@@ -18,6 +18,31 @@ contract MultiPaymentChannels {
   mapping(address => uint256) balance;
   mapping(bytes32 => bool) payed;
 
+  /*
+    // channel, payment and transaction hash deffinitions
+    // to be used in multi payment channel setupand operation
+
+    channel hash (
+      constrcatAddress,
+      sender,
+      receiver,
+      chaninId,
+    )
+
+    payment hash (
+      channel hash,
+      amount,
+      nonce,
+    )
+
+    transaction hash (
+      channel hash,
+      payment hash,
+      signature
+    )
+
+  */
+
   // in the constructor pass in the recipient address and the duration of the payment channel
   constructor (address payable _recipient, uint256 duration) payable {
     sender = payable(msg.sender);

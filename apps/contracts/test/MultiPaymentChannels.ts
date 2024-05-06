@@ -114,6 +114,28 @@ describe("MultiPaymentChannels contract", function () {
   });
 
   it("Check create, send recieve and close based on signature", async function () {
+    /*
+
+    channel hash (
+      constrcatAddress,
+      sender,
+      receiver,
+      chaninId,
+    )
+
+    payment hash (
+      channel hash,
+      amount,
+      nonce,
+    )
+
+    transaction hash (
+      channel hash,
+      payment hash,
+      signature
+    )
+
+    */
   });
 
 });
