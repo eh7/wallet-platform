@@ -113,4 +113,7 @@ describe("MultiPaymentChannels contract", function () {
     */
   });
 
+  it("Check create, send recieve and close based on signature", async function () {
+  });
+
 });
