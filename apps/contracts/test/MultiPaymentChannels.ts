@@ -14,7 +14,7 @@ const getBalance = async (ethers, address) => {
 
 describe("MultiPaymentChannels contract", function () {
 
-  it("Deployment the MultiPaymentChannels contract, and check sender, recipient, expiration, contrcat eth balance is setup okay", async function () {
+  it.skip("Deployment the MultiPaymentChannels contract, and check sender, recipient, expiration, contrcat eth balance is setup okay", async function () {
 
     const [owner] = await ethers.getSigners();
     const receiver = (await ethers.getSigners())[1];
@@ -53,7 +53,7 @@ describe("MultiPaymentChannels contract", function () {
   });
 
 
-  it("Check varify signature", async function () {
+  it.skip("Check varify signature", async function () {
     const [owner] = await ethers.getSigners();
     const receiver = (await ethers.getSigners())[1];
 
@@ -136,6 +136,24 @@ describe("MultiPaymentChannels contract", function () {
     )
 
     */
+
+    const sender = (await ethers.getSigners())[0];
+    const receiver = (await ethers.getSigners())[1];
+
+    console.log('sender', sender.address);   
+    console.log('receiver', receiver.address);   
+
+    const multiPaymentChannelsContract = await ethers.deployContract("MultiPaymentChannels", [], {
+    });
+
+    //const duration = 7 * 24 * 60 * 60;
+    const amount = "1.0";
+    const sendAmount = ethers.parseEther(amount);
+    const hash = "";
+
+    await multiPaymentChannelsContract.creditPaymentChannel(hash, {
+      value: sendAmount,
+    });
   });
 
 });

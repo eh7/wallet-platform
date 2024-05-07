@@ -44,11 +44,15 @@ contract MultiPaymentChannels {
   */
 
   // in the constructor pass in the recipient address and the duration of the payment channel
+  constructor () {
+  }
+  /*
   constructor (address payable _recipient, uint256 duration) payable {
     sender = payable(msg.sender);
     recipient = _recipient;
     expiration = block.timestamp + duration;
   }
+  */
 
   // WIP: function create or add balance to a payment channel 
   function creditPaymentChannel(uint256 amount, bytes32 hash) external payable returns (bytes memory){
