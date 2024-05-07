@@ -14,8 +14,11 @@ contract MultiPaymentChannels {
 
   // new variables to hold values for authorised payments
   // in the multi payment channel
+  uint256 public nonce = 0;
   mapping(address => bytes32) root;
-  mapping(address => uint256) balance;
+  mapping(address => uint256) public balance;
+  mapping(bytes32 => bool) channel;
+  mapping(bytes32 => address) channelSender;
   mapping(bytes32 => bool) payed;
 
   /*
@@ -55,12 +58,86 @@ contract MultiPaymentChannels {
   */
 
   // WIP: function create or add balance to a payment channel 
-  function creditPaymentChannel(uint256 amount, bytes32 hash) external payable returns (bytes memory){
+  function createPaymentChannel(bytes32 hash) external payable returns (bytes memory){
+    require(!channel[hash]);
+    channel[hash] = true;
+    channelSender[hash] = msg.sender;
+    balance[msg.sender] += msg.value;
     //sender = payable(msg.sender);
     //recipient = _recipient;
     //expiration = block.timestamp + duration;
   }
 
+  // WIP
+  function creditSenderBalance() external payable {
+    balance[msg.sender] += msg.value;
+  }
+
+  // WIP
+  function withdrawBalance() external payable {
+    uint256 amount = balance[msg.sender];
+    require(
+      address(this).balance >= amount,
+      "balance greater than contract balance"
+    );
+
+    balance[msg.sender] = 0;
+
+    (bool success,) = msg.sender.call{value: amount}("");
+    require(success, "Failed to send Ether");
+  }
+
+  // WIP
+  function isValidChannelHashSignature(
+    bytes32 channel_hash,
+    uint256 amount,
+    bytes memory signature
+  ) internal view returns (bool){
+  //) external view returns (bytes memory){
+    //return abi.encodePacked(address(this), amount, channel_hash);
+
+    bytes32 message = keccak256(abi.encodePacked(address(this), amount, channel_hash));
+    return message.toEthSignedMessageHash().recover(signature) == channelSender[channel_hash];
+  }
+
+  // WIP
+  function claimChannelHashSignature(
+    bytes32 channel_hash,
+    uint256 amount,
+    bytes memory signature
+  ) external returns (bool){
+    //require(isValidSignature(amount, signature));
+    require(isValidChannelHashSignature(
+      channel_hash,
+      amount,
+      signature
+    ));
+    require(address(this).balance >= amount);
+    require(
+      balance[
+        channelSender[channel_hash]
+      ] >= amount
+    );
+    balance[
+      channelSender[channel_hash]
+    ] -= amount;
+    payable(msg.sender).transfer(amount);
+  }
+
+  // WIP
+  function addressOfChannelHashSignature(
+    bytes32 channel_hash,
+    uint256 amount,
+    bytes memory signature
+  ) external view returns (address){
+  //) external view returns (bytes memory){
+    //return abi.encodePacked(address(this), amount, channel_hash);
+
+    bytes32 message = keccak256(abi.encodePacked(address(this), amount, channel_hash));
+    return message.toEthSignedMessageHash().recover(signature);
+  }
+
+/*
   function hashData(uint256 amount) external view returns (bytes memory){
     return abi.encodePacked(address(this), amount);
   }
@@ -114,6 +191,7 @@ contract MultiPaymentChannels {
     //sender.transfer(amount);
     selfdestruct(sender);
   }
+*/
 
   function getEthSignedMessageHash(bytes32 _messageHash)
     public

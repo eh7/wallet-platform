@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import hardhat, { ethers } from "hardhat";
 import keccak256 from "keccak256";
 
 const getBalance = async (ethers, address) => {
@@ -9,6 +9,13 @@ const getBalance = async (ethers, address) => {
     )).toString()
   );
   console.log('balance (', address, ')', balance);
+}
+
+const formatBalance = async (ethers, amount, tag) => {
+  const balance = ethers.formatEther(
+    amount.toString()
+  );
+  console.log('contract balance (', tag, '): ', balance);
 }
 
 
@@ -149,11 +156,122 @@ describe("MultiPaymentChannels contract", function () {
     //const duration = 7 * 24 * 60 * 60;
     const amount = "1.0";
     const sendAmount = ethers.parseEther(amount);
-    const hash = "";
+    const contractAddress = multiPaymentChannelsContract.target;
+    const chainId = hardhat.network.config.chainId;
+    const channel_hash = keccak256(
+      contractAddress,
+      sender.address,
+      receiver.address,
+      chainId,
+    );
 
-    await multiPaymentChannelsContract.creditPaymentChannel(hash, {
+    await multiPaymentChannelsContract.createPaymentChannel(
+      channel_hash,
+      {
+        value: sendAmount,
+      }
+    );
+
+    getBalance(ethers, multiPaymentChannelsContract.target);
+    getBalance(ethers, sender.address);
+    getBalance(ethers, receiver.address);
+
+    formatBalance(
+      ethers,
+      await multiPaymentChannelsContract.balance(sender.address),
+      sender.address
+    );
+
+    await multiPaymentChannelsContract.creditSenderBalance({
       value: sendAmount,
     });
+
+    //
+    // WIP :: test signature creation/verification off chain
+    //
+    let authAmount = "0.1";
+    const authSendAmount = ethers.parseEther(authAmount);
+    let nonce = await multiPaymentChannelsContract.nonce(),
+    const payment_hash = keccak256(
+      channel_hash,
+      authSendAmount,
+      nonce,
+    );
+    console.log('payment_hash', payment_hash.toString('hex'));
+
+    const types = ['address', 'uint256', 'bytes32'];
+    const values= [contractAddress, authSendAmount, channel_hash];
+    const data = keccak256(
+      ethers.solidityPacked(types, values)
+    );
+    const signature = await sender.signMessage(
+      data
+    );
+    console.log('signature', signature);
+    const recoveredSignerAddress = ethers.verifyMessage(data, signature)
+    console.log('recoveredSignerAddress', recoveredSignerAddress);
+    console.log('sender', sender.address);
+
+    const signature_data_address = await multiPaymentChannelsContract.connect(receiver).addressOfChannelHashSignature(
+      channel_hash,
+      authSendAmount,
+      signature,
+    );
+    console.log('signature_data_address', signature_data_address);
+    //console.log(signature_data_address);
+    //console.log(ethers.solidityPacked(types, values));
+    //console.log(channel_hash.toString('hex'));
+
+    /*
+    const isValid = await multiPaymentChannelsContract.connect(receiver).isValidChannelHashSignature(
+      channel_hash,
+      authSendAmount,
+      signature,
+    );
+    console.log(isValid);
+    */
+
+    console.log('before .claimChannelHashSignature');
+    getBalance(ethers, sender.address);
+    getBalance(ethers, receiver.address);
+    await multiPaymentChannelsContract.connect(receiver).claimChannelHashSignature(
+      channel_hash,
+      authSendAmount,
+      signature,
+    );
+    console.log('after .claimChannelHashSignature');
+    getBalance(ethers, sender.address);
+    getBalance(ethers, receiver.address);
+
+
+    // END WIP
+
+    formatBalance(
+      ethers,
+      await multiPaymentChannelsContract.balance(sender.address),
+      sender.address
+    );
+    getBalance(ethers, multiPaymentChannelsContract.target);
+
+    getBalance(ethers, sender.address);
+    await multiPaymentChannelsContract.withdrawBalance();
+
+    formatBalance(
+      ethers,
+      await multiPaymentChannelsContract.balance(sender.address),
+      sender.address
+    );
+    getBalance(ethers, multiPaymentChannelsContract.target);
+    getBalance(ethers, sender.address);
+
+
+
+    //await multiPaymentChannelsContract.createPaymentChannel(
+    //  channel_hash,
+    //  {
+    //    value: sendAmount,
+    //  }
+    //);
   });
 
 });
