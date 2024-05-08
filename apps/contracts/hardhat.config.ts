@@ -8,6 +8,7 @@ require('dotenv').config({ path: __dirname+'/.env' });
 const INFURA_API_KEY = process.env.INFURA_API_KEY;
 const PRIVATE_KEY = process.env.PRIVATE_KEY;
 const PRIVATE_KEY_DEV_EVM = process.env.PRIVATE_KEY_DEV_EVM;
+const PRIVATE_KEY_DEV_EVM_HH = process.env.PRIVATE_KEY_DEV_EVM_HH;
 
 const config: HardhatUserConfig = {
   solidity: "0.8.24",
@@ -16,7 +17,7 @@ const config: HardhatUserConfig = {
   //  hardhat:{},
     devEvmNode:{
       url: 'http://127.0.0.1:8545/',
-      accounts: [`0x${PRIVATE_KEY_DEV_EVM}`]
+      accounts: [`0x${PRIVATE_KEY_DEV_EVM_HH}`]
     },
     goerli:{
       url: 'https://goerli.infura.io/v3/' + INFURA_API_KEY,

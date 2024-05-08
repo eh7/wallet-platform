@@ -4,6 +4,21 @@ const keccak256 = require("keccak256")
 require('dotenv').config()
 
 const run = async () => {
+  const amount = "0.1";
+  const sendAmount = ethers.parseEther(amount);
+
+  const sender = "0x92dAf44EE49DCdAA21e9dcb90ceb6bd50f20AC1A";
+  const receiver = "0xd03b9c07703bC73ccd1586E202C9DdF5af45e81C";
+
+  const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
+  const chainId = "31337";
+  const channel_hash = keccak256(
+    contractAddress,
+    sender,
+    receiver,
+    chainId,
+  );
+  console.log('channel_hash:', channel_hash.toString('hex'));
 }
 
 run();
