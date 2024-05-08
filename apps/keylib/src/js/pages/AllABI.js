@@ -496,6 +496,21 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
   	    {formData.display && (
   	      <Form onSubmit={(e) => handleSubmit(e, formData.inputs, formData.stateMutability)} className="p-5">
   		<h3>Function: { capitalize(formData.name) } ({ formData.stateMutability })</h3>
+  	          {(formData.stateMutability === 'payable') && (
+  	            <Form.Group className="mb-3" controlId="formBasicEmail">
+  	              <Form.Label>
+                        TxValue
+                      </Form.Label>
+  		      <Form.Control
+                        required
+                        name="txValue"
+  			value={formData.values['txValue']}
+                         type={'string'}
+                         onChange={(e) => handleInputOnChange(e, 'txValue', 'txValue')}
+                         placeholder={"Enter txValue"}
+                      />
+                    </Form.Group>
+  		  )}
   		{ formData.inputs.map((input, index) => {
   	          // return (<p><input value={input.name} /></p>);
   	          return (
