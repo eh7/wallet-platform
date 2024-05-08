@@ -130,6 +130,7 @@ function NavMain() {
                   <Nav.Link href="/contract/eh7token">Eh7Token</Nav.Link>
                   <Nav.Link href="/contract/etherWallet">EtherWallet</Nav.Link>
                   <Nav.Link href="/contract/groth16VerifierSquare">Groth16VerifierSquare</Nav.Link>
+                  <Nav.Link href="/contract/multiPaymentChannelsDev">MultiPaymentChannelsDev</Nav.Link>
                 </NavDropdownMenu>
               </Nav.Item>
 
