@@ -29,7 +29,7 @@ class Web3All {
   contractData = {};
 
   constructor (contractName, formData) {
-    console.log('################# contractName', contractName);
+    console.log('---################# contractName', contractName);
     console.log('formData :: ', formData);
     if (contractName === "Bespoke") {
 console.log('formData :: ', formData);
