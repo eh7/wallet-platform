@@ -124,20 +124,24 @@ console.log('bbbbbbbb', contractJson.network.address);
 
   async executeContractFunction (functionName, values, inputs, stateMutability) {
     const args = [];
-    let txValue;
+
     inputs.map((input) => {
-      if (input.name === 'txValue') {
-        txValue = values[input.name] || '0';
-      } else {
+//      if (input.name === 'txValue') {
+//        txValue = values[input.name] || '0';
+//      } else {
         args.push(values[input.name]);
-      }
+//      }
     });
+
+    let txValue = '0';
+    if (typeof values['txValue'] !== 'undefined') {
+      txValue = values['txValue'];
+    }
 
     //alert('signerAddress :: ' + this.signerAddress);
   
     if (stateMutability === 'view' || stateMutability === 'pure') {
       try {
-//console.log('zzzzzzzzzzzzzzzzzzzzzzz ...args', ...args);
 //console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
 //const returnData = await this.contractData.contract[functionName](0, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C');
         const returnData = await this.contractData.contract[functionName](...args);
@@ -145,6 +149,9 @@ console.log('bbbbbbbb', contractJson.network.address);
           "executeContractFunction - test CALL WITH REF :: ",
           returnData,
         );
+        if (functionName === 'balance') {
+          return (await ethers.utils.formatEther(returnData)) + ' eth';
+        }
         return returnData;
       } catch (e) {
         console.log('(view call error)', e); 
@@ -153,10 +160,11 @@ console.log('bbbbbbbb', contractJson.network.address);
     } else {
       try {
         const txArgs = {}; 
-        if (Number(txValue) > 0) {
+        if (txValue !== '0') {
           const sendValue = ethers.utils.parseEther(txValue);
           txArgs.value = sendValue;
-console.log("-----------------------> txValue:", txValue, sendValue);
+//console.log('ZXZXZXZX', txValue, txArgs);
+//console.log("-----------------------> txValue:", txValue, sendValue);
         }
         const returnData = await this.contractData.contractWithSigner[functionName](...args, txArgs);
 //        const returnData = await this.contractData.contractWithSigner[functionName](...args, {

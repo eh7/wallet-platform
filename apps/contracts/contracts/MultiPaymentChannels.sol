@@ -74,7 +74,8 @@ contract MultiPaymentChannels {
   }
 
   // WIP
-  function withdrawBalance() external payable {
+  //function withdrawBalance() external payable {
+  function withdrawBalance() external {
     uint256 amount = balance[msg.sender];
     require(
       balance[msg.sender] >= amount,
@@ -88,6 +89,7 @@ contract MultiPaymentChannels {
     balance[msg.sender] = 0;
 
     (bool success,) = msg.sender.call{value: amount}("");
+    //(bool success,) = payable(msg.sender).transfer(amount);
     require(success, "Failed to send Ether");
   }
 

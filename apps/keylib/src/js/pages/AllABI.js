@@ -137,15 +137,15 @@ const AllABI = (props) => {
         }
       });
 
-      if (formData.values.txValue !== '') {
+//      if (typeof formData.values.txValue !== 'undefined') {
 //formData.values.txValue
-        inputs.push({
-          internalType: 'uint256',
-          name: "txValue",
-          type: "uint256",
-        });
-console.log('Add txValue to transaction data', formData.values.txValue);
-      }
+//        inputs.push({
+//          internalType: 'uint256',
+//          name: "txValue",
+//          type: "uint256",
+//        });
+//console.log('Add txValue to transaction data', formData.values.txValue);
+//      }
 console.log('ggggggggggggggggggggggggggggggg', inputs);
 console.log('ggggggggggggggggggggggggggggggg', formData.values);
 
