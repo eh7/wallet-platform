@@ -136,6 +136,16 @@ const AllABI = (props) => {
           formData.values[item.name] = JSON.parse(formData.values[item.name]);
         }
       });
+
+      if (formData.values.txValue !== '') {
+//formData.values.txValue
+        inputs.push({
+          internalType: 'uint256',
+          name: "txValue",
+          type: "uint256",
+        });
+console.log('Add txValue to transaction data', formData.values.txValue);
+      }
 console.log('ggggggggggggggggggggggggggggggg', inputs);
 console.log('ggggggggggggggggggggggggggggggg', formData.values);
 

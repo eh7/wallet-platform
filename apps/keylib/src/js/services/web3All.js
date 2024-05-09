@@ -124,8 +124,13 @@ console.log('bbbbbbbb', contractJson.network.address);
 
   async executeContractFunction (functionName, values, inputs, stateMutability) {
     const args = [];
+    let txValue;
     inputs.map((input) => {
-      args.push(values[input.name]);
+      if (input.name === 'txValue') {
+        txValue = values[input.name] || '0';
+      } else {
+        args.push(values[input.name]);
+      }
     });
 
     //alert('signerAddress :: ' + this.signerAddress);
@@ -147,7 +152,16 @@ console.log('bbbbbbbb', contractJson.network.address);
       }
     } else {
       try {
-        const returnData = await this.contractData.contractWithSigner[functionName](...args);
+        const txArgs = {}; 
+        if (Number(txValue) > 0) {
+          const sendValue = ethers.utils.parseEther(txValue);
+          txArgs.value = sendValue;
+console.log("-----------------------> txValue:", txValue, sendValue);
+        }
+        const returnData = await this.contractData.contractWithSigner[functionName](...args, txArgs);
+//        const returnData = await this.contractData.contractWithSigner[functionName](...args, {
+//          value: sendValue
+//        });
         const network = JSON.parse(localStorage.getItem("network"));
         //returnData.hash
         console.log(
