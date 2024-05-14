@@ -8,9 +8,9 @@ contract MultiPaymentChannels {
 
   using ECDSA for bytes32;
 
-  address payable public sender;   // the account sending payments
-  address payable public recipient;  // the account receiving the payments
-  uint256 public expiration;     // timeout in case the recipient never closes the channel
+  //address payable public sender;   // the account sending payments
+  //address payable public recipient;  // the account receiving the payments
+  //uint256 public expiration;     // timeout in case the recipient never closes the channel
 
   // new variables to hold values for authorised payments
   // in the multi payment channel
@@ -35,12 +35,13 @@ contract MultiPaymentChannels {
     payment hash (
       channel hash,
       amount,
-      nonce,
+      //nonce,
     )
 
     transaction hash (
       channel hash,
       payment hash,
+      nonce,
       signature
     )
 

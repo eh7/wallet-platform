@@ -7,7 +7,8 @@ const run = async () => {
   const amount = "0.1";
   const sendAmount = ethers.parseEther(amount);
 
-  const sender = "0x92dAf44EE49DCdAA21e9dcb90ceb6bd50f20AC1A";
+  //const sender = "0x92dAf44EE49DCdAA21e9dcb90ceb6bd50f20AC1A";
+  const sender = "0x7574b8D4C0C2566b671C530d710821EB6694bE0C";
   const receiver = "0xd03b9c07703bC73ccd1586E202C9DdF5af45e81C";
 
   const contractAddress = "0x5fbdb2315678afecb367f032d93f642f64180aa3";
