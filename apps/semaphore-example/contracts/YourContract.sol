@@ -7,10 +7,17 @@ contract YourContract {
 
     uint256 public groupId;
 
-    constructor(ISemaphore _semaphore) {
-        semaphore = _semaphore;
+//    constructor(ISemaphore _semaphore) {
+//        semaphore = _semaphore;
+//
+//        groupId = semaphore.createGroup();
+//    }
 
-        groupId = semaphore.createGroup();
+    constructor(address semaphoreAddress, uint256 _groupId) {
+        semaphore = ISemaphore(semaphoreAddress);
+        groupId = _groupId;
+
+        semaphore.createGroup(groupId, address(this));
     }
 
     function joinGroup(uint256 identityCommitment) external {

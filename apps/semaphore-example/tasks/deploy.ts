@@ -14,7 +14,8 @@ task("deploy", "Deploy YourContract  contract")
 
         const FeedbackFactory = await ethers.getContractFactory("YourContract")
 
-        const feedbackContract = await FeedbackFactory.deploy(semaphoreAddress)
+	const feedbackContract = await FeedbackFactory.deploy(semaphoreAddress, 0)
+	//const feedbackContract = await FeedbackFactory.deploy(semaphoreAddress)
 
         if (logs) {
             console.info(`Feedback contract has been deployed to: ${await feedbackContract.getAddress()}`)

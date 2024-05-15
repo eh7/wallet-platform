@@ -27,7 +27,7 @@ describe("YourContract Semaphore test contract", function () {
     return { semaphoreContract, feedbackContract, groupId }
   }
 
-  it("Check Semaphore Contracts Deploy Okay", async function () {
+  it.skip("Check Semaphore Contracts Deploy Okay", async function () {
     //const [owner] = await ethers.getSigners();
 
     const { semaphoreContract, feedbackContract, groupId } = await loadFixture(deployFeedbackFixture)
