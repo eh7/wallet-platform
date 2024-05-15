@@ -3,8 +3,30 @@ import { ethers } from "hardhat";
 
 
 describe("YourContract Semaphore test contract", function () {
+
+  async function deployFeedbackFixture() {
+    const { semaphore } = await run("deploy:semaphore", {
+      logs: false
+    })
+
+    const semaphoreContract: ISemaphore = semaphore
+
+    const feedbackContract: Feedback = await run("deploy", {
+      logs: false,
+      semaphore: await semaphoreContract.getAddress()
+    })
+
+    const groupId = await feedbackContract.groupId()
+
+    return { semaphoreContract, feedbackContract, groupId }
+  }
+
   it("Deployment should be owned by the send that created the contract", async function () {
     //const [owner] = await ethers.getSigners();
+
+    const { semaphore } = await run("deploy:semaphore", {
+      logs: false
+    })
 
     const ISemaphoreContract = await ethers.deployContract("ISemaphore");
     const yourContract = await ethers.deployContract("YourContract",{
