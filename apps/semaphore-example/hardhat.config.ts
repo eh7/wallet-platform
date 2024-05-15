@@ -1,7 +1,12 @@
 import { HardhatUserConfig } from "hardhat/config";
 import "@nomicfoundation/hardhat-toolbox";
+import "@semaphore-protocol/hardhat"
 
 import { TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS } from "hardhat/builtin-tasks/task-names";
+
+import "./tasks/hello"
+import "./tasks/others"
+import "./tasks/deploy"
 
 require('dotenv').config({ path: __dirname+'/.env' });
 
