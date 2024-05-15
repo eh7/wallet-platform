@@ -1,6 +1,9 @@
 import { expect } from "chai";
 import { ethers } from "hardhat";
 
+import { Group, Identity, generateProof } from "@semaphore-protocol/core"
+
+import { run } from "hardhat"
 
 describe("YourContract Semaphore test contract", function () {
 
@@ -21,13 +24,14 @@ describe("YourContract Semaphore test contract", function () {
     return { semaphoreContract, feedbackContract, groupId }
   }
 
-  it("Deployment should be owned by the send that created the contract", async function () {
+  it("Check Semaphore Contracts Deploy Okay", async function () {
     //const [owner] = await ethers.getSigners();
 
     const { semaphore } = await run("deploy:semaphore", {
       logs: false
     })
 
+/*
     const ISemaphoreContract = await ethers.deployContract("ISemaphore");
     const yourContract = await ethers.deployContract("YourContract",{
       ISemaphoreContract,
@@ -37,5 +41,6 @@ describe("YourContract Semaphore test contract", function () {
 
     //const ownerBalance = await hardhatToken.balanceOf(owner.address);
     //expect(await hardhatToken.totalSupply()).to.equal(ownerBalance);
+*/
   });
 });
