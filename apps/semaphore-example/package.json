@@ -15,9 +15,11 @@
   },
   "dependencies": {
     "@semaphore-protocol/contracts": "^4.0.0-beta.9",
+    "@semaphore-protocol/core": "^4.0.0-beta.9",
     "@semaphore-protocol/group": "^4.0.0-beta.9",
     "@semaphore-protocol/hardhat": "^4.0.0-beta.9",
     "@semaphore-protocol/identity": "^4.0.0-beta.9",
-    "@semaphore-protocol/proof": "^4.0.0-beta.9"
+    "@semaphore-protocol/proof": "^4.0.0-beta.9",
+    "@zk-kit/types": "^1.0.9"
   }
 }

@@ -659,6 +659,15 @@
   dependencies:
     "@zk-kit/imt.sol" "2.0.0-beta.8"
 
+"@semaphore-protocol/core@^4.0.0-beta.9":
+  version "4.0.0-beta.9"
+  resolved "https://registry.npmjs.org/@semaphore-protocol/core/-/core-4.0.0-beta.9.tgz"
+  integrity sha512-OpzL365cn3B8QYN2flbyHvOPg0Ik6uPdYiWQDIjYLrau0lXil9Y1e5pJQeau66wUbY9YNztw7x6tMV8Jgj6NTg==
+  dependencies:
+    "@semaphore-protocol/group" "4.0.0-beta.9"
+    "@semaphore-protocol/identity" "4.0.0-beta.9"
+    "@semaphore-protocol/proof" "4.0.0-beta.9"
+
 "@semaphore-protocol/group@^4.0.0-beta.9", "@semaphore-protocol/group@4.0.0-beta.9":
   version "4.0.0-beta.9"
   resolved "https://registry.npmjs.org/@semaphore-protocol/group/-/group-4.0.0-beta.9.tgz"
@@ -687,7 +696,7 @@
     "@zk-kit/utils" "0.8.1"
     poseidon-lite "0.2.0"
 
-"@semaphore-protocol/proof@^4.0.0-beta.9":
+"@semaphore-protocol/proof@^4.0.0-beta.9", "@semaphore-protocol/proof@4.0.0-beta.9":
   version "4.0.0-beta.9"
   resolved "https://registry.npmjs.org/@semaphore-protocol/proof/-/proof-4.0.0-beta.9.tgz"
   integrity sha512-PjBDmRye79lcqWUWBnl5p1b2JgyJQMFzRdQh5LPFCnZP4gvR3uDJ+597dg41rF68iQqP9DZSEY4Mn2jU8guDxA==
@@ -955,6 +964,11 @@
   version "2.0.0-beta.2"
   resolved "https://registry.npmjs.org/@zk-kit/imt/-/imt-2.0.0-beta.2.tgz"
   integrity sha512-pTzGNW7SWNASwXGMOxvgNtlweX0Gak9IT5Bb4Xff7kJgQG1/CQy2GPwK74T+vCcpElJ3xQHgX+XJUyj7TeJRMg==
+
+"@zk-kit/types@^1.0.9":
+  version "1.0.9"
+  resolved "https://registry.npmjs.org/@zk-kit/types/-/types-1.0.9.tgz"
+  integrity sha512-Ve7anjIWaBDCM5wrreJQ0U9H4BSbDd9y6BfykPJM9ISJo6NeKnGXiSMZxJdTfVv8mT0DnOZgNarJ4a/n0fPVfw==
 
 "@zk-kit/utils@0.6.0":
   version "0.6.0"
@@ -1370,6 +1384,13 @@ buffer@^6.0.3, buffer@6.0.3:
   dependencies:
     base64-js "^1.3.1"
     ieee754 "^1.2.1"
+
+bufferutil@^4.0.1:
+  version "4.0.8"
+  resolved "https://registry.npmjs.org/bufferutil/-/bufferutil-4.0.8.tgz"
+  integrity sha512-4T53u4PdgsXqKaIctwF8ifXlRTTmEPJ8iEPWFdGZvcf7sbwYo6FKFEX9eNNAnzFZ7EzJAQ3CJeOtCRA4rDp7Pw==
+  dependencies:
+    node-gyp-build "^4.3.0"
 
 bytes@3.1.2:
   version "3.1.2"
@@ -3004,7 +3025,7 @@ node-emoji@^1.10.0:
   dependencies:
     lodash "^4.17.21"
 
-node-gyp-build@^4.2.0:
+node-gyp-build@^4.2.0, node-gyp-build@^4.3.0:
   version "4.8.1"
   resolved "https://registry.npmjs.org/node-gyp-build/-/node-gyp-build-4.8.1.tgz"
   integrity sha512-OSs33Z9yWr148JZcbZd5WiAXhh/n9z8TxQcdMhIOlpN9AhWpLfvVFO73+m77bBABQMaY9XSvIa+qk0jlI7Gcaw==
@@ -3958,6 +3979,13 @@ uri-js@^4.4.1:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+utf-8-validate@^5.0.2:
+  version "5.0.10"
+  resolved "https://registry.npmjs.org/utf-8-validate/-/utf-8-validate-5.0.10.tgz"
+  integrity sha512-Z6czzLq4u8fPOyx7TU6X3dvUZVvoJmxSQ+IcrlmagKhilxlhZgxPK6C5Jqbkw1IDUmFTM+cz9QDnnLTwDz/2gQ==
+  dependencies:
+    node-gyp-build "^4.3.0"
 
 utf8@3.0.0:
   version "3.0.0"
