@@ -10,16 +10,19 @@ import { run } from "hardhat"
 
 describe("Mixer Semaphore test contract", function () {
 
-  async function deployFeedbackFixture() {
+  async function deployContractFixture() {
     const { semaphore } = await run("deploy:semaphore", {
       logs: false
     })
 
     const semaphoreContract: ISemaphore = semaphore
 
+    const baseContract = "Mixer";
+
     const mixer: Feedback = await run("deploy", {
       logs: false,
-      semaphore: await semaphoreContract.getAddress()
+      semaphore: await semaphoreContract.getAddress(),
+      baseContract,
     })
 
     const groupId = await mixer.groupId()
@@ -30,7 +33,7 @@ describe("Mixer Semaphore test contract", function () {
   it.skip("Check Semaphore Contracts Deploy Okay", async function () {
     //const [owner] = await ethers.getSigners();
 
-    const { semaphoreContract, mixer, groupId } = await loadFixture(deployFeedbackFixture)
+    const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
 
     expect(groupId).to.equal(0);
 
@@ -60,7 +63,7 @@ describe("Mixer Semaphore test contract", function () {
 
   describe("# joinGroup", () => {
     it("Should allow users to join the group", async () => {
-      const { semaphoreContract, mixer, groupId } = await loadFixture(deployFeedbackFixture)
+      const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
 
       const users = [new Identity(), new Identity()]
 
@@ -79,7 +82,7 @@ describe("Mixer Semaphore test contract", function () {
 
   describe("# sendFeedback", () => {
     it("Should allow users to send feedback anonymously", async () => {
-      const { semaphoreContract, mixer, groupId } = await loadFixture(deployFeedbackFixture)
+      const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
 
       const users = [new Identity(), new Identity()]
       const group = new Group()
@@ -117,7 +120,7 @@ describe("Mixer Semaphore test contract", function () {
 
   describe("# deposit", () => {
     it("Should allow users to send deposit anonymously", async () => {
-      const { semaphoreContract, mixer, groupId } = await loadFixture(deployFeedbackFixture)
+      const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
 
       const users = [new Identity(), new Identity()]
       const group = new Group()
@@ -133,16 +136,13 @@ describe("Mixer Semaphore test contract", function () {
 
       //const feedback = encodeBytes32String("Hello World")
 
-      console.log(mixer.sendFeedback);
-      console.log(mixer.joinGroup);
-      console.log(mixer);
-      /*
       const transaction = mixer.deposit(
 	identityCommitment, {
           value: ethers.parseEther("0.1")
         }
       )
 
+      /*
       const transaction = mixer.deposit(
         proof.merkleTreeDepth,
         proof.merkleTreeRoot,

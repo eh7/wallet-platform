@@ -98,7 +98,10 @@ describe("YourContract Semaphore test contract", function () {
 
 //console.log('start')
       const proof = await generateProof(users[3], group, feedback, groupId)
-console.log(proof.nullifier)
+console.log(
+  'proof.nullifier',
+  proof.nullifier,
+)
 //      const proof1 = await generateProof(users[2], group, feedback, groupId)
 //      const proof2 = await generateProof(users[2], group, "another message", groupId)
 //console.log(users[2])

@@ -21,6 +21,7 @@ contract Mixer {
     depositERC20(uint256 _identityCommitment)
     mix(DepositProof _proof, address payable _relayerAddress)
     mixERC20(DepositProof _proof, address payable _relayerAddress)
+    */
     
     function deposit (uint256 _identityCommitment) external payable {
       require(msg.value == 0.01 ether);
@@ -48,7 +49,6 @@ contract Mixer {
 
         semaphore.validateProof(groupId, proof);
     }
-    */
 
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
@@ -73,7 +73,4 @@ contract Mixer {
         semaphore.validateProof(groupId, proof);
     }
 
-    function joinGroup1(uint256 identityCommitment) external {
-        semaphore.addMember(groupId, identityCommitment);
-    }
 }
