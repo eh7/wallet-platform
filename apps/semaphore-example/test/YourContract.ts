@@ -81,7 +81,12 @@ describe("YourContract Semaphore test contract", function () {
     it("Should allow users to send feedback anonymously", async () => {
       const { semaphoreContract, feedbackContract, groupId } = await loadFixture(deployFeedbackFixture)
 
-      const users = [new Identity(), new Identity()]
+      const users = [
+        new Identity(),
+        new Identity(),
+        new Identity(),
+        new Identity(),
+      ]
       const group = new Group()
 
       for (const user of users) {
@@ -91,7 +96,14 @@ describe("YourContract Semaphore test contract", function () {
 
       const feedback = encodeBytes32String("Hello World")
 
-      const proof = await generateProof(users[1], group, feedback, groupId)
+//console.log('start')
+      const proof = await generateProof(users[3], group, feedback, groupId)
+console.log(proof.nullifier)
+//      const proof1 = await generateProof(users[2], group, feedback, groupId)
+//      const proof2 = await generateProof(users[2], group, "another message", groupId)
+//console.log(users[2])
+//console.log(proof1.nullifier)
+//console.log(proof2.nullifier)
 
       const transaction = feedbackContract.sendFeedback(
         proof.merkleTreeDepth,
