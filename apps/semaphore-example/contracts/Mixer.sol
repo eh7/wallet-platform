@@ -9,7 +9,7 @@ contract Mixer {
 
     uint256 public groupId;
 
-    uint256 public constant TX_AMOUNT = 1 ether;
+    uint256 public constant TX_AMOUNT = 0.01 ether;
 
     event Deposit (address);
 
@@ -27,7 +27,8 @@ contract Mixer {
     mixERC20(DepositProof _proof, address payable _relayerAddress)
     */
     
-    function deposit (uint256 _identityCommitment) external payable {
+    //function deposit (uint256 _identityCommitment) external payable {
+    function deposit () external payable {
       require(msg.value == TX_AMOUNT);
       //emit Deposit(msg.sender);
     }
@@ -52,7 +53,7 @@ contract Mixer {
 
         require(
           address(this).balance >= TX_AMOUNT,
-          "balance greater than contract balance"
+          "withdraw amount greater than contract balance"
         );
         (bool success,) = msg.sender.call{value: TX_AMOUNT}("");
         require(success, "Failed to send Ether");

@@ -8,7 +8,7 @@ import { encodeBytes32String } from "ethers"
 
 import { run } from "hardhat"
 
-const TX_AMOUNT = "1"
+const TX_AMOUNT = "0.01"
 
 const getBalance = async (address) => {
   const balance = ethers.formatEther(
@@ -26,6 +26,23 @@ describe("Mixer Semaphore test contract", function () {
   beforeEach(async () => {
     accounts = await ethers.getSigners();
   })
+
+  async function getEvent(
+    contract: Contract,
+    tx: TransactionResponse,
+    eventName: string,
+  ) {
+    const receipt = await tx.wait();
+    if (receipt?.logs) {
+      for (const log of receipt.logs) {
+        const event = contract.interface.parseLog(log);
+        if (event?.name === eventName) {
+          return event;
+        }
+      }
+    }
+    return null;
+  }
 
   async function deployContractFixture() {
     const { semaphore } = await run("deploy:semaphore", {
@@ -117,19 +134,19 @@ describe("Mixer Semaphore test contract", function () {
       )
 
       const proof = await generateProof(users[1], group, paymentHash, groupId)
+console.log(proof)
 
       const identityCommitment = users[1].commitment;
 
-      const ethAmount = "0.1"
+      const ethAmount = "0.01"
 
       getBalance(mixer.target);
 
       const transaction = await mixer.deposit(
-	identityCommitment, {
+        {
 	  value: ethers.parseEther(
             TX_AMOUNT,
           )
-	  //value: ethers.parseEther("0.01")
         }
       )
 
@@ -163,6 +180,63 @@ describe("Mixer Semaphore test contract", function () {
         paymentHash, 
         proof.points
       )).to.be.reverted
+
+      //
+      // send next payment auth
+      const nonce_1 = 1;
+      const types_1 = ['string', 'string', 'uint256'];
+      const values_1 = ["pay", "gavin", nonce];
+      const paymentHash_1 = ethers.keccak256(
+        ethers.solidityPacked(types, values)
+      )
+      const proof_1 = await generateProof(users[1], group, paymentHash_1, groupId)
+console.log(proof_1)
+//      console.log(proof_1);
+
+      await expect(
+        mixer.connect(accounts[1]).withdraw(
+          proof_1.merkleTreeDepth,
+          proof_1.merkleTreeRoot,
+          proof_1.nullifier,
+          paymentHash, 
+          proof_1.points
+        )
+      ).to.be.reverted;
+      //).to.be.revertedWith("withdraw amount greater than contract balance");
+
+      const tx_deposit = await mixer.deposit(
+        {
+	  value: ethers.parseEther(
+            TX_AMOUNT,
+          )
+        }
+      )
+
+      const tx_1 = await mixer.connect(accounts[1]).withdraw(
+        proof_1.merkleTreeDepth,
+        proof_1.merkleTreeRoot,
+        proof_1.nullifier,
+        paymentHash_1, 
+        proof_1.points
+      )
+
+      await mixer.connect(accounts[1]).withdraw(
+        proof_1.merkleTreeDepth,
+        proof_1.merkleTreeRoot,
+        proof_1.nullifier,
+        paymentHash_1, 
+        proof_1.points
+      )
+//console.log(proof_1)
+
+      console.log(tx_1)
+
+      //await getEvent(
+      //  mixer,
+      //  transaction,
+      //  "Voted",
+      //)
+
 
       /*
       const transaction = mixer.deposit(
