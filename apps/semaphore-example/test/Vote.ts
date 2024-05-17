@@ -112,18 +112,6 @@ describe("Vote Semaphore test contract", function () {
       // wait for 5 seconds example - commented out not needed
       //await new Promise(res => setTimeout(() => res(null), 5000));
 
-//      console.log(transaction.hash)
-
-      const receipt = await transaction.wait();
-
-//      console.log(
-//        receipt,
-//        receipt?.logs,
-//        receipt.logs?.filter((x) => {
-//          return x.event == "Voted"
-//        })
-//      );
-
       const eventVoted = (
 	(
           await getEvent(
@@ -133,19 +121,11 @@ describe("Vote Semaphore test contract", function () {
 	  )
         ).args[0]
       )
-      //  ethers.BigNumber.from(eventVoted).toHexString(),
 
-      console.log(
-        'Voted',
-        typeof eventVoted,
-        ethers.toBeHex(eventVoted),
-	//eventVoted.toBeHex(),
-        eventVoted,
-//        (await getEvent(
-//          voteContract,
-//          transaction,
-//          "Voted",
-//	)).args[0]
+      expect(
+        vote
+      ).to.equal(
+        ethers.toBeHex(eventVoted)
       )
 
       expect(transaction)
@@ -154,6 +134,7 @@ describe("Vote Semaphore test contract", function () {
           vote, 
         )
 
+      
       expect(transaction)
         .to.emit(semaphoreContract, "ProofValidated")
         .withArgs(
@@ -165,36 +146,40 @@ describe("Vote Semaphore test contract", function () {
           groupId,
           proof.points
         )
-    })
-  })
 
-  /*
-  describe("# deposit", () => {
-    it.skip("Should allow users to send deposit anonymously", async () => {
-      const { semaphoreContract, vote, groupId } = await loadFixture(deployContractFixture)
+      //
+      // make sure it will not take another vote with same nullifier
+      // this should revert
+      //
+      await expect(voteContract.castVote(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        vote,
+        proof.points
+      )).to.be.reverted
 
-      const users = [new Identity(), new Identity()]
-      const group = new Group()
-
-      for (const user of users) {
-        await vote.joinGroup(user.commitment)
-        group.addMember(user.commitment)
-      }
-
-      const identityCommitment = users[0].commitment;
-
-      const ethAmount = "0.1"
-
-      //const vote = encodeBytes32String("Hello World")
-
-      const transaction = vote.deposit(
-	identityCommitment, {
-          value: ethers.parseEther("0.1")
-        }
+/*
+      const transaction1 = await voteContract.castVote(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        vote,
+        proof.points
       )
 
+      const eventVoted1 = (
+	(
+          await getEvent(
+            voteContract,
+            transaction1,
+            "Voted",
+	  )
+        ).args[0]
+      )
+*/
+
     })
   })
-  */
 
 });

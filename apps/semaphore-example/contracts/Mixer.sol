@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.8.23;
 
 import "@semaphore-protocol/contracts/interfaces/ISemaphore.sol";
@@ -6,6 +8,8 @@ contract Mixer {
     ISemaphore public semaphore;
 
     uint256 public groupId;
+
+    uint256 public constant TX_AMOUNT = 1 ether;
 
     event Deposit (address);
 
@@ -24,53 +28,58 @@ contract Mixer {
     */
     
     function deposit (uint256 _identityCommitment) external payable {
-      require(msg.value == 0.01 ether);
-      emit Deposit(msg.sender);
-      //address(this).balance += 0.01 ether;
-      //insert(leaf);
-      //roots[padZero(getRoot())] = true;
+      require(msg.value == TX_AMOUNT);
+      //emit Deposit(msg.sender);
     }
 
     function withdraw(
         uint256 merkleTreeDepth,
         uint256 merkleTreeRoot,
         uint256 nullifier,
-        uint256 feedback,
+        uint256 paymentHash,
         uint256[8] calldata points
     ) external returns (address) {
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
             merkleTreeDepth,
             merkleTreeRoot,
             nullifier,
-            feedback,
+            paymentHash,
             groupId,
             points
         );
 
         semaphore.validateProof(groupId, proof);
+
+        require(
+          address(this).balance >= TX_AMOUNT,
+          "balance greater than contract balance"
+        );
+        (bool success,) = msg.sender.call{value: TX_AMOUNT}("");
+        require(success, "Failed to send Ether");
     }
 
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
     }
 
+    /*
     function sendFeedback(
         uint256 merkleTreeDepth,
         uint256 merkleTreeRoot,
         uint256 nullifier,
-        uint256 feedback,
+        uint256 paymentHash,
         uint256[8] calldata points
     ) external {
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
             merkleTreeDepth,
             merkleTreeRoot,
             nullifier,
-            feedback,
+            paymentHash,
             groupId,
             points
         );
 
         semaphore.validateProof(groupId, proof);
     }
-
+    */
 }

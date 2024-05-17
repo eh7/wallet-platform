@@ -8,6 +8,8 @@ import { encodeBytes32String } from "ethers"
 
 import { run } from "hardhat"
 
+const TX_AMOUNT = "1"
+
 const getBalance = async (address) => {
   const balance = ethers.formatEther(
     (await ethers.provider.getBalance(
@@ -18,6 +20,12 @@ const getBalance = async (address) => {
 }
 
 describe("Mixer Semaphore test contract", function () {
+
+  let accounts: any;
+
+  beforeEach(async () => {
+    accounts = await ethers.getSigners();
+  })
 
   async function deployContractFixture() {
     const { semaphore } = await run("deploy:semaphore", {
@@ -89,45 +97,7 @@ describe("Mixer Semaphore test contract", function () {
     })
   });
 
-  describe("# sendFeedback", () => {
-    it("Should allow users to send feedback anonymously", async () => {
-      const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
-
-      const users = [new Identity(), new Identity()]
-      const group = new Group()
-
-      for (const user of users) {
-        await mixer.joinGroup(user.commitment)
-        group.addMember(user.commitment)
-      }
-
-      const feedback = encodeBytes32String("Hello World")
-
-      const proof = await generateProof(users[1], group, feedback, groupId)
-
-      const transaction = mixer.sendFeedback(
-        proof.merkleTreeDepth,
-        proof.merkleTreeRoot,
-        proof.nullifier,
-        feedback,
-        proof.points
-      )
-
-      await expect(transaction)
-        .to.emit(semaphoreContract, "ProofValidated")
-        .withArgs(
-          groupId,
-          proof.merkleTreeDepth,
-          proof.merkleTreeRoot,
-          proof.nullifier,
-          proof.message,
-          groupId,
-          proof.points
-        )
-    })
-  })
-
-  describe("# deposit", () => {
+  describe("# deposit and withdraw cycle", () => {
     it("Should allow users to send deposit anonymously", async () => {
       const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
 
@@ -139,22 +109,60 @@ describe("Mixer Semaphore test contract", function () {
         group.addMember(user.commitment)
       }
 
-      const identityCommitment = users[0].commitment;
+      const nonce = 0;
+      const types = ['string', 'string', 'uint256'];
+      const values = ["pay", "gavin", nonce];
+      const paymentHash = ethers.keccak256(
+        ethers.solidityPacked(types, values)
+      )
+
+      const proof = await generateProof(users[1], group, paymentHash, groupId)
+
+      const identityCommitment = users[1].commitment;
 
       const ethAmount = "0.1"
-
-      //const feedback = encodeBytes32String("Hello World")
 
       getBalance(mixer.target);
 
       const transaction = await mixer.deposit(
 	identityCommitment, {
-          value: ethers.parseEther("0.01")
+	  value: ethers.parseEther(
+            TX_AMOUNT,
+          )
+	  //value: ethers.parseEther("0.01")
         }
       )
 
-      console.log(transaction);
+      //console.log(transaction);
       getBalance(mixer.target);
+      getBalance(accounts[0].address);
+      getBalance(accounts[1].address);
+
+      const withdrawTransaction = await mixer.connect(accounts[1]).withdraw(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        proof.points
+      )
+
+      //const withdrawReceipt = await withdrawTransaction.wait();
+
+      getBalance(accounts[0].address);
+      getBalance(accounts[1].address);
+
+      //
+      // make sure it will not take another payment with same nullifier
+      // this should rever OR you will get test errort
+      //
+     // await expect(mixer.castVote(
+      await expect(mixer.connect(accounts[1]).withdraw(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        proof.points
+      )).to.be.reverted
 
       /*
       const transaction = mixer.deposit(
