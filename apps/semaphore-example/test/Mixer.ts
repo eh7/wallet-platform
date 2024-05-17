@@ -8,6 +8,15 @@ import { encodeBytes32String } from "ethers"
 
 import { run } from "hardhat"
 
+const getBalance = async (address) => {
+  const balance = ethers.formatEther(
+    (await ethers.provider.getBalance(
+      address,
+    )).toString()
+  );
+  console.log('balance (', address, ')', balance);
+}
+
 describe("Mixer Semaphore test contract", function () {
 
   async function deployContractFixture() {
@@ -136,11 +145,16 @@ describe("Mixer Semaphore test contract", function () {
 
       //const feedback = encodeBytes32String("Hello World")
 
-      const transaction = mixer.deposit(
+      getBalance(mixer.target);
+
+      const transaction = await mixer.deposit(
 	identityCommitment, {
-          value: ethers.parseEther("0.1")
+          value: ethers.parseEther("0.01")
         }
       )
+
+      console.log(transaction);
+      getBalance(mixer.target);
 
       /*
       const transaction = mixer.deposit(

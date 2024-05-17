@@ -1,5 +1,5 @@
 import { expect } from "chai";
-import { ethers } from "hardhat";
+import { ethers, BigNumber } from "hardhat";
 
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers"
 import { Group, Identity, generateProof } from "@semaphore-protocol/core"
@@ -9,6 +9,12 @@ import { encodeBytes32String } from "ethers"
 import { run } from "hardhat"
 
 describe("Vote Semaphore test contract", function () {
+
+  let accounts: any;
+
+  beforeEach(async () => {
+    accounts = await ethers.getSigners();
+  })
 
   async function deployContractFixture() {
     const { semaphore } = await run("deploy:semaphore", {
@@ -28,6 +34,23 @@ describe("Vote Semaphore test contract", function () {
     const groupId = await voteContract.groupId()
 
     return { semaphoreContract, voteContract, groupId }
+  }
+
+  async function getEvent(
+    contract: Contract,
+    tx: TransactionResponse,
+    eventName: string,
+  ) {
+    const receipt = await tx.wait();
+    if (receipt?.logs) {
+      for (const log of receipt.logs) {
+        const event = contract.interface.parseLog(log);
+        if (event?.name === eventName) {
+          return event;
+        }
+      }
+    }
+    return null;
   }
 
   describe("# joinGroup", () => {
@@ -77,7 +100,8 @@ describe("Vote Semaphore test contract", function () {
 
       const proof = await generateProof(users[1], group, vote, groupId)
 
-      const transaction = voteContract.castVote(
+      //const transaction = await voteContract.connect(accounts[0]).castVote(
+      const transaction = await voteContract.castVote(
         proof.merkleTreeDepth,
         proof.merkleTreeRoot,
         proof.nullifier,
@@ -85,7 +109,52 @@ describe("Vote Semaphore test contract", function () {
         proof.points
       )
 
-      await expect(transaction)
+      // wait for 5 seconds example - commented out not needed
+      //await new Promise(res => setTimeout(() => res(null), 5000));
+
+//      console.log(transaction.hash)
+
+      const receipt = await transaction.wait();
+
+//      console.log(
+//        receipt,
+//        receipt?.logs,
+//        receipt.logs?.filter((x) => {
+//          return x.event == "Voted"
+//        })
+//      );
+
+      const eventVoted = (
+	(
+          await getEvent(
+            voteContract,
+            transaction,
+            "Voted",
+	  )
+        ).args[0]
+      )
+      //  ethers.BigNumber.from(eventVoted).toHexString(),
+
+      console.log(
+        'Voted',
+        typeof eventVoted,
+        ethers.toBeHex(eventVoted),
+	//eventVoted.toBeHex(),
+        eventVoted,
+//        (await getEvent(
+//          voteContract,
+//          transaction,
+//          "Voted",
+//	)).args[0]
+      )
+
+      expect(transaction)
+        .to.emit(semaphoreContract, "Voted")
+        .withArgs(
+          vote, 
+        )
+
+      expect(transaction)
         .to.emit(semaphoreContract, "ProofValidated")
         .withArgs(
           groupId,

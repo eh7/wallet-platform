@@ -1,3 +1,5 @@
+// SPDX-License-Identifier: UNLICENSED
+
 pragma solidity ^0.8.23;
 
 import "@semaphore-protocol/contracts/interfaces/ISemaphore.sol";
@@ -7,7 +9,9 @@ contract Vote {
 
     uint256 public groupId;
 
-    event Deposit (address);
+    //event Deposit (address);
+    event Voted(uint256 vote);
+    event Log(uint256 nullifier);
 
     constructor(address semaphoreAddress, uint256 _groupId) {
         semaphore = ISemaphore(semaphoreAddress);
@@ -23,6 +27,7 @@ contract Vote {
     mixERC20(DepositProof _proof, address payable _relayerAddress)
     */
     
+    /*
     function deposit (uint256 _identityCommitment) external payable {
       require(msg.value == 0.01 ether);
       emit Deposit(msg.sender);
@@ -49,6 +54,7 @@ contract Vote {
 
         semaphore.validateProof(groupId, proof);
     }
+    */
 
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
@@ -70,7 +76,11 @@ contract Vote {
             points
         );
 
+        emit Log(nullifier);
+
         semaphore.validateProof(groupId, proof);
+
+        emit Voted(vote);
     }
 
     function hashVote (
