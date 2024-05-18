@@ -33,6 +33,24 @@ contract Mixer {
       //emit Deposit(msg.sender);
     }
 
+    function verify(
+        uint256 merkleTreeDepth,
+        uint256 merkleTreeRoot,
+        uint256 nullifier,
+        uint256 paymentHash,
+        uint256[8] calldata points
+    ) external view returns (bool) {
+        ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
+            merkleTreeDepth,
+            merkleTreeRoot,
+            nullifier,
+            paymentHash,
+            groupId,
+            points
+        );
+        return semaphore.verifyProof(groupId, proof);
+    }
+
     function withdraw(
         uint256 merkleTreeDepth,
         uint256 merkleTreeRoot,

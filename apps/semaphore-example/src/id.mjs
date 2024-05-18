@@ -11,6 +11,12 @@ const identity = new Identity("this is a secret string that means nothing or doe
 //console.log({ privateKey, publicKey, commitment } );
 console.log(identity);
 
+const identity1 = new Identity("this is a secret string that means nothing or doesIt?")
+console.log(identity1);
+console.log(identity1._secretScalar);
+
+process.exit()
+
 const message = "Hello World"
 
 const signature = identity.signMessage(message)

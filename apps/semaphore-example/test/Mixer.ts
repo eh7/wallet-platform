@@ -136,6 +136,14 @@ describe("Mixer Semaphore test contract", function () {
       const proof = await generateProof(users[1], group, paymentHash, groupId)
 console.log(proof)
 
+      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        proof.points
+      ))
+
       const identityCommitment = users[1].commitment;
 
       const ethAmount = "0.01"
@@ -193,6 +201,14 @@ console.log(proof)
 console.log(proof_1)
 //      console.log(proof_1);
 
+      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
+        proof_1.merkleTreeDepth,
+        proof_1.merkleTreeRoot,
+        proof_1.nullifier,
+        paymentHash_1, 
+        proof_1.points
+      ))
+
       await expect(
         mixer.connect(accounts[1]).withdraw(
           proof_1.merkleTreeDepth,
@@ -212,6 +228,15 @@ console.log(proof_1)
         }
       )
 
+      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
+        proof_1.merkleTreeDepth,
+        proof_1.merkleTreeRoot,
+        proof_1.nullifier,
+        paymentHash_1, 
+        proof_1.points
+      ))
+
+/*
       const tx_1 = await mixer.connect(accounts[1]).withdraw(
         proof_1.merkleTreeDepth,
         proof_1.merkleTreeRoot,
@@ -230,6 +255,7 @@ console.log(proof_1)
 //console.log(proof_1)
 
       console.log(tx_1)
+*/
 
       //await getEvent(
       //  mixer,
