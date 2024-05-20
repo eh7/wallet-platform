@@ -11,6 +11,8 @@ contract Mixer {
 
     uint256 public constant TX_AMOUNT = 0.01 ether;
 
+    mapping(bytes32 => bool) deposited;
+
     event Deposit (address);
 
     constructor(address semaphoreAddress, uint256 _groupId) {
@@ -27,9 +29,10 @@ contract Mixer {
     mixERC20(DepositProof _proof, address payable _relayerAddress)
     */
     
-    //function deposit (uint256 _identityCommitment) external payable {
-    function deposit () external payable {
+    //function deposit () external payable {
+    function deposit (bytes32 _paymentHash) external payable {
       require(msg.value == TX_AMOUNT);
+      deposited[_paymentHash] = true;
       //emit Deposit(msg.sender);
     }
 
@@ -58,6 +61,11 @@ contract Mixer {
         uint256 paymentHash,
         uint256[8] calldata points
     ) external returns (address) {
+
+        //require(
+        //  deposited[paymentHash]
+        //);
+
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
             merkleTreeDepth,
             merkleTreeRoot,

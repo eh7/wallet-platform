@@ -151,6 +151,7 @@ console.log(proof)
       getBalance(mixer.target);
 
       const transaction = await mixer.deposit(
+        paymentHash,
         {
 	  value: ethers.parseEther(
             TX_AMOUNT,
@@ -221,6 +222,7 @@ console.log(proof_1)
       //).to.be.revertedWith("withdraw amount greater than contract balance");
 
       const tx_deposit = await mixer.deposit(
+        paymentHash,
         {
 	  value: ethers.parseEther(
             TX_AMOUNT,
