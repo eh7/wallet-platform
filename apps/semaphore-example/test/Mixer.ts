@@ -4,7 +4,7 @@ import { ethers } from "hardhat";
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers"
 import { Group, Identity, generateProof } from "@semaphore-protocol/core"
 
-import { encodeBytes32String } from "ethers"
+import { encodeBytes32String, Typed } from "ethers"
 
 import { run } from "hardhat"
 

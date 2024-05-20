@@ -77,8 +77,11 @@ contract Mixer {
         require(success, "Failed to send Ether");
     }
 
+
     function joinGroup(uint256 identityCommitment) external {
-        semaphore.addMember(groupId, identityCommitment);
+    //function joinGroup(uint256 identityCommitment) external payable {
+      //require(msg.value == TX_AMOUNT);
+      semaphore.addMember(groupId, identityCommitment);
     }
 
     /*
