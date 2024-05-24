@@ -56,6 +56,13 @@ contract Vote {
     }
     */
 
+    function registerBallot(
+      bytes32 question, 
+      bytes32[] memory answers
+    //) external ExistingGroup(groupId) onlyGroupAdmin(groupId) {
+    ) external {
+    }
+
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
     }

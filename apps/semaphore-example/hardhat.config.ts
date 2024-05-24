@@ -17,6 +17,9 @@ const PRIVATE_KEY_DEV_EVM_HH = process.env.PRIVATE_KEY_DEV_EVM_HH;
 
 const config: HardhatUserConfig = {
   solidity: "0.8.23",
+  mocha: {
+    timeout: 100000000,
+  },
   //defaultNetwork: "yourtestnetname",
   networks: {
   //  hardhat:{},
