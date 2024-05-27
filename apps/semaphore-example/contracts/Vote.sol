@@ -13,8 +13,8 @@ contract Vote {
     event Voted(uint256 vote);
     event Log(uint256 nullifier);
 
-    constructor(address semaphoreAddress, uint256 _groupId) {
-        semaphore = ISemaphore(semaphoreAddress);
+    constructor(address _semaphoreAddress, uint256 _groupId) {
+        semaphore = ISemaphore(_semaphoreAddress);
         groupId = _groupId;
 
         semaphore.createGroup(groupId, address(this));
@@ -63,6 +63,8 @@ contract Vote {
     ) external {
     }
 
+    event Log(uint256 group, address admin);
+
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
     }
@@ -100,6 +102,10 @@ contract Vote {
           vote
         )
       );
+    }
+
+    function groupAdmin(uint256 _groupId) external view returns (address admin) {
+        admin = semaphore.groupAdmin(_groupId);
     }
 
 }

@@ -33,6 +33,18 @@ describe("Vote Semaphore test contract", function () {
 
     const groupId = await voteContract.groupId()
 
+    console.log(
+      //voteContract.getGroupAdmin,
+      //await voteContract.getGroupAdmin(groupId)
+      //voteContract.getGroupAdmin()
+      "WIP: updates in ",
+      "WIP: node_modules/@semaphore-protocol/contracts/Semaphore.sol ",
+      "WIP: node_modules/@semaphore-protocol/contracts/interfaces/ISemaphore.sol",
+      "WIP: intergrate into Vote Contract with inheritance and remove groupAdmin fucntion in Semaphore function and ISemaphore Interface???",
+      await voteContract.groupAdmin(groupId),
+      groupId
+    );
+
     return { semaphoreContract, voteContract, groupId }
   }
 
