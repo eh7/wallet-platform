@@ -82,6 +82,12 @@ subtask(TASK_COMPILE_SOLIDITY_GET_SOURCE_PATHS).setAction(async (_, __, runSuper
   paths = paths.filter(
     (p: any) => !p.includes("TransientStore")
   );
+  paths = paths.filter(
+    (p: any) => !p.includes("MyToken")
+  );
+  paths = paths.filter(
+    (p: any) => !p.includes("VoteAs")
+  );
   return paths;
 
   //console.log(paths);

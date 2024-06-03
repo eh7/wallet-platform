@@ -33,6 +33,7 @@ describe("Vote Semaphore test contract", function () {
 
     const groupId = await voteContract.groupId()
 
+    /*
     console.log(
       //voteContract.getGroupAdmin,
       //await voteContract.getGroupAdmin(groupId)
@@ -44,6 +45,7 @@ describe("Vote Semaphore test contract", function () {
       await voteContract.groupAdmin(groupId),
       groupId
     );
+    */
 
     return { semaphoreContract, voteContract, groupId }
   }
@@ -84,6 +86,60 @@ describe("Vote Semaphore test contract", function () {
     })
   });
 
+  describe("# createBallot", () => {
+    it("Should allow users to createBallot if owner", async () => {
+      const { semaphoreContract, voteContract, groupId } = await loadFixture(deployContractFixture)
+
+      const users = [new Identity(), new Identity()]
+      const group = new Group()
+
+      for (const user of users) {
+        await voteContract.joinGroup(user.commitment)
+        group.addMember(user.commitment)
+      }
+
+      const signers = await ethers.getSigners();
+      const owner = await voteContract.owner();
+      expect(owner).to.equal(signers[0].address);
+
+      const questionString = "Should Scotland be an independant country?";
+      const responsesStringArray = ["yes", "no"];
+      const question = ethers.toUtf8Bytes(questionString);
+      const responses = [
+        ethers.toUtf8Bytes(responsesStringArray[0]),
+        ethers.toUtf8Bytes(responsesStringArray[1]),
+      ];
+      const ballot = await voteContract.createBallot(
+        question,
+        responses,
+      );
+
+      const eventBallot = (
+	(
+          await getEvent(
+            voteContract,
+            ballot,
+            "Ballot",
+	  )
+        )
+      )
+      const eventQuestion = ethers.toUtf8String(eventBallot.args[0]);
+      const evenResponses = await eventBallot.args[1].map((item) => {
+        return ethers.toUtf8String(item)
+      });
+      expect(eventQuestion).to.equal(questionString);
+      expect(evenResponses[0]).to.equal(responsesStringArray[0]);
+      expect(evenResponses[1]).to.equal(responsesStringArray[1]);
+      /*
+      console.log(
+        eventQuestion,
+        evenResponses[0],
+        evenResponses[1],
+      );
+      */
+    })
+  });
+ 
   describe("# castVote", () => {
     it("Should allow users to send voteContract anonymously", async () => {
       const { semaphoreContract, voteContract, groupId } = await loadFixture(deployContractFixture)

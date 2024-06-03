@@ -714,6 +714,5 @@ contract VerifierBirthday {
             mstore(0, isValid)
             return(0,0x20)
         }
-        
     }
 }

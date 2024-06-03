@@ -9,14 +9,32 @@ contract Vote {
 
     uint256 public groupId;
 
+    //mapping(uint256 => address) owners;
+    address public owner;
+
     //event Deposit (address);
     event Voted(uint256 vote);
     event Log(uint256 nullifier);
 
+    event Ballot(
+      bytes question,
+      bytes[] responses,
+      address owner,
+      uint256 groupId
+    );
+
+    /// @dev Checks if the owner
+    modifier onlyOwner() {
+      if (owner != msg.sender) {
+        revert('not vote owner');
+      }
+      _;
+    }
+
     constructor(address _semaphoreAddress, uint256 _groupId) {
         semaphore = ISemaphore(_semaphoreAddress);
         groupId = _groupId;
-
+        owner = msg.sender;
         semaphore.createGroup(groupId, address(this));
     }
 
@@ -54,13 +72,25 @@ contract Vote {
 
         semaphore.validateProof(groupId, proof);
     }
-    */
 
     function registerBallot(
       bytes32 question, 
       bytes32[] memory answers
     //) external ExistingGroup(groupId) onlyGroupAdmin(groupId) {
     ) external {
+    }
+    */
+
+    function createBallot(
+      bytes memory question,
+      bytes[] memory responses
+    ) external onlyOwner {
+      emit Ballot(
+        question,
+        responses,
+        owner,
+        groupId
+      );
     }
 
     event Log(uint256 group, address admin);
@@ -104,8 +134,10 @@ contract Vote {
       );
     }
 
+    /*
     function groupAdmin(uint256 _groupId) external view returns (address admin) {
         admin = semaphore.groupAdmin(_groupId);
     }
+    */
 
 }

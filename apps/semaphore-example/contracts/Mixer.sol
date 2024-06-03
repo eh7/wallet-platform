@@ -29,10 +29,10 @@ contract Mixer {
     mixERC20(DepositProof _proof, address payable _relayerAddress)
     */
     
-    //function deposit () external payable {
-    function deposit (bytes32 _paymentHash) external payable {
+    function deposit () external payable {
+    //function deposit (bytes32 _paymentHash) external payable {
       require(msg.value == TX_AMOUNT);
-      deposited[_paymentHash] = true;
+      //deposited[_paymentHash] = true;
       //emit Deposit(msg.sender);
     }
 
