@@ -7,6 +7,7 @@ const contracts = [
   'Bespoke',
   'Groth16VerifierSquare',
   'MultiPaymentChannelsDev',
+  'Vote',
 ];
 
 const contractsJson = {
@@ -17,6 +18,7 @@ const contractsJson = {
   "EtherWallet": "../contracts/EtherWallet",
   "Groth16VerifierSquare": "../contracts/Groth16VerifierSquare",
   "MultiPaymentChannelsDev": "../contracts/MultiPaymentChannels",
+  "Vote": "../contracts/Vote",
 }
 
 const networks = {

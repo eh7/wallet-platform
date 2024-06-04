@@ -126,6 +126,7 @@ const App = () => {
           <Route path="/contract/etherWallet" element={<AllABI contractName="EtherWallet" />} />
           <Route path="/contract/groth16VerifierSquare" element={<AllABI contractName="Groth16VerifierSquare" />} />
           <Route path="/contract/multiPaymentChannelsDev" element={<AllABI contractName="MultiPaymentChannelsDev" />} />
+          <Route path="/contract/vote" element={<AllABI contractName="Vote" />} />
 
           <Route path="/send" element={<SendTx />} /> 
           <Route path="/config/network" element={<ConfNetwork />} /> 
