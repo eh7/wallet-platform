@@ -528,13 +528,26 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
   	              <Form.Label>
                         {capitalize(input.name)} ({input.type})
                       </Form.Label>
+                      {
+                        <div>
+                          <div>input.type {(input.type === 'bytes[]') ? <div>true</div> : <div>false</div>}</div> 
+                          <div>{
+                            (input.type) ? (
+                              <>yes</>
+                            ) : (
+                              <>no</>
+                            )
+                            (input.type.substr(-2) === '[]') ?  (<div>true</div>) : <div>false</div>
+                          }  </div> 
+                          </div>
+  		      }
   		      <Form.Control
                         required
                         name={input.name}
   			value={formData.values[input.name]}
-                         type={input.type}
-                         onChange={(e) => handleInputOnChange(e, input.name, input)}
-                         placeholder={"Enter " + input.name}
+                        type={input.type}
+                        onChange={(e) => handleInputOnChange(e, input.name, input)}
+                        placeholder={"Enter " + input.name}
                       />
                     </Form.Group>
   		  );
