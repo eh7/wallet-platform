@@ -170,6 +170,23 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
     }
   }
 
+  function arryInputElement (input, formData, count) {
+    return (
+      <>
+        { 
+          <Form.Control
+            required
+            name={input.name}
+            value={formData.values[input.name]}
+            type={input.type}
+            onChange={(e) => handleInputOnChange(e, input.name, input)}
+            placeholder={"Enter " + input.name}
+          />
+        }
+      </>
+    )
+  }
+
   useEffect(() => {
     async function setup () {
       web3All = new Web3All(props.contractName || contractName, formData);
@@ -532,11 +549,15 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                         <div>
                           <div>input.type {(input.type === 'bytes[]') ? <div>true</div> : <div>false</div>}</div> 
                           <div>{
-                            (input.type) ? (
-                              <>yes</>
+                            (input.type.substr(-2) === '[]') ?  (
+                              <>yes array
+                              {arryInputElement(input, formData)}
+                              </> 
                             ) : (
-                              <>no</>
+                              false 
                             )
+                            }
+                            {
                             (input.type.substr(-2) === '[]') ?  (<div>true</div>) : <div>false</div>
                           }  </div> 
                           </div>
