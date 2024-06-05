@@ -117,6 +117,17 @@ const AllABI = (props) => {
     console.log('handleSubmitBespokeContract :: formData', formData);
   }
 
+  function handleArrayInputCountOnChange(e, name, input) {
+    e.preventDefault();
+    console.log(name, e.target.value, input);
+    if (e.target.value > -1) {
+      formData.values[input.nameCount] = e.target.value;
+      setFormData(formData);
+      //alert(formData.values[input.nameCount])
+    }
+    //alert("handleArrayInputCountOnChange")
+  }
+
   function handleInputOnChange(e, name, input) {
     e.preventDefault();
     formData.functionName = input;
@@ -170,10 +181,20 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
     }
   }
 
-  function arryInputElement (input, formData, count) {
+  function arrayInputElement (input, formData, count) {
+    const inputCount = input.name + "Count";
     return (
       <>
         { 
+          <Form.Control
+            required
+            name={inputCount}
+            type={"number"}
+            onChange={(e) => handleArrayInputCountOnChange(e, inputCount, input)}
+            value={(formData.values[input.nameCount]) ? formData.values[input.nameCount] : 0}
+          />
+        }
+        {
           <Form.Control
             required
             name={input.name}
@@ -551,7 +572,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                           <div>{
                             (input.type.substr(-2) === '[]') ?  (
                               <>yes array
-                              {arryInputElement(input, formData)}
+                              {arrayInputElement(input, formData)}
                               </> 
                             ) : (
                               false 
