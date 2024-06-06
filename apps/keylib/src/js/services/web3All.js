@@ -126,24 +126,48 @@ console.log('bbbbbbbb', contractJson.network.address);
     const args = [];
 
     inputs.map((input) => {
-//      if (input.name === 'txValue') {
-//        txValue = values[input.name] || '0';
-//      } else {
+      if (input.type === 'bytes') {
+        args.push(
+          //JSON.stringify(
+          //  ethers.utils.hexlify(
+              ethers.utils.toUtf8Bytes(
+                values[input.name]
+              )
+          //  )
+          //)
+        );
+      } else if (input.type === 'bytes[]') {
+/*
+console.log(
+  input.name,
+  input.type,
+  JSON.stringify(values[input.name], null, 2),
+);
+*/
+        const valueArray = [];
+        values[input.name].map((item, i) => {
+          valueArray.push(
+            //ethers.utils.hexlify(
+              ethers.utils.toUtf8Bytes(item.value)
+            //)
+          );
+        });
+        args.push(JSON.stringify(valueArray));
+      } else {
         args.push(values[input.name]);
-//      }
+      }
     });
+
+console.log('args', ...args);
+alert('args see log');
 
     let txValue = '0';
     if (typeof values['txValue'] !== 'undefined') {
       txValue = values['txValue'];
     }
 
-    //alert('signerAddress :: ' + this.signerAddress);
-  
     if (stateMutability === 'view' || stateMutability === 'pure') {
       try {
-//console.log('zzzzzzzzzzzzzzzzzzzzzzz inputs', inputs);
-//const returnData = await this.contractData.contract[functionName](0, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C');
         const returnData = await this.contractData.contract[functionName](...args);
         console.log(
           "executeContractFunction - test CALL WITH REF :: ",
@@ -163,13 +187,10 @@ console.log('bbbbbbbb', contractJson.network.address);
         if (txValue !== '0') {
           const sendValue = ethers.utils.parseEther(txValue);
           txArgs.value = sendValue;
-//console.log('ZXZXZXZX', txValue, txArgs);
-//console.log("-----------------------> txValue:", txValue, sendValue);
         }
+
         const returnData = await this.contractData.contractWithSigner[functionName](...args, txArgs);
-//        const returnData = await this.contractData.contractWithSigner[functionName](...args, {
-//          value: sendValue
-//        });
+
         const network = JSON.parse(localStorage.getItem("network"));
         //returnData.hash
         console.log(

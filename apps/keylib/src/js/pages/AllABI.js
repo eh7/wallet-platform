@@ -28,6 +28,12 @@ import {
   networkBlockerUrls,
 } from '../services/conf';
 
+import InputsArrayElement from '../components/Form/InputsArrayElement';
+
+import {
+  capitalize,
+} from "../utils";
+
 //import BlockTimestamp from "../components/BlockTimestamp";
 
 const contractName = 'Properties';
@@ -43,9 +49,9 @@ const myEmitter = new EventEmitter();
 //  );
 //}
 
-const capitalize = (str) => {
-  return str.charAt(0).toUpperCase()+str.slice(1);
-}
+//const capitalize = (str) => {
+//  return str.charAt(0).toUpperCase()+str.slice(1);
+//}
 
 const AllABI = (props) => {
 
@@ -128,15 +134,17 @@ const AllABI = (props) => {
     //alert("handleArrayInputCountOnChange")
   }
 
-  function handleInputOnChange(e, name, input) {
+  function handleInputOnChange (e, name, input) {
     e.preventDefault();
     formData.functionName = input;
     formData.values[name] = e.target.value;
     setFormData(formData);
   }
  
-  async function handleSubmit(e, inputs, stateMutability) {
+  async function handleSubmit (e, inputs, stateMutability) {
     e.preventDefault();
+
+    console.log('------------> formData', formData);
 
     try {
       await web3All.contractSetup(abiData);
@@ -568,29 +576,31 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                       </Form.Label>
                       {
                         <div>
-                          <div>input.type {(input.type === 'bytes[]') ? <div>true</div> : <div>false</div>}</div> 
-                          <div>{
-                            (input.type.substr(-2) === '[]') ?  (
-                              <>yes array
-                              {arrayInputElement(input, formData)}
+                          {(input.type.substr(-2) === '[]') ? (
+                              <>
+                                <InputsArrayElement 
+                                  name={input.name}
+                                  type={input.type}
+                                  onUpdateArrayData={(e) => {
+                                    //console.log("InputsArrayElement onUpdateArrayData", e)
+                                    formData.values[input.name] = e;
+                                    setFormData(formData);
+                                  }}
+                                />
                               </> 
                             ) : (
-                              false 
+  		              <Form.Control
+                                required
+                                name={input.name}
+          			value={formData.values[input.name]}
+                                type={input.type}
+                                onChange={(e) => handleInputOnChange(e, input.name, input)}
+                                placeholder={"Enter " + input.name}
+                              />
                             )
-                            }
-                            {
-                            (input.type.substr(-2) === '[]') ?  (<div>true</div>) : <div>false</div>
-                          }  </div> 
-                          </div>
+                          }
+                        </div>
   		      }
-  		      <Form.Control
-                        required
-                        name={input.name}
-  			value={formData.values[input.name]}
-                        type={input.type}
-                        onChange={(e) => handleInputOnChange(e, input.name, input)}
-                        placeholder={"Enter " + input.name}
-                      />
                     </Form.Group>
   		  );
   		})}

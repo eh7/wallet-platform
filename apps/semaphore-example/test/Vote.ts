@@ -109,6 +109,10 @@ describe("Vote Semaphore test contract", function () {
         ethers.toUtf8Bytes(responsesStringArray[0]),
         ethers.toUtf8Bytes(responsesStringArray[1]),
       ];
+console.log(
+        question,
+        responses,
+);
       const ballot = await voteContract.createBallot(
         question,
         responses,
