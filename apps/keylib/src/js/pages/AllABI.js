@@ -501,6 +501,16 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                     <thead>
                       <tr>
                         <th>Block No.</th>
+                    {
+                      abiData.abi.filter((element) => {
+                        if (element.type === 'event' && element.name === logs[0].event) {
+                          console.log(element.inputs)
+                          element.inputs.filter((item) => {
+                            console.log('--> ', item.name, element.name)
+                          })
+                        }
+                      })
+                    }
                     { 
                       Object.keys(logs[0].args).map((header, index) => {
                         if (index >= logs[0].args.length) {
