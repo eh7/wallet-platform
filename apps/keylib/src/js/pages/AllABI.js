@@ -517,6 +517,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                   {
                     <tbody>
                     { logs.map((event) => {
+                        //console.log(event);
                         const tds = event.args.map((item) => {
                           if (typeof item === 'object') {
                             return (<td>{item.toString()}</td>);

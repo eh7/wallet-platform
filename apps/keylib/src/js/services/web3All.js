@@ -133,7 +133,7 @@ console.log('bbbbbbbb', contractJson.network.address);
       } else if (input.type === 'bytes[]') {
         const valueArray = [];
         values[input.name].map((item, i) => {
-          alert(JSON.stringify(item, 2, null));
+          //alert(JSON.stringify(item, 2, null));
           valueArray.push(
             ethers.utils.toUtf8Bytes(item.value)
           );
