@@ -128,38 +128,20 @@ console.log('bbbbbbbb', contractJson.network.address);
     inputs.map((input) => {
       if (input.type === 'bytes') {
         args.push(
-          //JSON.stringify(
-          //  ethers.utils.hexlify(
-              ethers.utils.toUtf8Bytes(
-                values[input.name]
-              )
-          //  )
-          //)
+          ethers.utils.toUtf8Bytes(values[input.name])
         );
       } else if (input.type === 'bytes[]') {
-/*
-console.log(
-  input.name,
-  input.type,
-  JSON.stringify(values[input.name], null, 2),
-);
-*/
         const valueArray = [];
         values[input.name].map((item, i) => {
           valueArray.push(
-            //ethers.utils.hexlify(
-              ethers.utils.toUtf8Bytes(item.value)
-            //)
+            ethers.utils.toUtf8Bytes(item)
           );
         });
-        args.push(JSON.stringify(valueArray));
+        args.push(valueArray);
       } else {
         args.push(values[input.name]);
       }
     });
-
-console.log('args', ...args);
-alert('args see log');
 
     let txValue = '0';
     if (typeof values['txValue'] !== 'undefined') {
@@ -189,10 +171,24 @@ alert('args see log');
           txArgs.value = sendValue;
         }
 
+        /*
+        const questionString = "i-test -- Should Scotland be an independant country?";
+        const responsesStringArray = ["yes", "no"];
+        const question = ethers.utils.toUtf8Bytes(questionString);
+        const responses = [
+          ethers.utils.toUtf8Bytes(responsesStringArray[0]),
+          ethers.utils.toUtf8Bytes(responsesStringArray[1]),
+        ];
+//console.log(question);
+//console.log(responses);
+//alert(999)
+        const returnData = await this.contractData.contractWithSigner[functionName](question, responses, txArgs);
+        */
+
         const returnData = await this.contractData.contractWithSigner[functionName](...args, txArgs);
 
         const network = JSON.parse(localStorage.getItem("network"));
-        //returnData.hash
+
         console.log(
           "executeFunction - stateMutability not pure or view:",
           returnData.hash,
