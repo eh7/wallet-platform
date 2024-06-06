@@ -133,8 +133,9 @@ console.log('bbbbbbbb', contractJson.network.address);
       } else if (input.type === 'bytes[]') {
         const valueArray = [];
         values[input.name].map((item, i) => {
+          alert(JSON.stringify(item, 2, null));
           valueArray.push(
-            ethers.utils.toUtf8Bytes(item)
+            ethers.utils.toUtf8Bytes(item.value)
           );
         });
         args.push(valueArray);
@@ -142,6 +143,8 @@ console.log('bbbbbbbb', contractJson.network.address);
         args.push(values[input.name]);
       }
     });
+
+    //console.log("----------> ...args:", ...args);
 
     let txValue = '0';
     if (typeof values['txValue'] !== 'undefined') {
