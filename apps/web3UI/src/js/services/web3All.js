@@ -122,6 +122,13 @@ console.log('bbbbbbbb', contractJson.network.address);
     return data;
   }
 
+  toUtf8String (_bytes) {
+    return ethers.utils.toUtf8String(
+      _bytes
+    )
+  }
+  
+
   async executeContractFunction (functionName, values, inputs, stateMutability) {
     const args = [];
 

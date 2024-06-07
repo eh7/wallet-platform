@@ -216,6 +216,25 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
     )
   }
 
+  function getEventNameTypesObject (_eventName, _index) {
+    const eventsTypesObject = {};
+    abiData.abi.filter((element, index) => {
+      if (
+        element.type === 'event' && 
+        element.name === _eventName
+      ) {
+        //console.log('getEventNameTypesObject:', element.inputs)
+        element.inputs.filter((item, index) => {
+          //if (item.name === _itemName) {
+          if (index === _index) {
+            console.log('getEventNameTypesObject: item:', index, _index, item);
+            return item;
+          }
+        })
+      }
+    })
+  }
+
   useEffect(() => {
     async function setup () {
       web3All = new Web3All(props.contractName || contractName, formData);
@@ -506,7 +525,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                         if (element.type === 'event' && element.name === logs[0].event) {
                           console.log(element.inputs)
                           element.inputs.filter((item) => {
-                            console.log('--> ', item.name, element.name)
+                            console.log('--> ', item.name, element.name, item.type)
                           })
                         }
                       })
@@ -526,10 +545,39 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                   }
                   {
                     <tbody>
-                    { logs.map((event) => {
-                        //console.log(event);
-                        const tds = event.args.map((item) => {
-                          if (typeof item === 'object') {
+                    { logs.map((event, eventIndex) => {
+                        //console.log('---> event: ', event);
+                        console.log('---> logs[0]: ', logs[0]);
+                        console.log('---> Object.keys(logs[0].args): ', Object.keys(logs[0].args));
+                        const tds = event.args.map((item, index) => {
+                          /*
+                          console.log('--> item : ', eventIndex, item);
+                          { 
+                            //const tmp = getEventNameTypesObject(event.event, index)
+                            console.log('fffff', eventTypes[eventIndex].inputs[index]);
+                          }
+                          console.log('f type:', eventTypes[eventIndex].inputs[index].type);
+                          */
+
+                          if (eventTypes[eventIndex].inputs[index].type === 'bytes[]') {
+                            const decoded = [];
+                            console.log('typeof item', typeof item, item.length)
+                            item.map((element) => {
+                              decoded.push(
+                                web3All.toUtf8String(
+                                  element.toString()
+                                )
+                              )
+                            })
+                            return (<td>bytes[] -> [{decoded.toString()}]</td>);
+                          } else if (eventTypes[eventIndex].inputs[index].type === 'bytes') {
+                            return (<td>bytes -> {
+                              //ethers.utils.fromUtf8Bytes(
+                              web3All.toUtf8String(
+                                item
+                              )
+                            }</td>);
+                          } else if (typeof item === 'object') {
                             return (<td>{item.toString()}</td>);
                           } else {
                             return (<td>{item}</td>);
