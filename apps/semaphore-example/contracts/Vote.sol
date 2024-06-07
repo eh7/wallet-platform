@@ -14,7 +14,6 @@ contract Vote {
 
     //event Deposit (address);
     event Voted(uint256 vote);
-    event Log(uint256 nullifier);
 
     event Ballot(
       bytes question,
@@ -93,8 +92,6 @@ contract Vote {
       );
     }
 
-    event Log(uint256 group, address admin);
-
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
     }
@@ -114,8 +111,6 @@ contract Vote {
             groupId,
             points
         );
-
-        emit Log(nullifier);
 
         semaphore.validateProof(groupId, proof);
 

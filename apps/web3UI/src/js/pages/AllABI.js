@@ -475,7 +475,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
   	</Card.Header>
   	<Row>
   	  <Col>
-              {(!!eventTypes.length) && (
+              {(!eventTypes.length) || (
                 <p className="p-4">
                   <nav>
                   <h4>Contract Events</h4>
@@ -546,20 +546,11 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                   {
                     <tbody>
                     { logs.map((event, eventIndex) => {
-                        //console.log('---> event: ', event);
-                        console.log('---> logs[0]: ', logs[0]);
-                        console.log('---> Object.keys(logs[0].args): ', Object.keys(logs[0].args));
-                        const tds = event.args.map((item, index) => {
-                          /*
-                          console.log('--> item : ', eventIndex, item);
-                          { 
-                            //const tmp = getEventNameTypesObject(event.event, index)
-                            console.log('fffff', eventTypes[eventIndex].inputs[index]);
-                          }
-                          console.log('f type:', eventTypes[eventIndex].inputs[index].type);
-                          */
+                        const thisEventIndex = eventTypes.findIndex((logType) => logType.name === logs[0].event) 
 
-                          if (eventTypes[eventIndex].inputs[index].type === 'bytes[]') {
+                        const tds = event.args.map((item, index) => {
+
+                          if (eventTypes[thisEventIndex].inputs[index].type === 'bytes[]') {
                             const decoded = [];
                             console.log('typeof item', typeof item, item.length)
                             item.map((element) => {
@@ -570,7 +561,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                               )
                             })
                             return (<td>bytes[] -> [{decoded.toString()}]</td>);
-                          } else if (eventTypes[eventIndex].inputs[index].type === 'bytes') {
+                          } else if (eventTypes[thisEventIndex].inputs[index].type === 'bytes') {
                             return (<td>bytes -> {
                               //ethers.utils.fromUtf8Bytes(
                               web3All.toUtf8String(
