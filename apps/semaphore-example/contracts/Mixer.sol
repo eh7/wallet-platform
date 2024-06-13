@@ -54,6 +54,25 @@ contract Mixer {
         return semaphore.verifyProof(groupId, proof);
     }
 
+    function validate(
+        uint256 merkleTreeDepth,
+        uint256 merkleTreeRoot,
+        uint256 nullifier,
+        uint256 paymentHash,
+        uint256[8] calldata points
+    ) external returns (bool) {
+        ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
+            merkleTreeDepth,
+            merkleTreeRoot,
+            nullifier,
+            paymentHash,
+            groupId,
+            points
+        );
+        semaphore.validateProof(groupId, proof);
+        return true;
+    }
+
     function withdraw(
         uint256 merkleTreeDepth,
         uint256 merkleTreeRoot,

@@ -2,7 +2,12 @@ import { expect } from "chai";
 import { ethers } from "hardhat";
 
 import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers"
-import { Group, Identity, generateProof } from "@semaphore-protocol/core"
+import {
+  Group,
+  Identity,
+  generateProof,
+  verifyProof,
+} from "@semaphore-protocol/core"
 
 import { encodeBytes32String, Typed } from "ethers"
 
@@ -276,6 +281,102 @@ console.log(proof_1)
       )
       */
 
+    })
+  })
+
+  describe("# joinGroup further tests", () => {
+    it("Should allow users to join the group", async () => {
+      const { semaphoreContract, mixer, groupId } = await loadFixture(deployContractFixture)
+
+      const users = [new Identity(), new Identity(), new Identity()]
+      //users[2]._secretScalar = 1;
+
+      /*
+      const bn = BigInt(users[0]._secretScalar);
+      const hex = bn.toString(16);
+      console.log(hex)
+      console.log(BigInt('0x38ffea047696d3eb2618bdcfd244a1c2e4f2f9541b169bda478503752fab6b3').toString(2));
+      console.log(new Identity("secret-value"))
+      console.log(new Identity("secret-value"))
+
+console.log(
+  users[0]._secretScalar,
+  "\n" + users[1]._secretScalar,
+  "\n" + users[2]._secretScalar,
+  "\n" + BigInt(users[0]._secretScalar).toString(),
+);
+process.exit()
+      */
+
+      const group = new Group()
+
+      for (const [i, user] of users.entries()) {
+        const transaction = await mixer.joinGroup(user.commitment)
+        group.addMember(user.commitment)
+
+        await expect(transaction)
+           .to.emit(semaphoreContract, "MemberAdded")
+           .withArgs(groupId, i, user.commitment, group.root)
+      }
+
+      //console.log(users[0]._secretScalar);
+      //console.log(users[1]._secretScalar);
+      //console.log(users[2]._secretScalar);
+
+      // setup payment hashes
+      const types = ['string', 'string', 'uint256'];
+
+      // paymentHash
+      const nonce = 0;
+      const values = ["pay", "gavin", nonce];
+      const paymentHash = ethers.keccak256(
+        ethers.solidityPacked(types, values)
+      )
+
+      // paymentHash1
+      const nonce1 = 1;
+      const values1 = ["pay", "gavin", nonce1];
+      const paymentHash1 = ethers.keccak256(
+        ethers.solidityPacked(types, values)
+      )
+
+      const proof = await generateProof(users[1], group, paymentHash, groupId)
+      const proof1 = await generateProof(users[1], group, paymentHash1, String(nonce1))
+
+      console.log(await verifyProof(proof));
+      console.log(await verifyProof(proof1));
+
+      console.log(users[1])
+      console.log(proof.nullifier);
+      console.log(proof1.nullifier);
+
+      console.log('groupId:', groupId);
+      console.log('group.root:', group.root);
+
+      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).validate(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        proof.points
+      ))
+/*
+      //console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
+      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).validate(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        proof.points
+      ))
+*/
+      console.log('xxxxxxxxxxxxxxxxxxxxx hash1', await mixer.connect(accounts[1]).validate(
+        proof1.merkleTreeDepth,
+        proof1.merkleTreeRoot,
+        proof1.nullifier,
+        paymentHash1, 
+        proof1.points
+      ))
     })
   })
 
