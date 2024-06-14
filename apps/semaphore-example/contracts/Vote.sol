@@ -101,6 +101,7 @@ contract Vote {
         uint256 merkleTreeRoot,
         uint256 nullifier,
         uint256 vote,
+        uint256 scope,
         uint256[8] calldata points
     ) external {
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
@@ -108,7 +109,8 @@ contract Vote {
             merkleTreeRoot,
             nullifier,
             vote,
-            groupId,
+            //groupId,
+            scope,
             points
         );
 

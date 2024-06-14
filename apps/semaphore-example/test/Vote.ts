@@ -170,7 +170,8 @@ console.log(
       //console.log('hashed vote:', hashVoteContract);
       expect(vote).to.equal(hashVoteContract);
 
-      const proof = await generateProof(users[1], group, vote, groupId)
+      const scope = 0;
+      const proof = await generateProof(users[1], group, vote, scope)
 
       //const transaction = await voteContract.connect(accounts[0]).castVote(
       const transaction = await voteContract.castVote(
@@ -178,6 +179,7 @@ console.log(
         proof.merkleTreeRoot,
         proof.nullifier,
         vote,
+        scope,
         proof.points
       )
 
@@ -228,16 +230,24 @@ console.log(
         proof.merkleTreeRoot,
         proof.nullifier,
         vote,
+        scope,
         proof.points
       )).to.be.reverted
 
-/*
+      const scope2 = 1;
+      const types2 = ['string', 'string'];
+      const values2 = ["best colour", "red"];
+      const vote2 = ethers.keccak256(
+        ethers.solidityPacked(types2, values2)
+      )
+      const proof2 = await generateProof(users[1], group, vote2, scope2)
       const transaction1 = await voteContract.castVote(
-        proof.merkleTreeDepth,
-        proof.merkleTreeRoot,
-        proof.nullifier,
-        vote,
-        proof.points
+        proof2.merkleTreeDepth,
+        proof2.merkleTreeRoot,
+        proof2.nullifier,
+        vote2,
+        scope2,
+        proof2.points
       )
 
       const eventVoted1 = (
@@ -249,6 +259,17 @@ console.log(
 	  )
         ).args[0]
       )
+
+      await expect(voteContract.castVote(
+        proof2.merkleTreeDepth,
+        proof2.merkleTreeRoot,
+        proof2.nullifier,
+        vote2,
+        scope2,
+        proof2.points
+      )
+      ).to.be.reverted
+/*
 */
 
     })
