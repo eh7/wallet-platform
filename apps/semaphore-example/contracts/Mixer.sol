@@ -41,6 +41,7 @@ contract Mixer {
         uint256 merkleTreeRoot,
         uint256 nullifier,
         uint256 paymentHash,
+        uint256 scope,
         uint256[8] calldata points
     ) external view returns (bool) {
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
@@ -48,7 +49,8 @@ contract Mixer {
             merkleTreeRoot,
             nullifier,
             paymentHash,
-            groupId,
+            //groupId,
+            scope,
             points
         );
         return semaphore.verifyProof(groupId, proof);
@@ -59,6 +61,7 @@ contract Mixer {
         uint256 merkleTreeRoot,
         uint256 nullifier,
         uint256 paymentHash,
+        uint256 scope,
         uint256[8] calldata points
     ) external returns (bool) {
         ISemaphore.SemaphoreProof memory proof = ISemaphore.SemaphoreProof(
@@ -66,7 +69,8 @@ contract Mixer {
             merkleTreeRoot,
             nullifier,
             paymentHash,
-            groupId,
+            //groupId,
+            scope,
             points
         );
         semaphore.validateProof(groupId, proof);

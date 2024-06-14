@@ -5,6 +5,7 @@ import { loadFixture } from "@nomicfoundation/hardhat-toolbox/network-helpers"
 import {
   Group,
   Identity,
+  Proof,
   generateProof,
   verifyProof,
 } from "@semaphore-protocol/core"
@@ -12,6 +13,24 @@ import {
 import { encodeBytes32String, Typed } from "ethers"
 
 import { run } from "hardhat"
+
+/*
+import { encodeBytes32String } from "ethers/abi"
+import { toBigInt as _toBigInt } from "ethers/utils"
+import { BigNumberish } from "./types"
+function toBigInt(value: BigNumberish | Uint8Array | string): bigint {
+    try {
+        return _toBigInt(value)
+    } catch (error: any) {
+        if (typeof value === "string") {
+            return _toBigInt(encodeBytes32String(value))
+        }
+
+        throw TypeError(error.message)
+    }
+}
+*/
+
 
 const TX_AMOUNT = "0.01"
 
@@ -139,13 +158,14 @@ describe("Mixer Semaphore test contract", function () {
       )
 
       const proof = await generateProof(users[1], group, paymentHash, groupId)
-console.log(proof)
+//console.log(proof)
 
       console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
         proof.merkleTreeDepth,
         proof.merkleTreeRoot,
         proof.nullifier,
         paymentHash, 
+        groupId,
         proof.points
       ))
 
@@ -204,7 +224,7 @@ console.log(proof)
         ethers.solidityPacked(types, values)
       )
       const proof_1 = await generateProof(users[1], group, paymentHash_1, groupId)
-console.log(proof_1)
+//console.log(proof_1)
 //      console.log(proof_1);
 
       console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
@@ -212,6 +232,7 @@ console.log(proof_1)
         proof_1.merkleTreeRoot,
         proof_1.nullifier,
         paymentHash_1, 
+        groupId,
         proof_1.points
       ))
 
@@ -240,6 +261,7 @@ console.log(proof_1)
         proof_1.merkleTreeRoot,
         proof_1.nullifier,
         paymentHash_1, 
+        groupId,
         proof_1.points
       ))
 
@@ -341,42 +363,66 @@ process.exit()
       )
 
       const proof = await generateProof(users[1], group, paymentHash, groupId)
-      const proof1 = await generateProof(users[1], group, paymentHash1, String(nonce1))
+      const proof1 = await generateProof(users[1], group, paymentHash1, nonce1)
 
+//      console.log(
+//        "toBigInt(groupId):", toBigInt(groupId),
+//        "toBigInt('groupId'):", toBigInt('groupId')
+//	Proof.toBigInt(groupId),
+//        Proof.toBigInt('groupId'),
+//      )
+
+/*
       console.log(await verifyProof(proof));
       console.log(await verifyProof(proof1));
 
       console.log(users[1])
-      console.log(proof.nullifier);
-      console.log(proof1.nullifier);
+      console.log(proof);
+      console.log(proof1);
 
       console.log('groupId:', groupId);
       console.log('group.root:', group.root);
-
-      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).validate(
-        proof.merkleTreeDepth,
-        proof.merkleTreeRoot,
-        proof.nullifier,
-        paymentHash, 
-        proof.points
-      ))
-/*
-      //console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).verify(
-      console.log('xxxxxxxxxxxxxxxxxxxxx', await mixer.connect(accounts[1]).validate(
-        proof.merkleTreeDepth,
-        proof.merkleTreeRoot,
-        proof.nullifier,
-        paymentHash, 
-        proof.points
-      ))
 */
-      console.log('xxxxxxxxxxxxxxxxxxxxx hash1', await mixer.connect(accounts[1]).validate(
+
+      const resultProof1 = await mixer.connect(accounts[1]).validate(
         proof1.merkleTreeDepth,
         proof1.merkleTreeRoot,
         proof1.nullifier,
         paymentHash1, 
+        nonce1,
         proof1.points
-      ))
+      )
+      //console.log(resultProof1.blockNumber);
+      expect(
+        resultProof1.blockNumber
+      ).to.be.ok;
+
+      const resultProof = await mixer.connect(accounts[1]).validate(
+        proof.merkleTreeDepth,
+        proof.merkleTreeRoot,
+        proof.nullifier,
+        paymentHash, 
+        groupId,
+        proof.points
+      )
+      expect(
+        resultProof
+      ).to.be.ok;
+
+      try {
+        const resultProofTakeTwo = await mixer.connect(accounts[1]).validate(
+          proof.merkleTreeDepth,
+          proof.merkleTreeRoot,
+          proof.nullifier,
+          paymentHash, 
+          proof.points
+        )
+      } catch (e) {
+	expect(
+          e.message.match("no matching fragment"))
+        .to.be.not.true;
+      }
+
     })
   })
 

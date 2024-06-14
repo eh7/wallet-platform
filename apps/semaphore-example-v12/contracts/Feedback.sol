@@ -14,9 +14,11 @@ contract Feedback {
         semaphore = ISemaphore(_semaphoreAddress);
 
         //groupId = semaphore.createGroup();
-        semaphore.createGroup(_groupId, address(this));
+        //semaphore.createGroup(_groupId, address(this));
+        groupId = semaphore.createGroup(address(this));
     }
 
+/*
     function joinGroup(uint256 identityCommitment) external {
         semaphore.addMember(groupId, identityCommitment);
     }
@@ -39,6 +41,5 @@ contract Feedback {
 
         semaphore.validateProof(groupId, proof);
     }
-/*
 */
 }
