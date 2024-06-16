@@ -332,6 +332,8 @@ process.exit()
 
       const group = new Group()
 
+console.log(mixer.joinGroup);
+
       for (const [i, user] of users.entries()) {
         const transaction = await mixer.joinGroup(user.commitment)
         group.addMember(user.commitment)
