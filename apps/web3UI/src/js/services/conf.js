@@ -7,6 +7,7 @@ const contracts = [
   'Bespoke',
   'Groth16VerifierSquare',
   'MultiPaymentChannelsDev',
+  'Notes',
   'Vote',
 ];
 
@@ -19,6 +20,7 @@ const contractsJson = {
   "Groth16VerifierSquare": "../contracts/Groth16VerifierSquare",
   "MultiPaymentChannelsDev": "../contracts/MultiPaymentChannels",
   "Vote": "../contracts/Vote",
+  "Notes": "../contracts/Notes",
 }
 
 const networks = {
