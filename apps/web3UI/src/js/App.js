@@ -30,6 +30,7 @@ import SetupExportData from './pages/SetupExportData';
 import SetupImportData from './pages/SetupImportData';
 import SetupLoadKeystore from './pages/SetupLoadKeystore';
 import SetupSSS from './pages/SetupSSS';
+import SetupSSSGenerator from './pages/SetupSSSGenerator';
 
 //import Network from '/components/Conf/Network'; 
 
@@ -144,6 +145,7 @@ const App = () => {
           <Route path="/setup/keystore/load" element={<SetupLoadKeystore />} /> 
           <Route path="/setup/localStorage" element={<LocalStorage />} /> 
           <Route path="/setup/sss" element={<SetupSSS />} /> 
+          <Route path="/setup/sss/generator" element={<SetupSSSGenerator />} /> 
        </Routes>
     </>
  );

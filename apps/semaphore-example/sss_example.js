@@ -7,6 +7,10 @@ var key = process.env.PRIVATE_KEY_DEV_EVM_HH
 // generate a 512-bit key
 //var key = secrets.random(512) // => key is a hex string
 //console.log(key);
+//
+var sharesTest = secrets.share('7574b8D4C0C2566b671C530d710821EB6694bE0C', 10, 2)
+console.log(sharesTest)
+process.exit();
  
 // split into 10 shares with a threshold of 5
 var shares = secrets.share(key, 20, 2)

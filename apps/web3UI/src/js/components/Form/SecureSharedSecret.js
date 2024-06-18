@@ -49,7 +49,8 @@ function SecureSharedSecret(props) {
         }
       })
       if (chk === threshold) {
-        const key = secrets.combine(shares);
+        const comb = secrets.combine(shares);
+        const key = Buffer.from(comb, 'hex').toString()
         setKey(key)
       }
     } catch (e) {
