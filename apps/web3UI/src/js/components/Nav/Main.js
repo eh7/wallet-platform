@@ -146,6 +146,7 @@ function NavMain() {
                   <NavDropdown.Item href="/setup/export/data">Export Application Data</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/import/data">Import Application Data</NavDropdown.Item>
                   <NavDropdown.Item href="/setup/localStorage">Local Storage</NavDropdown.Item>
+                  <NavDropdown.Item href="/setup/sss">Shared Secret</NavDropdown.Item>
                 </NavDropdownMenu>
               </Nav.Item>
 
