@@ -51,6 +51,10 @@ function NavMain() {
       address
     );
     console.log(myAddress);
+    /*
+    const pkey = await wallet.getPrivateKey();
+    console.log(pkey);
+    */
   }
 
   const setNetwork = (chainId) => {
