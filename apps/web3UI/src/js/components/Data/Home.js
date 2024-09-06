@@ -31,7 +31,7 @@ function Data(props) {
     //alert(await wallet.getPrivateKey())
     setData([1,2,3])
     this.key = wallet.getPrivateKey();
-    alert(await this.key)
+    //alert(await this.key)
   }
 
   useEffect(() => {
