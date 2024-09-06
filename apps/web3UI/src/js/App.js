@@ -9,6 +9,7 @@ import Col from 'react-bootstrap/Col';
 import NavMain from './components/Nav/Main';
 
 import Home from './pages/Home';
+import Data from './pages/Data';
 import About from './pages/About';
 import Applications from './pages/Applications';
 import SendTx from './pages/Send';
@@ -118,8 +119,9 @@ const App = () => {
        <NavMain/>
        <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/About" element={<About />} />
-          <Route path="/Applications" element={<Applications />} />
+          <Route path="/data" element={<Data />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/applications" element={<Applications />} />
 
           <Route path="/contract/ballot" element={<AllABI contractName="Ballot" />} />
           <Route path="/contract/ballotDev" element={<AllABI contractName="BallotDev" />} />
