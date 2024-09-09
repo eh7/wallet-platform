@@ -546,10 +546,16 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                   {
                     <tbody>
                     { logs.map((event, eventIndex) => {
+//console.log('event index hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event, eventIndex)
+console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', logType, logs[0].event)
                         const thisEventIndex = eventTypes.findIndex((logType) => logType.name === logs[0].event) 
 
                         const tds = event.args.map((item, index) => {
 
+console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', item, index)
+console.log('???', eventTypes, thisEventIndex)
+/*
+//WIP - fix the log output error
                           if (eventTypes[thisEventIndex].inputs[index].type === 'bytes[]') {
                             const decoded = [];
                             console.log('typeof item', typeof item, item.length)
@@ -573,6 +579,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                           } else {
                             return (<td>{item}</td>);
                           }
+*/
                         })
                         //const blockTd = (<td>{web3All.getBlockTimestampSync(event.blockNumber)}</td>);
                         const host = (web3All.networkId) ? networkBlockerUrls[web3All.networkId] : 'mumbai.polygonscan.com';

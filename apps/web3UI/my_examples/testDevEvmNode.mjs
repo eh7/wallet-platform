@@ -12,7 +12,8 @@ const contractJson = require("../src/js/contracts/BallotDev");
 //const endPoint = 'http://127.0.0.1:8545/';
 const endPoint = process.env.RPC_URL_EVM_NODE;
 
-const provider = new ethers.providers.JsonRpcProvider(endPoint);
+//const provider = new ethers.providers.JsonRpcProvider(endPoint);
+const provider = new ethers.JsonRpcProvider(endPoint);
 
 
 //console.log(provider);

@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useTable } from "react-table";
 import {
   BigNumber,
+  Contract,
   ethers,
+  JsonRpcProvider,
+  toQuantity,
+  toUtf8Bytes,
+  toUtf8String,
   utils,
 } from "ethers";
 import {
@@ -123,7 +128,8 @@ console.log('bbbbbbbb', contractJson.network.address);
   }
 
   toUtf8String (_bytes) {
-    return ethers.utils.toUtf8String(
+    //return ethers.utils.toUtf8String(
+    return toUtf8String(
       _bytes
     )
   }
@@ -135,14 +141,16 @@ console.log('bbbbbbbb', contractJson.network.address);
     inputs.map((input) => {
       if (input.type === 'bytes') {
         args.push(
-          ethers.utils.toUtf8Bytes(values[input.name])
+          //ethers.utils.toUtf8Bytes(values[input.name])
+          toUtf8Bytes(values[input.name])
         );
       } else if (input.type === 'bytes[]') {
         const valueArray = [];
         values[input.name].map((item, i) => {
           //alert(JSON.stringify(item, 2, null));
           valueArray.push(
-            ethers.utils.toUtf8Bytes(item.value)
+            //ethers.utils.toUtf8Bytes(item.value)
+            toUtf8Bytes(item.value)
           );
         });
         args.push(valueArray);
@@ -177,7 +185,8 @@ console.log('bbbbbbbb', contractJson.network.address);
       try {
         const txArgs = {}; 
         if (txValue !== '0') {
-          const sendValue = ethers.utils.parseEther(txValue);
+          //const sendValue = ethers.utils.parseEther(txValue);
+          const sendValue = ethers.parseEther(txValue);
           txArgs.value = sendValue;
         }
 
@@ -226,7 +235,8 @@ console.log('bbbbbbbb', contractJson.network.address);
     } else {
       networks.map((network, i) => {
 //console.log(typeof networks[i].chainId);
-        networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+        //networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+        networkProvider[networks[i].chainId] = new JsonRpcProvider(networks[i].rpcUrl);
 //console.log('sssssssssssssssssssssssssss', String(abiData.networkId), networks[i].chainId);
       })
     }
@@ -245,7 +255,8 @@ console.log('bbbbbbbb', contractJson.network.address);
     //    const address = await provider.send("eth_requestAccounts", []);
     //    const signer = provider.getSigner();
 
-    const contract = new ethers.Contract(
+    //const contract = new ethers.Contract(
+    const contract = new Contract(
       abiData.address,
       abiData.abi,
       provider
@@ -284,7 +295,8 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1);
   }
 
   async checkNetwork () {
-    const targetNetworkId = ethers.utils.hexValue(
+    //const targetNetworkId = ethers.utils.hexValue(
+    const targetNetworkId = toQuantity(
       Number(this.networkId)
     );
     console.log(
@@ -305,7 +317,8 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1);
   }
 
   async switchNetwork () {
-    const targetNetworkId = ethers.utils.hexValue(
+    //const targetNetworkId = ethers.utils.hexValue(
+    const targetNetworkId = toQuantity(
       Number(this.networkId)
     );
     await window.ethereum.request({
@@ -317,7 +330,8 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx', 1);
   }
 
   async addNetwork (chainId, name, pcUrls) {
-    const targetNetworkId = ethers.utils.hexValue(
+    //const targetNetworkId = ethers.utils.hexValue(
+    const targetNetworkId = toQuantity(
       Number(chainId)
     );
     try {

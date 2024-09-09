@@ -18,7 +18,8 @@ const contractJson = require("../src/js/contracts/BallotDev");
 
 const endPoint = process.env.RPC_URL_EVM_NODE;
 
-const provider = new ethers.providers.JsonRpcProvider(endPoint);
+//const provider = new ethers.providers.JsonRpcProvider(endPoint);
+const provider = new ethers.JsonRpcProvider(endPoint);
 
 let pkey = [];
 pkey.push(process.env.PKEY_URL_EVM_NODE0);

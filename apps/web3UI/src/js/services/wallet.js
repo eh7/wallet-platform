@@ -1,7 +1,12 @@
 import bip39 from 'bip39-light';
 //import EthjsWallet from 'ethereumjs-wallet';
 import EthjsWallet, { hdkey as etherHDkey } from 'ethereumjs-wallet';
-import { ethers } from 'ethers';
+import {
+  ethers,
+  formatEther,
+  JsonRpcProvider,
+  Wallet as EthersWallet,
+} from 'ethers';
 
 const crypto = require('crypto');
 const algorithm = 'aes-256-cbc'; //Using AES encryption
@@ -13,6 +18,9 @@ import { redirect } from "react-router-dom";
 import 'dotenv/config';
 
 const endPoint = process.env.RPC_URL || '';
+
+//console.log(ethers)
+//console.log(JsonRpcProvider)
 
 export default class Wallet {
 
@@ -60,13 +68,16 @@ export default class Wallet {
   setupProvider = () => {
     const networks = JSON.parse(localStorage.getItem("networks"));
 
-    this.provider = new ethers.providers.JsonRpcProvider(endPoint);
+//console.log(ethers, endPoint)
+    //this.provider = new ethers.providers.JsonRpcProvider(endPoint);
+    this.provider = new JsonRpcProvider(endPoint);
 
     if (networks === null) {
       console.log(localStorage.getItem("networks"));
     } else {
       networks.map((network, i) => {
-        this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+        //this.networkProvider[networks[i].chainId] = new ethers.providers.JsonRpcProvider(networks[i].rpcUrl);
+        this.networkProvider[networks[i].chainId] = new JsonRpcProvider(networks[i].rpcUrl);
       })
       console.log(
         'this.networkProvider:',
@@ -85,11 +96,13 @@ export default class Wallet {
     const network = JSON.parse(localStorage.getItem("network"));
     const provider = this.networkProvider[network.chainId];
     const privateKeyString = await this.getPrivateKey();
-    const signer = new ethers.Wallet(privateKeyString, provider);
+    //const signer = new ethers.Wallet(privateKeyString, provider);
+    const signer = new EthersWallet(privateKeyString, provider);
     const params = {
       from: _params[0].from,
       to: _params[0].to,
-      value: ethers.utils.parseUnits(_params[0].value, 'ether').toHexString(),
+      //value: ethers.utils.parseUnits(_params[0].value, 'ether').toHexString(),
+      value: ethers.parseEther(_params[0].value),
     };
     const transaction = await signer.sendTransaction(params)
     //console.log('transaction hash:', transaction.hash);
@@ -113,7 +126,8 @@ export default class Wallet {
       const provider = this.networkProvider[network.chainId];
       const balance = await provider.getBalance(_address);
       //const balance = await this.provider.getBalance(_address);
-      const balanceInEth = ethers.utils.formatEther(balance);
+      //const balanceInEth = ethers.utils.formatEther(balance);
+      const balanceInEth = ethers.formatEther(balance);
       return balanceInEth;
     } catch (e) {
       console.log('eallet.js :: getBalance :: ', e);
@@ -474,7 +488,8 @@ export default class Wallet {
         error: 'no endPoint set',
       });
     }
-    const provider = new ethers.providers.JsonRpcProvider(endPoint);
+    //const provider = new ethers.providers.JsonRpcProvider(endPoint);
+    const provider = new JsonRpcProvider(endPoint);
     const wallet = new ethers.Wallet(this.data.privateKey);
     //const currentBlock = await provider.getBlockNumber();
     //console.log('currentBlock:', currentBlock);

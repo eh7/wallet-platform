@@ -8,12 +8,16 @@ const require = createRequire(import.meta.url);
 
 const endPoint = process.env.RPC_URL_EVM_NODE;
 //const pkey = process.env.PKEY_URL_EVM_NODE0;
-const pkey = process.env.PKEY_URL_EVM_NODE;
+//const pkey = process.env.PKEY_URL_EVM_NODE;
+const pkey = process.env.PRIVATE_KEY_DEV_EVM_ROCK_KEYLIB;
 
-const provider = new ethers.providers.JsonRpcProvider(endPoint);
+//const provider = new ethers.providers.JsonRpcProvider(endPoint);
+console.log(ethers.JsonRpcProvider)
+const provider = new ethers.JsonRpcProvider(endPoint);
 
 const getBalance = async (address) => {
-  const balance = ethers.utils.formatEther(
+//  const balance = ethers.utils.formatEther(
+  const balance = ethers.formatEther(
     (await provider.getBalance(
       address,
     )).toString()
@@ -34,6 +38,9 @@ const run = async () => {
   //const to = "0x92dAf44EE49DCdAA21e9dcb90ceb6bd50f20AC1A";
   
   getBalance(address);
+
+  //console.log(ethers.utiles.hexValue(1))
+  console.log(ethers.toQuantity(55))
 
 //  const balance = await provider.getBalance(address);
 //  console.log(balance);
