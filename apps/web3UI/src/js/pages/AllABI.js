@@ -64,6 +64,7 @@ const AllABI = (props) => {
   const [showIndex, setShowIndex] = useState(null);
   const [eventTypes, setEventTypes] = useState([]);
   const [eventLoading, setEventLoading] = useState(null);
+  const [eventOutput, setEventOutput] = useState(null);
 
   const [formFeedback, setFormFeedback] = useState('');
 
@@ -80,7 +81,13 @@ const AllABI = (props) => {
         if (events.length > 0) {
           events.map((row, rowIndex) => events[rowIndex].event = eventTypes[index].name)
 console.log('WIP ********* EEEEVVVEEEEENNNNNT:', eventTypes[index])
-          console.log('logs:', events);
+console.log('logs:', events);
+          const output = await formatEventsData(abiData.abi, eventTypes[index], events)
+          setEventOutput(output)
+//console.log('vvvvvvvvvvvvvvvvvvvv', eventName, eventInputs, eventData, output,  eventOutput);
+//console.log('zzzzzzzzzzz eventOutput, ::', output, eventOutput)
+
+//                      Object.keys(logs[0].args).map((header, index) => {
           //alert('handleEventLogs');
           setLogs(events);
           setShowLogs(true);
@@ -94,6 +101,32 @@ console.log('WIP ********* EEEEVVVEEEEENNNNNT:', eventTypes[index])
         console.log("try catch error in handleEventLogs:", e);
         setEventLoading(null);
       }
+    }
+  }
+
+  async function formatEventsData (abiData, eventType, eventLogs) {
+    console.log(
+      "formatEventsData :: ",
+      abiData,
+      eventType.inputs,
+      eventLogs,
+    ) 
+    const eventName = eventType.name;
+    const eventInputs = [];
+    eventType.inputs.map((input) =>  eventInputs.push(input))
+
+    //const eventData = [];
+    const eventData = eventLogs.map((input) =>  {
+      input.nname = eventName;
+      return input
+      //return eventData.push(input)
+    });
+    
+    console.log(eventOutput)
+    return {
+      eventName,
+      eventInputs,
+      eventData,
     }
   }
 
@@ -516,52 +549,33 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
               )}
               {(showLogs) && (
   	      <div className="p-4">
-                  <h3>{ logs[0].event } Events</h3>
+                  <h3>{ eventOutput.eventName } Events</h3>
                   <Table striped bordered hover>
                   { 
                     <thead>
                       <tr>
                         <th>Block No.</th>
-                    {
-                      abiData.abi.filter((element) => {
-                        if (element.type === 'event' && element.name === logs[0].event) {
-                          console.log(element.inputs)
-                          element.inputs.filter((item) => {
-                            console.log('--> ', item.name, element.name, item.type)
+                        { eventOutput.eventInputs.map((input) => { 
+                            return (<th>{ capitalize(input.name) }</th>);
                           })
                         }
-                      })
-                    }
-                    { 
-                      Object.keys(logs[0].args).map((header, index) => {
-                    {console.log('xxxxxxxxxxx ----------------->', logs, abiData.abi, logs[0].args, header)}
-                        if (index >= logs[0].args.length) {
-                          // console.log(header, index, logs[0].args.length); 
-                          return (<th>{ capitalize(header) }</th>);
-                        } else {
-                          return '';
-                        }
-                      })
-                    }
                       </tr>
                     </thead>
                   }
                   {
                     <tbody>
-                    { logs.map((event, eventIndex) => {
-//console.log('event index hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event, eventIndex)
-console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event)
-                        const thisEventIndex = eventTypes.findIndex((logType) => logType.name === logs[0].event) 
-
-                        const tds = event.args.map((item, index) => {
-
-console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', item, index)
-console.log('???', eventTypes, thisEventIndex)
-/*
-//WIP - fix the log output error
-                          if (eventTypes[thisEventIndex].inputs[index].type === 'bytes[]') {
+                    { eventOutput.eventData.map((event, eventIndex) => {
+                      const host = (web3All.networkId) ? networkBlockerUrls[web3All.networkId] : 'mumbai.polygonscan.com';
+                      const blockTd = (<td><a href={"https://" + host + "/block/" + event.blockNumber} target="_blank" rel="noreferrer">{event.blockNumber}</a></td>);
+                      const tds = event.args.map((item, index) => {
+          
+                        if (eventOutput.eventInputs[index].type === "bytes") {
+                          const formatted_item = web3All.toUtf8String(
+                            item
+                          )
+                          return (<td>{formatted_item}</td>)
+                        } else if (eventOutput.eventInputs[index].type === "bytes[]") {
                             const decoded = [];
-                            console.log('typeof item', typeof item, item.length)
                             item.map((element) => {
                               decoded.push(
                                 web3All.toUtf8String(
@@ -570,28 +584,17 @@ console.log('???', eventTypes, thisEventIndex)
                               )
                             })
                             return (<td>bytes[] -> [{decoded.toString()}]</td>);
-                          } else if (eventTypes[thisEventIndex].inputs[index].type === 'bytes') {
-                            return (<td>bytes -> {
-                              //ethers.utils.fromUtf8Bytes(
-                              web3All.toUtf8String(
-                                item
-                              )
-                            }</td>);
-                          } else if (typeof item === 'object') {
-                            return (<td>{item.toString()}</td>);
-                          } else {
-                            return (<td>{item}</td>);
-                          }
-*/
-                        })
-                        //const blockTd = (<td>{web3All.getBlockTimestampSync(event.blockNumber)}</td>);
-                        const host = (web3All.networkId) ? networkBlockerUrls[web3All.networkId] : 'mumbai.polygonscan.com';
-                        //const blockTd = (<td><a href={"https://mumbai.polygonscan.com/block/" + event.blockNumber} target="_blank" rel="noreferrer">{event.blockNumber}</a></td>);
-                        const blockTd = (<td><a href={"https://" + host + "/block/" + event.blockNumber} target="_blank" rel="noreferrer">{event.blockNumber}</a></td>);
-                        //const blockTd = (<td><a href={"https://rinkeby.etherscan.io/block/" + event.blockNumber} target="_blank" rel="noreferrer">{event.blockNumber}</a></td>);
-                        return (<tr>{blockTd}{tds}</tr>);
+                        } else if (eventOutput.eventInputs[index].type == "uint256") {
+                          return (<td>{item.toString()}</td>)
+                        } else {
+                          {console.log('wwwttt', item)}
+                          return (<td>{item}</td>)
+                        }
                       })
-                    }
+                      return (<tr>
+                        {blockTd} {tds}
+                      </tr>)
+                    })}
                     </tbody>
                   }
                   </Table>

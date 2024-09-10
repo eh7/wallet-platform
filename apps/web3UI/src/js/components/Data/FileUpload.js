@@ -33,14 +33,7 @@ class FileUpload extends React.Component {
   }
 
   createStoreInDB = async () => {
-    const dbName = 'filesystem-database'
-    const storeName = 'files'
-    const db = await openDB(dbName, 1)
-    this.setState({ keys: await db.getAllKeys(storeName) })
-    this.setState({ files: await db.getAll(storeName) })
-    //this.setState({ keys: await db.getAll(storeName) })
-    console.log('keys', this.state.keys)
-    console.log('keys', this.state.files)
+
 /*
     const dbPromise = await openDB('filesystem-database', 1, {
       upgrade (db) {
@@ -57,6 +50,20 @@ class FileUpload extends React.Component {
       }
     });
 */
+
+    try {
+    const dbName = 'filesystem-database'
+    const storeName = 'files'
+    const db = await openDB(dbName, 1)
+    //await db.createObjectStore(storeName);
+    this.setState({ keys: await db.getAllKeys(storeName) })
+    this.setState({ files: await db.getAll(storeName) })
+    //this.setState({ keys: await db.getAll(storeName) })
+    console.log('keys', this.state.keys)
+    console.log('files', this.state.files)
+    } catch (e) {
+      console.error("ERROR CATCH :: createStoreInDB :: ", e)
+    }
   }
 
   //const indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
@@ -84,6 +91,12 @@ class FileUpload extends React.Component {
         const dbName = 'filesystem-database'
         const storeName = 'files'
         const db = await openDB(dbName, 1)
+//console.log("ffffffffffffffffffffffffffffffffff")
+//        if (!db.objectStoreNames.contains('files')) {
+//console.log("ffffffffffffffffffffffffffffffffff")
+//          db.createObjectStore('files')
+//        } 
+        //await db.createObjectStore(storeName);
         //const store = db.transaction(storeName).objectStore(storeName);
         //const value = await store.get(key);
 //        const transCount = db.transaction(['count'], 'readwrite');
@@ -172,6 +185,7 @@ console.log(indexedDB)
                   const trans = db.transaction([storeName], 'readwrite');
                   //const del = await trans.store.delete('name', ob.name)
                   //let del = await trans.objectStore(storeName).delete(index);
+                  console.log(this.state.files)
                   console.log(
                     'xxxxxxxxxxxx DELETED ::::::::',
                     await trans.objectStore(storeName).delete(ob.name),
@@ -181,6 +195,7 @@ console.log(indexedDB)
                     //del
                   //  await db.delete(storeName, index)
                   )
+                  console.log(this.state.files)
                   alert('delete ' + this.state.files[index].name)
                   this.setState({ files: await db.getAll(storeName) })
                 }}> x </button>
