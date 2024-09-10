@@ -547,7 +547,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                     <tbody>
                     { logs.map((event, eventIndex) => {
 //console.log('event index hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event, eventIndex)
-console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', logType, logs[0].event)
+//console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', logType, logs[0].event)
                         const thisEventIndex = eventTypes.findIndex((logType) => logType.name === logs[0].event) 
 
                         const tds = event.args.map((item, index) => {
