@@ -11,15 +11,16 @@ class FileUpload extends React.Component {
       files: [],
     };
 
-    this.createStoreInDBDev();
     this.dbName = 'filesystem-database'
     this.storeName = 'files'
+    this.createStoreInDBDev();
 
   }
 
   createStoreInDBDev = async () => {
     try {
-      const dbName = 'Test-Databaset'
+      //const dbName = 'Test-Databaset'
+      const dbName = 'filesystem-database'
       const storeName = 'files'
       //const dbPromise = openDB('keyval-store2', 1, {
       const dbPromise = openDB(dbName, 1, {
@@ -27,9 +28,10 @@ class FileUpload extends React.Component {
           db.createObjectStore(storeName);
           //this.setState({ keys: await db.getAllKeys(storeName) });
           //this.setState({ files: await db.getAll(storeName) });
+          this.db = db;
+          //createStoreInDB()
         },
       });
-      alert('filesTest')
     } catch (e) {
       console.error('ERROR in :: createStoreInDBDev :: ', e)
     };
@@ -70,10 +72,13 @@ class FileUpload extends React.Component {
 */
 
     try {
-      //const dbName = 'filesystem-database'
+      /*
       const dbName = 'Test-Database'
+      */
+      const dbName = 'filesystem-database'
       const storeName = 'files'
       const db = await openDB(dbName, 1)
+      //const db = this.db
       //await db.createObjectStore(storeName);
       this.setState({ keys: await db.getAllKeys(storeName) })
       this.setState({ files: await db.getAll(storeName) })
@@ -108,16 +113,20 @@ class FileUpload extends React.Component {
       }
 
       try {
-        //const dbName = 'filesystem-database'
-        const dbName = 'Test-Database'
+        const dbName = 'filesystem-database'
+        //const dbName = 'Test-Database'
         const storeName = 'files'
         const db = await openDB(dbName, 1)
 
+        //const db = this.db
+
+//console.log(storeName)
+//console.log(db.transaction(storeName, 'readwrite'))
         const trans = db.transaction([storeName], 'readwrite');
         await trans.store.put(ob, ob.name)
 
         const dataInDb = await trans.store.get(ob.name)
-        console.log(dataInDb.name)
+        console.log('SSSSSSSSSSSSSS dataInDb ::: ', dataInDb.name, dataInDb)
         //alert('dataInDb.name:' + dataInDb.name)
 
         document.querySelector("#image").style = 'border: 1px solid black';
@@ -154,8 +163,8 @@ class FileUpload extends React.Component {
             {this.state.keys.map((name, index) => {
               return <>
                 <button onClick={async () => {
-                  //const dbName = 'filesystem-database'
-                  const dbName = 'Test-Databaset'
+                  const dbName = 'filesystem-database'
+                  //const dbName = 'Test-Databaset'
                   const storeName = 'files'
                   const ob = this.state.files[index]
                   const db = await openDB(dbName, 1)
@@ -167,8 +176,8 @@ class FileUpload extends React.Component {
                   //alert(this.state.files[index].name)
                 }}>{index} :: {name}</button>
                 <button onClick={async () => {
-                  //const dbName = 'filesystem-database'
-                  const dbName = 'Test-Databaset'
+                  const dbName = 'filesystem-database'
+                  //const dbName = 'Test-Databaset'
                   const storeName = 'files'
                   const ob = this.state.files[index]
                   const db = await openDB(dbName, 1)
