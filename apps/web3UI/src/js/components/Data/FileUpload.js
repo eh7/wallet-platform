@@ -2,6 +2,8 @@ import React from 'react';
 import {openDB} from 'idb';
 import * as indexedDB from 'idb';
 
+import Wallet from '../../services/wallet';
+
 class FileUpload extends React.Component {
 
   constructor(props) {
@@ -9,12 +11,14 @@ class FileUpload extends React.Component {
     this.state = {
       keys: [],
       files: [],
+      pharse: '',
     };
 
     this.dbName = 'filesystem-database'
     this.storeName = 'files'
     this.createStoreInDBDev();
-
+    this.wallet = new Wallet();
+    //console.log('this.wallet', this.wallet)
   }
 
   createStoreInDBDev = async () => {
@@ -85,6 +89,8 @@ class FileUpload extends React.Component {
       //this.setState({ keys: await db.getAll(storeName) })
       console.log('keys', this.state.keys)
       console.log('files', this.state.files)
+      this.setState({ phrase: await this.wallet.getNewPhrase() });
+      console.log("phrase:", this.state.phrase);
     } catch (e) {
       console.error("ERROR CATCH :: createStoreInDB :: ", e)
     }
@@ -157,6 +163,9 @@ class FileUpload extends React.Component {
       //this.useDB()
       return (
         <>
+          <p>Sync Phrase: <b>{ this.state.phrase }</b></p>
+
+          <p><img id="image"/></p>
           FileUpload Input: <input type="file" onChange={this.handleFileUpload} />
           <p><img id="image"/></p>
           <p>

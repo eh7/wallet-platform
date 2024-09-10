@@ -287,6 +287,10 @@ export default class Wallet {
     };
   }
 
+  getNewPhrase = async () => {
+    return await bip39.generateMnemonic(4)
+  }
+
   getAddress = async () => {
     if (localStorage.getItem('keyset')) {
       // TODO remove this from localStorage after dev
