@@ -10,27 +10,45 @@ class FileUpload extends React.Component {
       keys: [],
       files: [],
     };
+
+    this.createStoreInDBDev();
+    this.dbName = 'filesystem-database'
+    this.storeName = 'files'
+
+  }
+
+  createStoreInDBDev = async () => {
+    try {
+      const dbName = 'Test-Databaset'
+      const storeName = 'files'
+      //const dbPromise = openDB('keyval-store2', 1, {
+      const dbPromise = openDB(dbName, 1, {
+        upgrade(db) {
+          db.createObjectStore(storeName);
+          //this.setState({ keys: await db.getAllKeys(storeName) });
+          //this.setState({ files: await db.getAll(storeName) });
+        },
+      });
+      alert('filesTest')
+    } catch (e) {
+      console.error('ERROR in :: createStoreInDBDev :: ', e)
+    };
   }
 
   indexedDBStuff = () => {
-    // Check for IndexedDB support:
     if (!('indexedDB' in window)) {
-      // Can't use IndexedDB
       console.log("This browser doesn't support IndexedDB");
       return false;
     } else {
-      // Do IndexedDB stuff here:
-      // ...
-      //alert('IndexedDB supported')
       return true
     }
   }
 
-  useDB = async  () => {
-    // Returns a promise, which makes `idb` usable with async-await.
-    //const dbPromise = await openDB('example-database', version, events);
-    const dbPromise = await openDB('test-db1', 1)
-  }
+  //useDB = async () => {
+  //  // Returns a promise, which makes `idb` usable with async-await.
+  //  //const dbPromise = await openDB('example-database', version, events);
+  //  const dbPromise = await openDB('test-db1', 1)
+  //}
 
   createStoreInDB = async () => {
 
@@ -52,15 +70,16 @@ class FileUpload extends React.Component {
 */
 
     try {
-    const dbName = 'filesystem-database'
-    const storeName = 'files'
-    const db = await openDB(dbName, 1)
-    //await db.createObjectStore(storeName);
-    this.setState({ keys: await db.getAllKeys(storeName) })
-    this.setState({ files: await db.getAll(storeName) })
-    //this.setState({ keys: await db.getAll(storeName) })
-    console.log('keys', this.state.keys)
-    console.log('files', this.state.files)
+      //const dbName = 'filesystem-database'
+      const dbName = 'Test-Database'
+      const storeName = 'files'
+      const db = await openDB(dbName, 1)
+      //await db.createObjectStore(storeName);
+      this.setState({ keys: await db.getAllKeys(storeName) })
+      this.setState({ files: await db.getAll(storeName) })
+      //this.setState({ keys: await db.getAll(storeName) })
+      console.log('keys', this.state.keys)
+      console.log('files', this.state.files)
     } catch (e) {
       console.error("ERROR CATCH :: createStoreInDB :: ", e)
     }
@@ -85,25 +104,15 @@ class FileUpload extends React.Component {
         created:new Date(),
         data: fileString,
         name: file.name,
+        //name: file.name,getAllKeys
       }
 
       try {
-        const dbName = 'filesystem-database'
+        //const dbName = 'filesystem-database'
+        const dbName = 'Test-Database'
         const storeName = 'files'
         const db = await openDB(dbName, 1)
-//console.log("ffffffffffffffffffffffffffffffffff")
-//        if (!db.objectStoreNames.contains('files')) {
-//console.log("ffffffffffffffffffffffffffffffffff")
-//          db.createObjectStore('files')
-//        } 
-        //await db.createObjectStore(storeName);
-        //const store = db.transaction(storeName).objectStore(storeName);
-        //const value = await store.get(key);
-//        const transCount = db.transaction(['count'], 'readwrite');
-//        await transCount.store.put(1, 'count')
-//        const count = await transCount.store.get('count');
-//alert('count: ' + count)
-        //
+
         const trans = db.transaction([storeName], 'readwrite');
         await trans.store.put(ob, ob.name)
 
@@ -114,30 +123,9 @@ class FileUpload extends React.Component {
         document.querySelector("#image").style = 'border: 1px solid black';
         document.querySelector("#image").src = dataInDb.data;
 
-//	request.onsuccess = function(e) {
-//	  const db = e.target.result;
-console.log(indexedDB)
-//console.log(request)
-//	  console.log('db opened');
-//	}
-
-//        const db = await this.createStoreInDB()
-//        const trans = db.transaction(['files'], 'readwrite');
-//        const addReq = trans.objectStore('files').add(ob);
-//console.log(trans)
-//console.log(ob)
-//console.log(db)
       } catch (e) {
         console.log('ERROR FILE SAVE', e)
       }
-
-   //document.querySelector("#image").src = fileString;
-
-//const transaction = db.transaction(["filesystem-database"], "readwrite");
-      //console.log(this.state.db)
-      //localforage.setItem(theFile.name, fileString);
-
-      //alert('file uploaded: ' + file.name)
     };
 
     reader.readAsDataURL(file);
@@ -166,7 +154,8 @@ console.log(indexedDB)
             {this.state.keys.map((name, index) => {
               return <>
                 <button onClick={async () => {
-                  const dbName = 'filesystem-database'
+                  //const dbName = 'filesystem-database'
+                  const dbName = 'Test-Databaset'
                   const storeName = 'files'
                   const ob = this.state.files[index]
                   const db = await openDB(dbName, 1)
@@ -178,7 +167,8 @@ console.log(indexedDB)
                   //alert(this.state.files[index].name)
                 }}>{index} :: {name}</button>
                 <button onClick={async () => {
-                  const dbName = 'filesystem-database'
+                  //const dbName = 'filesystem-database'
+                  const dbName = 'Test-Databaset'
                   const storeName = 'files'
                   const ob = this.state.files[index]
                   const db = await openDB(dbName, 1)
