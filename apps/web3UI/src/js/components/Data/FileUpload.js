@@ -172,6 +172,7 @@ console.log(indexedDB)
                   const trans = db.transaction([storeName], 'readwrite');
                   //const del = await trans.store.delete('name', ob.name)
                   //let del = await trans.objectStore(storeName).delete(index);
+                  console.log(this.state.files)
                   console.log(
                     'xxxxxxxxxxxx DELETED ::::::::',
                     await trans.objectStore(storeName).delete(ob.name),
@@ -181,6 +182,7 @@ console.log(indexedDB)
                     //del
                   //  await db.delete(storeName, index)
                   )
+                  console.log(this.state.files)
                   alert('delete ' + this.state.files[index].name)
                   this.setState({ files: await db.getAll(storeName) })
                 }}> x </button>
