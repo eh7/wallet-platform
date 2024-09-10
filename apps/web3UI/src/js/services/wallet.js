@@ -127,7 +127,7 @@ export default class Wallet {
       const balance = await provider.getBalance(_address);
       //const balance = await this.provider.getBalance(_address);
       //const balanceInEth = ethers.utils.formatEther(balance);
-      const balanceInEth = ethers.formatEther(balance);
+      const balanceInEth = formatEther(balance);
       return balanceInEth;
     } catch (e) {
       console.log('eallet.js :: getBalance :: ', e);

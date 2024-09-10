@@ -78,9 +78,11 @@ const AllABI = (props) => {
         setEventLoading(index);
         const events = await web3All.Logs(web3All, eventTypes[index]);
         if (events.length > 0) {
-          setLogs(events);
+          events.map((row, rowIndex) => events[rowIndex].event = eventTypes[index].name)
+console.log('WIP ********* EEEEVVVEEEEENNNNNT:', eventTypes[index])
           console.log('logs:', events);
           //alert('handleEventLogs');
+          setLogs(events);
           setShowLogs(true);
           setShowIndex(index);
         } else {
@@ -379,7 +381,7 @@ console.log('ggggggggggggggggggggggggggggggg', formData.values);
                      <thead>
                        <tr>
                          <th>Block No.</th>
-                     { 
+                     {
                        Object.keys(logs[0].args).map((header, index) => {
                          if (index >= logs[0].args.length) {
                            // console.log(header, index, logs[0].args.length); 
@@ -489,7 +491,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                           type='button'
                           variant={variantEventButton[index]}
                         >
-                          Logs {eventTypes[index].name} 
+                          Logs {eventTypes[index].name}
                           {
                             eventLoading === index 
                             ? <Badge
@@ -532,6 +534,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                     }
                     { 
                       Object.keys(logs[0].args).map((header, index) => {
+                    {console.log('xxxxxxxxxxx ----------------->', logs, abiData.abi, logs[0].args, header)}
                         if (index >= logs[0].args.length) {
                           // console.log(header, index, logs[0].args.length); 
                           return (<th>{ capitalize(header) }</th>);
@@ -547,7 +550,7 @@ console.log('xxxxxxxxxxxxxxxxxxxxxxxxxx', abiData);
                     <tbody>
                     { logs.map((event, eventIndex) => {
 //console.log('event index hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event, eventIndex)
-console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', logType, logs[0].event)
+console.log('hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh', event)
                         const thisEventIndex = eventTypes.findIndex((logType) => logType.name === logs[0].event) 
 
                         const tds = event.args.map((item, index) => {
