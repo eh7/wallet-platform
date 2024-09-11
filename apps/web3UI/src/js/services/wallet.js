@@ -289,20 +289,51 @@ export default class Wallet {
     };
   }
 
+  checkPhraseData = () => {
+    const dataPhrase = this.decrypt(
+      JSON.parse(
+        localStorage.getItem(
+          "dataPhrase"
+        )
+      )
+    )
+    return dataPhrase
+  }
+
+  getPhraseData = async () => {
+    let dataPhrase = this.decrypt(
+      JSON.parse(
+        localStorage.getItem(
+          "dataPhrase"
+        )
+      )
+    )
+
+    console.log('hhhhhhhhhhhhhhhhhhhhhh dataPhrase ::::::::: ', dataPhrase);
+
+    if (dataPhrase === '') {
+      dataPhrase = this.getNewPhraseData()
+    }
+    
+    return dataPhrase
+  }
+
   getNewPhraseData = async () => {
     const myRandomBytes = randomBytes(32);
     const mnemonic = Mnemonic.fromEntropy(myRandomBytes)
-
     localStorage.setItem(
       "dataPhrase",
       JSON.stringify(
         this.encrypt(mnemonic.phrase)
       )
     )
-
     return mnemonic.phrase;
+  }
 
-    //return await bip39.generateMnemonic()
+  syncPhraseData = async () => {
+  }
+
+  syncSetupNewPhraseData = async () => {
   }
 
   getAddress = async () => {

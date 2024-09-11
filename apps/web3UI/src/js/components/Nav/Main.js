@@ -100,8 +100,10 @@ function NavMain() {
       <Row className="w-100">
         <Col sm="6">
           <Navbar className="rounded mb-0">
-            <Navbar.Brand href="/">Crypto Wallet Interface</Navbar.Brand>
-           </Navbar>
+            <Navbar.Brand  href="/">
+              <h2>Crypto Wallet Interface</h2>
+            </Navbar.Brand>
+          </Navbar>
         </Col>
         <Col sm="6" className="small text-muted">
             {myAddress}

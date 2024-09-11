@@ -13,6 +13,7 @@ class FileUpload extends React.Component {
       files: [],
       pharse: '',
       dbStatus: false,
+      listening: false,
     };
 
     this.dbName = 'filesystem-database'
@@ -98,6 +99,23 @@ class FileUpload extends React.Component {
   //const indexedDB = window.indexedDB || window.webkitIndexedDB || window.mozIndexedDB || window.OIndexedDB || window.msIndexedDB,
   //      IDBTransaction = window.IDBTransaction || window.webkitIDBTransaction || window.OIDBTransaction || window.msIDBTransaction,
   //      dbVersion = 1.0;
+ 
+  handleListenClick = (event) => {
+    let value = document.querySelector('#listenSwitch').value;
+    if (document.querySelector('#listenSwitch').value === 'off') {
+      document.querySelector("#listenSwitch").value = "on";
+      console.log("WIP ::  initiate publishing of latest files data on REST API or p2p broadcast")
+    } else {
+      document.querySelector("#listenSwitch").value = "off";
+      console.log("WIP ::  p2p signoff and halt publishing of latest files data")
+    }
+    /*
+    console.log('SSSSSSSXXXXXXXXXXX', 
+      document.getElementById('listenSwitch'),
+    )
+    alert('handleListenClick')
+    */
+  }
 
   handleFileUpload = (event) => {
     const file = event.target.files[0];
@@ -162,7 +180,7 @@ class FileUpload extends React.Component {
   componentDidMount = async () => {
     this.wallet = new Wallet();
     this.createStoreInDB();
-    this.setState({ phrase: await this.wallet.getNewPhraseData() });
+    this.setState({ phrase: await this.wallet.getPhraseData() });
     this.setupDBState();
     //console.log("phrase:", this.state.phrase);
 /*
@@ -196,13 +214,16 @@ class FileUpload extends React.Component {
       return (
         <>
           <p>Sync Phrase: <b>{ this.state.phrase }</b></p>
+          <p>Sync Listen: 
+            <b>{ this.state.listening }</b>
+            <input type="button" id="listenSwitch" value="off" onClick={this.handleListenClick}/>
+          </p>
 
           <p><img id="image"/></p>
           FileUpload Input: <input type="file" onChange={this.handleFileUpload} />
-          <p><img id="image"/></p>
-          <p>
+          <ul>
             {this.state.keys.map((name, index) => {
-              return <>
+              return (<li>
                 <button onClick={async () => {
                   const dbName = 'filesystem-database'
                   //const dbName = 'Test-Databaset'
@@ -215,7 +236,7 @@ class FileUpload extends React.Component {
                   document.querySelector("#image").src = dataInDb.data;
                   //console.log(Object.keys(this.state.files[index]))
                   //alert(this.state.files[index].name)
-                }}>{index} :: {name}</button>
+                }}>{name}</button>
                 <button onClick={async () => {
                   const dbName = 'filesystem-database'
                   //const dbName = 'Test-Databaset'
@@ -240,9 +261,9 @@ class FileUpload extends React.Component {
                   alert('delete ' + this.state.files[index].name)
                   this.setState({ files: await db.getAll(storeName) })
                 }}> x </button>
-              </>
+              </li>)
             })}
-          </p>
+          </ul>
         </>
       );
     } else {
