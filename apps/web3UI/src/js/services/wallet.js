@@ -5,6 +5,8 @@ import {
   ethers,
   formatEther,
   JsonRpcProvider,
+  Mnemonic,
+  randomBytes,
   Wallet as EthersWallet,
 } from 'ethers';
 
@@ -287,8 +289,20 @@ export default class Wallet {
     };
   }
 
-  getNewPhrase = async () => {
-    return await bip39.generateMnemonic(4)
+  getNewPhraseData = async () => {
+    const myRandomBytes = randomBytes(32);
+    const mnemonic = Mnemonic.fromEntropy(myRandomBytes)
+
+    localStorage.setItem(
+      "dataPhrase",
+      JSON.stringify(
+        this.encrypt(mnemonic.phrase)
+      )
+    )
+
+    return mnemonic.phrase;
+
+    //return await bip39.generateMnemonic()
   }
 
   getAddress = async () => {

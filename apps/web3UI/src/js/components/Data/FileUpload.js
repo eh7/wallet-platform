@@ -76,6 +76,8 @@ class FileUpload extends React.Component {
 */
 
     try {
+      this.setState({ phrase: await this.wallet.getNewPhraseData() });
+      console.log("phrase:", this.state.phrase);
       /*
       const dbName = 'Test-Database'
       */
@@ -89,8 +91,6 @@ class FileUpload extends React.Component {
       //this.setState({ keys: await db.getAll(storeName) })
       console.log('keys', this.state.keys)
       console.log('files', this.state.files)
-      this.setState({ phrase: await this.wallet.getNewPhrase() });
-      console.log("phrase:", this.state.phrase);
     } catch (e) {
       console.error("ERROR CATCH :: createStoreInDB :: ", e)
     }
