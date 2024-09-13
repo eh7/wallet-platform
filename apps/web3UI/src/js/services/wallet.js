@@ -8,6 +8,7 @@ import {
   Mnemonic,
   randomBytes,
   Wallet as EthersWallet,
+  HDNodeWallet,
 } from 'ethers';
 
 const crypto = require('crypto');
@@ -134,6 +135,59 @@ export default class Wallet {
     } catch (e) {
       console.log('eallet.js :: getBalance :: ', e);
     }
+  }
+
+  getWalletFilesData = (_phrase, _index) => {
+    const i = _index
+    const path = "m/44'/60'/0'/0/" + i
+    const mnemonicInstance = Mnemonic.fromPhrase(_phrase)
+    return HDNodeWallet.fromMnemonic(mnemonicInstance, path)
+  }
+
+  decryptFilesData = (_encryptedData, _phrase) => {
+
+    const wallet = this.getWalletFilesData(_phrase, 0)
+    // const wallet = EthersWallet.fromPhrase(_phrase);
+
+    const key = wallet.privateKey.substr(2, 32);
+    let iv = Buffer.from(_encryptedData.iv, 'hex');
+    let encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
+    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return JSON.parse(
+      decrypted.toString('utf8')
+    );
+  }
+
+  encryptFilesData = (_files, _phrase) => {
+    //console.log(EthersWallet.fromPhrase);
+
+    //const i = 0
+    //const path = "m/44'/60'/0'/0/" + i
+    //const mnemonicInstance = Mnemonic.fromPhrase(_phrase)
+    //const wallet = HDNodeWallet.fromMnemonic(mnemonicInstance, path)
+   
+    const wallet = this.getWalletFilesData(_phrase, 0)
+
+    //const wallet = EthersWallet.fromPhrase(_phrase);
+
+    const key = wallet.privateKey.substr(2, 32);
+    const address = wallet.address;
+    console.log('address', address)
+    //console.log('encryptFilesData key :: ', key)
+    let cipher = crypto.createCipheriv(
+      'aes-256-cbc',
+      Buffer.from(key),
+      this.iv
+    );
+    const text = JSON.stringify(_files)
+    let encrypted = cipher.update(text);
+    encrypted = Buffer.concat([encrypted, cipher.final()]);
+    return {
+      iv: this.iv.toString('hex'),
+      encryptedData: encrypted.toString('hex')
+    };
   }
 
   //Encrypting text
@@ -309,7 +363,7 @@ export default class Wallet {
       )
     )
 
-    console.log('hhhhhhhhhhhhhhhhhhhhhh dataPhrase ::::::::: ', dataPhrase);
+    //console.log('hhhhhhhhhhhhhhhhhhhhhh dataPhrase ::::::::: ', dataPhrase);
 
     if (dataPhrase === '') {
       dataPhrase = this.getNewPhraseData()

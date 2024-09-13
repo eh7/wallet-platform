@@ -61,14 +61,41 @@ class FileUpload extends React.Component {
   }
 
   handleListenClick = (event) => {
-    let value = document.querySelector('#listenSwitch').value;
-    if (document.querySelector('#listenSwitch').value === 'off') {
-      document.querySelector("#listenSwitch").value = "on";
-      console.log("WIP ::  initiate publishing of latest files data on REST API or p2p broadcast")
-    } else {
-      document.querySelector("#listenSwitch").value = "off";
-      console.log("WIP ::  p2p signoff and halt publishing of latest files data")
+    try {
+      let value = document.querySelector('#listenSwitch').value;
+      if (document.querySelector('#listenSwitch').value === 'off') {
+        document.querySelector("#listenSwitch").value = "on";
+        this.syncSwitchOn()
+        console.log("WIP ::  initiate publishing of latest files data on REST API or p2p broadcast")
+      } else {
+        document.querySelector("#listenSwitch").value = "off";
+        this.syncSwitchOff()
+        console.log("WIP ::  p2p signoff and halt publishing of latest files data")
+      }
+    } catch (e) {
+      console.error(':: handleListenClick ERROR :: ', e)
+      alert(':: handleListenClick ERROR :: ' +  e.message)
     }
+  }
+
+  syncSwitchOn = (event) => {
+    console.log('files', this.state.files)
+    const encryptedFilesData = this.wallet.encryptFilesData(
+      this.state.files,
+      this.state.phrase,
+    )
+    console.log('encryptedFilesData', encryptedFilesData);
+
+    const decryptedFilesData = this.wallet.decryptFilesData(
+      encryptedFilesData,
+      this.state.phrase,
+    )
+    console.log('decryptedFilesData', decryptedFilesData);
+    alert('on')
+  }
+
+  syncSwitchOff = (event) => {
+    alert('off')
   }
 
   handleFileUpload = (event) => {
