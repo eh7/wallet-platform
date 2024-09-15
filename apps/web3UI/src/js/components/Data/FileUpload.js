@@ -85,6 +85,7 @@ class FileUpload extends React.Component {
       this.state.phrase,
     )
     console.log('encryptedFilesData', encryptedFilesData);
+    console.log(JSON.stringify(encryptedFilesData))
 
     const decryptedFilesData = this.wallet.decryptFilesData(
       encryptedFilesData,
