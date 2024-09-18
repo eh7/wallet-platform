@@ -5,8 +5,10 @@ import {
   ethers,
   formatEther,
   JsonRpcProvider,
+  keccak256,
   Mnemonic,
   randomBytes,
+  toUtf8Bytes,
   Wallet as EthersWallet,
   HDNodeWallet,
 } from 'ethers';
@@ -167,26 +169,51 @@ export default class Wallet {
     //const path = "m/44'/60'/0'/0/" + i
     //const mnemonicInstance = Mnemonic.fromPhrase(_phrase)
     //const wallet = HDNodeWallet.fromMnemonic(mnemonicInstance, path)
-   
-    const wallet = this.getWalletFilesData(_phrase, 0)
 
-    //const wallet = EthersWallet.fromPhrase(_phrase);
+    const wallet = this.getWalletFilesData(_phrase, 0)
 
     const key = wallet.privateKey.substr(2, 32);
     const address = wallet.address;
-    console.log('address', address)
+    //console.log('address', address)
     //console.log('encryptFilesData key :: ', key)
+//console.log(this.iv)
+//console.log(crypto.randomBytes(16))
+    const iv = crypto.randomBytes(16)
     let cipher = crypto.createCipheriv(
       'aes-256-cbc',
       Buffer.from(key),
-      this.iv
+      //this.iv
+      iv
     );
     const text = JSON.stringify(_files)
     let encrypted = cipher.update(text);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
+
+    const hashes = [];
+    const encryptedFiles = [];
+    _files.map((file, index) => {
+      hashes.push(
+        keccak256(
+          toUtf8Bytes(
+            JSON.stringify(file)
+          )
+        )
+      )
+      encryptedFiles.push({
+        //iv: this.iv.toString('hex'),
+        iv: iv.toString('hex'),
+        encryptedData: cipher.update(
+          JSON.stringify(file)
+        ).toString('hex')
+      })
+    })
+    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles)
+
     return {
-      iv: this.iv.toString('hex'),
-      encryptedData: encrypted.toString('hex')
+      //iv: this.iv.toString('hex'),
+      iv: iv.toString('hex'),
+      encryptedData: encrypted.toString('hex'),
+      hashes
     };
   }
 

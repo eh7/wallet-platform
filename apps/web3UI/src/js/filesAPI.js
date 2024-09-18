@@ -5,13 +5,28 @@ const app = express();
 const bodyParser = require('body-parser')
 const port = 3333;
 
-//app.use(bodyParser.urlencoded({ extended: false }))
-app.use(bodyParser.urlencoded({limit: '25mb'}))
-app.use(bodyParser.json({limit: '25mb'}))
+app.use(bodyParser.urlencoded({ extended: false }))
+//app.use(bodyParser.urlencoded({limit: '25mb'}))
+//app.use(bodyParser.json({limit: '25mb'}))
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.post('/publishNew', function (req, res, next) {
+  console.log("data publish")
+  let count = 0;
+  req.pipe(fs.createWriteStream('/tmp/uploadFile'));
+  req.on('data', (chunk) => {
+    count++
+    console.log(count, chunk);
+  });
+  req.on('end', (next) => {
+    console.log('end')
+    next
+  });
+});
+
 
 app.post('/publish', (req, res) => {
   if (!req.body.address) {
