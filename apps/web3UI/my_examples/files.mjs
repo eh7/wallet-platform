@@ -73,6 +73,11 @@ var decoded = Buffer.from(
 )
 console.log(decoded.toString('utf8'))
 
+console.log(clientCombined[5].data)
+//const textDecoder = new TextDecoder();
+//textDecoder.decode(clientCombined[5].data)
+//const reader = new FileReader();
+
 
 /*
 console.log('files', files)

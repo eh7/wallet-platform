@@ -181,6 +181,21 @@ class FileUpload extends React.Component {
 console.log('dataInDb', ob)
     document.querySelector("#image").style = 'border: 1px solid black';
     document.querySelector("#image").src = dataInDb.data;
+
+/*
+var cleanScript = {
+    'type': 'script',
+    'api_key': 'api_key',
+    'data': 'data',
+    'inputs': 'inputs',
+    'timeoutSeconds': 'timeoutSeconds'
+};
+var jsonse = JSON.stringify(cleanScript);
+var blob = new Blob([jsonse], {type: "application/json"});
+//    var blob = dataInDb.data
+    //var url  = URL.createObjectURL(blob);
+    console.log({blob})
+*/
   }
 
   deleteFile = async (_name, _index) => {
