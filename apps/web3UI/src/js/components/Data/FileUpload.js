@@ -178,6 +178,7 @@ class FileUpload extends React.Component {
     const db = await openDB(this.state.dbName, 1)
     const trans = db.transaction([this.state.storeName], 'readonly');
     const dataInDb = await trans.store.get(ob.name)
+console.log('dataInDb', ob)
     document.querySelector("#image").style = 'border: 1px solid black';
     document.querySelector("#image").src = dataInDb.data;
   }
