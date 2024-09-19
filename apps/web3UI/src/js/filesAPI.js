@@ -14,7 +14,6 @@ app.listen(port, () => {
 });
 
 app.post('/publishNew', function (req, res, next) {
-  console.log("data publish")
   let count = 0;
   req.pipe(fs.createWriteStream('/tmp/uploadFile'));
   req.on('data', (chunk) => {
@@ -22,8 +21,11 @@ app.post('/publishNew', function (req, res, next) {
     console.log(count, chunk);
   });
   req.on('end', (next) => {
-    console.log('end')
-    next
+    const message = `data published!`
+    //res.send(message);
+    res.status(200).send(message)
+    console.log(message)
+    //next
   });
 });
 
