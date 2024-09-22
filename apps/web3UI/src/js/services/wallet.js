@@ -6,6 +6,7 @@ import {
   formatEther,
   getBytes,
   hexlify,
+  hashMessage,
   JsonRpcProvider,
   keccak256,
   Mnemonic,
@@ -100,16 +101,36 @@ export default class Wallet {
     return await this.provider.getBlockNumber()
   }
 
+  recoverAddressFromMessage = async (_message, _signature) => {
+    const network = JSON.parse(localStorage.getItem("network"))
+    const provider = this.networkProvider[network.chainId]
+    const privateKeyString = await this.getPrivateKey()
+    const signer = new EthersWallet(privateKeyString, provider)
+
+    const digest = getBytes(hashMessage(_message))
+    const recoveredAddress = recoverAddress(digest, _signature)
+
+    return recoveredAddress
+  }
+
   signMessage = async (_message) => {
-    const network = JSON.parse(localStorage.getItem("network"));
-    const provider = this.networkProvider[network.chainId];
-    const privateKeyString = await this.getPrivateKey();
-    const signer = new EthersWallet(privateKeyString, provider);
-    const rawSig = await signer.signMessage(_message);
-    //const recovered = await signer.recoverStringFromRaw(_message, rawSig);
-    //console.log(signer.recoverStringFromRaw)
-//    console.log(await recoverAddress(_message, rawSig))
-    return rawSig 
+    const network = JSON.parse(localStorage.getItem("network"))
+    const provider = this.networkProvider[network.chainId]
+    const privateKeyString = await this.getPrivateKey()
+    const signer = new EthersWallet(privateKeyString, provider)
+
+    const signature = await signer.signMessage(_message)
+
+    const digest = getBytes(hashMessage(_message))
+    const recoveredAddress = recoverAddress(digest, signature)
+    const address = await this.getAddress()
+    console.log({
+      recoveredAddress,
+      address,
+      status: (recoveredAddress === address),
+    })
+
+    return signature 
   }
 
   sendTx = async (_params) => {
@@ -213,7 +234,12 @@ export default class Wallet {
 //const message = hexlify("data")
 const message = "data"
 const rawSig = await this.signMessage(message);
+const recoveredAddress = await this.recoverAddressFromMessage(message, rawSig);
 console.log("WIP :: signature generate and test", rawSig)
+console.log({
+  info: "WIP :: signature generate and test",
+  recoveredAddress
+})
 //const addressUser = await this.wallet.getAddress()
 //const sig = await this.wallet.signMessage(message)
      
