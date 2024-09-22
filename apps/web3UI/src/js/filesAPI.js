@@ -14,6 +14,8 @@ app.listen(port, () => {
 });
 
 app.post('/publishNew', function (req, res, next) {
+//  const addressUser
+//  const addressData
   let count = 0;
   req.pipe(fs.createWriteStream('/tmp/uploadFile'));
   req.on('data', (chunk) => {

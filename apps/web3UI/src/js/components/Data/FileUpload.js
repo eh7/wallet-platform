@@ -78,11 +78,12 @@ class FileUpload extends React.Component {
     }
   }
 
-  syncSwitchOn = (event) => {
+  syncSwitchOn = async (event) => {
     console.log('files', this.state.files)
-    const encryptedFilesData = this.wallet.encryptFilesData(
+    const encryptedFilesData = await this.wallet.encryptFilesData(
       this.state.files,
       this.state.phrase,
+      await this.wallet.getAddress()
     )
     console.log('encryptedFilesData', encryptedFilesData);
     console.log(JSON.stringify(encryptedFilesData))

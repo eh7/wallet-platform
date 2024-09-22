@@ -4,10 +4,13 @@ import EthjsWallet, { hdkey as etherHDkey } from 'ethereumjs-wallet';
 import {
   ethers,
   formatEther,
+  getBytes,
+  hexlify,
   JsonRpcProvider,
   keccak256,
   Mnemonic,
   randomBytes,
+  recoverAddress,
   toUtf8Bytes,
   Wallet as EthersWallet,
   HDNodeWallet,
@@ -97,6 +100,18 @@ export default class Wallet {
     return await this.provider.getBlockNumber()
   }
 
+  signMessage = async (_message) => {
+    const network = JSON.parse(localStorage.getItem("network"));
+    const provider = this.networkProvider[network.chainId];
+    const privateKeyString = await this.getPrivateKey();
+    const signer = new EthersWallet(privateKeyString, provider);
+    const rawSig = await signer.signMessage(_message);
+    //const recovered = await signer.recoverStringFromRaw(_message, rawSig);
+    //console.log(signer.recoverStringFromRaw)
+//    console.log(await recoverAddress(_message, rawSig))
+    return rawSig 
+  }
+
   sendTx = async (_params) => {
     const network = JSON.parse(localStorage.getItem("network"));
     const provider = this.networkProvider[network.chainId];
@@ -162,7 +177,11 @@ export default class Wallet {
     );
   }
 
-  encryptFilesData = (_files, _phrase) => {
+  //signMessage = (message) =>{
+  //  return await this.wallet.signMessage(message);
+  //}
+
+  encryptFilesData = async (_files, _phrase, _addressUser) => {
     //console.log(EthersWallet.fromPhrase);
 
     //const i = 0
@@ -188,17 +207,28 @@ export default class Wallet {
     const text = JSON.stringify(_files)
     let encrypted = cipher.update(text);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
-
+ 
+//const message = arrayify("data")
+//const message = getBytes("data")
+//const message = hexlify("data")
+const message = "data"
+const rawSig = await this.signMessage(message);
+console.log("WIP :: signature generate and test", rawSig)
+//const addressUser = await this.wallet.getAddress()
+//const sig = await this.wallet.signMessage(message)
+     
     const hashes = [];
     const encryptedFiles = [];
     _files.map((file, index) => {
-      hashes.push(
-        keccak256(
+      hashes.push({
+        hash: keccak256(
           toUtf8Bytes(
-            JSON.stringify(file)
+            JSON.stringify(file.data)
           )
-        )
-      )
+        ),
+        addressUser: _addressUser,
+        addressData: address,
+      })
       encryptedFiles.push({
         //iv: this.iv.toString('hex'),
         iv: iv.toString('hex'),
