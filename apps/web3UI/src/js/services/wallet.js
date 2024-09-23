@@ -229,9 +229,7 @@ export default class Wallet {
     let encrypted = cipher.update(text);
     encrypted = Buffer.concat([encrypted, cipher.final()]);
  
-//const message = arrayify("data")
-//const message = getBytes("data")
-//const message = hexlify("data")
+/*
 const message = "data"
 const rawSig = await this.signMessage(message);
 const recoveredAddress = await this.recoverAddressFromMessage(message, rawSig);
@@ -240,9 +238,7 @@ console.log({
   info: "WIP :: signature generate and test",
   recoveredAddress
 })
-//const addressUser = await this.wallet.getAddress()
-//const sig = await this.wallet.signMessage(message)
-     
+*/     
     const hashes = [];
     const encryptedFiles = [];
     _files.map((file, index) => {

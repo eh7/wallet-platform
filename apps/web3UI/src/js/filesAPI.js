@@ -2,18 +2,22 @@ const express = require('express');
 const fs = require('fs');
 //const multer = require('multer');
 const app = express();
+const cors = require('cors')
 const bodyParser = require('body-parser')
 const port = 3333;
 
+app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
-//app.use(bodyParser.json({limit: '25mb'}))
+app.use(bodyParser.json({limit: '25mb'}))
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
 app.post('/publishNew', function (req, res, next) {
+  let body = ''
+  console.log('/publishNew', req.body)
 //  const addressUser
 //  const addressData
   let count = 0;
@@ -21,12 +25,14 @@ app.post('/publishNew', function (req, res, next) {
   req.on('data', (chunk) => {
     count++
     console.log(count, chunk);
+    body += chunk
   });
   req.on('end', (next) => {
     const message = `data published!`
     //res.send(message);
     res.status(200).send(message)
-    console.log(message)
+    console.log("message:", message)
+    console.log("return body data:", body)
     //next
   });
 });

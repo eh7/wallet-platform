@@ -79,11 +79,14 @@ class FileUpload extends React.Component {
   }
 
   syncSwitchOn = async (event) => {
-    console.log('files', this.state.files)
+    //console.log('files', this.state.files)
+
+    const address = await this.wallet.getAddress()
+
     const encryptedFilesData = await this.wallet.encryptFilesData(
       this.state.files,
       this.state.phrase,
-      await this.wallet.getAddress()
+      address
     )
     console.log('encryptedFilesData', encryptedFilesData);
     console.log(JSON.stringify(encryptedFilesData))
@@ -93,6 +96,33 @@ class FileUpload extends React.Component {
       this.state.phrase,
     )
     console.log('decryptedFilesData', decryptedFilesData);
+
+    try {
+      const data = JSON.stringify(
+        encryptedFilesData.hashes
+      );
+      const signature = await this.wallet.signMessage(data);
+      const recoveredAddress = await this.wallet.recoverAddressFromMessage(data, signature);
+      console.log({
+        text: 'signMessage',
+        state: (address === recoveredAddress),
+        address,
+        recoveredAddress,
+        data: encryptedFilesData.hashes,
+      });
+      //3333
+      const url = "http://localhost:3333/publishNew";
+      const dataString = "this is a data string in the components/Data/FileUpload.js" 
+      const response = await fetch(url, {
+        method: "POST",
+        //body: JSON.stringify({ username: "example" }),
+        body: dataString,
+      })
+      console.log(response)
+   } catch (err) {
+     console.error('signMessage', err)
+   }
+
     alert('on')
   }
 

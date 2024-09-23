@@ -6,17 +6,36 @@ const request = require('request');
 const fs = require('fs');
 
 const dataString = fs.readFileSync('data.txt')
+//const dataString = "fs.readFileSync('data.txt')"
 //const dataString = fs.readFileSync('test.txt')
 
 const readable = Readable.from([]);
 
 async function post() {
-  //const response = await fetch('http://localhost:3333/publishNew', {method: 'POST', body: 'a=1'});
-  const r = request.post("http://localhost:3333/publishNew", (error, response, body) => {
+  const r1 = await fetch('http://localhost:3333/publishNew', {
+    method: 'POST',
+    body: dataString,
+  });
+  console.log({
+    status: r1.status,
+    statusText: r1.statusText, 
+    urlList: r1.urlList,
+    body: r1.body,
+  })
+/*
+  const r = request.post(
+    { 
+      url: "http://localhost:3333/publishNew",
+      //form:    { mes:"heydude" }
+    },
+    (error, response, body) => {
     console.error('error:', error)
     console.log('statusCode:', response && response.statusCode)
     console.log('body:', body)
   })
+
+//console.log('r1', r1)
+//console.log('r', r)
 
   readable.pipe(r);
 
@@ -29,13 +48,6 @@ async function post() {
       buffer.slice(i, i + chunkSize)
     )
   }
-
-/*
-async function * generate() {
-//  yield 'hello';
-//  yield 'streams';
-}
-*/
 
   readable.on('error', (error) => {
     console.error("ERRRROOORR", error)
@@ -52,7 +64,7 @@ async function * generate() {
   readable.on('end', () => {
     console.log('end');
   })
-
+*/
 }
 
 post()
