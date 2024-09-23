@@ -11,9 +11,32 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
 app.use(bodyParser.json({limit: '25mb'}))
 
-const processBody = (body) => {
+const processBody = async (body) => {
   const bodyObj = JSON.parse(body)
-  console.log("process Body", bodyObj)
+//  console.log("process Body", bodyObj)
+
+  bodyObj.hashes.map((hash, index) => {
+    const dirPath = '/tmp/files/' + bodyObj.hashes[index].addressData + '/' + bodyObj.hashes[index].addressUser
+    console.log(
+      "CREATE DIR FOR DATA/USER:",
+      dirPath,
+      bodyObj.hashes[index],
+    )
+    try {
+      if (!fs.existsSync(dirPath)) {
+        fs.mkdirSync(dirPath, { recursive: true })
+      }
+      const filePath = dirPath + '/filesData.json'
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(bodyObj.hashes),
+      )
+    } catch (err) {
+      console.error('mkdirSync files db :: ERROR ::', err)
+    }
+  })
+  //console.log("CREAT DIR FOR DATA/USER:", dirPath,Object.keys( bodyObj.hashes))
+  //await fs.mkdir(dirPath)
 }
 
 app.listen(port, () => {
