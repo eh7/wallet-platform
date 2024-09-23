@@ -11,6 +11,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
 app.use(bodyParser.json({limit: '25mb'}))
 
+const processBody = (body) => {
+  const bodyObj = JSON.parse(body)
+  console.log("process Body", bodyObj)
+}
+
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
@@ -32,7 +37,8 @@ app.post('/publishNew', function (req, res, next) {
     //res.send(message);
     res.status(200).send(message)
     console.log("message:", message)
-    console.log("return body data:", body)
+    //console.log("return body data:", body)
+    processBody(body)
     //next
   });
 });

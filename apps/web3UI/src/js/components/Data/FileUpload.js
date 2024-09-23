@@ -112,13 +112,16 @@ class FileUpload extends React.Component {
       });
       //3333
       const url = "http://localhost:3333/publishNew";
-      const dataString = "this is a data string in the components/Data/FileUpload.js" 
+      //const dataString = "this is a data string in the components/Data/FileUpload.js" 
+      const dataString = JSON.stringify(encryptedFilesData) 
       const response = await fetch(url, {
         method: "POST",
         //body: JSON.stringify({ username: "example" }),
         body: dataString,
       })
-      console.log(response)
+      console.log({
+        response,
+      })
    } catch (err) {
      console.error('signMessage', err)
    }

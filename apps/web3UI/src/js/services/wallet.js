@@ -188,9 +188,10 @@ export default class Wallet {
     // const wallet = EthersWallet.fromPhrase(_phrase);
 
     const key = wallet.privateKey.substr(2, 32);
-    let iv = Buffer.from(_encryptedData.iv, 'hex');
-    let encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
-    let decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
+
+    const iv = Buffer.from(_encryptedData.iv, 'hex');
+    const encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
+    const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
     let decrypted = decipher.update(encryptedText);
     decrypted = Buffer.concat([decrypted, decipher.final()]);
     return JSON.parse(
@@ -265,6 +266,7 @@ console.log({
       //iv: this.iv.toString('hex'),
       iv: iv.toString('hex'),
       encryptedData: encrypted.toString('hex'),
+      encryptedFiles,
       hashes
     };
   }
