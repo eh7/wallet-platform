@@ -56,6 +56,7 @@ app.get('/stats', function (req, res, next) {
   const dirPath = '/tmp/files/' 
   const syncDataAddresses = []
   const syncUserAddresses = []
+  //const allFilesHashData = {}
   fs.readdir(dirPath, { recursive: true }, (errror, files) => {
     const output = files.map((file, index) => {
 
@@ -70,6 +71,7 @@ app.get('/stats', function (req, res, next) {
       }
 
       if (file.match(/filesHashData.json$/i)) {
+        //allFilesHashData{addressData}{addressUser} = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
         console.log(
           JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
           //(dirPath + file + '/filesHashData.json')
