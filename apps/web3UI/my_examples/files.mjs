@@ -38,15 +38,15 @@ client0.push(files[3])
 
 const client1 = []
 client1.push(files[3])
-client1.push(files[4])
-client1.push(files[5])
+//client1.push(files[4])
+//client1.push(files[5])
 
 console.log({
   client0
 })
 console.log({
-  client1}
-)
+  client1
+})
 
 function pushFile(array, file) {
   array.indexOf(file) === -1 ? array.push(file) : console.log("This file already exists");
@@ -64,7 +64,7 @@ console.log({
 })
 
 
-console.log(clientCombined[5])
+//console.log(clientCombined[5])
 
 var decoded = Buffer.from(
   //'OTggdGVzdCBmaWxlCg==',
@@ -73,7 +73,7 @@ var decoded = Buffer.from(
 )
 console.log(decoded.toString('utf8'))
 
-console.log(clientCombined[5].data)
+//console.log(clientCombined[5].data)
 //const textDecoder = new TextDecoder();
 //textDecoder.decode(clientCombined[5].data)
 //const reader = new FileReader();

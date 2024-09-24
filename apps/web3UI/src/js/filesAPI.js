@@ -13,35 +13,69 @@ app.use(bodyParser.json({limit: '25mb'}))
 
 const processBody = async (body) => {
   const bodyObj = JSON.parse(body)
-//  console.log("process Body", bodyObj)
+//console.log(bodyObj)
+
+  const dirPath = '/tmp/files/' + bodyObj.addressData + '/' + bodyObj.addressUser
+  try {
+    if (!fs.existsSync(dirPath)) {
+      fs.mkdirSync(dirPath, { recursive: true })
+      console.log('mkdirSync files db :: path:', dirPath)
+    }
+  } catch (err) {
+    console.error('mkdirSync files db :: ERROR ::', err)
+  }   
 
   bodyObj.hashes.map((hash, index) => {
-    const dirPath = '/tmp/files/' + bodyObj.hashes[index].addressData + '/' + bodyObj.hashes[index].addressUser
     console.log(
       "CREATE DIR FOR DATA/USER:",
       dirPath,
       bodyObj.hashes[index],
     )
     try {
-      if (!fs.existsSync(dirPath)) {
-        fs.mkdirSync(dirPath, { recursive: true })
-      }
-      const filePath = dirPath + '/filesData.json'
+      const filesHashPath = dirPath + '/filesHashData.json'
       fs.writeFileSync(
-        filePath,
+        filesHashPath,
         JSON.stringify(bodyObj.hashes),
+      )
+      const filesEncryptedDataPath = dirPath + '/filesEncryptedFilesData.json'
+      fs.writeFileSync(
+        filesEncryptedDataPath,
+        JSON.stringify(bodyObj.encryptedFiles),
       )
     } catch (err) {
       console.error('mkdirSync files db :: ERROR ::', err)
     }
   })
-  //console.log("CREAT DIR FOR DATA/USER:", dirPath,Object.keys( bodyObj.hashes))
-  //await fs.mkdir(dirPath)
 }
 
 app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
+
+app.get('/stats', function (req, res, next) {
+  const dirPath = '/tmp/files/' 
+  fs.readdir(dirPath, { recursive: true }, (errror, files) => {
+    const output = files.map((file, index) => {
+      if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
+        const [addressData, addressUser] = file.split("/")
+        const  dataFiles = fs.readdirSync(dirPath  + '/' + file)
+        console.log(
+          (dirPath + file + '/filesHashData.json')
+          //fs.readFileSync(dirPath + file + '/filesHashData.json')
+        )
+        //console.log(fs.readFileSync(dirPath + '/' + file + '/filesHashData.json'))
+        //console.log(dataFiles)
+       // filesHashData
+        return { addressData, addressUser }
+      }
+    })
+    res.status(200).json({
+      'info': 'getStats',
+      files: JSON.stringify(files, null, 2),
+      output,
+    })
+  }) 
+})
 
 app.post('/publishNew', function (req, res, next) {
   let body = ''
@@ -94,7 +128,7 @@ app.post('/publish', (req, res) => {
   try {
     fs.writeFileSync(
       directoryPath  + '/' + req.body.addressData + ".json",
-      JSON.stringify(req.body.data,null,2),
+      JSON.stringify(req.body.data),
       "utf8",
     );
   } catch (err) {

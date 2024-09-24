@@ -199,36 +199,30 @@ export default class Wallet {
     );
   }
 
-  //signMessage = (message) =>{
-  //  return await this.wallet.signMessage(message);
-  //}
-
   encryptFilesData = async (_files, _phrase, _addressUser) => {
-    //console.log(EthersWallet.fromPhrase);
-
-    //const i = 0
-    //const path = "m/44'/60'/0'/0/" + i
-    //const mnemonicInstance = Mnemonic.fromPhrase(_phrase)
-    //const wallet = HDNodeWallet.fromMnemonic(mnemonicInstance, path)
 
     const wallet = this.getWalletFilesData(_phrase, 0)
 
     const key = wallet.privateKey.substr(2, 32);
     const address = wallet.address;
-    //console.log('address', address)
-    //console.log('encryptFilesData key :: ', key)
-//console.log(this.iv)
-//console.log(crypto.randomBytes(16))
+
     const iv = crypto.randomBytes(16)
     let cipher = crypto.createCipheriv(
       'aes-256-cbc',
       Buffer.from(key),
-      //this.iv
       iv
     );
-    const text = JSON.stringify(_files)
-    let encrypted = cipher.update(text);
-    encrypted = Buffer.concat([encrypted, cipher.final()]);
+
+//    const text = JSON.stringify(_files)
+//    let encrypted = cipher.update(text);
+//    encrypted = Buffer.concat([encrypted, cipher.final()]);
+
+    const encrypted = Buffer.concat([
+      cipher.update(
+        JSON.stringify(_files)
+      ),
+      cipher.final(),
+    ])
  
 /*
 const message = "data"
@@ -253,7 +247,6 @@ console.log({
         addressData: address,
       })
       encryptedFiles.push({
-        //iv: this.iv.toString('hex'),
         iv: iv.toString('hex'),
         encryptedData: cipher.update(
           JSON.stringify(file)
@@ -263,11 +256,12 @@ console.log({
     console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles)
 
     return {
-      //iv: this.iv.toString('hex'),
       iv: iv.toString('hex'),
       encryptedData: encrypted.toString('hex'),
+      addressUser: _addressUser,
+      addressData: address,
       encryptedFiles,
-      hashes
+      hashes,
     };
   }
 
@@ -436,21 +430,29 @@ console.log({
   }
 
   getPhraseData = async () => {
-    let dataPhrase = this.decrypt(
-      JSON.parse(
-        localStorage.getItem(
-          "dataPhrase"
-        )
+    try {
+      let dataPhrase = localStorage.getItem(
+        "dataPhrase"
       )
-    )
 
-    //console.log('hhhhhhhhhhhhhhhhhhhhhh dataPhrase ::::::::: ', dataPhrase);
-
-    if (dataPhrase === '') {
-      dataPhrase = this.getNewPhraseData()
-    }
+      if (dataPhrase) {
+        dataPhrase = this.decrypt(
+          JSON.parse(
+            localStorage.getItem(
+              "dataPhrase"
+            )
+          )
+        )
+      } else {
+        dataPhrase = this.getNewPhraseData()
+      }
+      //console.log('hhhhhhhhhhhhhhhhhhhhhh dataPhrase ::::::::: ', dataPhrase);
     
-    return dataPhrase
+      return dataPhrase
+    } catch (err) {
+      console.error("ERROR servcie::wallet::getPhraseData:", err)
+      return "" 
+    }
   }
 
   getNewPhraseData = async () => {
@@ -463,6 +465,17 @@ console.log({
       )
     )
     return mnemonic.phrase;
+  }
+
+  setNewPhraseData = async (_phrase) => {
+    if (_phrase) {
+      localStorage.setItem(
+        "dataPhrase",
+        JSON.stringify(
+          this.encrypt(_phrase)
+        )
+      )
+    }
   }
 
   syncPhraseData = async () => {

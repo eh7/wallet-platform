@@ -11,6 +11,7 @@ class FileUpload extends React.Component {
     this.state = {
       keys: [],
       files: [],
+      form: {phrase:''},
       pharse: '',
       dbStatus: false,
       listening: false,
@@ -249,6 +250,18 @@ var blob = new Blob([jsonse], {type: "application/json"});
     this.setupDBState();
   }
   
+  setPhrase = async () => {
+    console.log('update sync Prase:', this.state.form.phrase)
+    await this.wallet.setNewPhraseData(this.state.form.phrase)
+    await this.setState({ phrase: this.state.form.phrase });
+    this.state.form.phrase = ''
+    console.log('update sync Prase:', this.state.phrase)
+    alert('WIP setPhrase()')
+  }
+
+  componentDidUpdate = async () => {
+//    alert('componentDidUpdate')
+  }
 
   componentDidMount = async () => {
     try {
@@ -266,16 +279,26 @@ var blob = new Blob([jsonse], {type: "application/json"});
   }
 
   render() {
-    if(!this.state.dbStatus) {
+//    if(!this.state.dbStatus) {
+//      return (
+//        <>
+//          db not setup...
+//        </>
+//      )
+//    } else if(this.indexedDBStuff()) {
+    if(this.indexedDBStuff()) {
       return (
         <>
-          db not setup...
-        </>
-      )
-    } else if(this.indexedDBStuff()) {
-      return (
-        <>
-          <p>Sync Phrase: <b>{ this.state.phrase }</b></p>
+          <p>
+            Sync Phrase: <b>{ this.state.phrase }</b>
+          </p>
+          <p>
+            <button onClick={() => this.setPhrase()}>update</button>
+            <input type="text" ref={this.state.form.phrase} onChange={(event) => {
+              this.state.form.phrase = event.target.value
+              console.log('phrase input onClick event.target.value:', event.target.value, this.state.form.phrase)
+            }} />
+          </p>
           <p>Sync Listen: 
             <b>{ this.state.listening }</b>
             <input type="button" id="listenSwitch" value="off" onClick={this.handleListenClick}/>
