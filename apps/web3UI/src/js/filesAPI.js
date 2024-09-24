@@ -54,20 +54,40 @@ app.listen(port, () => {
 
 app.get('/stats', function (req, res, next) {
   const dirPath = '/tmp/files/' 
+  const syncDataAddresses = []
+  const syncUserAddresses = []
   fs.readdir(dirPath, { recursive: true }, (errror, files) => {
     const output = files.map((file, index) => {
+
+      const [addressData, addressUser] = file.split("/")
+
+      if(syncDataAddresses.indexOf(addressData) === -1) {
+        syncDataAddresses.push(addressData)
+      }
+      //console.log(syncDataAddresses)
+
+      if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
+      }
+
+      if (file.match(/filesHashData.json$/i)) {
+        console.log(
+          JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
+          //(dirPath + file + '/filesHashData.json')
+          //fs.readFileSync(dirPath + file + '/filesHashData.json')
+        )
+        return { addressData, addressUser }
+      } 
+
+      /*
       if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
         const [addressData, addressUser] = file.split("/")
         const  dataFiles = fs.readdirSync(dirPath  + '/' + file)
-        console.log(
-          (dirPath + file + '/filesHashData.json')
-          //fs.readFileSync(dirPath + file + '/filesHashData.json')
-        )
         //console.log(fs.readFileSync(dirPath + '/' + file + '/filesHashData.json'))
         //console.log(dataFiles)
        // filesHashData
         return { addressData, addressUser }
       }
+      */
     })
     res.status(200).json({
       'info': 'getStats',
