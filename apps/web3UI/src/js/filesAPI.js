@@ -142,9 +142,11 @@ app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
 
   const readStream = fs.createReadStream(filePath);
 
+  console.log("file stream to client done")
+
   res.writeHead(200, {
     'Content-Type': 'application/octet-stream',
-    'Content-Disposition': 'attachment; filename="file.txt"'
+ //   'Content-Disposition': 'attachment; filename="file.txt"'
   });
 
   readStream.pipe(res);
@@ -153,6 +155,10 @@ app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
     console.error(err);
     res.status(500).send({ message: 'Error streaming file' });
   });
+
+  readStream.on('done', () => {
+    console.log("file stream to client done")
+  })
 
 //  res.status(200).send(files)
 //  res.status(200).json({
