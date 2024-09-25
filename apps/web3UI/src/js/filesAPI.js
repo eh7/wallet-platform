@@ -10,6 +10,89 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
 app.use(bodyParser.json({limit: '25mb'}))
 
+const merge = (a, b, predicate = (a, b) => a === b) => {
+  const c = [...a]; // copy to avoid side effects
+  // add all items from B to copy C if they're not already present
+  b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
+  return c;
+}
+
+const prepareSyncData = async (
+  _allFilesHashes,
+  _files,
+  _syncDataAddresses,
+  _filesHashData,
+  _filesEncryptedFilesData,
+) => {
+  console.log("prepareSyncData")
+  _syncDataAddresses.map((dataAddress) => {
+    const allFileHashes = []
+    //const uniqueFileHashes = []
+    console.log('process dataAddress:', dataAddress)  
+    //
+    // WIP
+    // get all fileHashes for this sync dataAddress
+    // create a uniquie list of fileHashes for this sync  dataAddress
+    // copy all sync fileHashes and encryptedFilesData to the sync directory for that sync data/user address
+    //
+    _allFilesHashes.map((dataPair, index) => {
+      const pairRef = [
+        dataPair.addressData +
+        '/' +
+        dataPair.addressUser
+      ]
+
+//      const encryptedFiles = _filesEncryptedFilesData[pairRef].map((encryptedDataFile, index) => {
+//        encryptedDataFile.index = index
+//        return encryptedDataFile
+//      })
+//console.log(encryptedFiles)
+
+      allFileHashes.push(_filesHashData[pairRef])
+    })
+    //console.log('allFileHashes', allFileHashes)
+    //console.log('allFileHashes.length', allFileHashes.length)
+
+    const uniqueFileHashes = merge(
+      allFileHashes[0],
+      allFileHashes[1],
+    )
+
+    const latestFiles = []
+    let i = 0
+    uniqueFileHashes.map((hashes, index) => {
+      const pairRef = hashes.addressData + '/' + hashes.addressUser
+
+      console.log(hashes.index)
+      
+      const data = _filesEncryptedFilesData[pairRef][hashes.index]
+      data.index = i
+      i++
+      latestFiles.push(data)
+
+      console.log(Object.keys(data))
+      console.log(data.iv)
+//      data.filter((item) => {
+//        console.log(item)
+//      })
+
+      //console.log('uniqueFileHashes', uniqueFileHashes[pairRef])
+    })
+//console.log(_filesEncryptedFilesData)
+
+    console.log('uniqueFileHashes', uniqueFileHashes)
+    console.log('latestFiles', latestFiles)
+
+    const filePath = '/tmp/files/' + dataAddress + '/latestFilesData.json';
+    fs.writeFileSync(
+      filePath,
+      JSON.stringify(latestFiles),
+      "utf8",
+    )
+  })
+  
+}
+
 const processBody = async (body) => {
   const bodyObj = JSON.parse(body)
 
@@ -50,12 +133,29 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
+app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
+  const dirPath = '/tmp/files/' 
+  const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
+  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
+  console.log("WIP i::  Men at work :::::: latest files")
+
+  res.status(200).json({
+    info: 'latest ' + req.params.dataAddress,
+    message: 'okay',
+    status: '200',
+    files, 
+  })
+})
+
 app.get('/stats', function (req, res, next) {
   const dirPath = '/tmp/files/' 
   const syncDataAddresses = []
   const syncUserAddresses = []
   const filesHashes = []
   const filesHashesJson = []
+  const filesHashData = []
+  const filesEncryptedFilesData = []
+
   fs.readdir(dirPath, { recursive: true }, (errror, files) => {
     files.map((file, index) => {
 
@@ -82,10 +182,20 @@ app.get('/stats', function (req, res, next) {
         }
       }
 
+      if (file.match(/filesEncryptedFilesData.json$/i)) {
+        filesEncryptedFilesData[
+          addressData +
+          '/' +
+          addressUser
+        ] = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
+      }
+
       if (file.match(/filesHashData.json$/i)) {
-        console.log(
-          JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
-        )
+        filesHashData[
+          addressData +
+          '/' +
+          addressUser
+        ] = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
       } 
 
       if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
@@ -93,12 +203,21 @@ app.get('/stats', function (req, res, next) {
       }
 
     })
-    console.log({filesHashes})
+    //console.log({filesHashes})
+    //console.log({filesHashData})
+    //console.log({filesEncryptedFilesData})
+
+    prepareSyncData(
+      filesHashes,
+      files,
+      syncDataAddresses,
+      filesHashData,
+      filesEncryptedFilesData,
+    ) 
+
     res.status(200).json({
       'info': 'getStats',
-      //filesString: JSON.stringify(files, null, 2),
       files,
-      //output,
       syncUserAddresses,
       syncDataAddresses,
       filesHashes,

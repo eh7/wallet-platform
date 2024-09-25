@@ -245,12 +245,14 @@ console.log({
         ),
         addressUser: _addressUser,
         addressData: address,
+        index,
       })
       encryptedFiles.push({
         iv: iv.toString('hex'),
         encryptedData: cipher.update(
           JSON.stringify(file)
-        ).toString('hex')
+        ).toString('hex'),
+        index,
       })
     })
     console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles)
