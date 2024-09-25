@@ -13,7 +13,6 @@ app.use(bodyParser.json({limit: '25mb'}))
 
 const processBody = async (body) => {
   const bodyObj = JSON.parse(body)
-//console.log(bodyObj)
 
   const dirPath = '/tmp/files/' + bodyObj.addressData + '/' + bodyObj.addressUser
   try {
@@ -56,19 +55,55 @@ app.get('/stats', function (req, res, next) {
   const dirPath = '/tmp/files/' 
   const syncDataAddresses = []
   const syncUserAddresses = []
+  const filesHashes = []
+  const filesHashes1 = []
   //const allFilesHashData = {}
   fs.readdir(dirPath, { recursive: true }, (errror, files) => {
-    const output = files.map((file, index) => {
+    files.map((file, index) => {
 
       const [addressData, addressUser] = file.split("/")
 
-      if(syncDataAddresses.indexOf(addressData) === -1) {
+      if (addressUser && syncUserAddresses.indexOf(addressUser) === -1) {
+        syncUserAddresses.push(addressUser)
+      }
+
+      if(addressData && syncDataAddresses.indexOf(addressData) === -1) {
         syncDataAddresses.push(addressData)
       }
-      //console.log(syncDataAddresses)
 
-      if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
+      /*
+      if ( addressData && addressUser) {
+        if (!filesHashes[addressData]) {
+          filesHashes[addressData] = []
+        }
+        if (!filesHashes[addressData][addressUser]) {
+          //console.log('state', filesHashes[addressData][addressUser])
+          filesHashes[addressData][addressUser] = true
+        }
       }
+      */
+
+      if (addressData && addressUser) {
+        const data = {addressData, addressUser}
+        let check = false
+        filesHashes.map((fileHash) => {
+          if (fileHash.addressData === addressData && fileHash.addressUser === addressUser) {
+            check = true
+          }
+        })
+        if (!check) {
+          filesHashes.push(data)
+        }
+      }
+
+//      if (addressUser && syncUserAddresses.indexOf(addressUser) === -1) {
+//        syncUserAddresses.push(addressUser)
+//        syncUserAddresses[addressData] = []
+//        syncUserAddresses[addressData][addressUser] = true
+//  console.log(syncUserAddresses[addressData][addressUser], addressData, addressUser)
+//      }
+
+      //console.log(syncDataAddresses)
 
       if (file.match(/filesHashData.json$/i)) {
         //allFilesHashData{addressData}{addressUser} = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
@@ -77,8 +112,14 @@ app.get('/stats', function (req, res, next) {
           //(dirPath + file + '/filesHashData.json')
           //fs.readFileSync(dirPath + file + '/filesHashData.json')
         )
-        return { addressData, addressUser }
+        //filesHashes[addressData][addressUser].push(JSON.parse(fs.readFileSync(dirPath + file).toString('utf8')))
+        //filesHashes.push(addressData)
+        //return { addressData, addressUser }
       } 
+
+      if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
+        return { addressData, addressUser }
+      }
 
       /*
       if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
@@ -91,10 +132,33 @@ app.get('/stats', function (req, res, next) {
       }
       */
     })
+    console.log({filesHashes})
+    console.log({filesHashes1})
+    const test = []
+/*
+    syncDataAddresses.map((addressData) => {
+      console.log(addressData, filesHashes[addressData].length)
+      //filesHashes[addressData].map((addressUser) => {
+//console.log(addressData, addressUser)
+console.log(
+  addressData,
+  typeof filesHashes[addressData],
+  filesHashes[addressData],
+)
+//        test.push({ addressData, addressUser })
+      //})
+    })
+*/
     res.status(200).json({
       'info': 'getStats',
-      files: JSON.stringify(files, null, 2),
-      output,
+      //filesString: JSON.stringify(files, null, 2),
+      files,
+      //output,
+      syncUserAddresses,
+      syncDataAddresses,
+      filesHashes,
+      test,
+      filesHashes1,
     })
   }) 
 })
