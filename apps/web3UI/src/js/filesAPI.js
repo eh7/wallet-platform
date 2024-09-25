@@ -1,6 +1,5 @@
 const express = require('express');
 const fs = require('fs');
-//const multer = require('multer');
 const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
@@ -56,8 +55,7 @@ app.get('/stats', function (req, res, next) {
   const syncDataAddresses = []
   const syncUserAddresses = []
   const filesHashes = []
-  const filesHashes1 = []
-  //const allFilesHashData = {}
+  const filesHashesJson = []
   fs.readdir(dirPath, { recursive: true }, (errror, files) => {
     files.map((file, index) => {
 
@@ -70,18 +68,6 @@ app.get('/stats', function (req, res, next) {
       if(addressData && syncDataAddresses.indexOf(addressData) === -1) {
         syncDataAddresses.push(addressData)
       }
-
-      /*
-      if ( addressData && addressUser) {
-        if (!filesHashes[addressData]) {
-          filesHashes[addressData] = []
-        }
-        if (!filesHashes[addressData][addressUser]) {
-          //console.log('state', filesHashes[addressData][addressUser])
-          filesHashes[addressData][addressUser] = true
-        }
-      }
-      */
 
       if (addressData && addressUser) {
         const data = {addressData, addressUser}
@@ -96,59 +82,18 @@ app.get('/stats', function (req, res, next) {
         }
       }
 
-//      if (addressUser && syncUserAddresses.indexOf(addressUser) === -1) {
-//        syncUserAddresses.push(addressUser)
-//        syncUserAddresses[addressData] = []
-//        syncUserAddresses[addressData][addressUser] = true
-//  console.log(syncUserAddresses[addressData][addressUser], addressData, addressUser)
-//      }
-
-      //console.log(syncDataAddresses)
-
       if (file.match(/filesHashData.json$/i)) {
-        //allFilesHashData{addressData}{addressUser} = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
         console.log(
           JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
-          //(dirPath + file + '/filesHashData.json')
-          //fs.readFileSync(dirPath + file + '/filesHashData.json')
         )
-        //filesHashes[addressData][addressUser].push(JSON.parse(fs.readFileSync(dirPath + file).toString('utf8')))
-        //filesHashes.push(addressData)
-        //return { addressData, addressUser }
       } 
 
       if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
         return { addressData, addressUser }
       }
 
-      /*
-      if (file.match(/^0x[0123456789abcdef]+\/0x[0123456789abcdef]+$/i)) {
-        const [addressData, addressUser] = file.split("/")
-        const  dataFiles = fs.readdirSync(dirPath  + '/' + file)
-        //console.log(fs.readFileSync(dirPath + '/' + file + '/filesHashData.json'))
-        //console.log(dataFiles)
-       // filesHashData
-        return { addressData, addressUser }
-      }
-      */
     })
     console.log({filesHashes})
-    console.log({filesHashes1})
-    const test = []
-/*
-    syncDataAddresses.map((addressData) => {
-      console.log(addressData, filesHashes[addressData].length)
-      //filesHashes[addressData].map((addressUser) => {
-//console.log(addressData, addressUser)
-console.log(
-  addressData,
-  typeof filesHashes[addressData],
-  filesHashes[addressData],
-)
-//        test.push({ addressData, addressUser })
-      //})
-    })
-*/
     res.status(200).json({
       'info': 'getStats',
       //filesString: JSON.stringify(files, null, 2),
@@ -157,8 +102,6 @@ console.log(
       syncUserAddresses,
       syncDataAddresses,
       filesHashes,
-      test,
-      filesHashes1,
     })
   }) 
 })
