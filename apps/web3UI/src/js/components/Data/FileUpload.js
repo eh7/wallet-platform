@@ -61,6 +61,51 @@ class FileUpload extends React.Component {
     }
   }
 
+  readChunks = (reader) => {
+    return {
+      async* [Symbol.asyncIterator]() {
+        let readResult = await reader.read();
+        while (!readResult.done) {
+          yield readResult.value;
+          readResult = await reader.read();
+        }
+      },
+    };
+  }
+
+  handleLatestClick = async (event) => {
+    //alert("WIP :: handleLatestClick")
+    const addressUser = await this.wallet.getAddress()
+    const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
+    const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser
+//console.log('handleLatestClick url', url)
+    const response = await fetch(url, {
+      method: "GET",
+//      //body: JSON.stringify({ username: "example" }),
+//      body: dataString,
+    })
+    const reader = response.body.getReader();
+    const decoder = new TextDecoder('utf8');
+    let files = ''
+    for await (const chunk of this.readChunks(reader)) {
+      console.log(`received chunk of size ${chunk.length}`);
+      //console.log(decoder.decode(chunk))
+      files = files + decoder.decode(chunk) 
+    }
+    files = JSON.parse(files)
+    console.log({files})
+/*
+    let result;
+    while (!result?.done) {
+      result = await reader.read();
+      let chunk = decoder.decode(result.value);
+      console.log(chunk)
+      console.log(typeof chunk)
+    }
+    //console.log('handleLatestClick :: response', response, result)
+*/
+  }
+
   handleListenClick = (event) => {
     try {
       let value = document.querySelector('#listenSwitch').value;
@@ -302,6 +347,9 @@ var blob = new Blob([jsonse], {type: "application/json"});
           <p>Sync Listen: 
             <b>{ this.state.listening }</b>
             <input type="button" id="listenSwitch" value="off" onClick={this.handleListenClick}/>
+          </p>
+          <p>Sync Latest: 
+            <input type="button" id="latestSwitch" value="get" onClick={this.handleLatestClick}/>
           </p>
 
           <p><img id="image"/></p>

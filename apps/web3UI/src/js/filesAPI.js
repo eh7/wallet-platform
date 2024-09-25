@@ -136,15 +136,32 @@ app.listen(port, () => {
 app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
   const dirPath = '/tmp/files/' 
   const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
-  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
-  console.log("WIP i::  Men at work :::::: latest files")
+//  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
+//console.log(files)
+//  console.log("WIP i::  Men at work :::::: latest files")
 
-  res.status(200).json({
-    info: 'latest ' + req.params.dataAddress,
-    message: 'okay',
-    status: '200',
-    files, 
-  })
+  const readStream = fs.createReadStream(filePath);
+
+  res.writeHead(200, {
+    'Content-Type': 'application/octet-stream',
+    'Content-Disposition': 'attachment; filename="file.txt"'
+  });
+
+  readStream.pipe(res);
+  
+  readStream.on('error', (err) => {
+    console.error(err);
+    res.status(500).send({ message: 'Error streaming file' });
+  });
+
+//  res.status(200).send(files)
+//  res.status(200).json({
+//    info: 'latest ' + req.params.dataAddress,
+//    message: 'okay',
+//    status: '200',
+//    files1: "files1", 
+//    files: files, 
+//  })
 })
 
 app.get('/stats', function (req, res, next) {

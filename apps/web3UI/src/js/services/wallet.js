@@ -199,6 +199,11 @@ export default class Wallet {
     );
   }
 
+  getDataWalletPhrase = async (_phrase) => {
+    const wallet = await this.getWalletFilesData(_phrase, 0)
+    return wallet.address;
+  }
+
   encryptFilesData = async (_files, _phrase, _addressUser) => {
 
     const wallet = this.getWalletFilesData(_phrase, 0)
