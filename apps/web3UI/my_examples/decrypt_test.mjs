@@ -17,12 +17,22 @@ import {
 import crypto from 'crypto';
 const algorithm = 'aes-256-cbc'; //Using AES encryption
 
+//let iv = null
+//iv = crypto.randomBytes(16)
+//console.log(iv)
+//process.exit()
 
+const file = {
+  "created": "2024-09-19T21:08:42.884Z",
+  "data": "data:application/json;base64,ewoJIm5hbWUiOiAidGVzdGluZ05hbWUiLAoJImRhdGEiOiAidGhpcyBpcyBzb21lIGRhdGEiCn0K",
+  "name": "test00.json"
+}
 
-//const data = {"iv":"df67e50ace9db8b07b592314125bfe53","encryptedData":"d7dc65058a556e84bf2c7979f50e8f5d9acfb37f1a06b6afc1c81140232a1542e11924fdd2c656fe3db3fdfa4e1e742a2af145c021c5f67bc0d01f88a995b43c5986062a9ac972626b19cd63c7417b1424767f6844b17c7a7070d81c5556d0d78fa83dea75aa2c1bb05ff2bc0d9855ff","index":4}
-const data = {"iv":"db0913d757130756bcbb99408a9e455a","encryptedData":"28d6c4c0dba4dd19219c593b1c38859c6bac2c4c68a096a9c6123e91fb9178b59b49a90662e854d2a24252e7003f6a8dbac7332e3fbc4bf9ecde9e9b55bd8b8c8218337877b806ea7d02971dfe01ae092450c58e3fd8bfb124b52b1f1f147a22931e2caa32fb1f6adfacfcc4263f89c097e8085cbc7bc4f5dd1bedc5be6813e8d7386df437b1e50a1195c0a90194feae29f3f49323933664b4b6d76b8a73f57e949496e0ac0532cd5f53404c5374b3bd31137e6e9c44df136941824dbe25c2d58e823b1f3c8f99fbf680160212cb3f65dd1e09533a75331d0e7004ad308fb09851be1dea5d10117b72bd6b12815c933dbeb959213412e57e9011a5927832370c9430456a60be6266f9a96a5a78b0fc62c422f139b4b2881419d213124173cdff772dd6f72cf97726c7da48333fd4ca240864cbc5cc5f8cd132a5fb4b1b403d5377455b4bca46d4cf1abb262c5628de88cf2ee8e57adb081bff4e3b897e5b666bc133bf09bc872b272bded7036986f164a21c0eac5dc87a072bb03bbf46a3ed756484c97f0f9759234b1dd951f49c1031a4574aa3f3f76662b6deecd9f789c2984043ee89489b6ac1ffeacec0f2929eefcb72df2a988fd7acfecfb65c42f2e949516a15816df6fbf8f786c8e60357bf74253ceebce49dba43b4985ddec0c89086296b17cfb2e3ee22267c1aaede17fd80bf8aec7a2325395270c649b6fa398c1a7c48ac45448ca5053df4b1b3c3ba65ff574d0554843e6794fd80a653592d02028ef5c99cda8d46f0d84db78b74a7df7e37b418a0d916c89c35dd8d428ce51fe65c902ac4431cf70e2585687f2635389fed7b7f3666591ea723811e2b65e444934807834cd34603a8161121cba041bc30a7bc7e39c4d4b8c4d8d4dbe7337559a937fa1765ed4b06c7ec20f4ea2c1d87304165d3590f1ee2152ab998aeb5f00178e027473345b306492fbf250a9ab72c222e1567b542231bc892bf1b173ef6accb58f31c6670d378142ee865bc0246f7b87269b1381e12c265093b0368dceb602812a42bb4a8af70d568f3a211081450b6f0a4b795d7283bf4cc44fb808375397cc421e647b15d26b649ac751b6900197e91cfce2a39661dddfae968e53838c3013c19a44fb235d43548513ea66c9f457fb9876779d464c58214c5bef82827df2bb09b8264c8d88fe21144bb3070b26445643ee68f2877679707f5abf1e92996be44e618ffbbe7b44898563b2272fb318b132e13e26393cd3d6525c6643d52c1e01e8c323348e6334c54f463f342e57a25d4646a4feb365908bc9542cfe6c11977bde68a7cf4be9e0a8d8c70173a154de6207506035362208fb84acc19be06dac55b2a996952b2b4175d93e12a287037db4bc838b7e47d0b3e6afbbb2bfc03df53ca17b16227f99d1394142c36d6ff21f943147a5d90151330040ec7ec61ce8da07e052cde62a16d5bdcd86cb39441939e3bebd1175897d19672c25bd822f2ea4dc61e6ba7987e1d0c8d2251da0e7e88f4946a08ca83e9003b7495d1b9a0e652c48e63423aeed9ff9c13ea557a84f6b6cb2e0add9844325df93c58c5013bc1f61dc68a21c71a29c5dfd20e2ea4ce8a3a8e0c817706504defcde476ecc89bcbb07406def7d6620d18a6a6874386c12ec0c7f90920970208ace71af15a0e1641e71bd9d2b0638b0192be6fa2f8ce70223e23bed230c60a8b16a06c888534e8431f686f3bcfb6a731d17bd535d20587d0c22d27f646e75b4bcdda6f10f00e039c7d6244b351977e142a767854ac2474eb9f51a0edd99c22a1dd4d27a46ce91f9e0008976c918fd266d53a335c9dfdc82c929d351ee88a0c2e66a02dad26189d939140008bcfd3549b936d6a360457b0a7424949ac6ccaf306bed0f45e2755b7a41ab99413818e2803c8dc41d10451f16dcfeac622ca630dcf2f165b0ed078447e6e2f3a9d834447a98f147fcbc48512b6d00a689bf5acea7c3f8780bc2d3ee9b8bc8883069ab37a27bd914eef094730c11590648a912331c977e96eadbdc98a4af17b229cb0567434dc26629fc463848ae4cf0b5cc951b6cd06342ce175e75e04847635199216eb4b08a4f0f0209dbed79302e3a7582b363fe4abb934f0b7248214b067e25f99b37a6468b16d93e996c042fa20bf5b4fa22cc8386480883e4daf32084da4eca44baa13e9daedba3bfe0464b03276a8245b27c6fcb3149069b02f53a28aa39d6fe38b46368da4b06426a0f9b962bf9c0b9f7e143cf146a99d7f45a7ba122bc656ad4799d9a63bb0b2e520eeab119bdedc2ce8bef7bacd1c77ef6850279e5fcb6d05464f8cb763aeeebd2e8bc81b8cf6bc86fe57471c596bd9e2a273380611834958e857028743a96358ab153a58fd2d5c11ecba4472723c97d512a5c3b0368296caeccb065d8f3b710750260db93cb2a32da3db4f8ec8c76ae7754e514a6b0b416cf38460c6d7f31d649fa0e2672c126e4c9de2b9acd0a0019d0a46f3209c32f484b2171a3b88eecb54f48f0a4654401c3e41b4cb6d242124cb2c8a40932be4cc3c95705af0b0b059a41e3b5a48cda2791abd4ee9b087656441a317766c7c7e947fd8df37847be8e3078006c56ee1dcc496bf5daaf20572874f1db41329de6412deb25c7b7ec542d050741b481bd331b121401404e0392f8638796bb95e5ddae42d2a3a7114b85dc0de2a2fd5732fa927b9c7000629dd02fc84301bc0905ecc58a59956d4164b515473abd8c49fd938532f8d7f429d8e1b70ec245e58fdb2de433ebfa67a40f7b63fa878b2b3853e32f4386c6d557f7dbbcdad5c8070ce6b0421c8fa621e0286049e177ad6baeb1219baccca0fce8dfcf9771e74753b65b902982c375e36734ceba85c775f563ffe062b307ce1e28885d0378a0aac7f2298fa88dca49ea3a994e600bb91781ce8bf3661f4b146227f094923d15bb7fdca67faf0fd592ea13058cb96c077f157ce40a0d9127e1bd854793df2bf28a111851952d672add0b25d5314e4d76e464ab9debed6e1cb6ab27af3f691a68d43311a77e246c8927b1c36b3ee5a60eff251915de935e1c1fa9489277cb7a38bb48173cf67e17e1d282120cc78c00a10969c30d7bf6c97d5f23943d7803c48bb54063f82fbe7486da41170c157b064eba55e238991b6717aedca2f3d782618979ef29f4ff79f53bae3b2b1b6c7506a93c4b5ee1fa31873c8d1f5dcb21ee9db2faf6a3468ebf7a43f7499fb54c12edbaae7f6908ea39891b942393c78cd30a1b53c5d1e26ee8f4d54e084d432671fec1975c98277a72785c079a8eccf51399f2f8b977054c287d78c9e81bdf9914d82ae2add6148b4c55d68e345708b2f2a3f3d659364775b984dbf6774442ca40ccddd46fa096cac213619fb6f6fff5f9abdd01ca84c867e8e6c4ad6e44ba59d7d93897be6658b463c4b0f89eec8f9ce9b4caf0f4d5438b84c7ed42443adc8b65fd8ff196c45233d3a9ef80f4ce385465104d47b9bf1f80b11b8f0ff7b67f95c478937dedd60e489cf5b852a3993e6ecfd460712be3bf2c660d2e9433e092754802d686054ce2255bfb6ef2d4a35be008d3e725899ad532977f603da5702822c8ec05c0b5cffef8e1962a9841df586a03ba9e285daa551a898947be844d4a692c8a099f1c06ec29fd67c4900118212e0d373f5bfb3a78cf82081afb2f1ce9da12325955a825b1e3b3b1ac8dda4a26c4d78e313dd1b159796770b3020d585a52e63ff334d6e6133e804a3da93aff81383387e372b25d1ee3ec27fd69fc4bdd7a18c028c49ac91f7cc5d2c4f39e2b73e1d156e09687ebead033acbcbde0e0a0668cfc69f9a0cd0f2e2c0df7ff214bdfa1778e6543e74ec741a0b83857f4999e709afab19559a1c1de6216df3214f0714bb586598e0960e8f86c236f0e2f662120490a47c7805b86a96b75a7952e496d73b16be8649ceb379ea06d035384a9b6f8a75be119d04a74e2f332c17db8e04475ee469a216602dfb3b7c19a29164d4e915b952b2aba7ed89383d9f667a933f14d1c4414ef50e2987e8797f466eab43d361d0326ffcf8d5236b18b4d84b8f73578391ec36d6f6e25c0801537cba8d7b5f0df97f61a780be1c46f88da394c0943c7678678c99910047f1b90212fcb0ac1a1cd388124ab46d9e2a95f3f8e5f82a1e63f4d44e9a6114a4f921cace07081b7f63dcab7e67a10eba124649fdb1d8030dcfdd4ec32f1028341cab4554ba8c6a7100a867b3fc762eedaef909d1697368ffb80b85b6ef80664d4498338dff8877fa23b1652a27bd8608a374318d78cdc27139a3d9a8e92f25a65a5dbd36fa6e8b8c366bd222570c14d82e790d24b8bb696d77a61f2f9fac8ccccd67308463c02f74ff4a32b1c8e6afe3664664edb0b67cdb046a6a8766d9ebd1b331a065383965a8fca5749cc8d0450600b37d4423e4b72bc75a2a65b447","index":4}
+// phrase rock in office (brave)
+//const phrase = "hobby slogan armor endless tank left odor puppy grow saddle high prison pupil fortune one blame belt butter deer pepper industry segment nature mail"
 
-const phrase = "hobby slogan armor endless tank left odor puppy grow saddle high prison pupil fortune one blame belt butter deer pepper industry segment nature mail"
+// phrase xps laptop (brave)
+const phrase = "inmate sentence heart grid virus brick monkey diamond voyage mad glide brother surround angry protect loan explain august hunt pretty grape taste point struggle"
 
 const getWalletFilesData = (_phrase, _index) => {
   const i = _index
@@ -31,22 +41,111 @@ const getWalletFilesData = (_phrase, _index) => {
   return HDNodeWallet.fromMnemonic(mnemonicInstance, path)
 }
 
-const decryptFilesData = (_encryptedData, _phrase) => {
-
+const encryptSyncFilesData = async (_string, _phrase, _addressUser) => {
   const wallet = getWalletFilesData(_phrase, 0)
-
-  const key = wallet.privateKey.substr(2, 32);
-
-  const iv = Buffer.from(_encryptedData.iv, 'hex');
-  const encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
-  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key), iv);
-  let decrypted = decipher.update(encryptedText);
-  decrypted = Buffer.concat([decrypted, decipher.final()]);
-  return JSON.parse(
-    decrypted.toString('utf8')
+  const key = wallet.privateKey.substr(2, 64);
+console.log('key', key)
+  const address = wallet.address;
+  const iv = crypto.randomBytes(16)
+console.log('iv', iv.toString('hex'))
+  let cipher = crypto.createCipheriv(
+    'aes-256-cbc',
+    Buffer.from(key, 'hex'),
+    iv
   );
-/*
-*/
+
+
+//  let cipher = crypto.createCipheriv(
+//    'aes-256-cbc',
+//    Buffer.from(key, 'hex'),
+//    iv
+//  );
+  const encrypted = Buffer.concat([
+    cipher.update(
+      _string
+    ),
+    cipher.final(),
+  ])
+  return {
+    iv: iv.toString('hex'),
+    encryptedData: encrypted.toString('hex'),
+    addressUser: _addressUser,
+    addressData: address,
+  };
 }
 
-decryptFilesData(data, phrase)
+const decryptSyncFilesData = (_encryptedData, _phrase) => {
+  const wallet = getWalletFilesData(_phrase, 0)
+  const key = wallet.privateKey.substr(2, 64);
+  //const iv = Buffer.from(_encryptedData.iv, 'hex');
+  const iv = Buffer.from(_encryptedData.iv, 'hex');
+//console.log('iv', _encryptedData.iv)
+//console.log('_encryptedData', _encryptedData)
+const testIV = crypto.randomBytes(16)
+console.log('key', key)
+console.log('key', Buffer.from(key, 'hex'))
+console.log('iv', Buffer.from(iv, 'hex'))
+console.log('iv', iv.toString('hex'))
+//console.log('iv', testIV)
+//console.log('iv', iv.toString())
+  const encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
+  const decipher = crypto.createDecipheriv('aes-256-cbc', Buffer.from(key, 'hex'), iv);
+  let decrypted = decipher.update(encryptedText);
+//console.log(decrypted.toString('utf8'))
+  decrypted = Buffer.concat([decrypted, decipher.final()]);
+  return decrypted.toString('utf8')
+}
+
+/*
+const encyptedString = await encryptSyncFilesData(process.argv[2] || "string", phrase, "addressUser")
+console.log(encyptedString)
+const decyptedString = await decryptSyncFilesData(encyptedString, phrase)
+console.log(decyptedString)
+*/
+
+////////////////////
+
+const encyptedStringFile = await encryptSyncFilesData(
+  JSON.stringify(file),
+  phrase,
+  "userAddress"
+)
+console.log('file', file)
+console.log('encyptedStringFile', encyptedStringFile)
+
+
+const decyptedStringFile = await decryptSyncFilesData(
+  encyptedStringFile,
+  phrase,
+)
+console.log('decyptedStringFile', JSON.parse(decyptedStringFile))
+
+/////////////////////////////////
+//
+console.log('-------------------------------------------------------------------')
+console.log('--test decrypt file from logs in web3UI webapp ---------------------------')
+console.log('-------------------------------------------------------------------')
+
+const encryptedFileData1 = {
+  "iv": "a933ac59880e91da8af632bfdadf8b6d",
+  "encryptedData": "7b9c0a33d699a1ff1fa5bf6c95766439cdf3e73d3afa6c33534ce473cfe22a87249fc6e0599154d7e9442453a342b37ff81c96377ac76b4ea7c38fa095ed9b60557a13438b86e408b0ce815b9eef4034c3023d8ff37c2fc12b6e34aeb6e9e6ce944419c5c7173223d1688b05b1f0e33c",
+  "index": 3
+}
+const encryptedFileData = {
+    "iv": "2bdec1e1fa69f0ca6308d097dfe34639",
+    "encryptedData": "099622231951741ee663ecbedb0cfcb2dec3bb689f96ba751cd9644b3ce2992399b8555bdcb55f9575c9be9b16cfdbcd0b7ba8c0143aaa76b609e13d79b9690118be7e5bc35726376a0a238af4177de57e6c99d8e77f89fd6779b5637ee6102a30407913878a341d8a89a294ea073c0901381aaccff46618737a14ca51236b2815bf652f7e14ad38ea362d2d12fca21bdf656a007830c713ad555b5d7f22510e71d0d12e3edef1f62122e78006057bec",
+    "index": 2
+}
+
+const iv = "2bdec1e1fa69f0ca6308d097dfe34639"
+const key = "550b42040966307d66a0fb2c4ef99843b6e1a76dbb1aa976cbcf87b2e8ba1652"
+
+const decyptedFileData = await decryptSyncFilesData(
+  encryptedFileData,
+  phrase,
+)
+
+console.log('encryptedFileData', encryptedFileData)
+console.log('decyptedFileData', decyptedFileData)
+/*
+*/

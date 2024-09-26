@@ -185,6 +185,26 @@ export default class Wallet {
   decryptFilesData = (_encryptedData, _phrase) => {
 
     const wallet = this.getWalletFilesData(_phrase, 0)
+    const key = wallet.privateKey.substr(2, 64);
+    const iv = Buffer.from(_encryptedData.iv, 'hex');
+//console.log('key', key)
+//console.log('iv', iv)
+    const encryptedText = Buffer.from(_encryptedData.encryptedData, 'hex');
+    const decipher = crypto.createDecipheriv(
+     'aes-256-cbc',
+      Buffer.from(key, 'hex'),
+      iv,
+    );
+    let decrypted = decipher.update(encryptedText);
+    decrypted = Buffer.concat([decrypted, decipher.final()]);
+    return JSON.parse(
+      decrypted.toString('utf8')
+    );
+  }
+
+  decryptFilesDataOld = (_encryptedData, _phrase) => {
+
+    const wallet = this.getWalletFilesData(_phrase, 0)
     // const wallet = EthersWallet.fromPhrase(_phrase);
 
     const key = wallet.privateKey.substr(2, 32);
@@ -207,11 +227,69 @@ export default class Wallet {
   encryptFilesData = async (_files, _phrase, _addressUser) => {
 
     const wallet = this.getWalletFilesData(_phrase, 0)
-
-    const key = wallet.privateKey.substr(2, 32);
+    const key = wallet.privateKey.substr(2, 64);
+console.log('key', key)
     const address = wallet.address;
 
     const iv = crypto.randomBytes(16)
+console.log('iv', iv.toString('hex'))
+    let cipher = crypto.createCipheriv(
+      'aes-256-cbc',
+      Buffer.from(key, 'hex'),
+      iv
+    );
+
+    const encrypted = Buffer.concat([
+      cipher.update(
+        JSON.stringify(_files)
+      ),
+      cipher.final(),
+    ])
+ 
+    const hashes = [];
+    const encryptedFiles = [];
+    _files.map((file, index) => {
+      hashes.push({
+        hash: keccak256(
+          toUtf8Bytes(
+            JSON.stringify(file.data)
+          )
+        ),
+        addressUser: _addressUser,
+        addressData: address,
+        index,
+      })
+      encryptedFiles.push({
+        iv: iv.toString('hex'),
+        encryptedData: cipher.update(
+          JSON.stringify(file)
+        ).toString('hex'),
+        index,
+      })
+      //console.log(index, file)
+    })
+    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles, _phrase)
+
+    return {
+      iv: iv.toString('hex'),
+      encryptedData: encrypted.toString('hex'),
+      addressUser: _addressUser,
+      addressData: address,
+      encryptedFiles,
+      hashes,
+    };
+  }
+
+  encryptFilesDataOld = async (_files, _phrase, _addressUser) => {
+
+    const wallet = this.getWalletFilesData(_phrase, 0)
+
+    const key = wallet.privateKey.substr(2, 32);
+console.log('key', key)
+    const address = wallet.address;
+
+    const iv = crypto.randomBytes(16)
+console.log('iv', iv.toString('hex'))
     let cipher = crypto.createCipheriv(
       'aes-256-cbc',
       Buffer.from(key),
@@ -259,8 +337,9 @@ console.log({
         ).toString('hex'),
         index,
       })
+      //console.log(index, file)
     })
-    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles)
+    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles, _phrase)
 
     return {
       iv: iv.toString('hex'),
