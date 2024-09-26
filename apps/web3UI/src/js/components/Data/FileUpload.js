@@ -75,35 +75,32 @@ class FileUpload extends React.Component {
 
   handleLatestClick = async (event) => {
     //alert("WIP :: handleLatestClick")
-    const addressUser = await this.wallet.getAddress()
-    const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
-    const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser
+    try {
+      const addressUser = await this.wallet.getAddress()
+      const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
+      const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser
 //console.log('handleLatestClick url', url)
-    const response = await fetch(url, {
-      method: "GET",
+      const response = await fetch(url, {
+        method: "GET",
 //      //body: JSON.stringify({ username: "example" }),
 //      body: dataString,
-    })
-    const reader = response.body.getReader();
-    const decoder = new TextDecoder('utf8');
-    let files = ''
-    for await (const chunk of this.readChunks(reader)) {
-      console.log(`received chunk of size ${chunk.length}`);
-      //console.log(decoder.decode(chunk))
-      files = files + decoder.decode(chunk) 
+      })
+      const reader = response.body.getReader();
+      const decoder = new TextDecoder('utf8');
+      let files = ''
+      for await (const chunk of this.readChunks(reader)) {
+        console.log(`received chunk of size ${chunk.length}`);
+        //console.log(decoder.decode(chunk))
+        files = files + decoder.decode(chunk) 
+      }
+      files = JSON.parse(files)
+      console.log({files})
+      files.map((file) => {
+        console.log('decryptFilesData :: ', this.wallet.decryptFilesData(file, this.state.phrase))
+      })
+    } catch (err) {
+      console.error('ERROR :: handleLatestClick ::', err)
     }
-    files = JSON.parse(files)
-    console.log({files})
-/*
-    let result;
-    while (!result?.done) {
-      result = await reader.read();
-      let chunk = decoder.decode(result.value);
-      console.log(chunk)
-      console.log(typeof chunk)
-    }
-    //console.log('handleLatestClick :: response', response, result)
-*/
   }
 
   handleListenClick = (event) => {

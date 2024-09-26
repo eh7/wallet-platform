@@ -10,12 +10,42 @@ app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
 app.use(bodyParser.json({limit: '25mb'}))
 
+const objectsEqual = (o1, o2) =>
+  Object.keys(o1).length === Object.keys(o2).length
+    && Object.keys(o1).every(p => o1[p] === o2[p]);
+
+const merge = (_array) => {
+  const newArray = []
+  _array.map((subArray) => {
+    subArray.map((newItem) => {
+      if (newArray.length === 0) {
+        newArray.push(newItem)
+      } else {
+        let check = false
+        newArray.map((checkItem, checkItemIndex) => {
+          //console.log('check', checkItem, newItem, objectsEqual(checkItem, newItem))
+          if (!check) {
+            check = objectsEqual(checkItem, newItem)
+          }
+        })
+        if (!check) {
+          newArray.push(newItem)
+        }
+      }
+    })
+  })
+  return newArray
+}
+
+
+/*
 const merge = (a, b, predicate = (a, b) => a === b) => {
   const c = [...a]; // copy to avoid side effects
   // add all items from B to copy C if they're not already present
   b.forEach((bItem) => (c.some((cItem) => predicate(bItem, cItem)) ? null : c.push(bItem)))
   return c;
 }
+*/
 
 const prepareSyncData = async (
   _allFilesHashes,
@@ -25,22 +55,23 @@ const prepareSyncData = async (
   _filesEncryptedFilesData,
 ) => {
   console.log("prepareSyncData")
-  _syncDataAddresses.map((dataAddress) => {
-    const allFileHashes = []
-    //const uniqueFileHashes = []
-    console.log('process dataAddress:', dataAddress)  
-    //
-    // WIP
-    // get all fileHashes for this sync dataAddress
-    // create a uniquie list of fileHashes for this sync  dataAddress
-    // copy all sync fileHashes and encryptedFilesData to the sync directory for that sync data/user address
-    //
-    _allFilesHashes.map((dataPair, index) => {
-      const pairRef = [
-        dataPair.addressData +
-        '/' +
-        dataPair.addressUser
-      ]
+  try {
+    _syncDataAddresses.map((dataAddress) => {
+      const allFileHashes = []
+      //const uniqueFileHashes = []
+      console.log('process dataAddress:', dataAddress)  
+      //
+      // WIP
+      // get all fileHashes for this sync dataAddress
+      // create a uniquie list of fileHashes for this sync  dataAddress
+      // copy all sync fileHashes and encryptedFilesData to the sync directory for that sync data/user address
+      //
+      _allFilesHashes.map((dataPair, index) => {
+        const pairRef = [
+          dataPair.addressData +
+          '/' +
+          dataPair.addressUser
+        ]
 
 //      const encryptedFiles = _filesEncryptedFilesData[pairRef].map((encryptedDataFile, index) => {
 //        encryptedDataFile.index = index
@@ -48,30 +79,30 @@ const prepareSyncData = async (
 //      })
 //console.log(encryptedFiles)
 
-      allFileHashes.push(_filesHashData[pairRef])
-    })
-    //console.log('allFileHashes', allFileHashes)
-    //console.log('allFileHashes.length', allFileHashes.length)
+        if (_filesHashData[pairRef]) {
+          allFileHashes.push(_filesHashData[pairRef])
+        }
+      })
+      //console.log('allFileHashes', allFileHashes)
+      //console.log('allFileHashes.length', allFileHashes.length)
 
-    const uniqueFileHashes = merge(
-      allFileHashes[0],
-      allFileHashes[1],
-    )
+      const uniqueFileHashes = merge(allFileHashes)
+      //console.log(uniqueFileHashes)
 
-    const latestFiles = []
-    let i = 0
-    uniqueFileHashes.map((hashes, index) => {
-      const pairRef = hashes.addressData + '/' + hashes.addressUser
+      const latestFiles = []
+      let i = 0
+      uniqueFileHashes.map((hashes, index) => {
+        const pairRef = hashes.addressData + '/' + hashes.addressUser
 
-      console.log(hashes.index)
+        console.log(hashes.index)
       
-      const data = _filesEncryptedFilesData[pairRef][hashes.index]
-      data.index = i
-      i++
-      latestFiles.push(data)
+        const data = _filesEncryptedFilesData[pairRef][hashes.index]
+        data.index = i
+        i++
+        latestFiles.push(data)
 
-      console.log(Object.keys(data))
-      console.log(data.iv)
+        console.log(Object.keys(data))
+        console.log(data.iv)
 //      data.filter((item) => {
 //        console.log(item)
 //      })
@@ -80,17 +111,19 @@ const prepareSyncData = async (
     })
 //console.log(_filesEncryptedFilesData)
 
-    console.log('uniqueFileHashes', uniqueFileHashes)
-    console.log('latestFiles', latestFiles)
+      console.log('uniqueFileHashes', uniqueFileHashes)
+      console.log('latestFiles', latestFiles)
 
-    const filePath = '/tmp/files/' + dataAddress + '/latestFilesData.json';
-    fs.writeFileSync(
-      filePath,
-      JSON.stringify(latestFiles),
-      "utf8",
-    )
-  })
-  
+      const filePath = '/tmp/files/' + dataAddress + '/latestFilesData.json';
+      fs.writeFileSync(
+        filePath,
+        JSON.stringify(latestFiles),
+        "utf8",
+      )
+    })
+  } catch (err) {
+    console.error('prepareSyncData', err)
+  } 
 }
 
 const processBody = async (body) => {
@@ -134,31 +167,35 @@ app.listen(port, () => {
 });
 
 app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
-  const dirPath = '/tmp/files/' 
-  const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
+  try {
+    const dirPath = '/tmp/files/' 
+    const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
 //  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
 //console.log(files)
 //  console.log("WIP i::  Men at work :::::: latest files")
 
-  const readStream = fs.createReadStream(filePath);
+    const readStream = fs.createReadStream(filePath);
 
-  console.log("file stream to client done")
-
-  res.writeHead(200, {
-    'Content-Type': 'application/octet-stream',
- //   'Content-Disposition': 'attachment; filename="file.txt"'
-  });
-
-  readStream.pipe(res);
-  
-  readStream.on('error', (err) => {
-    console.error(err);
-    res.status(500).send({ message: 'Error streaming file' });
-  });
-
-  readStream.on('done', () => {
     console.log("file stream to client done")
-  })
+
+    res.writeHead(200, {
+      'Content-Type': 'application/octet-stream',
+ //     'Content-Disposition': 'attachment; filename="file.txt"'
+    });
+
+    readStream.pipe(res);
+  
+    readStream.on('error', (err) => {
+      console.error(err);
+      res.status(500).send({ message: 'Error streaming file' });
+    });
+
+    readStream.on('done', () => {
+      console.log("file stream to client done")
+    })
+  } catch (err) {
+    console.error('recieve get("/latest/:dataAddress/:userAdddress")', err)
+  }
 
 //  res.status(200).send(files)
 //  res.status(200).json({
