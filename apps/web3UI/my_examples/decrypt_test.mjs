@@ -137,9 +137,7 @@ const encryptedFileData = {
     "index": 2
 }
 
-const iv = "2bdec1e1fa69f0ca6308d097dfe34639"
-const key = "550b42040966307d66a0fb2c4ef99843b6e1a76dbb1aa976cbcf87b2e8ba1652"
-
+/*
 const decyptedFileData = await decryptSyncFilesData(
   encryptedFileData,
   phrase,
@@ -147,5 +145,24 @@ const decyptedFileData = await decryptSyncFilesData(
 
 console.log('encryptedFileData', encryptedFileData)
 console.log('decyptedFileData', decyptedFileData)
-/*
 */
+
+const iv = Buffer.from("2bdec1e1fa69f0ca6308d097dfe34639", 'hex')
+const key = "550b42040966307d66a0fb2c4ef99843b6e1a76dbb1aa976cbcf87b2e8ba1652"
+const decipher = crypto.createDecipheriv(
+  'aes-256-cbc',
+  Buffer.from(key, 'hex'),
+  iv
+);
+let decrypted = decipher.update(
+  Buffer.from(
+    encryptedFileData.encryptedData,
+    'hex'
+  )
+);
+decrypted = Buffer.concat([decrypted, decipher.final()]);
+console.log('decrypted', decrypted)
+//let decrypted = decipher.update(encryptedText);
+//decrypted = Buffer.concat([decrypted, decipher.final()]);
+
+
