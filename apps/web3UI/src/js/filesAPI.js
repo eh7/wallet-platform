@@ -94,25 +94,37 @@ const prepareSyncData = async (
       uniqueFileHashes.map((hashes, index) => {
         const pairRef = hashes.addressData + '/' + hashes.addressUser
 
-        console.log(hashes.index)
+        // console.log(hashes.index)
       
         const data = _filesEncryptedFilesData[pairRef][hashes.index]
         data.index = i
         i++
         latestFiles.push(data)
 
-        console.log(Object.keys(data))
-        console.log(data.iv)
+        if (hashes.index === 2)
+        console.log(
+          'oldIndex:' + hashes.index,
+          'newIdex:' + data.index,
+          'iv:' + data.iv,
+          'encryptedData:' + data.encryptedData,
+          //'encryptedData:' + "data.encryptedData".substring(10),
+        )
+//console.log("--", data.index)
+//console.log("--", data.iv)
+
+//        console.log(Object.keys(data))
+//        console.log(data.iv)
 //      data.filter((item) => {
 //        console.log(item)
 //      })
 
       //console.log('uniqueFileHashes', uniqueFileHashes[pairRef])
-    })
+      })
 //console.log(_filesEncryptedFilesData)
 
-      console.log('uniqueFileHashes', uniqueFileHashes)
-      console.log('latestFiles', latestFiles)
+//      console.log('uniqueFileHashes', uniqueFileHashes)
+//      console.log('latestFiles', latestFiles)
+//      console.log('latestFiles[3]', latestFiles[3])
 
       const filePath = '/tmp/files/' + dataAddress + '/latestFilesData.json';
       fs.writeFileSync(
@@ -243,11 +255,37 @@ app.get('/stats', function (req, res, next) {
       }
 
       if (file.match(/filesEncryptedFilesData.json$/i)) {
-        filesEncryptedFilesData[
-          addressData +
-          '/' +
-          addressUser
-        ] = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
+        const pairRef = addressData + '/' + addressUser
+//        filesEncryptedFilesData[
+//          addressData +
+//          '/' +
+//          addressUser
+//        ] = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
+        filesEncryptedFilesData[pairRef] = JSON.parse(fs.readFileSync(dirPath + file).toString('utf8'))
+
+// WIP :: TESTING
+/*
+console.log(filesEncryptedFilesData[pairRef][2])
+const thisStringFiles = fs.readFileSync(dirPath + file)//.toString('utf-8')
+//console.log(addressUser, '0x7574b8D4C0C2566b671C530d710821EB6694bE0C')
+if (addressUser === '0x7574b8D4C0C2566b671C530d710821EB6694bE0C') {
+//  console.log(addressUser, 'iv[0]:' + (JSON.parse(thisFile))[2].iv)
+  const files = JSON.parse(thisStringFiles)
+  console.log(
+    addressUser,
+    Object.keys(
+      files
+    ),
+    Object.keys(
+      files[2]
+    ),
+    '\nencryptedData:' + files['2']['encryptedData'],
+    '\nindex:' + files['2']['index'],
+    '\niv:' + files['2']['iv'],
+  )
+}
+*/
+// END TESTING
       }
 
       if (file.match(/filesHashData.json$/i)) {
@@ -265,7 +303,7 @@ app.get('/stats', function (req, res, next) {
     })
     //console.log({filesHashes})
     //console.log({filesHashData})
-    //console.log({filesEncryptedFilesData})
+    //console.log(filesEncryptedFilesData)
 
     prepareSyncData(
       filesHashes,

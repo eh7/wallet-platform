@@ -94,7 +94,16 @@ class FileUpload extends React.Component {
         files = files + decoder.decode(chunk) 
       }
       files = JSON.parse(files)
-      console.log({files})
+      console.log('files', files)
+      /*
+      files.map((file, index) => {
+        const decryptedFileData = this.wallet.decryptFileData(
+          file,
+          this.state.phrase,
+        )
+        console.log('decryptedFilesData array index=' + index, file, decryptedFileData);
+      })
+      */
       files.map((file) => {
         console.log('decryptFilesData :: ', this.wallet.decryptFilesData(file, this.state.phrase))
       })
@@ -139,6 +148,14 @@ class FileUpload extends React.Component {
       this.state.phrase,
     )
     console.log('decryptedFilesData', decryptedFilesData);
+
+    encryptedFilesData.encryptedFiles.map((file, index) => {
+      const decryptedFilesData = this.wallet.decryptFilesData(
+        file,
+        this.state.phrase,
+      )
+      console.log('decryptedFilesData array index=' + index, decryptedFilesData);
+    })
 
     try {
       const data = JSON.stringify(
