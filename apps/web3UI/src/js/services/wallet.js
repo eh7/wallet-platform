@@ -305,7 +305,7 @@ console.log('iv', iv.toString('hex'))
         await this.encryptFileData(file, _phrase, _addressUser, index)
       )
     })
-    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles, _phrase)
+    console.log("HASHES AND ENCRYPTEDFILES :: ", hashes, encryptedFiles)
 
     return {
       iv: iv.toString('hex'),

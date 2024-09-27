@@ -75,6 +75,7 @@ class FileUpload extends React.Component {
 
   handleLatestClick = async (event) => {
     //alert("WIP :: handleLatestClick")
+    const newFiles = []
     try {
       const addressUser = await this.wallet.getAddress()
       const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
@@ -105,8 +106,9 @@ class FileUpload extends React.Component {
       })
       */
       files.map((file) => {
-        console.log('decryptFilesData :: ', this.wallet.decryptFilesData(file, this.state.phrase))
+        newFiles.push(this.wallet.decryptFilesData(file, this.state.phrase))
       })
+      console.log('decryptFilesData :: decrypted :: ', newFiles)
     } catch (err) {
       console.error('ERROR :: handleLatestClick ::', err)
     }
