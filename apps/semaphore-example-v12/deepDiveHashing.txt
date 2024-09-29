@@ -1,0 +1,223 @@
+
+
+Member-only story
+A Deep Dive into SHA-256 By Learning To Hash by Hand
+A thorough exploration of the fundamental details of the algorithm that preserves the security of today’s computer systems
+Dr. Ashish Bamania
+Level Up Coding
+Dr. Ashish Bamania
+·
+Follow
+Published in
+Level Up Coding
+·
+9 min read
+·
+2 days ago
+161
+
+2
+
+
+
+Image generated with DALL-E 3
+SHA-256 or the Secure-Hash-Algorithm 256-bit is a cryptographic hashing algorithm/ function that is widely used by almost all computers today.
+It belongs to a family of SHA-2 hashing algorithms developed by the National Security Agency (NSA) and first published in 2001.
+Some popular use cases of this algorithm today are:
+Digital certificates for SSL/ TLS
+Mining algorithm of Bitcoin and other cryptocurrencies
+Bitcoin wallet address generation
+Checking the integrity of files in version control systems like Git
+Password hashing, storage and verification
+This is a story that discusses this algorithm in great depth and teaches its implementation by hand.
+What’s This Craze About SHA-256?
+A hash function/ algorithm works on the following basic principle —
+Given any data, the hash function generates a unique representation of it.
+SHA-256 is available as a method in Python’s built-in library hashlib and can be used as follows.
+import hashlib
+
+# Specify the input
+input = "ashish"
+
+# Convert it into bytes
+input_bytes = input.encode("utf-8")
+
+# Create a SHA256 Hash Object
+hash_object = hashlib.sha256()
+
+# Update the object with the byte representation
+hash_object.update(input_bytes)
+
+# Generate the hexadecimal representation of the hash
+hash_hex = hash_object.hexdigest()
+
+print(hash_hex)
+# 05d08de271d2773a504b3a30f98df26cccda55689a8dc3514f55d3f247553d2b
+What makes the SHA-256 hashing function so amazing are the following reasons.
+1. Deterministic Fixed Output Length
+Given data of any length, it returns a unique and exact 256-bit representation of it, which is the same every time it is calculated.
+2. Avalanche Effect
+If the input data is changed even by a very small amount (a single bit), the output is drastically altered (just like in an avalanche).
+#SHA256 representation of "ashish"
+05d08de271d2773a504b3a30f98df26cccda55689a8dc3514f55d3f247553d2b
+
+#SHA256 representation of "Ashish"
+ff81423fd44fc0fb20422ffb699ce225bacb400fb70ee3fee3743aac45e910b4
+3. Collision Resistance
+A Hash Collision occurs when two different data items produce the same output hash value.
+Collisions have been discovered in many previous hash functions like SHA1 (collision discovered by Google), but to date, none has been found in SHA-256.
+4. Pre-Image Resistance
+The term ‘Image’ refers to the output after applying the hash function.
+The term ‘Pre-Image Resistance’ thus means that the ‘pre-Image’ or the input to the hash function cannot be calculated using the output (‘Image’).
+This is because there are 2²⁵⁶ possible output hashes for every input and if one tries the brute force approach (i.e. trial and error with every possible combination) with the current pre-quantum computing technology, it would take more time than the age of the universe itself to achieve this.
+5. Extremely Quick
+The SHA-256 algorithm is blazingly fast.
+Benchmarking it in Python using timeit led to it calculating a hash in a mere 1.2 microseconds.
+import hashlib
+import timeit
+
+def hash_a_string():
+    text = "ashish"
+    text_bytes = text.encode('utf-8')
+    hash_object = hashlib.sha256()
+    hash_object.update(text_bytes)
+    return hash_object.hexdigest()
+
+number_of_runs = 1000000
+
+# Using timeit to measure the execution time (Running the function 1 million times)
+time_taken = timeit.timeit(hash_a_string, number=number_of_runs)
+average_time_per_run = time_taken / number_of_runs
+
+average_time_per_run_microseconds = average_time_per_run * 1e6
+
+print(f"Average time per run: {average_time_per_run_microseconds:.3f} microseconds")
+
+# Average time per run: 1.244 microseconds
+I have always been curious about why a neural network cannot reverse a SHA-256 hash.
+And, learning its intricacies and calculating it by hand, answered this for me.
+So, if you’re in the same boat, you’ll get your answer after reading this story as well.
+It’s now time to deep dive into its implementation.
+Getting Our Hands Dirty With Some Cryptography
+Our task is to calculate the SHA-256 hash of the string ashish.
+Step 1: Convert the String characters from ASCII into Binary
+The ASCII characters of the string are first converted into binary using the table below.
+
+ASCII to Binary Character Table (Source: University of Connecticut)
+
+Converting the String characters from ASCII into Binary
+These binary representations are then concatenated as follows.
+
+Concatenation of bits
+Step 2: Padding The Message
+This step aims to make our input a multiple of 512 bits.
+For this, the bit 1 is added to the end of the above bits followed by 0s to make the length 448mod512.
+Hence, 448 — (1 + 48) or 399 zeros are added to it.
+Why 448mod512? — you might ask.
+This ensures that our block has exactly 64 bits remaining for the length field after the original input and padding.
+Next, the input length (in binary) is added to it.
+In our case, this is 48 bits which is 110000 in binary.
+
+Converting the bits into a multiple of 512
+Step 3: Split The Padded Input Into N-512 bits Blocks
+Since our input consists of just 512 bits, in our case, N = 1.
+In other words, we just have a single block of 512 bits that is to be further processed.
+Step 4: Split The Padded Input Into 32-bit Words
+The 512-bit input is split into sixteen 32-bit words as follows and each of them is labelled with M(0) to M(15).
+
+Spliting the 512-bit input into 32-bit words & labeling them with M(0) to M(15)
+Step 5: Setting Up Constants
+This step involves using the properties of prime numbers in our algorithm.
+In this step, we take the first 64 prime numbers and calculate each number’s cube root.
+Next, the first 32 bits of the fractional representation (in binary) of the cube roots are obtained and converted into hexadecimal.
+These values are denoted as K(n) where n ranges from 0 to 63.
+These values from K(0) to K(63) from left to right are shown below.
+
+K(0) to K(63) values shown from left to right
+Step 6: Setting Up Initial Hash Values
+We do something similar to the step above, here.
+We calculate eight values denoted with H(0)(n) (that we will further work on) by taking the first 32 bits of the fractional parts (in binary) of the square roots of the first eight prime numbers.
+For example, for the first prime number 2, it's square root √2 ≈ 1.4142135623730950488016887242097.
+We keep its fractional part and convert this to binary as 01101010000010011110011001100111 and then into hexadecimal as 6a09e667.
+This is our H(0)(0) value.
+We do this for all first 8 prime numbers.
+
+H-values from H(0)(0) to H(0)(7)
+SHA-256 Hash Computation
+We go through each 512-block of our padded input (N= 1 in our case) and take the following steps.
+Step 7: Prepare The Message Schedule
+We calculate sixty-four 32-bit values denoted by W(t) where the first 16 values (W(0) to W(15)) are exactly equal to M(0) to M(15) as calculated in Step 4.
+Further values of W(t) (from W(16) to W(63)) are calculated using the following formula —
+
+W(t) is equal to this equation (Image obtained and modified from Secure Hash Standard (SHS))
+In the above formula, σ(0) and σ(1) are given by the following equation —
+
+σ(0) and σ(1) are expanded as above (Image obtained and modified from Secure Hash Standard (SHS))
+The terms like ROTR and SHR might look cryptic and super confusing but let’s learn about them without losing hope.
+ROTR
+ROTR(n)(x) means the right rotation of n bits in the input x.
+For example, ROTR(1)(011) means the right rotation of 1 bit in 011.
+The result of this operation is 110.
+The last bit that ‘falls off’, is added to the left and hence it is called rotation.
+SHR
+SHR(n)(x) means the right shift of n bits in the input x.
+For example, SHR(1)(011) means the right shift of 1 bit in 011.
+The result of this operation is 001.
+In this operation, the last bit that ‘falls off’ isn’t rotated, but a 0 is added from the left.
+Now, that you know what these are, σ(0) and σ(1) are simply the result of the XOR (exclusive OR) operation (⊕) on its constituent values.
+Using these, W(16) to W(63) are calculated by performing Addition modulo 2³² (operation represented by the + sign in the formula) over the values.
+This operation results in 32-bit results for these W(t) values.
+Example: Calculation Of W(16)
+Things might be getting confusing here, so let’s go through an example of calculating W(16).
+
+Deriving the equation to calculate W(16)
+Let’s move to σ(1)(W(14)) which is the same as σ(1)(M(14)).
+
+Calculation of σ(1)(W(14))
+Similarly, σ(0)(W(1)) is same as σ(0)(M(1)) and is calculated as follows.
+
+Calculation of σ(0)(W(1))
+Finally, let’s perform the last step.
+
+Calculation of W(16)
+Further calculations from W(17) to W(63) are performed similarly.
+Step 8: Initialize Eight Variables With The Initial H values
+8 variables (named from a to h) are initialized using the previously calculated H values as follows.
+
+Initializing variables named from ‘a’ to ‘h’
+Step 9: Perform Further Operations On These Variables
+The following operations are next performed on the above variables in a loop from t = 0 to t = 63.
+
+Operations to be performed over ‘a’ to ‘h’ variables from t=0 to t=63 (Image obtained from Secure Hash Standard (SHS))
+Let’s look into the calculations of T(1) and T(2).
+The two summation operations are performed as follows —
+
+Σ(0) and Σ(1) are expanded as above (Image obtained from Secure Hash Standard (SHS))
+Similarly, the Ch(e,f,g) and Maj(a,b,c) operations are performed as follows —
+
+Ch(e,f,g) and Maj(a,b,c) are expanded as above (Image obtained from Secure Hash Standard (SHS))
+The Ch(e,f,g) Operation
+The result of the operation Ch(e,f,g) chooses each bit from f and g based on whether the corresponding bit in e is 1 or 0, respectively.
+(A little tip — This is the opposite of what you might think. Re-read it again.)
+The Maj(a,b,c) Operation
+For Maj(a,b,c), this function outputs the majority value at each bit position among a, b and c.
+Step 10: Update The Initial H Values
+The initial H(0)(n) values are recalculated by adding them to the variables a to h as follows.
+
+Updating the original H(0)(n) values that result in H(f)(n) values
+Step 11: Concatenate The Final H Values
+Finally, all of the updated H values (H(f)(n)) are concatenated and this results in the final SHA-256 hash for our input string.
+
+Concatenation of all H(f)(n) values to obtain the final hash
+That’s the whole process of how we produce a SHA-256 hash.
+The algorithm is mathematically dense, repetitive and boring to implement and I get why it is made that way.
+And the answer to the question of why it is irreversible?
+This is because of the clever use of bitwise logical operations (shifts, rotations, Maj and more) that do not have straightforward inverses.
+Applying them to our input over multiple rounds leaves it irreversibly scrambled.
+Also, deriving the constants (H and K values) from multiple operations on prime numbers and using them according to the input bits, adds the required randomness to the algorithm, which makes its reverse engineering process clearly impossible.
+Further Reading
+NIST’s official document titled Secure Hash Standard (SHS)
+Greg Walker’s GitHub: Animation of SHA-256 hashing in your terminal implemented in Ruby
+Pictorial representation of SHA-256 hashing by Tim Samshuijzen
+Image Source
+All images are created by the author unless otherwise specified.

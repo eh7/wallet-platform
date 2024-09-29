@@ -1,0 +1,30 @@
+{
+  "name": "simpleui",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "start-hash": "cd apps/hash/ && electron ./app.js",
+    "start-hello": "cd apps/helloWorld/ && electron ./app.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make"
+  },
+  "author": "Gavin Francis <gav@eh7.co.uk>",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
+    "electron": "^31.0.2"
+  },
+  "dependencies": {
+    "electron-squirrel-startup": "^1.0.1",
+    "keccak256": "^1.0.6"
+  }
+}

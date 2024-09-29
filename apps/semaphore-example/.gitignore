@@ -1,0 +1,19 @@
+node_modules
+node_modules.1
+.env
+build
+build/powersOfTau28_hez_final_22.ptau
+
+# Hardhat files
+/cache
+/artifacts
+
+# TypeChain files
+/typechain
+/typechain-types
+
+# solidity-coverage files
+/coverage
+/coverage.json
+
+my-app
