@@ -1,3 +1,4 @@
+
 const ethers = require("ethers");
 const ABI = require("./contracts/Greeter.abi.json");
 require("dotenv").config();
@@ -25,8 +26,6 @@ const run = async () => {
   const contract = new ethers.Contract(process.env.greeterAddr, ABI, wallet)
   //console.log(await contract.setGreeting('this is test greeting, hello'))
   console.log(await contract.greet.call())
-/*
-*/
 	
   //console.log(
   //  wallet
@@ -35,3 +34,11 @@ const run = async () => {
 }
 run()
 
+async function getTransfer(){
+  let signer = null
+  let provider
+  //let url = 'https://goerli.optimism.io'
+  let url = 'https://rpc.ankr.com/optimism_testnet/db621a0f80a4f68bb5c4014ae55cef44ba3e685e02a5a7c707c7a76abbb1a94f'
+  provider = new ethers.JsonRpcProvider(url)
+  console.log(provider)
+}
