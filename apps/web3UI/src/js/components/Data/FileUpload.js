@@ -4,6 +4,8 @@ import * as indexedDB from 'idb';
 
 import Wallet from '../../services/wallet';
 
+const dbVersion = 2
+
 class FileUpload extends React.Component {
 
   constructor(props) {
@@ -17,17 +19,43 @@ class FileUpload extends React.Component {
       listening: false,
       dbName: 'filesystem-database',
       storeName: 'files',
+      dbNameNew: 'filesystem-database-new',
+      storeNameTest: 'newFiles',
     };
 
   }
 
-  createStoreInDB = async () => {
+  createStoreInDBNew = async () => {
     try {
-      const dbName = 'filesystem-database'
-      const storeName = 'files'
-      const dbPromise = openDB(dbName, 1, {
+      const dbName =this.state.dbNameNew 
+      const storeName = this.state.storeName
+      const dbPromise = openDB(dbName, dbVersion, {
         upgrade(db) {
           db.createObjectStore(storeName);
+          console.log("db.createObjectStore ::", dbName, storeName)
+        },
+      });
+    } catch (e) {
+      console.error('ERROR in :: createStoreInDBNew :: ', e)
+    };
+  }
+
+  createStoreInDB = async () => {
+    try {
+      //const dbName = 'filesystem-database'
+      //const storeName = 'files'
+      const dbName =this.state.dbName
+      const storeName = this.state.storeName
+      const storeNameTest = this.state.storeNameTest
+      const dbPromise = openDB(dbName, dbVersion, {
+        upgrade(db) {
+          if (!db.objectStoreNames.contains(storeName)) {
+            db.createObjectStore(storeName)
+          }
+          if (!db.objectStoreNames.contains(storeNameTest)) {
+            db.createObjectStore(storeNameTest)
+          }
+          console.log('UPGRADE indexedDB OKAY! version:', dbVersion, db.objectStoreNames)
         },
       });
     } catch (e) {
@@ -51,7 +79,7 @@ class FileUpload extends React.Component {
       console.log("phrase:", this.state.phrase);
       const dbName = 'filesystem-database'
       const storeName = 'files'
-      const db = await openDB(dbName, 1)
+      const db = await openDB(dbName, dbVersion)
       this.setState({ keys: await db.getAllKeys(storeName) })
       this.setState({ files: await db.getAll(storeName) })
       console.log('keys', this.state.keys)
@@ -74,7 +102,6 @@ class FileUpload extends React.Component {
   }
 
   handleLatestClick = async (event) => {
-    //alert("WIP :: handleLatestClick")
     const newFiles = []
     try {
       const addressUser = await this.wallet.getAddress()
@@ -108,7 +135,9 @@ class FileUpload extends React.Component {
       files.map((file) => {
         newFiles.push(this.wallet.decryptFilesData(file, this.state.phrase))
       })
+      //WIP
       console.log('decryptFilesData :: decrypted :: ', newFiles)
+      this.updateFiles(newFiles)
     } catch (err) {
       console.error('ERROR :: handleLatestClick ::', err)
     }
@@ -120,11 +149,11 @@ class FileUpload extends React.Component {
       if (document.querySelector('#listenSwitch').value === 'off') {
         document.querySelector("#listenSwitch").value = "on";
         this.syncSwitchOn()
-        console.log("WIP ::  initiate publishing of latest files data on REST API or p2p broadcast")
+        console.log("initiate publishing of latest files data on REST API or p2p broadcast")
       } else {
         document.querySelector("#listenSwitch").value = "off";
         this.syncSwitchOff()
-        console.log("WIP ::  p2p signoff and halt publishing of latest files data")
+        console.log("p2p signoff and halt publishing of latest files data")
       }
     } catch (e) {
       console.error(':: handleListenClick ERROR :: ', e)
@@ -219,7 +248,7 @@ class FileUpload extends React.Component {
       try {
         //const dbName = 'filesystem-database'
         //const storeName = 'files'
-        const db = await openDB(this.state.dbName, 1)
+        const db = await openDB(this.state.dbName, dbVersion)
 
         const trans = db.transaction([this.state.storeName], 'readwrite');
         await trans.store.put(ob, ob.name)
@@ -244,7 +273,7 @@ class FileUpload extends React.Component {
   setupDBState = async (_fileData) => {
     //const dbName = 'filesystem-database'
     //const storeName = 'files'
-    const db = await openDB(this.state.dbName, 1)
+    const db = await openDB(this.state.dbName, dbVersion)
     await this.setState({
       dbStatus: true,
       files: await db.getAll(this.state.storeName), 
@@ -271,7 +300,7 @@ class FileUpload extends React.Component {
 
   showImageFile = async (_name, _index) => {
     const ob = this.state.files[_index]
-    const db = await openDB(this.state.dbName, 1)
+    const db = await openDB(this.state.dbName, dbVersion)
     const trans = db.transaction([this.state.storeName], 'readonly');
     const dataInDb = await trans.store.get(ob.name)
 console.log('dataInDb', ob)
@@ -294,9 +323,34 @@ var blob = new Blob([jsonse], {type: "application/json"});
 */
   }
 
+  updateFiles = async (_files) => {
+    try {
+      const db = await openDB(this.state.dbName, dbVersion)
+      //const table = this.state.storeNameTest
+      const table = this.state.storeName
+      const trans = db.transaction([table], 'readwrite')
+      _files.map(async (file) => {
+        console.log("put", file)
+        const ob = file
+        await trans.objectStore(table).put(ob, ob.name)
+        console.log('store.put(ob, ob.name)', ob, table)
+        this.setState({ keys: await db.getAllKeys(table) })
+        this.setState({ files: await db.getAll(table) })
+      })
+      console.log(
+        'sssssssssssssssssssssssssssss',
+        await trans.objectStore(table).get('moon-logo.png')
+      )
+      //WIP
+      alert('added all synced files to ' + this.state.storeNameTest)
+    } catch (err) {
+      console.error('ERROR :: updateFiles ::', err)
+    } 
+  }
+
   deleteFile = async (_name, _index) => {
     const ob = this.state.files[_index]
-    const db = await openDB(this.state.dbName, 1)
+    const db = await openDB(this.state.dbName, dbVersion)
     const trans = db.transaction([this.state.storeName], 'readwrite');
     console.log(this.state.files)
     console.log(
@@ -312,22 +366,23 @@ var blob = new Blob([jsonse], {type: "application/json"});
   }
   
   setPhrase = async () => {
-    console.log('update sync Prase:', this.state.form.phrase)
+    console.log('update sync Phrase:', this.state.form.phrase)
     await this.wallet.setNewPhraseData(this.state.form.phrase)
     await this.setState({ phrase: this.state.form.phrase });
     this.state.form.phrase = ''
-    console.log('update sync Prase:', this.state.phrase)
+    console.log('updated sync Phrase')//, this.state.phrase)
     alert('WIP setPhrase()')
   }
 
   componentDidUpdate = async () => {
-//    alert('componentDidUpdate')
+    alert('componentDidUpdate')
   }
 
   componentDidMount = async () => {
     try {
       this.wallet = new Wallet();
       this.createStoreInDB();
+      //this.createStoreInDBNew();
       this.setState({ phrase: await this.wallet.getPhraseData() });
       this.setupDBState();
     } catch (e) {
