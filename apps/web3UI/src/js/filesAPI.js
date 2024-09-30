@@ -96,33 +96,26 @@ const prepareSyncData = async (
       const latestFiles = []
       let i = 0
       uniqueFileHashes.map((hashes, index) => {
-        const pairRef = hashes.addressData + '/' + hashes.addressUser
-
-        // console.log(hashes.index)
+        if (dataAddress !== hashes.addressData) {
+        } else {
+          const pairRef = hashes.addressData + '/' + hashes.addressUser
       
-        const data = _filesEncryptedFilesData[pairRef][hashes.index]
-        data.index = i
-        i++
-        latestFiles.push(data)
+          const data = _filesEncryptedFilesData[pairRef][hashes.index]
+          data.index = i
+          i++
+          latestFiles.push(data)
 
-        if (hashes.index === 2)
-        console.log(
-          'oldIndex:' + hashes.index,
-          'newIdex:' + data.index,
-          'iv:' + data.iv,
-          'encryptedData:' + data.encryptedData,
-          //'encryptedData:' + "data.encryptedData".substring(10),
-        )
-//console.log("--", data.index)
-//console.log("--", data.iv)
-
-//        console.log(Object.keys(data))
-//        console.log(data.iv)
-//      data.filter((item) => {
-//        console.log(item)
-//      })
-
-      //console.log('uniqueFileHashes', uniqueFileHashes[pairRef])
+/*
+          if (hashes.index === 2)
+          console.log(
+            'oldIndex:' + hashes.index,
+            'newIdex:' + data.index,
+            'iv:' + data.iv,
+            'encryptedData:' + data.encryptedData,
+            //'encryptedData:' + "data.encryptedData".substring(10),
+          )
+*/
+        }
       })
 //console.log(_filesEncryptedFilesData)
 
@@ -136,6 +129,7 @@ const prepareSyncData = async (
         JSON.stringify(latestFiles),
         "utf8",
       )
+      // console.log(123456, dataAddress, latestFiles.length)
     })
   } catch (err) {
     console.error('prepareSyncData', err)
@@ -217,6 +211,7 @@ console.log(req.params)
       addressUser: req.params.userAddress,
       now: fmessage,
     })
+console.log(data, Buffer.from(data))
     const hashedMessage = ethers.keccak256(
       Buffer.from(data)
     )

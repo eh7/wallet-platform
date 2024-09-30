@@ -124,6 +124,19 @@ export default class Wallet {
     //const signature = await signer.signMessage(_message)
     //const digest = getBytes(hashMessage(_message))
 
+/*
+console.log(
+  JSON.parse(_message),
+  Buffer.from(
+    JSON.stringify(_message)
+    //_message
+    JSON.stringify(
+      JSON.parse(_message)
+    ),
+  )
+)
+*/
+console.log('Buffer.from(_message):', _message, Buffer.from(_message))
     const hashedMessage = keccak256(Buffer.from(_message)))
     console.log('hashed _message::', hashedMessage, _message)
     const signature = await signer.signMessage(hashedMessage)

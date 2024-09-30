@@ -359,10 +359,7 @@ var blob = new Blob([jsonse], {type: "application/json"});
       })
       trans.done
 
-      //console.log(
-      //  'sssssssssssssssssssssssssssss',
-      //  await trans.objectStore(table).get('moon-logo.png')
-      //)
+      //alert('added all synced files to ' + this.state.storeNameTest)
     } catch (err) {
       console.error('ERROR :: updateFiles ::', err)
     } 
