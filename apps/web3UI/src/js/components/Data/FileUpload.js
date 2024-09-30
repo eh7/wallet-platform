@@ -337,10 +337,10 @@ var blob = new Blob([jsonse], {type: "application/json"});
         this.setState({ keys: await db.getAllKeys(table) })
         this.setState({ files: await db.getAll(table) })
       })
-      console.log(
-        'sssssssssssssssssssssssssssss',
-        await trans.objectStore(table).get('moon-logo.png')
-      )
+      //console.log(
+      //  'sssssssssssssssssssssssssssss',
+      //  await trans.objectStore(table).get('moon-logo.png')
+      //)
       //WIP
       alert('added all synced files to ' + this.state.storeNameTest)
     } catch (err) {
