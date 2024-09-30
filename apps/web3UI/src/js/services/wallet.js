@@ -119,9 +119,16 @@ export default class Wallet {
     const privateKeyString = await this.getPrivateKey()
     const signer = new EthersWallet(privateKeyString, provider)
 
-    const signature = await signer.signMessage(_message)
+    //const signature = await signer.signMessage(_message)
+    //console.log('hashed _message::', keccak256(Buffer.from(_message)))
+    //const signature = await signer.signMessage(_message)
+    //const digest = getBytes(hashMessage(_message))
 
-    const digest = getBytes(hashMessage(_message))
+    const hashedMessage = keccak256(Buffer.from(_message)))
+    console.log('hashed _message::', hashedMessage, _message)
+    const signature = await signer.signMessage(hashedMessage)
+    const digest = getBytes(hashMessage(hashedMessage))
+
     const recoveredAddress = recoverAddress(digest, signature)
     const address = await this.getAddress()
     console.log({
@@ -130,7 +137,7 @@ export default class Wallet {
       status: (recoveredAddress === address),
     })
 
-    return signature 
+    return { signature, hashedMessage } 
   }
 
   sendTx = async (_params) => {
@@ -314,6 +321,7 @@ console.log('iv', iv.toString('hex'))
       addressData: address,
       encryptedFiles,
       hashes,
+      timestamp: new Date(),
     };
   }
 

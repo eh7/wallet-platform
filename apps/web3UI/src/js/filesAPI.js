@@ -5,6 +5,10 @@ const cors = require('cors')
 const bodyParser = require('body-parser')
 const port = 3333;
 
+//const Wallet = require('./services/wallet')
+//const wallet = new Wallet();
+const ethers = require('ethers')
+
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }))
 //app.use(bodyParser.urlencoded({limit: '25mb'}))
@@ -140,6 +144,30 @@ const prepareSyncData = async (
 
 const processBody = async (body) => {
   const bodyObj = JSON.parse(body)
+  const signature = bodyObj.signature
+
+  //const recoveredAddress = await wallet.recoverAddressFromMessage(bodyObj.data, bodyObj.signature);
+  //console.log('processBody :: bodyObj.signature: ', bodyObj.signature, recoveredAddress)
+  delete bodyObj.signature;
+  console.log('processBody :: bodyObj.signature: ', bodyObj.signature, bodyObj)
+  const tmpbodyObj = bodyObj
+  const _message = ethers.keccak256(
+    Buffer.from(
+      JSON.stringify(
+        tmpbodyObj
+      )
+    )
+  )
+  console.log('hashed _message:', _message)
+  const digest = ethers.getBytes(ethers.hashMessage(_message))
+  const signerRecoveredAddress = ethers.recoverAddress(digest, signature)
+  console.log('signerRecoveredAddress', signerRecoveredAddress, bodyObj.addressUser, (signerRecoveredAddress === bodyObj.addressUser))
+  if (signerRecoveredAddress !== bodyObj.addressUser) {
+    console.error('signerRecoveredAddress error :: no match')
+    return {}
+  }
+
+  
 
   const dirPath = '/tmp/files/' + bodyObj.addressData + '/' + bodyObj.addressUser
   try {
@@ -178,8 +206,41 @@ app.listen(port, () => {
   console.log(`Server is running on http://localhost:${port}`);
 });
 
-app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
+app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
   try {
+    // Authorization
+    const fmessage = req.headers['fmessage']
+    const fsignature =  req.headers['fsignature']
+console.log(req.params)
+     const data = JSON.stringify({
+      addressData: req.params.dataAddress,
+      addressUser: req.params.userAddress,
+      now: fmessage,
+    })
+    const hashedMessage = ethers.keccak256(
+      Buffer.from(data)
+    )
+
+
+    //const digest = ethers.getBytes(ethers.hashMessage(fmessage))
+    //const digest = ethers.getBytes(ethers.hashMessage(data))
+    const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
+    const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
+    /*
+    const digest = ethers.getBytes(ethers.hashMessage(_message))
+    const signerRecoveredAddress = ethers.recoverAddress(digest, signature)
+    console.log('signerRecoveredAddress', signerRecoveredAddress, bodyObj.addressUser, (signerRecoveredAddress === bodyObj.addressUser))
+    */
+    console.log(fmessage, data, hashedMessage, req.params.dataAddress, signerRecoveredAddress)
+/*
+    if (signerRecoveredAddress !== req.params.dataAddress) {
+      console.error('signerRecoveredAddress error :: no match')
+      res.status(500).send({ message: 'Error matching signature' });
+      return {}
+      //next() 
+    }
+*/
+
     const dirPath = '/tmp/files/' 
     const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
 //  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
@@ -206,7 +267,7 @@ app.get('/latest/:dataAddress/:userAdddress', function (req, res, next) {
       console.log("file stream to client done")
     })
   } catch (err) {
-    console.error('recieve get("/latest/:dataAddress/:userAdddress")', err)
+    console.error('recieve get("/latest/:dataAddress/:userAddress")', err)
   }
 
 //  res.status(200).send(files)

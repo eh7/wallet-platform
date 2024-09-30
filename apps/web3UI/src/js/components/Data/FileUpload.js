@@ -106,38 +106,59 @@ class FileUpload extends React.Component {
     try {
       const addressUser = await this.wallet.getAddress()
       const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
+
+      const now = new Date()
+      const seconds = Math.round(now.getTime() / 1000);
+      const data = JSON.stringify({
+        addressData,
+        addressUser,
+        now: seconds,
+      })
+      const {signature, hashedMessage} = await this.wallet.signMessage(data);
+
       const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser
-//console.log('handleLatestClick url', url)
+      //const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser + "?" + new URLSearchParams({signature, hashedMessage})
+      const headers = {
+        'fsignature': signature,
+        'fmessage': seconds, 
+      }
+      //console.log('handleLatestClick url', url)
       const response = await fetch(url, {
         method: "GET",
+        headers,
+//        body: {signature, hashedMessage},
 //      //body: JSON.stringify({ username: "example" }),
 //      body: dataString,
       })
-      const reader = response.body.getReader();
-      const decoder = new TextDecoder('utf8');
-      let files = ''
-      for await (const chunk of this.readChunks(reader)) {
-        console.log(`received chunk of size ${chunk.length}`);
-        //console.log(decoder.decode(chunk))
-        files = files + decoder.decode(chunk) 
-      }
-      files = JSON.parse(files)
-      console.log('files', files)
-      /*
-      files.map((file, index) => {
-        const decryptedFileData = this.wallet.decryptFileData(
-          file,
-          this.state.phrase,
-        )
-        console.log('decryptedFilesData array index=' + index, file, decryptedFileData);
-      })
-      */
-      files.map((file) => {
-        newFiles.push(this.wallet.decryptFilesData(file, this.state.phrase))
-      })
-      //WIP
-      console.log('decryptFilesData :: decrypted :: ', newFiles)
-      this.updateFiles(newFiles)
+//console.log('xxxxxxxxxxxxxxxxxxxxxxxxxxx response:', response)
+//
+ //     if (response.status === 200) {
+        const reader = response.body.getReader();
+        const decoder = new TextDecoder('utf8');
+        let files = ''
+        for await (const chunk of this.readChunks(reader)) {
+          console.log(`received chunk of size ${chunk.length}`);
+          //console.log(decoder.decode(chunk))
+          files = files + decoder.decode(chunk) 
+        }
+        files = JSON.parse(files)
+        console.log('files', files)
+        /*
+        files.map((file, index) => {
+          const decryptedFileData = this.wallet.decryptFileData(
+            file,
+            this.state.phrase,
+          )
+          console.log('decryptedFilesData array index=' + index, file, decryptedFileData);
+        })
+        */
+        files.map((file) => {
+          newFiles.push(this.wallet.decryptFilesData(file, this.state.phrase))
+        })
+        //WIP
+        console.log('decryptFilesData :: decrypted :: ', newFiles)
+        this.updateFiles(newFiles)
+//      }
     } catch (err) {
       console.error('ERROR :: handleLatestClick ::', err)
     }
@@ -174,6 +195,8 @@ class FileUpload extends React.Component {
     console.log('encryptedFilesData', encryptedFilesData);
     console.log(JSON.stringify(encryptedFilesData))
 
+    // WIP START
+    // Example showing decryption of file and files data
     const decryptedFilesData = this.wallet.decryptFilesData(
       encryptedFilesData,
       this.state.phrase,
@@ -187,24 +210,36 @@ class FileUpload extends React.Component {
       )
       console.log('decryptedFilesData array index=' + index, decryptedFilesData);
     })
+    // WIP DONE
 
     try {
+      console.log('encryptedFilesData', encryptedFilesData)
       const data = JSON.stringify(
-        encryptedFilesData.hashes
+        encryptedFilesData
+        //encryptedFilesData.hashes
       );
-      const signature = await this.wallet.signMessage(data);
+      const {signature, hashedMessage} = await this.wallet.signMessage(data);
+      //const signature = await this.wallet.signMessage(data);
       const recoveredAddress = await this.wallet.recoverAddressFromMessage(data, signature);
       console.log({
         text: 'signMessage',
         state: (address === recoveredAddress),
         address,
         recoveredAddress,
-        data: encryptedFilesData.hashes,
+        //dataOld: encryptedFilesData.hashes,
+        data,
       });
-      //3333
+
+      let apiData = encryptedFilesData
+      encryptedFilesData.signature = signature
+
+      //
+      // publish the latest files data to the filesAPI server
+      // host localhost port 3333 path /publishNew
       const url = "http://localhost:3333/publishNew";
       //const dataString = "this is a data string in the components/Data/FileUpload.js" 
-      const dataString = JSON.stringify(encryptedFilesData) 
+      //const dataString = JSON.stringify(encryptedFilesData) 
+      const dataString = JSON.stringify(apiData) 
       const response = await fetch(url, {
         method: "POST",
         //body: JSON.stringify({ username: "example" }),
@@ -271,31 +306,12 @@ class FileUpload extends React.Component {
   };
 
   setupDBState = async (_fileData) => {
-    //const dbName = 'filesystem-database'
-    //const storeName = 'files'
     const db = await openDB(this.state.dbName, dbVersion)
     await this.setState({
       dbStatus: true,
       files: await db.getAll(this.state.storeName), 
       keys: await db.getAllKeys(this.state.storeName),
     })
-
-    //const fileData = await db.getAll(this.state.storeName)
-    //alert(JSON.stringify(Object.keys(fileData)))
-
-    /*
-    console.log(_fileData)
-    alert(JSON.stringify(_fileData))
-    if (_fileData) {
-      //const fileData = await db.getAll(this.state.storeName)
-      if (this.state.files.length > 0) {
-        this.showImageFile(
-          this.state.files[0].name,
-          0,
-        )
-      }
-    }
-    */
   }
 
   showImageFile = async (_name, _index) => {
@@ -329,20 +345,24 @@ var blob = new Blob([jsonse], {type: "application/json"});
       //const table = this.state.storeNameTest
       const table = this.state.storeName
       const trans = db.transaction([table], 'readwrite')
+
+      trans.addEventListener("complete", (event) => {
+        this.setupDBState();
+        alert('trans complete :: added all synced files to ' + table)
+      })
+
       _files.map(async (file) => {
         console.log("put", file)
         const ob = file
         await trans.objectStore(table).put(ob, ob.name)
         console.log('store.put(ob, ob.name)', ob, table)
-        this.setState({ keys: await db.getAllKeys(table) })
-        this.setState({ files: await db.getAll(table) })
       })
-      console.log(
-        'sssssssssssssssssssssssssssss',
-        await trans.objectStore(table).get('moon-logo.png')
-      )
-      //WIP
-      alert('added all synced files to ' + this.state.storeNameTest)
+      trans.done
+
+      //console.log(
+      //  'sssssssssssssssssssssssssssss',
+      //  await trans.objectStore(table).get('moon-logo.png')
+      //)
     } catch (err) {
       console.error('ERROR :: updateFiles ::', err)
     } 
