@@ -1,9 +1,14 @@
-import React from 'react';
-import Card from 'react-bootstrap/Card';
-import {openDB} from 'idb';
-import * as indexedDB from 'idb';
+import React from 'react'
+import Card from 'react-bootstrap/Card'
+import Container from 'react-bootstrap/Container'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Table from 'react-bootstrap/Table'
 
-import Wallet from '../../services/wallet';
+import {openDB} from 'idb'
+import * as indexedDB from 'idb'
+
+import Wallet from '../../services/wallet'
 
 const dbVersion = 2
 const apiHost = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
@@ -23,9 +28,15 @@ class FileUpload extends React.Component {
       storeName: 'files',
       dbNameNew: 'filesystem-database-new',
       storeNameTest: 'newFiles',
+      utf8FileText: '',
     };
 
   }
+
+  // example blob to file example
+//  const myFile = new File([myBlob], '/tmp/image.jpeg', {
+//    type: myBlob.type,
+//  });
 
   createStoreInDBNew = async () => {
     try {
@@ -343,6 +354,80 @@ class FileUpload extends React.Component {
     })
   }
 
+  renderTextFile = async (_name, _index) => {
+    const ob = this.state.files[_index]
+    const db = await openDB(this.state.dbName, dbVersion)
+    const trans = db.transaction([this.state.storeName], 'readonly');
+    const dataInDb = await trans.store.get(ob.name)
+    let [typeEncoding, typeEncodedData] = dataInDb.data.split(",")
+    typeEncoding = typeEncoding.substring(5)
+    let [type, encoding] = typeEncoding.split(";")
+    console.log(typeEncodedData, type, encoding)
+    const binaryData = atob(typeEncodedData)
+    const utf8String = decodeURIComponent(escape(binaryData))
+
+    this.setState({ utf8FileText: utf8String })
+//    document.querySelector("#blobTextData").style = 'border: 1px solid black';
+//    document.querySelector("#blobTextData").innerHtml = utf8String;
+//    document.querySelector("#blobTextData").innerHtml = "testing debug text"
+    //alert(utf8String)
+
+    document.querySelector("#image").style = 'border: 0px solid black';
+    document.querySelector("#image").src = '';
+  }
+
+  saveImageFile = async (_name, _index) => {
+    const ob = this.state.files[_index]
+    const db = await openDB(this.state.dbName, dbVersion)
+    const trans = db.transaction([this.state.storeName], 'readonly');
+    const dataInDb = await trans.store.get(ob.name)
+
+    const saveBlob = (function () {
+      var a = document.createElement("a");
+      document.body.appendChild(a);
+      a.style = "display: none";
+      return function (data, fileName) {
+
+      let [typeEncoding, typeEncodedData] = data.split(",")
+      typeEncoding = typeEncoding.substring(5)
+      let [type, encoding] = typeEncoding.split(";")
+      
+console.log(
+  'data.spli(",")::',
+  data.split(","),
+  'type:',
+  type,
+)
+        // From http://stackoverflow.com/questions/14967647/ (continues on next line)
+        // encode-decode-image-with-base64-breaks-image (2013-04-21)
+        function fixBinary (bin) {
+          var length = bin.length;
+          var buf = new ArrayBuffer(length);
+          var arr = new Uint8Array(buf);
+          for (var i = 0; i < length; i++) {
+            arr[i] = bin.charCodeAt(i);
+          }
+          return buf;
+        }
+
+        const binaryData = fixBinary(atob(typeEncodedData));
+        const json = JSON.stringify(data)
+        //const blob = new Blob([json], {type: "octet/stream"})
+        //const blob = new Blob([json], {
+        const blob = new Blob([binaryData], {
+          type,
+        })
+        const url  = window.URL.createObjectURL(blob)
+        a.href = url;
+        a.download = fileName;
+        a.click();
+        window.URL.revokeObjectURL(url);
+      };
+    }());
+
+    saveBlob(dataInDb.data, dataInDb.name);
+  }
+
   showImageFile = async (_name, _index) => {
     const ob = this.state.files[_index]
     const db = await openDB(this.state.dbName, dbVersion)
@@ -351,21 +436,7 @@ class FileUpload extends React.Component {
 console.log('dataInDb', ob)
     document.querySelector("#image").style = 'border: 1px solid black';
     document.querySelector("#image").src = dataInDb.data;
-
-/*
-var cleanScript = {
-    'type': 'script',
-    'api_key': 'api_key',
-    'data': 'data',
-    'inputs': 'inputs',
-    'timeoutSeconds': 'timeoutSeconds'
-};
-var jsonse = JSON.stringify(cleanScript);
-var blob = new Blob([jsonse], {type: "application/json"});
-//    var blob = dataInDb.data
-    //var url  = URL.createObjectURL(blob);
-    console.log({blob})
-*/
+    this.setState({ utf8FileText: '' })
   }
 
   updateFiles = async (_files) => {
@@ -486,24 +557,57 @@ var blob = new Blob([jsonse], {type: "application/json"});
               <p>Latest: 
                 <input type="button" id="latestSwitch" value="get" onClick={this.handleLatestClick}/>
               </p>
-              { (this.state.address === '0xF125Fe77570a4E51B16B674C95ace26fbE99164e') && 
+              { (this.state.address === '0xF125Fe77570a4E51B16B674C95ace26fbE99164e' || this.state.address === '0x7574b8D4C0C2566b671C530d710821EB6694bE0C') && 
                 <p>Run Stats: 
                   <input type="button" id="runStats" value="get" onClick={this.handleStatsClick}/>
                 </p>
               }
 
-              <p><img id="image"/></p>
               FileUpload Input: <input type="file"
                                        key={Math.random().toString(36)}
                                        onChange={this.handleFileUpload} />
-              <ul>
-                {this.state.keys.map((name, index) => {
-                  return (<li>
-                    <button onClick={() => this.showImageFile(name, index)}>show {name}</button>
-                    <button onClick={() => this.deleteFile(name, index)}> x </button>
-                  </li>)
-                })}
-              </ul>
+              <Container fluid="md">
+                <Table striped bordered hover size="sm" variant="warning" >
+                  <thead>
+                    <tr>
+                      <th>-</th>
+                      <th>-</th>
+                      <th>-</th>
+                      <th>delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.keys.map((name, index) => {
+                      return (
+                        <tr>
+                          <td>
+                            <button onClick={() => this.showImageFile(name, index)}>show {name}</button>
+                          </td>
+                          <td>
+                            <button onClick={() => this.saveImageFile(name, index)}> save </button>
+                          </td>
+                          <td>
+                            <button onClick={() => this.renderTextFile(name, index)}> renderTextFile </button>
+                          </td>
+                          <td>
+                            <button onClick={() => this.deleteFile(name, index)}> x </button>
+                          </td>
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </Table>
+              </Container>
+
+              <Card bg="Success" border="warning" style={{ width: '18rem' }}>
+                <Card.Title>File Output</Card.Title>
+                <Card.Body>
+                   <Card.Text>
+                     <p><img id="image"/></p>
+                     {this.state?.utf8FileText}
+                   </Card.Text>
+                </Card.Body>
+              </Card>
 
             </Card.Body>
           </Card>

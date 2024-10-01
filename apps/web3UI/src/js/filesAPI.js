@@ -285,7 +285,7 @@ app.get('/stats', function (req, res, next) {
     )
     const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
     const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
-    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e") {
+    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e" && signerRecoveredAddress !== "0x7574b8D4C0C2566b671C530d710821EB6694bE0C") {
       console.error('signerRecoveredAddress error :: /stats :: no match', signerRecoveredAddress)
       res.status(500).send({ message: 'Error matching signature' });
       return {}
