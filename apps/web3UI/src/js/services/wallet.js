@@ -137,6 +137,7 @@ console.log(
 )
 */
 console.log('Buffer.from(_message):', _message, Buffer.from(_message))
+console.log('Buffer.from(_message).toString(\'hex\'):', _message, Buffer.from(_message).toString('hex'), '\n')
     const hashedMessage = keccak256(Buffer.from(_message)))
     console.log('hashed _message::', hashedMessage, _message)
     const signature = await signer.signMessage(hashedMessage)

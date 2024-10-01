@@ -205,42 +205,31 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
     // Authorization
     const fmessage = req.headers['fmessage']
     const fsignature =  req.headers['fsignature']
-console.log(req.params)
      const data = JSON.stringify({
       addressData: req.params.dataAddress,
       addressUser: req.params.userAddress,
-      now: fmessage,
+      now: Number(fmessage),
     })
-console.log(data, Buffer.from(data))
     const hashedMessage = ethers.keccak256(
       Buffer.from(data)
     )
 
-
-    //const digest = ethers.getBytes(ethers.hashMessage(fmessage))
-    //const digest = ethers.getBytes(ethers.hashMessage(data))
+    // if authorized send latest data
     const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
     const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
-    /*
-    const digest = ethers.getBytes(ethers.hashMessage(_message))
-    const signerRecoveredAddress = ethers.recoverAddress(digest, signature)
-    console.log('signerRecoveredAddress', signerRecoveredAddress, bodyObj.addressUser, (signerRecoveredAddress === bodyObj.addressUser))
-    */
-    console.log(fmessage, data, hashedMessage, req.params.dataAddress, signerRecoveredAddress)
-/*
-    if (signerRecoveredAddress !== req.params.dataAddress) {
-      console.error('signerRecoveredAddress error :: no match')
+    //console.log(fmessage, data, hashedMessage, req.params.dataAddress)
+    //console.log("signerRecoveredAddress:", signerRecoveredAddress)
+    //console.log("signerRecoveredAddress:", signerRecoveredAddress, req.params.userAddress)
+
+    if (signerRecoveredAddress !== req.params.userAddress) {
+      console.error('signerRecoveredAddress error :: no match', signerRecoveredAddress)
       res.status(500).send({ message: 'Error matching signature' });
       return {}
       //next() 
     }
-*/
 
     const dirPath = '/tmp/files/' 
     const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
-//  const files = JSON.parse(fs.readFileSync(filePath).toString('utf8'))
-//console.log(files)
-//  console.log("WIP i::  Men at work :::::: latest files")
 
     const readStream = fs.createReadStream(filePath);
 
