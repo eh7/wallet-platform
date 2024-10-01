@@ -6,6 +6,7 @@ import * as indexedDB from 'idb';
 import Wallet from '../../services/wallet';
 
 const dbVersion = 2
+const apiHost = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
 
 class FileUpload extends React.Component {
 
@@ -112,7 +113,7 @@ class FileUpload extends React.Component {
       })
       const {signature, hashedMessage} = await this.wallet.signMessage(data);
 
-      const url = "http://localhost:3333/stats"
+      const url = "http://" + apiHost + ":3333/stats"
       const headers = {
         'fsignature': signature,
         'fmessage': seconds, 
@@ -144,7 +145,7 @@ class FileUpload extends React.Component {
       })
       const {signature, hashedMessage} = await this.wallet.signMessage(data);
 
-      const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser
+      const url = "http://" + apiHost + ":3333/latest/" + addressData + '/' + addressUser
       //const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser + "?" + new URLSearchParams({signature, hashedMessage})
       const headers = {
         'fsignature': signature,
@@ -264,7 +265,7 @@ class FileUpload extends React.Component {
       //
       // publish the latest files data to the filesAPI server
       // host localhost port 3333 path /publishNew
-      const url = "http://localhost:3333/publishNew";
+      const url = "http://" + apiHost + ":3333/publishNew";
       //const dataString = "this is a data string in the components/Data/FileUpload.js" 
       //const dataString = JSON.stringify(encryptedFilesData) 
       const dataString = JSON.stringify(apiData) 
