@@ -4,6 +4,11 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const port = 3333;
+//const host = (!process.env.DEV) ? "localhost" : "www.zkws.org"
+const host = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
+const mainDirPath = (process.env.PROD === 'true') ? '/var/tmp/files/' : '/tmp/files/'
+
+console.log(process.env.PROD, (process.env.PROD === 'true'))
 
 //const Wallet = require('./services/wallet')
 //const wallet = new Wallet();
@@ -123,7 +128,7 @@ const prepareSyncData = async (
 //      console.log('latestFiles', latestFiles)
 //      console.log('latestFiles[3]', latestFiles[3])
 
-      const filePath = '/tmp/files/' + dataAddress + '/latestFilesData.json';
+      const filePath = mainDirPath + dataAddress + '/latestFilesData.json';
       fs.writeFileSync(
         filePath,
         JSON.stringify(latestFiles),
@@ -157,13 +162,14 @@ const processBody = async (body) => {
   const signerRecoveredAddress = ethers.recoverAddress(digest, signature)
   console.log('signerRecoveredAddress', signerRecoveredAddress, bodyObj.addressUser, (signerRecoveredAddress === bodyObj.addressUser))
   if (signerRecoveredAddress !== bodyObj.addressUser) {
-    console.error('signerRecoveredAddress error :: no match')
+    console.error('signerRecoveredAddress error :: /publichNew :: processBody :: no match', signerRecoveredAddress)
+    //console.error('signerRecoveredAddress error :: no match')
     return {}
   }
 
   
 
-  const dirPath = '/tmp/files/' + bodyObj.addressData + '/' + bodyObj.addressUser
+  const dirPath = mainDirPath + bodyObj.addressData + '/' + bodyObj.addressUser
   try {
     if (!fs.existsSync(dirPath)) {
       fs.mkdirSync(dirPath, { recursive: true })
@@ -196,8 +202,8 @@ const processBody = async (body) => {
   })
 }
 
-app.listen(port, () => {
-  console.log(`Server is running on http://localhost:${port}`);
+app.listen(port, host, () => {
+  console.log(`Server is running on http://${host}:${port}`);
 });
 
 app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
@@ -208,7 +214,8 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
      const data = JSON.stringify({
       addressData: req.params.dataAddress,
       addressUser: req.params.userAddress,
-      now: Number(fmessage),
+      now: fmessage,
+      //now: Number(fmessage),
     })
     const hashedMessage = ethers.keccak256(
       Buffer.from(data)
@@ -222,13 +229,14 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
     //console.log("signerRecoveredAddress:", signerRecoveredAddress, req.params.userAddress)
 
     if (signerRecoveredAddress !== req.params.userAddress) {
-      console.error('signerRecoveredAddress error :: no match', signerRecoveredAddress)
+      console.error('signerRecoveredAddress error :: /latest :: no match', signerRecoveredAddress)
+      //console.error('signerRecoveredAddress error :: no match', signerRecoveredAddress)
       res.status(500).send({ message: 'Error matching signature' });
       return {}
       //next() 
     }
 
-    const dirPath = '/tmp/files/' 
+    const dirPath = mainDirPath 
     const filePath = dirPath + req.params.dataAddress + '/latestFilesData.json';
 
     const readStream = fs.createReadStream(filePath);
@@ -265,7 +273,31 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
 })
 
 app.get('/stats', function (req, res, next) {
-  const dirPath = '/tmp/files/' 
+  try {
+    const fmessage = req.headers['fmessage']
+    const fsignature =  req.headers['fsignature']
+    const data = JSON.stringify({
+      info: "stats",
+      now: fmessage,
+    })
+    const hashedMessage = ethers.keccak256(
+      Buffer.from(data)
+    )
+    const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
+    const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
+    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e") {
+      console.error('signerRecoveredAddress error :: /stats :: no match', signerRecoveredAddress)
+      res.status(500).send({ message: 'Error matching signature' });
+      return {}
+      //next()
+    }
+  }  catch (err) {
+    console.error('ERROR :: app.get(/stats) :: checkSignature ::', err.message)
+    res.status(500).send({ message: 'Error matching signature' });
+    return {}
+  }
+
+  const dirPath = mainDirPath 
   const syncDataAddresses = []
   const syncUserAddresses = []
   const filesHashes = []
@@ -405,7 +437,7 @@ app.post('/publish', (req, res) => {
   if (!req.body.data) {
     return res.status(400).json({ error: 'No body data' });
   }
-  const directoryPath = '/tmp/filesSync/' + req.body.addressData;
+  const directoryPath = mainDirPath + req.body.addressData;
   try {
     if (!fs.existsSync(directoryPath)) {
       fs.mkdirSync(directoryPath);

@@ -1,4 +1,5 @@
 import React from 'react';
+import Card from 'react-bootstrap/Card';
 import {openDB} from 'idb';
 import * as indexedDB from 'idb';
 
@@ -63,7 +64,7 @@ class FileUpload extends React.Component {
     };
   }
 
-  indexedDBStuff = () => {
+  indexedDBStuff = async () => {
     if (!('indexedDB' in window)) {
       console.log("This browser doesn't support IndexedDB");
       return false;
@@ -101,6 +102,33 @@ class FileUpload extends React.Component {
     };
   }
 
+  handleStatsClick = async (event) => {
+    try {
+      const now = new Date()
+      const seconds = String(Math.round(now.getTime() / 1000));
+      const data = JSON.stringify({
+        info: "stats",
+        now: seconds,
+      })
+      const {signature, hashedMessage} = await this.wallet.signMessage(data);
+
+      const url = "http://localhost:3333/stats"
+      const headers = {
+        'fsignature': signature,
+        'fmessage': seconds, 
+      }
+
+      const response = await fetch(url, {
+        method: "GET",
+        headers,
+      })
+
+      console.log('stats :: response ::', response)
+    } catch (err) {
+      console.error('ERROR :: handleStatsClick ::', err)
+    }
+  }
+
   handleLatestClick = async (event) => {
     const newFiles = []
     try {
@@ -108,7 +136,7 @@ class FileUpload extends React.Component {
       const addressData = await this.wallet.getDataWalletPhrase(this.state.phrase)
 
       const now = new Date()
-      const seconds = Math.round(now.getTime() / 1000);
+      const seconds = String(Math.round(now.getTime() / 1000));
       const data = JSON.stringify({
         addressData,
         addressUser,
@@ -383,17 +411,29 @@ var blob = new Blob([jsonse], {type: "application/json"});
   }
   
   setPhrase = async () => {
-    console.log('update sync Phrase:', this.state.form.phrase)
-    await this.wallet.setNewPhraseData(this.state.form.phrase)
-    await this.setState({ phrase: this.state.form.phrase });
-    this.state.form.phrase = ''
-    console.log('updated sync Phrase')//, this.state.phrase)
-    alert('WIP setPhrase()')
+    //e.preventDefault() 
+    if (!this.state.form.phrase) {
+      alert('Set a value for new phrase if you wish to set a new one')
+    } else {
+      console.log('update sync Phrase:', this.state.form.phrase)
+      await this.wallet.setNewPhraseData(this.state.form.phrase)
+      await this.setState({ phrase: this.state.form.phrase });
+      //this.state.form.phrase = ''
+      await this.setState(prevState => ({
+        form: {
+          ...prevState.form,
+          phrase: '',
+        }
+      }))
+      console.log('this.state.form.phrase', this.state.form.phrase)
+      console.log('updated sync Phrase')//, this.state.phrase)
+      alert('WIP setPhrase()')
+    }
   }
 
-  componentDidUpdate = async () => {
-    alert('componentDidUpdate')
-  }
+  //componentDidUpdate = async () => {
+  //  alert('componentDidUpdate')
+  //}
 
   componentDidMount = async () => {
     try {
@@ -401,6 +441,7 @@ var blob = new Blob([jsonse], {type: "application/json"});
       this.createStoreInDB();
       //this.createStoreInDBNew();
       this.setState({ phrase: await this.wallet.getPhraseData() });
+      this.setState({ address: await this.wallet.getAddress() })
       this.setupDBState();
     } catch (e) {
       console.error('ERROR :: FileUpload :: componentDidMount :: ', e)
@@ -422,36 +463,49 @@ var blob = new Blob([jsonse], {type: "application/json"});
     if(this.indexedDBStuff()) {
       return (
         <>
-          <p>
-            Sync Phrase: <b>{ this.state.phrase }</b>
-          </p>
-          <p>
-            <button onClick={() => this.setPhrase()}>update</button>
-            <input type="text" ref={this.state.form.phrase} onChange={(event) => {
-              this.state.form.phrase = event.target.value
-              console.log('phrase input onClick event.target.value:', event.target.value, this.state.form.phrase)
-            }} />
-          </p>
-          <p>Sync Listen: 
-            <b>{ this.state.listening }</b>
-            <input type="button" id="listenSwitch" value="off" onClick={this.handleListenClick}/>
-          </p>
-          <p>Sync Latest: 
-            <input type="button" id="latestSwitch" value="get" onClick={this.handleLatestClick}/>
-          </p>
+          <Card>
+            <Card.Body>
+              <Card.Title>Data Sync Controls</Card.Title>
 
-          <p><img id="image"/></p>
-          FileUpload Input: <input type="file"
-                                   key={Math.random().toString(36)}
-                                   onChange={this.handleFileUpload} />
-          <ul>
-            {this.state.keys.map((name, index) => {
-              return (<li>
-                <button onClick={() => this.showImageFile(name, index)}>show {name}</button>
-                <button onClick={() => this.deleteFile(name, index)}> x </button>
-              </li>)
-            })}
-          </ul>
+              <p>
+                Sync Phrase: <b>{ this.state.phrase }</b>
+              </p>
+              <p>
+                <button type="submit" onClick={() => this.setPhrase()}>update</button>
+                <input required type="text" ref={this.state.form.phrase} onChange={(event) => {
+                  this.state.form.phrase = event.target.value
+                  console.log('phrase input onClick event.target.value:', event.target.value, this.state.form.phrase)
+                }} />
+              </p>
+              <h4>Sync</h4>
+              <p>Listen: 
+                <b>{ this.state.listening }</b>
+                <input type="button" id="listenSwitch" value="off" onClick={this.handleListenClick}/>
+              </p>
+              <p>Latest: 
+                <input type="button" id="latestSwitch" value="get" onClick={this.handleLatestClick}/>
+              </p>
+              { (this.state.address === '0xF125Fe77570a4E51B16B674C95ace26fbE99164e') && 
+                <p>Run Stats: 
+                  <input type="button" id="runStats" value="get" onClick={this.handleStatsClick}/>
+                </p>
+              }
+
+              <p><img id="image"/></p>
+              FileUpload Input: <input type="file"
+                                       key={Math.random().toString(36)}
+                                       onChange={this.handleFileUpload} />
+              <ul>
+                {this.state.keys.map((name, index) => {
+                  return (<li>
+                    <button onClick={() => this.showImageFile(name, index)}>show {name}</button>
+                    <button onClick={() => this.deleteFile(name, index)}> x </button>
+                  </li>)
+                })}
+              </ul>
+
+            </Card.Body>
+          </Card>
         </>
       );
     } else {

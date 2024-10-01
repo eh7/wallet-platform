@@ -28,10 +28,8 @@ function Data(props) {
   ] = useState([]);
 
   const startUp = async () => {
-    //alert(await wallet.getPrivateKey())
     setData([1,2,3])
     this.key = wallet.getPrivateKey();
-    //alert(await this.key)
   }
 
   useEffect(() => {
@@ -98,6 +96,16 @@ function Data(props) {
     document.getElementById("submitButtonView").disabled = false;
     document.getElementById("submitButtonCreate").disabled = false;
   };
+
+  return (
+    <>
+      <Card>
+        <Card.Body>
+          <Card.Title>Data Home</Card.Title>
+        </Card.Body>
+      </Card>
+    </>
+  );
 
   return (
     <>
