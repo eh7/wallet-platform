@@ -19,6 +19,7 @@ describe("Ballot contract", function () {
     const testCandidates = [
       'yes',
       'no',
+      'mayby',
     ];
     const ballotContract = await ethers.deployContract("Ballot");
 
@@ -36,6 +37,13 @@ describe("Ballot contract", function () {
       testCandidates,
     );
     expect(Number(await ballotContract.ballotCount())).to.equal(1);
+
+    let candidate = await ballotContract.getCandidate(0,0);
+    console.log('candidate(0,0)', candidate)
+    candidate = await ballotContract.getCandidate(0,1);
+    console.log('candidate(0,1)', candidate)
+    candidate = await ballotContract.getCandidate(0,2);
+    console.log('candidate(0,2)', candidate)
 
     const ballotCount = await ballotContract.ballotCount();
     const ballot = await ballotContract.ballots(testBallotName);

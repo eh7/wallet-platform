@@ -138,6 +138,12 @@ console.log('bbbbbbbb', contractJson.network.address);
   async executeContractFunction (functionName, values, inputs, stateMutability) {
     const args = [];
 
+console.log('222222222222222222222222222')
+console.log(functionName)
+console.log(values)
+console.log(inputs)
+console.log('222222222222222222222222222')
+
     inputs.map((input) => {
       if (input.type === 'bytes') {
         args.push(
@@ -159,7 +165,7 @@ console.log('bbbbbbbb', contractJson.network.address);
       }
     });
 
-    //console.log("----------> ...args:", ...args);
+    console.log("----------> ...args:", args);
 
     let txValue = '0';
     if (typeof values['txValue'] !== 'undefined') {
@@ -203,6 +209,8 @@ console.log('bbbbbbbb', contractJson.network.address);
 //alert(999)
         const returnData = await this.contractData.contractWithSigner[functionName](question, responses, txArgs);
         */
+
+    console.log("----------> ...args:", ...args);
 
         const returnData = await this.contractData.contractWithSigner[functionName](...args, txArgs);
 

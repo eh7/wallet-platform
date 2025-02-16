@@ -180,6 +180,8 @@ console.log('logs:', events);
     e.preventDefault();
 
     console.log('------------> formData', formData);
+    //formData.values._candidates = ['yes','no']
+    //console.log('-----------> values ---> ', formData.values._candidates);
 
     try {
       await web3All.contractSetup(abiData);
@@ -187,7 +189,20 @@ console.log('logs:', events);
       // Add other bespoke parts format formData.values
       inputs.map((item) => {
         if (item.type === "string[]") {
-          formData.values[item.name] = JSON.parse(formData.values[item.name]);
+console.log('111111111', item, formData.values[item.name])
+          const valuesObj = formData.values[item.name];
+          //formData.values[item.name] = ['x','y','z'];
+          formData.values[item.name] = valuesObj.map(row => {
+            //formData.values[item.name].push(row.value)
+            //console.log('-- row', row.value)
+            return row.value
+          })
+console.log('111111111', item, formData.values[item.name])
+          
+//          formData.values[item.name] = JSON.parse(formData.values[item.name]);
+     //     formData.values[item.name].map((value) => {
+     //       return value.value
+     //     })
         }
       });
 
