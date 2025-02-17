@@ -243,11 +243,6 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
 
     console.log("file stream to client done")
 
-    res.writeHead(200, {
-      'Content-Type': 'application/octet-stream',
- //     'Content-Disposition': 'attachment; filename="file.txt"'
-    });
-
     readStream.pipe(res);
   
     readStream.on('error', (err) => {
@@ -257,6 +252,11 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
 
     readStream.on('done', () => {
       console.log("file stream to client done")
+
+      res.writeHead(200, {
+        'Content-Type': 'application/octet-stream',
+ //       'Content-Disposition': 'attachment; filename="file.txt"'
+      });
     })
   } catch (err) {
     console.error('recieve get("/latest/:dataAddress/:userAddress")', err)
@@ -285,7 +285,9 @@ app.get('/stats', function (req, res, next) {
     )
     const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
     const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
-    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e" && signerRecoveredAddress !== "0x7574b8D4C0C2566b671C530d710821EB6694bE0C") {
+    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e" &&
+        signerRecoveredAddress !== "0x7574b8D4C0C2566b671C530d710821EB6694bE0C" &&
+        signerRecoveredAddress !== '0x9B2300Ba0B80E2044c840DeAfc5695b9ab7B168B') {
       console.error('signerRecoveredAddress error :: /stats :: no match', signerRecoveredAddress)
       res.status(500).send({ message: 'Error matching signature' });
       return {}

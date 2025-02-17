@@ -355,25 +355,33 @@ class FileUpload extends React.Component {
   }
 
   renderTextFile = async (_name, _index) => {
-    const ob = this.state.files[_index]
-    const db = await openDB(this.state.dbName, dbVersion)
-    const trans = db.transaction([this.state.storeName], 'readonly');
-    const dataInDb = await trans.store.get(ob.name)
-    let [typeEncoding, typeEncodedData] = dataInDb.data.split(",")
-    typeEncoding = typeEncoding.substring(5)
-    let [type, encoding] = typeEncoding.split(";")
-    console.log(typeEncodedData, type, encoding)
-    const binaryData = atob(typeEncodedData)
-    const utf8String = decodeURIComponent(escape(binaryData))
+    try {
+      const ob = this.state.files[_index]
+      const db = await openDB(this.state.dbName, dbVersion)
+      const trans = db.transaction([this.state.storeName], 'readonly');
+      const dataInDb = await trans.store.get(ob.name)
+      let [typeEncoding, typeEncodedData] = dataInDb.data.split(",")
+      typeEncoding = typeEncoding.substring(5)
+      let [type, encoding] = typeEncoding.split(";")
+      if (type.match(/image/)) {
+        alert("Can not render text from an image")
+      } else {
+        console.log(typeEncodedData, type, encoding)
+        const binaryData = atob(typeEncodedData)
+        const utf8String = decodeURIComponent(escape(binaryData))
 
-    this.setState({ utf8FileText: utf8String })
-//    document.querySelector("#blobTextData").style = 'border: 1px solid black';
-//    document.querySelector("#blobTextData").innerHtml = utf8String;
-//    document.querySelector("#blobTextData").innerHtml = "testing debug text"
-    //alert(utf8String)
+        this.setState({ utf8FileText: utf8String })
+//      document.querySelector("#blobTextData").style = 'border: 1px solid black';
+//      document.querySelector("#blobTextData").innerHtml = utf8String;
+//      document.querySelector("#blobTextData").innerHtml = "testing debug text"
+      //alert(utf8String)
 
-    document.querySelector("#image").style = 'border: 0px solid black';
-    document.querySelector("#image").src = '';
+        document.querySelector("#image").style = 'border: 0px solid black';
+        document.querySelector("#image").src = '';
+      }
+    } catch (err) {
+      console.error('Error :: FileUpload :: renderTextFile ::', err.message, _name)
+    }
   }
 
   saveImageFile = async (_name, _index) => {
@@ -388,22 +396,16 @@ class FileUpload extends React.Component {
       a.style = "display: none";
       return function (data, fileName) {
 
-      let [typeEncoding, typeEncodedData] = data.split(",")
-      typeEncoding = typeEncoding.substring(5)
-      let [type, encoding] = typeEncoding.split(";")
+        let [typeEncoding, typeEncodedData] = data.split(",")
+        typeEncoding = typeEncoding.substring(5)
+        let [type, encoding] = typeEncoding.split(";")
       
-console.log(
-  'data.spli(",")::',
-  data.split(","),
-  'type:',
-  type,
-)
         // From http://stackoverflow.com/questions/14967647/ (continues on next line)
         // encode-decode-image-with-base64-breaks-image (2013-04-21)
         function fixBinary (bin) {
-          var length = bin.length;
-          var buf = new ArrayBuffer(length);
-          var arr = new Uint8Array(buf);
+          const length = bin.length;
+          let buf = new ArrayBuffer(length);
+          let arr = new Uint8Array(buf);
           for (var i = 0; i < length; i++) {
             arr[i] = bin.charCodeAt(i);
           }
@@ -570,9 +572,9 @@ console.log('dataInDb', ob)
                 <Table striped bordered hover size="sm" variant="warning" >
                   <thead>
                     <tr>
-                      <th>-</th>
-                      <th>-</th>
-                      <th>-</th>
+                      <th>view</th>
+                      <th>save</th>
+                      <th>text</th>
                       <th>delete</th>
                     </tr>
                   </thead>
