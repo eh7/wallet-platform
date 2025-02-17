@@ -247,7 +247,8 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
   
     readStream.on('error', (err) => {
       console.error(err);
-      res.status(500).send({ message: 'Error streaming file' });
+      //res.status(500).send({ message: 'Error streaming file' });
+      console.error('readStream.on error ', err)
     });
 
     readStream.on('done', () => {

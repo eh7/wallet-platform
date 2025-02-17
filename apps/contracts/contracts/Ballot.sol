@@ -86,6 +86,13 @@ contract Ballot {
     );
   }
 
+  function getCandidate(
+    uint256 _ballotId,
+    uint256 _position
+  ) public view returns (string memory _candidate) {
+    return candidates[_ballotId][_position];
+  }
+
   function getVote(
     uint256 _ballotId
   ) public view returns (uint256 _vote) {
