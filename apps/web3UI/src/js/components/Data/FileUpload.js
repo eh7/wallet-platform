@@ -276,7 +276,9 @@ class FileUpload extends React.Component {
       //
       // publish the latest files data to the filesAPI server
       // host localhost port 3333 path /publishNew
+      //console.log('publishNew degug')
       const url = "http://" + apiHost + ":3333/publishNew";
+console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddd', url)
       //const dataString = "this is a data string in the components/Data/FileUpload.js" 
       //const dataString = JSON.stringify(encryptedFilesData) 
       const dataString = JSON.stringify(apiData) 
