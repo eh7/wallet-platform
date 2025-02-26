@@ -10,8 +10,8 @@ const https = require('https')
 
 let server = null
 if (process.env.PROD === 'true') {
-  const privateKey  = fs.readFileSync('/home/zkws/certbot/config/live/zkws.org/privkey.pem', 'utf8')
-  const certificate = fs.readFileSync('/home/zkws/certbot/config/live/zkws.org/cert.pem', 'utf8')
+  const privateKey  = fs.readFileSync(process.env.SSLCertificateKeyFile, 'utf8')
+  const certificate = fs.readFileSync(process.env.SSLCertificateFile, 'utf8')
   const options = {
     key: privateKey,
     cert: certificate,
