@@ -125,6 +125,7 @@ class FileUpload extends React.Component {
       const {signature, hashedMessage} = await this.wallet.signMessage(data);
 
       const url = "http://" + apiHost + ":3333/stats"
+console.log("API URL -------------------------------------------> ", url)
       const headers = {
         'fsignature': signature,
         'fmessage': seconds, 
