@@ -4,6 +4,32 @@ const app = express();
 const cors = require('cors')
 const bodyParser = require('body-parser')
 const port = 3333;
+
+const http = require('http')
+const https = require('https')
+
+let server = null
+if (process.env.PROD === 'true') {
+  const privateKey  = fs.readFileSync(process.env.SSLCertificateKeyFile, 'utf8')
+  const certificate = fs.readFileSync(process.env.SSLCertificateFile, 'utf8')
+  const options = {
+    key: privateKey,
+    cert: certificate,
+  }
+  server = http.createServer(options, app);
+} else {
+  server = http.createServer(app);
+}
+
+/*
+const https = require('https')
+const privateKey  = fs.readFileSync('sslcert/server.key', 'utf8')
+const certificate = fs.readFileSync('sslcert/server.crt', 'utf8')
+    SSLCertificateFile /home/zkws/certbot/config/live/zkws.org/cert.pem
+    SSLCertificateKeyFile /home/zkws/certbot/config/live/zkws.org/privkey.pem
+    SSLCertificateChainFile /home/zkws/certbot/config/live/zkws.org/chain.pem
+*/
+
 //const host = (!process.env.DEV) ? "localhost" : "www.zkws.org"
 const host = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
 const mainDirPath = (process.env.PROD === 'true') ? '/var/tmp/files/' : '/tmp/files/'
@@ -202,8 +228,13 @@ const processBody = async (body) => {
   })
 }
 
-app.listen(port, host, () => {
-  console.log(`Server is running on http://${host}:${port}`);
+//app.listen(port, host, () => {
+server.listen(port, host, () => {
+  if (process.env.PROD === 'true') {
+    console.log(`Server is running on https://${host}:${port}`)
+  } else {
+    console.log(`Server is running on http://${host}:${port}`)
+  }
 });
 
 app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
@@ -243,11 +274,6 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
 
     console.log("file stream to client done")
 
-    res.writeHead(200, {
-      'Content-Type': 'application/octet-stream',
- //     'Content-Disposition': 'attachment; filename="file.txt"'
-    });
-
     readStream.pipe(res);
   
     readStream.on('error', (err) => {
@@ -258,6 +284,11 @@ app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
 
     readStream.on('done', () => {
       console.log("file stream to client done")
+
+      res.writeHead(200, {
+        'Content-Type': 'application/octet-stream',
+ //       'Content-Disposition': 'attachment; filename="file.txt"'
+      });
     })
   } catch (err) {
     console.error('recieve get("/latest/:dataAddress/:userAddress")', err)
@@ -286,7 +317,9 @@ app.get('/stats', function (req, res, next) {
     )
     const digest = ethers.getBytes(ethers.hashMessage(hashedMessage))
     const signerRecoveredAddress = ethers.recoverAddress(digest, fsignature)
-    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e" && signerRecoveredAddress !== "0x7574b8D4C0C2566b671C530d710821EB6694bE0C") {
+    if (signerRecoveredAddress !== "0xF125Fe77570a4E51B16B674C95ace26fbE99164e" &&
+        signerRecoveredAddress !== "0x7574b8D4C0C2566b671C530d710821EB6694bE0C" &&
+        signerRecoveredAddress !== '0x9B2300Ba0B80E2044c840DeAfc5695b9ab7B168B') {
       console.error('signerRecoveredAddress error :: /stats :: no match', signerRecoveredAddress)
       res.status(500).send({ message: 'Error matching signature' });
       return {}
