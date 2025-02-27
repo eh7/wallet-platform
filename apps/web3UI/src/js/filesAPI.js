@@ -240,6 +240,11 @@ server.listen(port, host, () => {
   }
 });
 
+app.use((req, res, next) => {
+  console.log("TODO: add middle ware to check owner and signature to authorise access to filesAPI!");
+  next();
+})
+
 app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
   try {
     // Authorization

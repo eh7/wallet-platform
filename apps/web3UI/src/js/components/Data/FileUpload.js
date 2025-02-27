@@ -11,7 +11,7 @@ import * as indexedDB from 'idb'
 import Wallet from '../../services/wallet'
 
 const dbVersion = 2
-const apiHost = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
+const apiHost = (process.env.PROD === 'true') ? "zkws.org" : "localhost"
 
 class FileUpload extends React.Component {
 
@@ -124,8 +124,8 @@ class FileUpload extends React.Component {
       })
       const {signature, hashedMessage} = await this.wallet.signMessage(data);
 
-      const url = "http://" + apiHost + ":3333/stats"
-console.log("API URL -------------------------------------------> ", url)
+      //const url = "http://" + apiHost + ":3333/stats"
+      const url = (process.env.PROD === 'true') ? "https://" + apiHost + ":3333/stats" : "http://" + apiHost + ":3333/stats"
       const headers = {
         'fsignature': signature,
         'fmessage': seconds, 
@@ -157,7 +157,8 @@ console.log("API URL -------------------------------------------> ", url)
       })
       const {signature, hashedMessage} = await this.wallet.signMessage(data);
 
-      const url = "http://" + apiHost + ":3333/latest/" + addressData + '/' + addressUser
+      const httpUrlHead = (process.env.PROD === 'true') ? "https" : "http"
+      const url = httpUrlHead + "://" + apiHost + ":3333/latest/" + addressData + '/' + addressUser
       //const url = "http://localhost:3333/latest/" + addressData + '/' + addressUser + "?" + new URLSearchParams({signature, hashedMessage})
       const headers = {
         'fsignature': signature,
@@ -277,9 +278,8 @@ console.log("API URL -------------------------------------------> ", url)
       //
       // publish the latest files data to the filesAPI server
       // host localhost port 3333 path /publishNew
-      //console.log('publishNew degug')
-      const url = "http://" + apiHost + ":3333/publishNew";
-console.log('ddddddddddddddddddddddddddddddddddddddddddddddddddddd', url)
+      const httpUrlHead = (process.env.PROD === 'true') ? "https" : "http"
+      const url = httpUrlHead + "://" + apiHost + ":3333/publishNew";
       //const dataString = "this is a data string in the components/Data/FileUpload.js" 
       //const dataString = JSON.stringify(encryptedFilesData) 
       const dataString = JSON.stringify(apiData) 
