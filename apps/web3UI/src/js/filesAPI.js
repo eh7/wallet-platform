@@ -18,7 +18,7 @@ if (process.env.PROD === 'true') {
     key: privateKey,
     cert: certificate,
   }
-  server = http.createServer(options, app);
+  server = https.createServer(options, app);
 } else {
   server = http.createServer(app);
 }
@@ -33,7 +33,7 @@ const certificate = fs.readFileSync('sslcert/server.crt', 'utf8')
 */
 
 //const host = (!process.env.DEV) ? "localhost" : "www.zkws.org"
-const host = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
+const host = (process.env.PROD === 'true') ? "zkws.org" : "localhost"
 //const host = "localhost"
 const mainDirPath = (process.env.PROD === 'true') ? '/var/tmp/files/' : '/tmp/files/'
 

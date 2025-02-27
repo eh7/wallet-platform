@@ -4,6 +4,8 @@ const https = require("https");
 const fs = require("fs");
 const path = require("path");
 
+require('dotenv').config()
+
 const app = express();
 const morgan = require("morgan");
 const port = process.env.PORT || 4500;
