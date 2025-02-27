@@ -109,10 +109,10 @@ describe("Ballot contract", function () {
     const castVote1 = await ballotContract.castVote(1, 0);
 
     const count1 = await ballotContract.counts(1, 0);
-    console.log('counts(1,0): ', count0);
+    console.log('counts(1,0): ', count1.toString());
 
     const count2 = await ballotContract.counts(1, 1);
-    console.log('counts(1,1): ', count2);
+    console.log('counts(1,1): ', count2.toString());
 
     // this should fail with not valid ballotId
     await expect(ballotContract.castVote(2, 0))
