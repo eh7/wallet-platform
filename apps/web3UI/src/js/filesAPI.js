@@ -237,6 +237,11 @@ server.listen(port, host, () => {
   }
 });
 
+app.use((req, res, next) => {
+  console.log("Hello middle ware!");
+  next();
+})
+
 app.get('/latest/:dataAddress/:userAddress', function (req, res, next) {
   try {
     // Authorization
