@@ -280,7 +280,6 @@ class FileUpload extends React.Component {
       // host localhost port 3333 path /publishNew
       const httpUrlHead = (process.env.PROD === 'true') ? "https" : "http"
       const url = httpUrlHead + "://" + apiHost + ":3333/publishNew";
-console.log("API URL -------------------------------------------> ", url)
       //const dataString = "this is a data string in the components/Data/FileUpload.js" 
       //const dataString = JSON.stringify(encryptedFilesData) 
       const dataString = JSON.stringify(apiData) 

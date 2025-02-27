@@ -8,6 +8,8 @@ const port = 3333;
 const http = require('http')
 const https = require('https')
 
+require('dotenv').config()
+
 let server = null
 if (process.env.PROD === 'true') {
   const privateKey  = fs.readFileSync(process.env.SSLCertificateKeyFile, 'utf8')
@@ -32,6 +34,7 @@ const certificate = fs.readFileSync('sslcert/server.crt', 'utf8')
 
 //const host = (!process.env.DEV) ? "localhost" : "www.zkws.org"
 const host = (process.env.PROD === 'true') ? "www.zkws.org" : "localhost"
+//const host = "localhost"
 const mainDirPath = (process.env.PROD === 'true') ? '/var/tmp/files/' : '/tmp/files/'
 
 console.log(process.env.PROD, (process.env.PROD === 'true'))
@@ -238,7 +241,7 @@ server.listen(port, host, () => {
 });
 
 app.use((req, res, next) => {
-  console.log("Hello middle ware!");
+  console.log("TODO: add middle ware to check owner and signature to authorise access to filesAPI!");
   next();
 })
 

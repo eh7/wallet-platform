@@ -27,6 +27,8 @@ const options = {
 // Create HTTPS server
 const server = https.createServer(options, app);
 
-server.listen(port, () => {
-  console.log(`App listening on https://localhost:${port}`);
+const host = "zkws.org"
+
+server.listen(port, host, () => {
+  console.log(`App listening on https://${host}:${port}`);
 });
