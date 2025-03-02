@@ -6,6 +6,7 @@
   "scripts": {
     "startParcel": "npm run contractJsonBuild && parcel serve src/index.html --public-url / --dist-dir dist",
     "start": "npm run contractJsonBuild && parcel serve src/index.dev.html --public-url / --dist-dir dist",
+    "startDataApp": "parcel serve src/index.app.data.html --public-url / --dist-dir dist",
     "startFileAPI": "PROD=false node src/js/filesAPI.js",
     "startFileAPIProduction": "PROD=true node src/js/filesAPI.js",
     "build": "npm run contractJsonBuild && parcel build src/index.dev.html --public-url / --dist-dir dist",
