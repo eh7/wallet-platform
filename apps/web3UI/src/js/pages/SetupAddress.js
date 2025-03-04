@@ -18,8 +18,10 @@ export default class SetupAddress extends React.Component {
     super(props);
     const wallet = new Wallet();
     const address = this.getAddress(wallet)
+    const phrase = ''
     this.state = {
       address,
+      phrase,
       count: 0,
       provider: {},
       isLoading: true,
@@ -44,6 +46,16 @@ export default class SetupAddress extends React.Component {
     //);
     const address = await wallet.getAddress();
     this.state.address = address;
+
+    const phrase = await wallet.getPhraseData();
+    this.state.phrase = phrase;
+
+    const seedHex = await wallet.getSeedHex();
+    this.state.seedHex = seedHex;
+
+    this.state.networks = localStorage.getItem("networks");
+    this.state.network = localStorage.getItem("network");
+
     this.state.isLoading = false;
     this.setState(this.state);
     //return address;
@@ -53,7 +65,26 @@ export default class SetupAddress extends React.Component {
     return (
       <>
         {(!this.state.isLoading) ? (
-          <h6>Address: {this.state.address}</h6>
+          <>
+            <h6>Address: {this.state.address}</h6>
+            <h6>Phrase: {this.state.phrase}</h6>
+            <h6>SeedHex: {this.state.seedHex}</h6>
+            <h6>
+              Networks:
+              <textarea class="form-control" id="formTextarea" rows="5">
+                {this.state.networks}
+              </textarea>
+            </h6>
+            <h6>
+              Network:
+                <p>{this.state.network}</p>
+                <p>Name: {JSON.parse(this.state.network).name}</p>
+                <p>chainId: {JSON.parse(this.state.network).chainId}</p>
+                <p>rpcUrl: {JSON.parse(this.state.network).rpcUrl}</p>
+                <p>symbol: {JSON.parse(this.state.network).symbol}</p>
+                <p>explorer: {JSON.parse(this.state.network).explorer}</p>
+            </h6>
+          </>
         ) : (<h6>Loading</h6>)}
       </>
     );
